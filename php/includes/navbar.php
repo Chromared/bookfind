@@ -1,16 +1,16 @@
 <div class="navbar">
-    <div class="titre-nav">
+    <div class="title-nav">
         <p><a href="">BookFind</a></p>
     </div>
     <div class="link-nav">
-        <p><a href="">Accueil</a></p>
+        <p><a href="index.php">Accueil</a></p>
     </div>
     <?php if (!isset($_SESSION['auth'])) { ?>
     <div class="link-nav">
-        <p><a href="">Se connecter</a></p>
+        <p><a href="login.php">Se connecter</a></p>
     </div>
     <div class="link-nav">
-        <p><a href="">S'inscrire</a></p>
+        <p><a href="signup.php">S'inscrire</a></p>
     </div>
     <?php } elseif (isset($_SESSION['auth'])) { ?>
     <div class="link-nav">
