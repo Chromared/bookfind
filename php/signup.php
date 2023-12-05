@@ -1,4 +1,5 @@
-<?php require('actions/users/signupAction.php'); ?>
+<?php require('actions/users/signupAction.php');
+      require('actions/database.php') ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,14 +11,14 @@
 <?php include 'includes/navbar.php'; ?>
 <form method="POST" class="form">
     <p>
-    <label class="form-label">Nom : </label><input type="text" name="name" required="required" class="form-control"/>
-    <br /><label class="form-label">Prénom : </label><input type="text" name="firstname" required="required" class="form-control"/>
-    <br /><label class="form-label">Mot de passe (code à 6 chiffres) : </label><input type="number" name="password" max="999999" required="required" class="form-control"/>
-    <br /><label class="form-label">Confirmer le mot de passe : </label><input type="number" name="confirm_password" max="999999" required="required" class="form-control"/>
+    <label class="form-label">Nom : </label><input type="text" maxlength="20" name="name" required="required" class="form-control"/>
+    <br /><label class="form-label">Prénom : </label><input type="text" maxlength="15" name="firstname" required="required" class="form-control"/>
+    <br /><label class="form-label">Mot de passe (code à 8 chiffres) : </label><input type="number" name="password" max="99999999" required="required" class="form-control"/>
+    <br /><label class="form-label">Confirmer le mot de passe : </label><input type="number" name="confirm_password" max="99999999" required="required" class="form-control"/>
     <br /><label class="form-label">Numéro de carte : </label><input type="number" maxlength="8" max="99999999" required="required" name="card" class="form-control"/>
-    <br /><label class="form-label">Classe : </label><select class="form-control" name="classe"><option value="6B">6B</option><option value="5B">5B</option><option value="4B">4B</option><option value="3B">3B</option><option value="6R">6R</option><option value="5R">5R</option><option value="4R">4R</option><option value="3R">3R</option><option value="6J">6J</option><option value="5J">5J</option><option value="4J">4J</option><option value="3J">3J</option><option value="6V">6V</option><option value="5V">5V</option><option value="4V">4V</option><option value="3V">3V</option></select>
-    <br /><label class="form-label">Je confirme avoir lu et accepté-e le <a href="">réglement</a> : </label><input type="checkbox" name="rules"/>
-    <br /><button class="btn" type="submit">Inscription !</button>
+    <br /><label class="form-label">Classe : </label><select class="form-control" name="classe" required="required" ><option value="6B">6B</option><option value="5B">5B</option><option value="4B">4B</option><option value="3B">3B</option><option value="6R">6R</option><option value="5R">5R</option><option value="4R">4R</option><option value="3R">3R</option><option value="6J">6J</option><option value="5J">5J</option><option value="4J">4J</option><option value="3J">3J</option><option value="6V">6V</option><option value="5V">5V</option><option value="4V">4V</option><option value="3V">3V</option></select>
+    <br /><label class="form-label">Je confirme avoir lu et accepté-e le <a href="rules.php" target="_blank">réglement</a> : </label><input required="required" type="checkbox" name="rules"/>
+    <br /><button class="form-btn-submit" type="submit">Inscription !</button>
     </p>
 </form>
 </body>
