@@ -5,3 +5,8 @@ Les class :
     .form-control : les champs de formulaires
     .form-btn-submit : le bouton de validation d'un formulaire
     .form-btn-reset : le bouton de réinitialisation d'un formulaire
+
+.navbar : la barre de navigation
+    .title-nav : le titre, bookfind
+    .link-nav : les liens de la barre de navigation
+    .nav-button : le bouton de la barre de navigation
