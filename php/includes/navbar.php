@@ -1,5 +1,5 @@
-<button class="navbar-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 <div class="navbar">
+<button class="navbar-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <div class="title-nav">
         <p><a href="#">BookFind</a></p>
     </div>
@@ -20,7 +20,10 @@
     <div class="link-nav">
         <p><a href="">Mes réservations</a></p>
     </div>
-        <?php if ($_SESSION['grade'] == '2') { ?>
+    <div class="link-nav">
+        <p><a href="">Mes emprunts</a></p>
+    </div>
+        <?php if ($_SESSION['grade'] >= '1') { ?>
             <div class="link-nav">
                 <p><a href="">Gérer le C.D.I</a></p>
             </div>
