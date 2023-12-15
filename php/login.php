@@ -9,7 +9,8 @@
 <?php include 'includes/navbar.php'; ?>
 <form method="POST" class="form">
     <label class="form-label">Numéro de carte : </label><input type="number" max="99999999" required="required" name="card" class="form-control" />
-    <label class="form-label">Mot de passe : </label><input type="number" max="99999999" required="required" name="password" class="form-control" />
+    <br /><label class="form-label">Mot de passe : </label><input type="number" max="99999999" required="required" name="password" class="form-control" />
+    <br /><input class="form-btn-submit" type="submit" value="Connexion !" /> <input type="reset" value="Réinitialiser le formulaire" class="form-btn-reset" />
 </form>
 </body>
 </html>
