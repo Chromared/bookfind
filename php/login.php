@@ -8,7 +8,7 @@
 <body>
 <?php include 'includes/navbar.php'; ?>
 <form method="POST" class="form">
-    <label class="form-label">Numéro de carte : </label><input type="number" class=""
+    <label class="form-label">Numéro de carte : </label><input type="number" max="99999999" required="required" name="card" class="form-control" />
 </form>
 </body>
 </html>
