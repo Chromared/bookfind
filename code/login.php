@@ -1,3 +1,5 @@
+<?php require('actions/users/loginAction.php');
+      require('actions/database.php') ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
