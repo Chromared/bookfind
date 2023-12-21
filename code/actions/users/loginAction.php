@@ -11,10 +11,16 @@
 
         if($checkIfUserAlreadyExists->rowCount() == 1){
 
-            $checkIfUserAlreadyExists = $bdd->prepare('SELECT mdp FROM users WHERE carte = ?');
-            $checkIfUserAlreadyExists->execute(array($password));
+            $passwordVerify = $bdd->prepare('SELECT mdp FROM users WHERE carte = ?');
+            $passwordVerify->execute(array($password));
+
+            if($password == $passwordVerify){
 
         
 
+    }else{
+        echo "Votre mot de passe est incorrect";
+    }}else{
+        echo 'Aucun compte n\'est associé à cette carte. Créer mon compte <a href="signup.php?card=' . $card .'">ici</a>.';
     }}}}
 ?>
