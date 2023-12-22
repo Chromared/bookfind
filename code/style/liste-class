@@ -15,5 +15,5 @@ Les class :
 
 .msg : Message d'information venant du site (ex: Mot de passe incorrect)
     .msg-blue : Message blue
-    .msg-alerte : Message jaune/orange
+    .msg-alerte : Message jaune/orange (alerte)
     .msg-danger : Message rouge
