@@ -3,7 +3,7 @@
     if (isset($_POST['card']) AND isset($_POST['password'])) {
     if (empty($_POST['card']) AND empty($_POST['password'])) {
 
-        $card = $_POST['card'];
+        $card = htmlspecialchars($_POST['card']);
         $password = crypt($_POST['password'], PASSWORD_DEFAULT);
 
         $checkIfUserAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
