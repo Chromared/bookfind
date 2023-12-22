@@ -7,11 +7,11 @@
 
             if (isset($_POST['rules-cu'])){
 
-                $name = $_POST['name'];
-                $firstname = $_POST['firstname'];
+                $name = htmlspecialchars($_POST['name']);
+                $firstname = htmlspecialchars($_POST['firstname']);
                 $mdp = crypt($_POST['password'], PASSWORD_DEFAULT);
-                $card = $_POST['card'];
-                $classe = $_POST['classe'];
+                $card = htmlspecialchars($_POST['card']);
+                $classe = htmlspecialchars($_POST['classe']);
 
                 $checkIfUserAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
                 $checkIfUserAlreadyExists->execute(array($card));
