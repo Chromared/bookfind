@@ -37,11 +37,13 @@
                     $_SESSION['classe'] = $usersInfos['classe'];
                     $_SESSION['grade'] = $usersInfos['grade'];
 
-                }else{ ?><p>Un compte à déjà été créé avec cette carte.</p><?php }
+                }else{ ?><div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div><?php }
 
-            } else { ?><p>Vous devez accepté-e les conditions d'utilisation et les règles.</p><?php }
+            } else { ?><div class="msg"><div class="msg-alerte"><p>Vous devez accepté-e les conditions d'utilisation et les règles.</p></div></div><?php }
 
-        }else{ ?><p>Les deux mot de passe ne sont pas identique.</p><?php }
+        }else{ ?><div class="msg"><div class="msg-alerte"><p>Les deux mot de passe ne sont pas identique.</p></div></div><?php }
 
-    }}}
+    }else{?><div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.<p></div></div><?php }
+}else{?><div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.</p></div></div><?php }
+}
 ?>
