@@ -1,6 +1,7 @@
 <div class="navbar">
-<button class="nav-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <div class="title-nav">
+<button class="nav-button" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aribua-label="Toggle navigation"></button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="title-nav"></
         <p><a href="#">BookFind</a></p>
     </div>
     <div class="link-nav">
