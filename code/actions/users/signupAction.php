@@ -44,6 +44,6 @@
         }else{ ?><div class="msg"><div class="msg-alerte"><p>Les deux mot de passe ne sont pas identique.</p></div></div><?php }
 
     }else{?><div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.<p></div></div><?php }
-}else{?><div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.</p></div></div><?php }
+}else{?><div class="msg"><div class="msg-alerte"><p>Tous les champs n'existe pas. Veuillez <a href="signup.php">recharger</a> la page.</p></div></div><?php }
 }
 ?>
