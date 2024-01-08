@@ -18,7 +18,7 @@
 
                 if($checkIfUserAlreadyExists->rowCount() == 0){
 
-                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET card = ?, classe = ?, nom = ?, prenom = ?, mdp = ?');
+                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?');
                     $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp));
 
                     //Récupérer les informations de l'utilisateur
