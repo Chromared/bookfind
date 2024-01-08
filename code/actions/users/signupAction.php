@@ -1,7 +1,7 @@
 <?php
     if (isset($_POST['validate'])) {
     if (isset($_POST['name']) AND isset($_POST['firstname']) AND isset($_POST['password']) AND isset($_POST['confirm_password']) AND isset($_POST['card']) AND isset($_POST['classe'])){
-    if (empty($_POST['name']) AND empty($_POST['firstname']) AND empty($_POST['password']) AND empty($_POST['confirm_password']) AND empty($_POST['card']) AND empty($_POST['classe'])){
+    if (!empty($_POST['name']) AND !empty($_POST['firstname']) AND !empty($_POST['password']) AND !empty($_POST['confirm_password']) AND !empty($_POST['card']) AND !empty($_POST['classe'])){
  
         if ($_POST['password'] == $_POST['confirm_password']){
 
