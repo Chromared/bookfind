@@ -12,14 +12,14 @@
         if($checkIfUserAlreadyExists->rowCount() == 1){
 
             $passwordVerify = $bdd->prepare('SELECT mdp FROM users WHERE carte = ?');
-            $passwordVerify->execute(array($password));
+            $passwordVerify->execute(array($card));
 
             if($password == $passwordVerify){
 
                  //Récupérer les informations de l'utilisateur
                 $getInfosOfThisUserReq = $bdd->prepare('SELECT id, carte, nom, prenom, grade, classe FROM users WHERE carte = ?');
                 $getInfosOfThisUserReq->execute(array($card));
-                                                  $usersInfos = $getInfosOfThisUserReq->fetch();
+                $usersInfos = $getInfosOfThisUserReq->fetch();
                 
                 //Authentifier l'utilisateur sur le site et récupérer ses données dans des variables globales sessions
                 $_SESSION['auth'] = true;
