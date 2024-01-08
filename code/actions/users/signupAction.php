@@ -18,11 +18,11 @@
 
                 if($checkIfUserAlreadyExists->rowCount() == 0){
 
-                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?');
-                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp));
+                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, cu = ?');
+                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true));
 
                     //Récupérer les informations de l'utilisateur
-                    $getInfosOfThisUserReq = $bdd->prepare('SELECT id, carte, nom, prenom, grade, classe FROM users WHERE carte = ?');
+                    $getInfosOfThisUserReq = $bdd->prepare('SELECT id, carte, nom, prenom, grade, classe, theme FROM users WHERE carte = ?');
                     $getInfosOfThisUserReq->execute(array($card));
 
                     $usersInfos = $getInfosOfThisUserReq->fetch();
@@ -31,11 +31,12 @@
                     $_SESSION['auth'] = true;
                     $_SESSION['admin'] = false;
                     $_SESSION['id'] = $usersInfos['id'];
-                    $_SESSION['lastname'] = $usersInfos['nom'];
+                    $_SESSION['name'] = $usersInfos['nom'];
                     $_SESSION['firstname'] = $usersInfos['prenom'];
                     $_SESSION['carte'] = $usersInfos['carte'];
                     $_SESSION['classe'] = $usersInfos['classe'];
                     $_SESSION['grade'] = $usersInfos['grade'];
+                    $_SESSION['theme'] = $usersInfos['theme'];
 
                 }else{ ?><div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div><?php }
 
