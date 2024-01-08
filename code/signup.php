@@ -1,5 +1,3 @@
-<?php require('actions/users/signupAction.php');
-      require('actions/database.php') ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,6 +7,8 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
+<?php include 'actions/database.php'; ?>
+<?php include 'actions/users/signupAction.php'; ?>
 <form method="POST" class="form">
     <p>
     <label class="form-label">Nom : </label><input type="text" maxlength="20" name="name" required="required" class="form-control"/>
