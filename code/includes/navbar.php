@@ -19,12 +19,9 @@
         <p><a href="">Mon profil</a></p>
     </div>
     <div class="link-nav">
-        <p><a href="">Mes réservations</a></p>
-    </div>
-    <div class="link-nav">
         <p><a href="">Mes emprunts</a></p>
     </div>
-        <?php if ($_SESSION['grade'] >= '1') { ?>
+        <?php if ($_SESSION['grade'] > '0') { ?>
             <div class="link-nav">
                 <p><a href="">Gérer le C.D.I</a></p>
             </div>
