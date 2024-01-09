@@ -4,22 +4,19 @@
     if (!empty($_POST['card']) AND !empty($_POST['password'])) {
 
         $card = htmlspecialchars($_POST['card']);
-        $password = crypt($_POST['password'], PASSWORD_DEFAULT);
+        $password = htmlspecialchars($_POST['password']);
 
-        $checkIfUserAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
+        $checkIfUserAlreadyExists = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
         $checkIfUserAlreadyExists->execute(array($card));
 
-        if($checkIfUserAlreadyExists->rowCount() == 1){
-
-            $passwordVerify = $bdd->prepare('SELECT mdp FROM users WHERE carte = ?');
-            $passwordVerify->execute(array($card));
-
-            if($password == $passwordVerify){
+        if($checkIfUserAlreadyExists->rowCount() > 0){
 
                  //Récupérer les informations de l'utilisateur
-                $getInfosOfThisUserReq = $bdd->prepare('SELECT id, carte, nom, prenom, grade, classe FROM users WHERE carte = ?');
-                $getInfosOfThisUserReq->execute(array($card));
-                $usersInfos = $getInfosOfThisUserReq->fetch();
+                $usersInfos = $checkIfUserAlreadyExists->fetch();
+            
+            if(password_verify($password, $usersInfos['mdp'])){
+
+
                 
                 //Authentifier l'utilisateur sur le site et récupérer ses données dans des variables globales sessions
                 $_SESSION['auth'] = true;
@@ -30,20 +27,20 @@
                 $_SESSION['carte'] = $usersInfos['carte'];
                 $_SESSION['classe'] = $usersInfos['classe'];
                 $_SESSION['grade'] = $usersInfos['grade'];
+                $_SESSION['theme'] = $usersInfos['theme'];
+
+                //Rediriger l'utilisateur vers la page d'accueil
+                header('index.php');
                 
 
-
-        
-
     }else{
-        echo 'Votre mot de passe est incorrect';
+        $errorMsg = '<div class="msg"><div class="msg-alerte">Votre mot de passe est incorrect.</div></div>';
     }}else{
-        echo 'Aucun compte n\'est associé à cette carte. Créer mon compte <a href="signup.php?card=' . $card .'">ici</a>.';
+        $errorMsg = '<div class="msg"><div class="msg-alerte">Aucun compte n\'est associé à cette carte. Créer mon compte <a href="signup.php?card=' . $card .'">ici</a>.</div></div>';
     }}else{
-        ?><?php
-    }
-    }else{
-        ?><?php
+        $errorMsg = '<div class="msg"><div class="msg-alerte">Tous les champs ne sont pas rempli.</div></div>';
+    }}else{
+        $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Tous les champs n\'existe pas. Veuillez <a href="login.php">recharger</a> la page.</p></div></div>';
     }
 }
 ?>
