@@ -17,3 +17,4 @@ Les class :
     .msg-blue : Message blue
     .msg-alerte : Message jaune/orange (alerte)
     .msg-danger : Message rouge (alerte importante)
+NOTE : une div .msg-blue, alerte ou danger sera TOUJOURS dans une div .msg !
