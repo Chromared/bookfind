@@ -11,6 +11,7 @@
 <?php include 'actions/database.php';
       include 'actions/users/loginAction.php'; ?>
 <p>
+<?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
 <form method="POST" class="form">
     <fieldset class="form-fieldset"><legend class="form-legend">Se connecter</legend>
     <label class="form-label">Numéro de carte : </label><input type="number" max="99999999" required="required" name="card" class="form-control" />
