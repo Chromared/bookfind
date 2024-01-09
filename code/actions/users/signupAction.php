@@ -37,14 +37,16 @@
                     $_SESSION['classe'] = $usersInfos['classe'];
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
+                    
+                    header('index.php');
 
-                }else{ ?><div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div><?php }
+                }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div>'; }
 
-            } else { ?><div class="msg"><div class="msg-alerte"><p>Vous devez accepté-e les conditions d'utilisation et les règles.</p></div></div><?php }
+            } else { $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Vous devez accepté-e les conditions d\'utilisation et les règles.</p></div></div>'; }
 
-        }else{ ?><div class="msg"><div class="msg-alerte"><p>Les deux mot de passe ne sont pas identique.</p></div></div><?php }
+        }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Les deux mot de passe ne sont pas identique.</p></div></div>'; }
 
-    }else{?><div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.<p></div></div><?php }
-}else{?><div class="msg"><div class="msg-alerte"><p>Tous les champs n'existe pas. Veuillez <a href="signup.php">recharger</a> la page.</p></div></div><?php }
+    }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.<p></div></div>'; }
+}else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Tous les champs n\'existe pas. Veuillez <a href="signup.php">recharger</a> la page.</p></div></div>'; }
 }
 ?>
