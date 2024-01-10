@@ -8,8 +8,8 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
-<?php include 'actions/database.php';
-      include 'actions/users/loginAction.php'; ?>
+<?php include 'actions/database.php'; ?>
+
 <p>
 <?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
 <form method="POST" class="form">
@@ -20,5 +20,6 @@
     </fieldset>
 </form>
 </p>
+<?php include 'actions/users/loginAction.php'; ?>
 </body>
 </html>
