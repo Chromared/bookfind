@@ -1,3 +1,4 @@
+<?php require 'actions/users/signupAction.php'; ?>
 <?php session_start() ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,7 +10,6 @@
 <body>
 <?php include 'includes/navbar.php'; ?>
 <?php include 'actions/database.php'; ?>
-
 <p>
 <?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
 <form method="POST" class="form">
@@ -25,6 +25,5 @@
 
 </form>
 </p>
-<?php include 'actions/users/signupAction.php'; ?>
 </body>
 </html>
