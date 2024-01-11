@@ -22,7 +22,7 @@
                     $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true));
 
                     //Récupérer les informations de l'utilisateur
-                    $getInfosOfThisUserReq = $bdd->prepare('SELECT id, carte, nom, prenom, grade, classe, theme FROM users WHERE carte = ?');
+                    $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
                     $getInfosOfThisUserReq->execute(array($card));
 
                     $usersInfos = $getInfosOfThisUserReq->fetch();
