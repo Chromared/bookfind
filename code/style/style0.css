@@ -1,3 +1,10 @@
-li.navbar{
-display: inline;
+.li-nav{
+    display:block;
+    display: inline-block
+}
+.link-nav{
+    display: inline-block
+}
+.title-nav{
+    display: inline-block
 }
