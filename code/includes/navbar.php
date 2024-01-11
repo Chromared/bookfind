@@ -16,7 +16,7 @@
     </div>
     <?php } elseif (isset($_SESSION['auth'])) { ?>
     <div class="link-nav">
-        <p><a href="">Mon profil</a></p>
+        <p><a href="profil.php">Mon profil</a></p>
     </div>
     <div class="link-nav">
         <p><a href="">Mes emprunts</a></p>
