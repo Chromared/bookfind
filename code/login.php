@@ -1,3 +1,4 @@
+<?php require 'actions/database.php';?>
 <?php require 'actions/users/loginAction.php'; ?>
 <?php session_start() ?>
 <!DOCTYPE html>
@@ -9,7 +10,6 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
-<?php include 'actions/database.php'; ?>
 <p>
 <?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
 <form method="POST" class="form">
