@@ -1,6 +1,6 @@
+<?php session_start() ?>
 <?php require 'actions/database.php';?>
 <?php require 'actions/users/loginAction.php'; ?>
-<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
