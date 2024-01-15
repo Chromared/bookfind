@@ -1,6 +1,5 @@
-<?php session_start();
-    require 'actions/database.php'; 
-    require 'actions/users/securityAction.php'; ?>
+<?php require 'actions/database.php'; 
+      require 'actions/users/securityAction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
