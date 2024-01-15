@@ -38,7 +38,7 @@
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
                     
-                    header('index.php');
+                    header('Location: index.php');
 
                 }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div>'; }
 
