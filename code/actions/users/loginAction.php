@@ -30,7 +30,7 @@
                 $_SESSION['theme'] = $usersInfos['theme'];
 
                 //Rediriger l'utilisateur vers la page d'accueil
-                header('index.php');
+                header('Location: index.php');
                 
 
     }else{
