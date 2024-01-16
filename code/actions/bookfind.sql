@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 11 jan. 2024 à 18:42
+-- Généré le : mar. 16 jan. 2024 à 19:48
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -24,14 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `auteur`
+--
+
+CREATE TABLE `auteur` (
+  `id` int(11) NOT NULL,
+  `nom` int(11) NOT NULL,
+  `prenom` int(11) NOT NULL,
+  `pseudonyme` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `books`
 --
 
 CREATE TABLE `books` (
   `id` int(11) NOT NULL,
   `isbn` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `auteur` varchar(255) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `id_auteur` int(11) NOT NULL,
   `resume` text NOT NULL,
   `genre` varchar(255) NOT NULL,
   `nb-emprunt` int(11) NOT NULL DEFAULT 0,
@@ -57,12 +70,26 @@ CREATE TABLE `users` (
   `cu` int(1) NOT NULL,
   `nb-emprunt-max` int(255) NOT NULL,
   `nb-emprunt-en-cour` int(255) NOT NULL DEFAULT 0,
-  `theme` int(2) NOT NULL DEFAULT 0
+  `theme` int(2) NOT NULL DEFAULT 0,
+  `inscription` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `regles`, `cu`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`, `inscription`) VALUES
+(1, 1, '4B', 'Muller', 'Alban', '2yOSnUkA4y91Y', 0, 1, 1, 0, 0, 0, '2024-01-16 19:10:31');
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `auteur`
+--
+ALTER TABLE `auteur`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `books`
@@ -81,6 +108,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT pour la table `auteur`
+--
+ALTER TABLE `auteur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `books`
 --
 ALTER TABLE `books`
@@ -90,7 +123,7 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
