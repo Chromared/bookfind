@@ -24,6 +24,7 @@
         ID : <?= $usersInfos['id']; ?><br />
         Numéro de carte : <?= $usersInfos['carte']; ?><br />
         Classe : <?= $usersInfos['classe']; ?><br />
+        Date d'inscription : <?php $timestamp = $usersInfos['inscription']; ?>
     </p>
 </div>
 </div>
