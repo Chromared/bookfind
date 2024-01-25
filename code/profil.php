@@ -11,6 +11,7 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'?>
+    <br /><br />
     <?php if (isset($_GET['id'])) { ?>
     <?php
     $id = $_GET['id'];
@@ -31,6 +32,11 @@
         Classe : <?= $usersInfos['classe']; ?><br />
         Date d'inscription : Le <?= $usersInfos['date']; ?> à <?= $usersInfos['heure']; ?><br />
         Grade : <?php Grade($usersInfos['grade']); ?>
+    </p>
+    <hr />
+    <p>
+            <a href="actions/users/logoutAction.php">Se déconnecter</a><br />
+            <a href="">Modifier son compte</a>
     </p>
 </div>
 </div>
