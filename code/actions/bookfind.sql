@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 16 jan. 2024 à 19:48
+-- Généré le : jeu. 25 jan. 2024 à 18:13
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -66,20 +66,21 @@ CREATE TABLE `users` (
   `prenom` varchar(15) NOT NULL,
   `mdp` text NOT NULL,
   `grade` int(1) NOT NULL DEFAULT 0,
+  `date` varchar(255) NOT NULL,
+  `heure` varchar(255) NOT NULL,
   `regles` int(1) NOT NULL,
   `cu` int(1) NOT NULL,
   `nb-emprunt-max` int(255) NOT NULL,
   `nb-emprunt-en-cour` int(255) NOT NULL DEFAULT 0,
-  `theme` int(2) NOT NULL DEFAULT 0,
-  `inscription` datetime NOT NULL DEFAULT current_timestamp()
+  `theme` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `regles`, `cu`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`, `inscription`) VALUES
-(1, 1, '4B', 'Muller', 'Alban', '2yOSnUkA4y91Y', 0, 1, 1, 0, 0, 0, '2024-01-16 19:10:31');
+INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date`, `heure`, `regles`, `cu`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`) VALUES
+(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, '25/01/2024', '17:10:00', 1, 1, 0, 0, 0);
 
 --
 -- Index pour les tables déchargées
@@ -123,7 +124,7 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
