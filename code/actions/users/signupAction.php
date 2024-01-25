@@ -13,13 +13,18 @@
                 $card = htmlspecialchars($_POST['card']);
                 $classe = htmlspecialchars($_POST['classe']);
 
+                date_default_timezone_set('Europe/Paris'); 
+                $date = date("d-m-Y");
+                $heure = date("H:i:s");
+
+
                 $checkIfUserAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
                 $checkIfUserAlreadyExists->execute(array($card));
 
                 if($checkIfUserAlreadyExists->rowCount() == 0){
 
-                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, cu = ?');
-                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true));
+                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, cu = ?, date = ?, heure = ?');
+                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true, $date, $heure));
 
                     //Récupérer les informations de l'utilisateur
                     $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
