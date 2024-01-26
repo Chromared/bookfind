@@ -15,6 +15,10 @@ function Grade($grade)
     echo '<span class="blue strong">Gérant(e) du C.D.I</span>';
     break;
 
+    case 3:
+    echo '<span class="green strong">Assistant(e) du C.D.I</span>';
+    break;
+
     default:
     echo '?';
     }
