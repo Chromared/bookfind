@@ -34,10 +34,12 @@
         Grade : <?php Grade($usersInfos['grade']); ?>
     </p>
     <hr />
+    <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
     <p>
             <a href="actions/users/logoutAction.php">Se déconnecter</a><br />
             <a href="">Modifier son compte</a>
     </p>
+    <?php } ?>
 </div>
 </div>
 <?php }else{ echo 'Aucun utilisateur avec l\'id n°' . $_GET["id"] . ' n\'a été trouvé.'; }} ?>
