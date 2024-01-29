@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 25 jan. 2024 à 18:13
+-- Généré le : lun. 29 jan. 2024 à 18:39
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -62,14 +62,14 @@ CREATE TABLE `users` (
   `id` int(255) NOT NULL,
   `carte` int(8) NOT NULL,
   `classe` varchar(2) NOT NULL,
-  `nom` varchar(20) NOT NULL,
-  `prenom` varchar(15) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(25) NOT NULL,
   `mdp` text NOT NULL,
   `grade` int(1) NOT NULL DEFAULT 0,
   `date` varchar(255) NOT NULL,
   `heure` varchar(255) NOT NULL,
   `regles` int(1) NOT NULL,
-  `cu` int(1) NOT NULL,
+  `pdc` int(1) NOT NULL,
   `nb-emprunt-max` int(255) NOT NULL,
   `nb-emprunt-en-cour` int(255) NOT NULL DEFAULT 0,
   `theme` int(2) NOT NULL DEFAULT 0
@@ -79,8 +79,8 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date`, `heure`, `regles`, `cu`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`) VALUES
-(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, '25/01/2024', '17:10:00', 1, 1, 0, 0, 0);
+INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date`, `heure`, `regles`, `pdc`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`) VALUES
+(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 3, '25/01/2024', '17:10:00', 1, 1, 0, 0, 0);
 
 --
 -- Index pour les tables déchargées
