@@ -5,7 +5,7 @@
  
         if ($_POST['password'] == $_POST['confirm_password']){
 
-            if (isset($_POST['rules-cu'])){
+            if (isset($_POST['rules-pdc'])){
 
                 $name = htmlspecialchars($_POST['name']);
                 $firstname = htmlspecialchars($_POST['firstname']);
@@ -23,7 +23,7 @@
 
                 if($checkIfUserAlreadyExists->rowCount() == 0){
 
-                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, cu = ?, date = ?, heure = ?');
+                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?, date = ?, heure = ?');
                     $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true, $date, $heure));
 
                     //Récupérer les informations de l'utilisateur
