@@ -1,5 +1,6 @@
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
+      require 'actions/users/showOneUsersProfilAction.php';
       require 'actions/fonctions/transfoGradeIntVersText.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -13,13 +14,8 @@
     <br /><br />
     <?php if (isset($_GET['id'])) { ?>
     <?php
-    $id = $_GET['id'];
-    $selectInfosFromUsers= $bdd->prepare('SELECT * FROM users WHERE id = ?');
-    $selectInfosFromUsers->execute(array($id));
 
     if($selectInfosFromUsers->rowCount() >= 1){
-
-    $usersInfos = $selectInfosFromUsers->fetch();
 ?>
 <div class="contour">
 <div class="user-name"><h4><?= $usersInfos['prenom']; ?> <?= $usersInfos['nom']; ?></h4></div>
@@ -36,7 +32,7 @@
     <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
     <p>
             <a href="actions/users/logoutAction.php">Se déconnecter</a><br />
-            <a href="">Modifier son compte</a>
+            <a href="updateProfil.php?id=<?= $_SESSION['id'] ?>">Modifier son compte</a>
     </p>
     <?php } ?>
 </div>
