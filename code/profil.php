@@ -1,4 +1,3 @@
-
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
       require 'actions/fonctions/transfoGradeIntVersText.php'; ?>
