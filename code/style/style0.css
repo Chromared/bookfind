@@ -31,3 +31,18 @@ body .navbar
 {
     background-color: #212529;
 }
+.strong{
+    font-weight: bold;
+}
+.italic{
+    font-style: italic;
+}
+.red{
+    color: red;
+}
+.blue{
+    color: blue;
+}
+.green{
+    color: rgb(0, 180, 0);
+}
