@@ -37,7 +37,7 @@
     <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
     <p>
             <a href="actions/users/logoutAction.php">Se déconnecter</a><br />
-            <a href="#">Modifier son compte</a>
+            <a href="">Modifier son compte</a>
     </p>
     <?php } ?>
 </div>
