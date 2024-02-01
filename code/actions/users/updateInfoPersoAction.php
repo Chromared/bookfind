@@ -13,7 +13,7 @@ if (isset($_POST['validateInfoPerso'])) {
         $errorMsg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
     }
 }else{
-    $errorMsg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href=updateProfil.php>recharger</a> la page.</div></div>';
+    $errorMsg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php">recharger</a> la page.</div></div>';
 }
 }
 ?>
