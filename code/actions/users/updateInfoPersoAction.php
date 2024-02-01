@@ -6,9 +6,9 @@ if (isset($_POST['validateInfoPerso'])) {
             $firstname = htmlspecialchars($_POST['firstname']);
             $id = $_SESSION['id'];
 
-            $updateInfoPerso = $bdd->prepare('UPDATE users SET name = ?, firstname = ? WHERE id = ?');
+            $updateInfoPerso = $bdd->prepare('UPDATE users SET nom = ?, prenom = ? WHERE id = ?');
             $updateInfoPerso->execute(array($name, $firstname, $id));
-            header('Location: ../index.php');
+            header('Location: updateProfil.php.php');
     }else {
         $errorMsg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
     }
