@@ -10,10 +10,10 @@ if (isset($_POST['validateInfoPerso'])) {
             $updateInfoPerso->execute(array($name, $firstname, $id));
             header('Location: ../index.php');
     }else {
-        echo 'Veuillez remplir tous les champs';
+        $errorMsg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
     }
 }else{
-    echo 'Tous les champs n\'existent pas. Veuillez <a href=updateProfil.php>recharger</a> la page.';
+    $errorMsg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href=updateProfil.php>recharger</a> la page.</div></div>';
 }
 }
 ?>
