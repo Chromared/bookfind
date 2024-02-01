@@ -4,7 +4,7 @@
       require 'actions/users/showOneUsersProfilAction.php';
       require 'actions/fonctions/selectedClasse.php';
       require 'actions/users/updateInfoPersoAction.php';
-      //require '';
+      require 'actions/users/updateInfoScoAction.php';
       //require '';
       //require ''; ?>
 <!DOCTYPE html>
