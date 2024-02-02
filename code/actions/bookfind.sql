@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 29 jan. 2024 à 18:39
+-- Généré le : ven. 02 fév. 2024 à 18:07
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -80,7 +80,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date`, `heure`, `regles`, `pdc`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`) VALUES
-(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 3, '25/01/2024', '17:10:00', 1, 1, 0, 0, 0);
+(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, '25/01/2024', '17:10:00', 1, 1, 0, 0, 0);
 
 --
 -- Index pour les tables déchargées
