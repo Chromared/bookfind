@@ -4,35 +4,32 @@
 
         if ($_POST['new-password'] == $_POST['confirm-new-password']) {
             
-        $password = crypt($_POST['actual-password'], PASSWORD_DEFAULT);
+        $password = htmlspecialchars($_POST['actual-password']);
         $newPassword = crypt($_POST['new-password'], PASSWORD_DEFAULT);
         $id = $_GET['id'];
 
         $checkPassword = $bdd->prepare('SELECT mdp FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
 
-        $checkPassword2 = $checkPassword->fetch();
+        $Password = $checkPassword->fetch();
 
-        if (password_verify($password, $checkPassword2['mdp'])) {
+        if (password_verify($password, $Password['mdp'])) {
 
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
             $updateMdp->execute(array($newPassword, $id));
 
-            mysql_close();
-            mysql_free_result();
-
             exit;
 
     }else{
-        $errorMsg = '<div class="msg"><div class="msg-alerte">Votre mot de passe actuel n\'est pas bon.</div></div>';
+        $Msg = '<div class="msg"><div class="msg-alerte">Votre mot de passe actuel n\'est pas bon.</div></div>';
 }
 }else{
-    $errorMsg = '<div class="msg"><div class="msg-alerte">Les deux nouveaux mot de passe ne sont pas identiques.</div></div>';
+    $Msg = '<div class="msg"><div class="msg-alerte">Les deux nouveaux mot de passe ne sont pas identiques.</div></div>';
 }
 }else{
-    $errorMsg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
+    $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
 }
 }else{
-    $errorMsg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php">recharger</a> la page.</div></div>';
+    $Msg = '<div class="msg"><div class="msg-alerte">ATous les champs n\'existent pas. Veuillez <a href="updateProfil.php">recharger</a> la page.</div></div>';
 }
 }
