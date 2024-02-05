@@ -4,12 +4,15 @@
         
         $card = htmlspecialchars($_POST['card']);
         $classe = htmlspecialchars($_POST['classe']);
-        $id = $_SESSION['id'];
+        $id = $_GET['id'];
 
         $updateInfoSco = $bdd->prepare('UPDATE users SET carte = ?, classe = ? WHERE id = ?');
         $updateInfoSco->execute(array($card, $classe, $id));
 
-        header('Location: updateProfil.php?id=' . $id .'');
+        $_SESSION['carte'] = $card;
+        $_SESSION['classe'] = $classe;
+
+        exit;
     }else{
         $errorMsg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
     }
