@@ -24,7 +24,7 @@
                 $_SESSION['id'] = $usersInfos['id'];
                 $_SESSION['lastname'] = $usersInfos['nom'];
                 $_SESSION['firstname'] = $usersInfos['prenom'];
-                $_SESSION['carte'] = $usersInfos['carte'];
+                $_SESSION['card'] = $usersInfos['carte'];
                 $_SESSION['classe'] = $usersInfos['classe'];
                 $_SESSION['grade'] = $usersInfos['grade'];
                 $_SESSION['theme'] = $usersInfos['theme'];
