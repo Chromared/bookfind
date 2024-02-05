@@ -6,7 +6,7 @@
             
         $password = crypt($_POST['actual-password'], PASSWORD_DEFAULT);
         $newPassword = crypt($_POST['new-password'], PASSWORD_DEFAULT);
-        $id = $_SESSION['id'];
+        $id = $_GET['id'];
 
         $checkPassword = $bdd->prepare('SELECT mdp FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
@@ -18,10 +18,13 @@
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
             $updateMdp->execute(array($newPassword, $id));
 
-            header('Location: updateProfil.php?m=1');
+            mysql_close();
+            mysql_free_result();
+
+            exit;
 
     }else{
-        $errorMsg = '';
+        $errorMsg = '<div class="msg"><div class="msg-alerte">Votre mot de passe actuel n\'est pas bon.</div></div>';
 }
 }else{
     $errorMsg = '<div class="msg"><div class="msg-alerte">Les deux nouveaux mot de passe ne sont pas identiques.</div></div>';
