@@ -21,11 +21,11 @@
     <div class="link-nav">
         <p><li class="li-nav"><a href="">Mes emprunts</a></li></p>
     </div>
-        <?php if ($_SESSION['grade'] > '0') { ?>
+        <?php if ($_SESSION['grade'] != '0') { ?>
             <div class="link-nav">
                 <p><li class="li-nav"><a href="">Gérer le C.D.I</a></li></p>
             </div>
-        <?php } if ($_SESSION['grade'] = 1) { ?>
+        <?php } if ($_SESSION['grade'] === 1) { ?>
             <div class="link-nav">
                 <p><li class="li-nav"><a href="">Gérer BookFind</a></li></p>
             </div>
