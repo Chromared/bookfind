@@ -14,11 +14,13 @@
         $Password = $checkPassword->fetch();
 
         if (password_verify($password, $Password['mdp'])) {
+            
+            $checkPassword->closeCursor();
 
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
             $updateMdp->execute(array($newPassword, $id));
 
-            exit;
+            header('Location: Profil.php?id=' . $id .'');
 
     }else{
         $Msg = '<div class="msg"><div class="msg-alerte">Votre mot de passe actuel n\'est pas bon.</div></div>';
@@ -30,6 +32,6 @@
     $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
 }
 }else{
-    $Msg = '<div class="msg"><div class="msg-alerte">ATous les champs n\'existent pas. Veuillez <a href="updateProfil.php">recharger</a> la page.</div></div>';
+    $Msg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php">recharger</a> la page.</div></div>';
 }
 }
