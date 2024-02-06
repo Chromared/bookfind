@@ -16,6 +16,7 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'?>
+<?php if(isset($Msg)){ echo '<p>'.$Msg.'</p>'; } ?>
 <fieldset class="form-fieldset"><legend class="form-legend">Informations personnelle</legend>
 <form method="POST" class="form">
     <label class="form-label">Prénom :</label> <input name="firstname" class="form-control" required="required" type="text" value="<?= $usersInfos['prenom'] ?>" />
