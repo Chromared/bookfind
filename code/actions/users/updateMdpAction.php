@@ -20,7 +20,7 @@
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
             $updateMdp->execute(array($newPassword, $id));
 
-            header('Location: Profil.php?id=' . $id .'');
+            header('Location: updateProfil.php?id=' . $id .'&msg=true');
 
     }else{
         $Msg = '<div class="msg"><div class="msg-alerte">Votre mot de passe actuel n\'est pas bon.</div></div>';
