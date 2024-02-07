@@ -12,7 +12,7 @@ if (isset($_POST['validateInfoPerso'])) {
             $_SESSION['name'] = $name;
             $_SESSION['firstname'] = $firstname;
 
-            header('Location: updateProfil.php?id=' . $id .'');
+            header('Location: updateProfil.php?id=' . $id .'&msg=true');
 
     }else {
         $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
