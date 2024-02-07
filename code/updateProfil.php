@@ -5,7 +5,7 @@
       require 'actions/fonctions/selectedClasse.php';
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
-      //require '';
+      require 'actions/users/updateMdpAction.php';
       //require ''; ?>
 <!DOCTYPE html>
 <html lang="fr">
