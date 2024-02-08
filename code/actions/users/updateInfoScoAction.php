@@ -4,7 +4,7 @@
         
         $card = htmlspecialchars($_POST['card']);
         $classe = htmlspecialchars($_POST['classe']);
-        $id = $_GET['id'];
+        $id = $_SESSION['id'];
 
         $updateInfoSco = $bdd->prepare('UPDATE users SET carte = ?, classe = ? WHERE id = ?');
         $updateInfoSco->execute(array($card, $classe, $id));
