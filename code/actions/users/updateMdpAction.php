@@ -6,7 +6,7 @@
             
         $password = htmlspecialchars($_POST['actual-password']);
         $newPassword = crypt($_POST['new-password'], PASSWORD_DEFAULT);
-        $id = $_GET['id'];
+        $id = $_SESSION['id'];
 
         $checkPassword = $bdd->prepare('SELECT mdp FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
