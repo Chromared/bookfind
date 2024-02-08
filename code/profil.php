@@ -32,7 +32,7 @@
     <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
     <p>
             <a href="actions/users/logoutAction.php">Se déconnecter</a><br />
-            <a href="updateProfil.php?id=<?= $_SESSION['id'] ?>">Modifier son compte</a>
+            <a href="updateProfil.php?id=<?= $_SESSION['id'] ?>">Modifier le compte</a>
     </p>
     <?php } ?>
 </div>
