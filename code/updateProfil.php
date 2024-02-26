@@ -6,7 +6,7 @@
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
       require 'actions/users/updateMdpAction.php';
-      require 'actions/users/deleteAccountAction.php'; ?>
+      require 'actions/users/deleteAccountAction1.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
