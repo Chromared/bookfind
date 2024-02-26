@@ -1,11 +1,13 @@
 Les class :
 
 .form : les formulaires
-    .form-label : les labels des formulaires
-    .form-control : les champs de formulaires
+    .form-label : les labels des formulaire
+    .form-control : les champs de formulaire
+    .form-checkbox : les cases a cocher de formulaire
     .form-btn-blue : le bouton de formulaire bleu
     .form-btn-red : le bouton de formulaire rouge
-    .form-btn-green : le bouton de formulaire green
+    .form-btn-green : le bouton de formulaire vert
+    .form-btn-orange : le bouton de formulaire orange
     .form-fieldset : zone englobant le formulaire
     .form-legend : le "titre" du formulaire
 NOTE : une div .form-label, control, ... sera TOUJOURS dans une div .form !
