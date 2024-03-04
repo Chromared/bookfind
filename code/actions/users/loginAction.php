@@ -43,4 +43,3 @@
         $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Tous les champs n\'existe pas. Veuillez <a href="login.php">recharger</a> la page.</p></div></div>';
     }
 }
-?>
