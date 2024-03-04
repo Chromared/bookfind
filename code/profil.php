@@ -1,7 +1,9 @@
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
       require 'actions/users/showOneUsersProfilAction.php';
-      require 'actions/fonctions/transfoGradeIntVersText.php'; ?>
+      require 'actions/fonctions/transfoGradeIntVersText.php';
+      require 'actions/fonctions/tradDateJourEnVersFr.php';
+      require 'actions/fonctions/transDateMoisIntVersLettre.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,7 +27,7 @@
         ID : <?= $usersInfos['id']; ?><br />
         Numéro de carte : <?= $usersInfos['carte']; ?><br />
         Classe : <?= $usersInfos['classe']; ?><br />
-        Date d'inscription : Le <?= $usersInfos['date']; ?> à <?= $usersInfos['heure']; ?><br />
+        Date d'inscription : Le <?php DateJour($usersInfos['date_j_lettre']); ?> <?= $usersInfos['date_j'] ?> <?php DateMois($usersInfos['date_m']); ?> à <?= $usersInfos['heure_h'] ?>:<?= $usersInfos['heure_m'] ?>:<?= $usersInfos['heure_s'] ?><br />
         Grade : <?php Grade($usersInfos['grade']); ?>
     </p>
     <hr />
