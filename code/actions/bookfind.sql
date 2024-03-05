@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 05 mars 2024 à 18:09
+-- Généré le : mar. 05 mars 2024 à 18:14
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -75,8 +75,8 @@ CREATE TABLE `users` (
   `heure_s` varchar(2) NOT NULL,
   `regles` int(1) NOT NULL,
   `pdc` int(1) NOT NULL,
-  `nb-emprunt-max` int(255) NOT NULL DEFAULT 5,
-  `nb-emprunt` int(255) NOT NULL DEFAULT 0,
+  `nb_emprunt_max` int(255) NOT NULL DEFAULT 5,
+  `nb_emprunt` int(255) NOT NULL DEFAULT 0,
   `theme` int(2) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -84,7 +84,7 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date_j_lettre`, `date_j`, `date_m`, `date_a`, `heure_h`, `heure_m`, `heure_s`, `regles`, `pdc`, `nb-emprunt-max`, `nb-emprunt`, `theme`) VALUES
+INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date_j_lettre`, `date_j`, `date_m`, `date_a`, `heure_h`, `heure_m`, `heure_s`, `regles`, `pdc`, `nb_emprunt_max`, `nb_emprunt`, `theme`) VALUES
 (1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, 'Monday', '01', '03', '2024', '18', '30', '00', 1, 1, 5, 0, 0);
 
 --
