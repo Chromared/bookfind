@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 05 fév. 2024 à 13:16
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.0.30
+-- Généré le : mar. 05 mars 2024 à 17:22
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,8 +66,13 @@ CREATE TABLE `users` (
   `prenom` varchar(25) NOT NULL,
   `mdp` text NOT NULL,
   `grade` int(1) NOT NULL DEFAULT 0,
-  `date` varchar(255) NOT NULL,
-  `heure` varchar(255) NOT NULL,
+  `date_j_lettre` varchar(255) NOT NULL,
+  `date_j` varchar(2) NOT NULL,
+  `date_m` varchar(2) NOT NULL,
+  `date_a` varchar(4) NOT NULL,
+  `heure_h` varchar(2) NOT NULL,
+  `heure_m` varchar(2) NOT NULL,
+  `heure_s` varchar(2) NOT NULL,
   `regles` int(1) NOT NULL,
   `pdc` int(1) NOT NULL,
   `nb-emprunt-max` int(255) NOT NULL DEFAULT 5,
@@ -79,9 +84,8 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date`, `heure`, `regles`, `pdc`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`) VALUES
-(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, '05-02-2024', '13:05:01', 1, 1, 5, 0, 0),
-(34, 1, '6B', 'a', 'a', '2yOSnUkA4y91Y', 0, '05-02-2024', '13:05:41', 1, 1, 5, 0, 0);
+INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date_j_lettre`, `date_j`, `date_m`, `date_a`, `heure_h`, `heure_m`, `heure_s`, `regles`, `pdc`, `nb-emprunt-max`, `nb-emprunt-en-cour`, `theme`) VALUES
+(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, 'Monday', '01', '03', '2024', '18', '30', '00', 1, 1, 5, 0, 0);
 
 --
 -- Index pour les tables déchargées
@@ -125,7 +129,7 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
