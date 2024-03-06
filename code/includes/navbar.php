@@ -21,14 +21,10 @@
     <div class="link-nav">
         <p><li class="li-nav"><a href="">Mes emprunts</a></li></p>
     </div>
-        <?php if ($_SESSION['grade'] != '0') { ?>
-            <div class="link-nav">
-                <p><li class="li-nav"><a href="">Gérer le C.D.I</a></li></p>
-            </div>
-        <?php } if ($_SESSION['grade'] === 1) { ?>
-            <div class="link-nav">
-                <p><li class="li-nav"><a href="">Gérer BookFind</a></li></p>
-            </div>
+        <?php if ($_SESSION['grade'] > '0') { ?>
+    <div class="link-nav">
+        <p><li class="li-nav"><a href="gestion/index.php">Gestion</a></li></p>
+    </div>
     <?php }} ?>
     <div class="button-nav">
         <p><li class="li-nav"><button class="" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aribua-label="Toggle navigation"><i class="fa-solid fa-bars" ></i></button></li></p>
