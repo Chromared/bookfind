@@ -1,4 +1,4 @@
 AuthName "Page de gestion protégée"
 AuthType Basic
-AuthUserFile "C:\xampp\htdocs\bf\gestion\.htpasswd"
+AuthUserFile ".htpasswd"
 Require valid-user
