@@ -1,8 +1,8 @@
+<?php if(!isset($_GET['id']) OR !empty($_GET['id'])){ ?>
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
-      require 'actions/users/securityGetIdProfil.php';
       require 'actions/users/showOneUsersProfilAction.php';
-      require 'actions/fonctions/selectedClasse.php';
+      require 'actions/fonctions/selectionnerClasse.php';
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
       require 'actions/users/updateMdpAction.php';
@@ -49,7 +49,7 @@
 </form>
 <?php }elseif(isset($deleteAccount)){ ?>
 <form class="form" method="POST">
-    <label class="form-label">Je confirme vouloir supprimer mon compte (Attention ! Il ne sera pas possible de revenir sur sa décision.):</label> <input type="checkbox" name="confirm-delete" class="form-checkbox" />
+    <label class="form-label">Je confirme vouloir supprimer mon compte (Attention ! Cette action est irreversible.):</label> <input type="checkbox" name="confirm-delete" class="form-checkbox" />
     <input type="submit" value="Supprimer le compte" name="validateDelete2" class="form-btn-red" />
 </form>
 <?php }?>
@@ -57,3 +57,4 @@
 </p>
 </body>
 </html>
+<?php } ?>
