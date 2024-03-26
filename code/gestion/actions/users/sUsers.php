@@ -13,7 +13,7 @@
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
-                <p><a style="color: black;" href="modify-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
+                <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
             <br />
             
@@ -29,7 +29,7 @@
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
-                <p><a style="color: black;" href="modify-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
+                <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
             <br />
             
@@ -45,7 +45,7 @@
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
-                <p><a style="color: black;" href="modify-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
+                <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
             <br />
             
@@ -61,7 +61,7 @@
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
-                <p><a style="color: black;" href="modify-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
+                <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
             <br />
 
@@ -77,7 +77,7 @@
             <p>Carte : <?= $users['carte'] ?></p>
             <p>Classe : <?= $users['classe'] ?></p>
             <p>Grade : <?php Grade($users['grade']); ?><br /></p>
-            <p><a style="color: black;" href="modify-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
+            <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
         </div>
         <br />
 
@@ -95,7 +95,7 @@
             <p>Carte : <?= $users['carte'] ?></p>
             <p>Classe : <?= $users['classe'] ?></p>
             <p>Grade : <?php Grade($users['grade']); ?><br /></p>
-            <p><a style="color: black;" href="modify-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
+            <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
         </div>
         <br />
 
