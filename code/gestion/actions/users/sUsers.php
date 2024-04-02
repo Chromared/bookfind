@@ -12,6 +12,7 @@
                 <p>ID : <?= $users['id'] ?></p>
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
+                <p>Nombre d'emprunt(s) : <?php echo '' . $users['nb_emprunt'] . '/' . $users['nb_emprunt_max'] . ''; ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
                 <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
@@ -28,6 +29,7 @@
                 <p>ID : <?= $users['id'] ?></p>
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
+                <p>Nombre d'emprunt(s) : <?php echo '' . $users['nb_emprunt'] . '/' . $users['nb_emprunt_max'] . ''; ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
                 <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
@@ -44,6 +46,7 @@
                 <p>ID : <?= $users['id'] ?></p>
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
+                <p>Nombre d'emprunt(s) : <?php echo '' . $users['nb_emprunt'] . '/' . $users['nb_emprunt_max'] . ''; ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
                 <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
@@ -60,6 +63,7 @@
                 <p>ID : <?= $users['id'] ?></p>
                 <p>Carte : <?= $users['carte'] ?></p>
                 <p>Classe : <?= $users['classe'] ?></p>
+                <p>Nombre d'emprunt(s) : <?php echo '' . $users['nb_emprunt'] . '/' . $users['nb_emprunt_max'] . ''; ?></p>
                 <p>Grade : <?php Grade($users['grade']); ?><br /></p>
                 <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
             </div>
@@ -76,6 +80,7 @@
             <p>ID : <?= $users['id'] ?></p>
             <p>Carte : <?= $users['carte'] ?></p>
             <p>Classe : <?= $users['classe'] ?></p>
+            <p>Nombre d'emprunt(s) : <?php echo '' . $users['nb_emprunt'] . '/' . $users['nb_emprunt_max'] . ''; ?></p>
             <p>Grade : <?php Grade($users['grade']); ?><br /></p>
             <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
         </div>
@@ -94,10 +99,11 @@
             <p>ID : <?= $users['id'] ?></p>
             <p>Carte : <?= $users['carte'] ?></p>
             <p>Classe : <?= $users['classe'] ?></p>
+            <p>Nombre d'emprunt(s) : <?php echo '' . $users['nb_emprunt'] . '/' . $users['nb_emprunt_max'] . ''; ?></p>
             <p>Grade : <?php Grade($users['grade']); ?><br /></p>
             <p><a style="color: black;" href="update-user.php?id=<?= $users['id'] ?>">Modifier l'utilisateur</a></p>
         </div>
         <br />
 
 <?php }
-}elseif(!isset($_GET['s']) OR empty($_GET['s'])){}
+}
