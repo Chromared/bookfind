@@ -1,8 +1,9 @@
-<?php if(!isset($_GET['id']) OR !empty($_GET['id'])){ ?>
+<?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require '../actions/database.php'; 
       require '../actions/users/securityAction.php';
       require '../actions/users/showOneUsersProfilAction.php';
       require '../actions/fonctions/selectionnerClasse.php';
+      require '../actions/fonctions/selectionnerGrade.php';
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
       require 'actions/users/updateMdpAction.php';
@@ -36,11 +37,14 @@
 </form>
 </fieldset>
 
+<?php if($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2'){?>
 <fieldset class="form-fieldset"><legend class="form-legend">Grade</legend>
 <form method="post" class="form">
+    <label class="form-label">Grade :</label> <select class="form-control" name="grade" ><option value="0" <?php Grade('0', $usersInfos['grade']); ?> >Aucun</option><option value="3" <?php Grade('3', $usersInfos['grade']); ?> >Assistant(e) du C.D.I</option><option value="2" <?php Grade('2', $usersInfos['grade']); ?> >Gérant(e) du C.D.I</option><?php if($_SESSION['grade'] == '1'){ ?><option value="1" <?php Grade('1', $usersInfos['grade']); ?> >Administrateur</option><?php } ?></select>
     <input type="submit" class="form-btn-blue" name="validateGrade" value="Valider" />
 </form>
 </fieldset>
+<?php } ?>
 
 <?php if($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2'){ ?>
 <fieldset class="form-fieldset"><legend class="form-legend">Mot de passe</legend>
@@ -58,7 +62,7 @@
 </form>
 <?php }elseif(isset($deleteAccount)){ ?>
 <form class="form" method="POST">
-    <label class="form-label">Je confirme vouloir supprimer ce compte (Attention ! Cette action est irreversible.):</label> <input type="checkbox" name="confirm-delete" class="form-checkbox" />
+    <label class="form-label">Je confirme vouloir supprimer ce compte (Attention ! Cette action est irreversible.) : </label> <input type="checkbox" name="confirm-delete" class="form-checkbox" />
     <input type="submit" value="Supprimer le compte" name="validateDelete2" class="form-btn-red" />
 </form>
 <?php }?>
