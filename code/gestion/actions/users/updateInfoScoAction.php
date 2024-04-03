@@ -14,10 +14,7 @@
         $updateInfoSco = $bdd->prepare('UPDATE users SET carte = ?, classe = ? WHERE id = ?');
         $updateInfoSco->execute(array($card, $classe, $id));
 
-        $_SESSION['carte'] = $card;
-        $_SESSION['classe'] = $classe;
-
-        header('Location: update-user.php?id=' . $id .'&msg=true');
+        header('Location: update-user.php?id=' . $id .'');
 
         }else{
             $Msg = '<div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div>';
