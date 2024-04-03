@@ -6,6 +6,7 @@
       require '../actions/fonctions/selectionnerGrade.php';
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
+      require 'actions/users/updateGradeAction.php';
       require 'actions/users/updateMdpAction.php';
       require 'actions/users/deleteAccountAction1.php';
       require 'actions/users/deleteAccountAction2.php'; ?>
@@ -18,7 +19,10 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'?>
-<?php if(isset($Msg)){ echo '<p>'.$Msg.'</p>'; } ?>
+
+<?php if(($_SESSION['grade'] != '1' AND $usersInfos['grade'] == '1') OR ($_SESSION['grade'] != '1' AND $_SESSION['grade'] != '2' AND $usersInfos['grade'] == '2')){echo '<p>Vous n\'avez pas le droit de modifier cet utilisateur.</p>';}else{ ?>
+
+<?php if(isset($Msg)){ echo '<p>' . $Msg . '</p>'; } ?>
 <p>
 
 <fieldset class="form-fieldset"><legend class="form-legend">Informations personnelle</legend>
@@ -67,9 +71,9 @@
 </form>
 <?php }?>
 </fieldset>
-
-</p>
-</body>
 <?php } ?>
+</p>
+<?php } ?>
+</body>
 </html>
 <?php } ?>
