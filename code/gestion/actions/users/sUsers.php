@@ -106,4 +106,12 @@
         <br />
 
 <?php }
+}else{
+
+        $requete = $bdd->query('SELECT COUNT(*) AS id FROM users');        
+        $resultat = $requete->fetch();
+        $nbCompte = $resultat['id']; ?>
+        <p>Il y a actuellement <?= $nbCompte ?> utilisateurs inscrits.</p>
+
+<?php
 }
