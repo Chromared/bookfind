@@ -10,7 +10,7 @@
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
             $updateMdp->execute(array($newPassword, $id));
 
-            header('Location: update-user.php?id=' . $id .'&msg=true');
+            header('Location: update-user.php?id=' . $id .'');
 
 }else{
     $Msg = '<div class="msg"><div class="msg-alerte">Les deux nouveaux mot de passe ne sont pas identiques.</div></div>';
