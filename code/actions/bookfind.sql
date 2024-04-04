@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 03 avr. 2024 à 18:10
+-- Généré le : jeu. 04 avr. 2024 à 17:54
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -20,6 +20,64 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bookfind`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `auteurs`
+--
+
+CREATE TABLE `auteurs` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `biographie` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `books`
+--
+
+CREATE TABLE `books` (
+  `id` int(11) NOT NULL,
+  `titre` varchar(255) NOT NULL,
+  `auteur` varchar(255) NOT NULL,
+  `isbn` int(255) NOT NULL,
+  `resume` text DEFAULT NULL,
+  `editeur` varchar(255) NOT NULL,
+  `serie` varchar(255) DEFAULT NULL,
+  `tome` int(11) DEFAULT NULL,
+  `nb_exemplaires` int(11) NOT NULL,
+  `statut` int(11) NOT NULL,
+  `genre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `emprunts`
+--
+
+CREATE TABLE `emprunts` (
+  `id` int(11) NOT NULL,
+  `id_livre` int(11) NOT NULL,
+  `date_emprunt` varchar(10) NOT NULL,
+  `date_retour` varchar(10) NOT NULL,
+  `id_emprunteur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `genres`
+--
+
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -63,6 +121,30 @@ INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `
 --
 
 --
+-- Index pour la table `auteurs`
+--
+ALTER TABLE `auteurs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `emprunts`
+--
+ALTER TABLE `emprunts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
@@ -71,6 +153,30 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `auteurs`
+--
+ALTER TABLE `auteurs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `emprunts`
+--
+ALTER TABLE `emprunts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `users`
