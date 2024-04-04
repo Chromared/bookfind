@@ -10,7 +10,7 @@
 
         $InfoDelete = $checkPassword->fetch();
 
-        if($InfoDelete['nb_emprunt'] === 0){
+        if($InfoDelete['nb_emprunt'] == '0'){
 
         if (password_verify($password, $InfoDelete['mdp'])) {
 

@@ -8,7 +8,7 @@
 
         $InfoDelete = $checkPassword->fetch();
 
-        if($InfoDelete['nb_emprunt'] === 0){
+        if($InfoDelete['nb_emprunt'] == '0'){
 
             $deleteAccount = true;
 
