@@ -2,8 +2,7 @@
       require 'actions/users/securityAction.php';
       require 'actions/users/showOneUsersProfilAction.php';
       require 'actions/fonctions/transfoGradeIntVersText.php';
-      require 'actions/fonctions/tradDateJourEnVersFr.php';
-      require 'actions/fonctions/transDateMoisIntVersLettre.php';?>
+      require 'actions/fonctions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,7 +25,7 @@
         ID : <?= htmlspecialchars($usersInfos['id']); ?><br />
         Numéro de carte : <?= htmlspecialchars($usersInfos['carte']); ?><br />
         Classe : <?= htmlspecialchars($usersInfos['classe']); ?><br />
-        Date d'inscription : Le <?php DateJour($usersInfos['date_j_lettre']); ?> <?= htmlspecialchars($usersInfos['date_j']); ?> <?php DateMois($usersInfos['date_m']); ?> à <?= htmlspecialchars($usersInfos['heure_h']); ?>:<?= htmlspecialchars($usersInfos['heure_m']); ?>:<?= htmlspecialchars($usersInfos['heure_s']); ?><br />
+        Date d'inscription : Le <?php ConversionDateHour($usersInfos['datetime']); ?><br />
         Grade : <?php Grade($usersInfos['grade']); ?><br />
     </p>
     <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>

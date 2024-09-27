@@ -1,6 +1,8 @@
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
-      require 'actions/books/showEmprunts.php';?>
+      require 'actions/books/showEmprunts.php';
+      require 'actions/fonctions/conversionDateHour.php';
+      require 'actions/fonctions/conversionDate.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,17 +12,21 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'?>
-    <?php if (isset($_GET['id'])) { ?>
-    <?php
+    <?php if (isset($_GET['card'])) {
+        if($selectInfosFromEmprunts->rowCount() > 0){
+            
+            while($empruntsInfos = $selectInfosFromEmprunts->fetch()){
+                
+            $selectInfosFromBooksEmprunts= $bdd->prepare('SELECT * FROM books WHERE id = ?');
+            $selectInfosFromBooksEmprunts->execute(array($empruntsInfos['id_book']));
+            $recupBooks = $selectInfosFromBooksEmprunts->fetch(); ?>
 
-    if($empruntsInfos->rowCount() >= 1){ ?>
- <?php  while($books = $recupBooks->fetch()){ ?>
         <div class="bordure">
-            <h4><?= htmlspecialchars($books['titre']); ?></h4>
-            <p>Auteur : <?= htmlspecialchars($books['auteur']); ?></p>
-            <p>Date de l'emprunt : </p>
-            <p>Date de retour prévue : </p>
-            <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>">Voir le livre</a></p>
+            <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
+            <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
+            <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos['date_emprunt']); ?></p>
+            <p>Date de retour prévue : <?= ConversionDate($empruntsInfos['date_retour']); ?></p>
+            <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
         </div>
         <br />
 
