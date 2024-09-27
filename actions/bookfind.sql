@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 17 juin 2024 à 18:14
+-- Généré le : ven. 27 sep. 2024 à 17:48
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -40,10 +40,9 @@ CREATE TABLE `authors` (
 --
 
 INSERT INTO `authors` (`id`, `nom`, `prenom`, `nomprenom`, `biographie`) VALUES
-(1, 'Muller', 'Alban', 'Muller Alban', 'Un homme génial !'),
-(3, 'Riordans', 'Rick', 'Riordans Rick', 'Auteur de Percy Jackson'),
-(4, 'Laucoin', 'Joachim', 'Laucoin Joachim', 'Un gros vantard.'),
-(5, 'Gaudron', 'Thomas', 'Gaudron Thomas', 'Fan de Minecraft.'),
+(3, 'Riordans', 'Rick', 'Riordans, Rick', 'Auteur de Percy Jackson'),
+(4, 'Laucoin', 'Joachim', 'Laucoin, Joachim', NULL),
+(5, 'Gaudron', 'Thomas', 'Gaudron, Thomas', 'Fan de Minecraft.'),
 (6, 'Muller', 'Alban', 'Muller, Alban', NULL);
 
 -- --------------------------------------------------------
@@ -61,7 +60,6 @@ CREATE TABLE `books` (
   `resume` text DEFAULT NULL,
   `editeur` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
-  `quantite` int(11) NOT NULL DEFAULT 1,
   `serie` varchar(255) DEFAULT NULL,
   `tome` int(11) DEFAULT NULL,
   `statut` int(11) NOT NULL,
@@ -72,10 +70,8 @@ CREATE TABLE `books` (
 -- Déchargement des données de la table `books`
 --
 
-INSERT INTO `books` (`id`, `titre`, `auteur`, `isbn`, `id_unique`, `resume`, `editeur`, `type`, `quantite`, `serie`, `tome`, `statut`, `genre`) VALUES
-(6, 'Alban', 'Alban Muller', 123456, '', 'Un livre cool.', 'Albin Michel', 'Manuel scolaire', 1, 'Alban', 1, 0, 'Humour'),
-(10, 'CACA', 'Muller, Alban', 1, '', '', 'WIZ', 'Manuel scolaire', 1, '', 0, 0, ''),
-(11, 'J&#039;aime la caca', 'Muller, Alban', 9999999, '', '', 'Albin Michel', 'Manuel scolaire', 1, '', 0, 0, '');
+INSERT INTO `books` (`id`, `titre`, `auteur`, `isbn`, `id_unique`, `resume`, `editeur`, `type`, `serie`, `tome`, `statut`, `genre`) VALUES
+(1, 'Alban', 'Muller, Alban', 123456, 'a', 'b', 'Albin Michel', 'Manuel scolaire', 'Alban', 1, 1, 'Horreur');
 
 -- --------------------------------------------------------
 
@@ -104,11 +100,20 @@ INSERT INTO `editeurs` (`id`, `nom`) VALUES
 
 CREATE TABLE `emprunts` (
   `id` int(11) NOT NULL,
-  `id_livre` int(11) NOT NULL,
-  `date_emprunt` varchar(10) NOT NULL,
-  `date_retour` varchar(10) NOT NULL,
-  `id_emprunteur` int(11) NOT NULL
+  `id_book` int(11) NOT NULL,
+  `titre_book` varchar(255) NOT NULL,
+  `date_emprunt` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_retour` date NOT NULL,
+  `card_emprunteur` int(11) NOT NULL,
+  `statut` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `emprunts`
+--
+
+INSERT INTO `emprunts` (`id`, `id_book`, `titre_book`, `date_emprunt`, `date_retour`, `card_emprunteur`, `statut`) VALUES
+(1, 1, 'Alban', '2024-09-27 17:11:18', '2024-10-29', 89702661, '1');
 
 -- --------------------------------------------------------
 
@@ -149,7 +154,8 @@ CREATE TABLE `types` (
 INSERT INTO `types` (`id`, `nom`) VALUES
 (1, 'Manuel scolaire'),
 (2, 'Bande dessinées'),
-(3, 'Test');
+(3, 'Test'),
+(4, 'Roman');
 
 -- --------------------------------------------------------
 
@@ -165,13 +171,7 @@ CREATE TABLE `users` (
   `prenom` varchar(25) NOT NULL,
   `mdp` text NOT NULL,
   `grade` int(1) NOT NULL DEFAULT 0,
-  `date_j_lettre` varchar(255) NOT NULL,
-  `date_j` varchar(2) NOT NULL,
-  `date_m` varchar(2) NOT NULL,
-  `date_a` varchar(4) NOT NULL,
-  `heure_h` varchar(2) NOT NULL,
-  `heure_m` varchar(2) NOT NULL,
-  `heure_s` varchar(2) NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
   `regles` int(1) NOT NULL,
   `pdc` int(1) NOT NULL,
   `nb_emprunt_max` int(255) NOT NULL DEFAULT 5,
@@ -183,10 +183,8 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `date_j_lettre`, `date_j`, `date_m`, `date_a`, `heure_h`, `heure_m`, `heure_s`, `regles`, `pdc`, `nb_emprunt_max`, `nb_emprunt`, `theme`) VALUES
-(1, 89702661, '4B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, 'Tuesday', '26', '03', '24', '18', '19', '05', 1, 1, 5, 0, 0),
-(41, 2, '6F', 'Alban', 'Muller', '2yOSnUkA4y91Y', 2, 'Monday', '01', '01', '0001', '01', '01', '01', 1, 1, 5, 0, 0),
-(42, 1, '6B', 'Y', 'X', '2yOSnUkA4y91Y', 3, 'Tuesday', '26', '03', '24', '18', '37', '44', 1, 1, 5, 2, 0);
+INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `datetime`, `regles`, `pdc`, `nb_emprunt_max`, `nb_emprunt`, `theme`) VALUES
+(1, 89702661, '3B', 'Muller', 'Alban', '2yrir8P1qFkn.', 1, '2024-09-27 17:35:04', 1, 1, 5, 0, 0);
 
 --
 -- Index pour les tables déchargées
@@ -249,7 +247,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT pour la table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `editeurs`
@@ -261,7 +259,7 @@ ALTER TABLE `editeurs`
 -- AUTO_INCREMENT pour la table `emprunts`
 --
 ALTER TABLE `emprunts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `genres`
@@ -273,13 +271,13 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT pour la table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
