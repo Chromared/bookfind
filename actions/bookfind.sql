@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 27 sep. 2024 à 17:48
+-- Généré le : ven. 27 sep. 2024 à 18:55
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -71,7 +71,8 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `titre`, `auteur`, `isbn`, `id_unique`, `resume`, `editeur`, `type`, `serie`, `tome`, `statut`, `genre`) VALUES
-(1, 'Alban', 'Muller, Alban', 123456, 'a', 'b', 'Albin Michel', 'Manuel scolaire', 'Alban', 1, 1, 'Horreur');
+(1, 'Alban', 'Muller, Alban', 123456, 'a', 'b', 'Albin Michel', 'Manuel scolaire', 'Alban', 1, 1, 'Horreur'),
+(2, 'Muller', 'Muller, Alban', 321654, 'b', 'caca', 'WIZ', 'Roman', 'Alban', 2, 1, 'Humour');
 
 -- --------------------------------------------------------
 
@@ -113,7 +114,8 @@ CREATE TABLE `emprunts` (
 --
 
 INSERT INTO `emprunts` (`id`, `id_book`, `titre_book`, `date_emprunt`, `date_retour`, `card_emprunteur`, `statut`) VALUES
-(1, 1, 'Alban', '2024-09-27 17:11:18', '2024-10-29', 89702661, '1');
+(1, 1, 'Alban', '2024-09-27 17:11:18', '2024-10-29', 89702661, '1'),
+(2, 2, 'Muller', '2024-09-27 17:56:10', '2024-10-28', 89702661, '1');
 
 -- --------------------------------------------------------
 
@@ -200,7 +202,8 @@ ALTER TABLE `authors`
 -- Index pour la table `books`
 --
 ALTER TABLE `books`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_unique` (`id_unique`);
 
 --
 -- Index pour la table `editeurs`
@@ -247,7 +250,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT pour la table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `editeurs`
@@ -259,7 +262,7 @@ ALTER TABLE `editeurs`
 -- AUTO_INCREMENT pour la table `emprunts`
 --
 ALTER TABLE `emprunts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `genres`

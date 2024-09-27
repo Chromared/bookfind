@@ -4,8 +4,7 @@
 $colonnes_valides = ['id', 'carte', 'classe', 'nom', 'prenom', 'mdp', 'grade', 'datetime', 'regles', 'pdc', 'nb_emprunt_max', 'nb_emprunt'];
 
 if (isset($_GET['s']) && !empty($_GET['s']) && isset($_GET['where']) && !empty($_GET['where'])) {
-    
-    // Échapper les données d'entrée utilisateur
+
     $s = htmlspecialchars($_GET['s']);
     $where = htmlspecialchars($_GET['where']);
     
