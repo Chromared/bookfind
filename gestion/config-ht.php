@@ -1,4 +1,4 @@
-<?php 
+<?php require '../actions/users/securityAction.php';
       require 'actions/securityActionAdmin.php';
 ?>
 <!DOCTYPE html>
@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils d'aide à la configuration des fichiers .ht</title>
+    <?php include '../includes/header.php'; ?>
 </head>
 <body>
 <p>
@@ -14,7 +16,7 @@
     if (isset($_POST['login']) AND isset($_POST['pass']))
     {
     $login = $_POST['login'];
-    $pass_crypte = crypt($_POST['pass'], PASSWORD_DEFAULT); // On crypte le mot de passe
+    $pass_crypte = crypt($_POST['pass'], PASSWORD_DEFAULT);
     echo 'Ligne à copier dans le .htpasswd :<br />' . $login . ':' .
     $pass_crypte;
     }

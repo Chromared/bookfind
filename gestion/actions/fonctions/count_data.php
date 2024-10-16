@@ -11,8 +11,13 @@ $requete_books = $bdd->query('SELECT COUNT(*) AS total_livres FROM books');
 $resultat_books = $requete_books->fetch();
 $nbCount2 = $resultat_books['total_livres'];
 
+// Récupération du nombre total d'emprunts
+$requete_emprunts = $bdd->query('SELECT COUNT(*) AS total_emprunts FROM emprunts');
+$resultat_emprunts = $requete_emprunts->fetch();
+$nbCount3 = $resultat_emprunts['total_emprunts'];
+
 // Debug pour vérifier si les requêtes retournent bien des résultats
-if (!$resultat_users || !$resultat_books) {
+if (!$resultat_users || !$resultat_books || !$resultat_emprunts) {
     echo json_encode(['error' => 'Erreur dans la récupération des données']);
     exit();
 }
@@ -20,5 +25,7 @@ if (!$resultat_users || !$resultat_books) {
 // Envoyer les données en JSON
 echo json_encode([
     'total_utilisateurs' => $nbCount1,
-    'total_livres' => $nbCount2
+    'total_livres' => $nbCount2,
+    'total_emprunts' => $nbCount3
 ]);
+?>
