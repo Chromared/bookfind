@@ -9,6 +9,7 @@ require 'actions/securityActionAdmin.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil de la gestion</title>
     <?php include '../includes/header.php'; ?>
 </head>
 <body>
@@ -18,13 +19,14 @@ require 'actions/securityActionAdmin.php';
         <?php if($_SESSION['grade'] == '1'){ ?> 
             et de BookFind 
         <?php } else { 
-            echo htmlspecialchars(''); 
+            echo htmlspecialchars('');
         } ?> !
     </h1>
 
     <p>
-        <i class="fa-solid fa-user"></i> <span id="utilisateurs">Chargement...</span><br>
-        <i class="fa-solid fa-book"></i> <span id="livres">Chargement...</span><br>
+        <i class="fa-solid fa-user"></i> <span id="utilisateurs"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br>
+        <i class="fa-solid fa-book"></i> <span id="livres"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br>
+        <i class="fa-solid fa-upload"></i> <span id="emprunts"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br>
     </p>
 
     <script>
@@ -33,12 +35,11 @@ require 'actions/securityActionAdmin.php';
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'actions/fonctions/count_data.php', true);
         xhr.onload = function() {
-            console.log('Requête envoyée, statut:', xhr.status); // Debug
             if (xhr.status == 200) {
-                console.log('Réponse reçue:', xhr.responseText); // Debug
                 var data = JSON.parse(xhr.responseText);
                 document.getElementById('utilisateurs').textContent = data.total_utilisateurs;
                 document.getElementById('livres').textContent = data.total_livres;
+                document.getElementById('emprunts').textContent = data.total_emprunts;
             } else {
                 console.error('Erreur dans la réponse AJAX');
             }
