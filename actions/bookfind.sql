@@ -106,7 +106,7 @@ CREATE TABLE `emprunts` (
   `date_emprunt` datetime NOT NULL DEFAULT current_timestamp(),
   `date_retour` date NOT NULL,
   `card_emprunteur` int(11) NOT NULL,
-  `statut` varchar(1) NOT NULL DEFAULT '1'
+  `statut` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
