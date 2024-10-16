@@ -42,8 +42,8 @@ CREATE TABLE `authors` (
 INSERT INTO `authors` (`id`, `nom`, `prenom`, `nomprenom`, `biographie`) VALUES
 (3, 'Riordans', 'Rick', 'Riordans, Rick', 'Auteur de Percy Jackson'),
 (4, 'Laucoin', 'Joachim', 'Laucoin, Joachim', NULL),
-(5, 'Gaudron', 'Thomas', 'Gaudron, Thomas', 'Fan de Minecraft.'),
-(6, 'Muller', 'Alban', 'Muller, Alban', NULL);
+(5, 'Gaudron', 'Thomas', 'Gaudron, Thomas', 'Une personne admirable, drôle, est un modèle pour certaine personne. Développeur CSS de Bookfind'),
+(6, 'Muller', 'Alban', 'Muller, Alban', 'Développeur principal de bookfind pour la partie backend et auteur de la série best seller "Les aventures de Nabla", qui est inspiré de sa vie. ');
 
 -- --------------------------------------------------------
 
