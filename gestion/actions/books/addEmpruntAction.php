@@ -23,19 +23,19 @@
         if($checkIfBookAlreadyExists->rowCount() > 0){
         if(NULL){
         if($user['nb_emprunt'] < $user['nb_emprunt_max']){
-
-        //Pour le statut, 1 = emprunté, 2 = retourné, NULL ou autre = erreur -> à corriger
-
-        $addEmprunt = $bdd->prepare('INSERT INTO emprunts SET id_book = ?, date_retour = ?, card_emprunteur = ?, statut = ?, titre_book = ?');
-        $addEmprunt->execute(array($book, $date, $card, 1, $booksInfos['titre']));
-
-        $updateEmpruntForBooks = $bdd->prepare('UPDATE books SET statut = ? WHERE id = ?');
-        $updateEmpruntForBooks->execute(array(1, $book));
-        
-        $user_nb_emprunt = $user['nb_emprunt'] +1;
-        $updateEmpruntForBooks = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
-        $updateEmpruntForBooks->execute(array($user_nb_emprunt, $card));
-
+            
+            //Pour le statut, 1 = emprunté, 2 = retourné. NULL ou autre = erreur -> à corriger
+            
+            $addEmprunt = $bdd->prepare('INSERT INTO emprunts SET id_book = ?, date_retour = ?, card_emprunteur = ?, statut = ?, titre_book = ?');
+            $addEmprunt->execute(array($book, $date, $card, 1, $booksInfos['titre']));
+            
+            $updateEmpruntForBooks = $bdd->prepare('UPDATE books SET statut = ? WHERE id = ?');
+            $updateEmpruntForBooks->execute(array(1, $book));
+            
+            $user_nb_emprunt = $user['nb_emprunt'] +1;
+            $updateEmpruntForBooks = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
+            $updateEmpruntForBooks->execute(array($user_nb_emprunt, $card));
+            
     }else{$msg = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
     }else{$msg = 'Ce livre est déjà emprunté.';}
     }else{$msg = 'Cet id (' . $book . ') ne correspond à aucun livre enregistré.';}
