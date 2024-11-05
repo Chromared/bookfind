@@ -1,5 +1,7 @@
 <?php session_start(); 
-    require 'actions/database.php'; ?>
+    require 'actions/database.php';
+    require '../actions/fonctions/conversionDate.php';
+    require '../actions/fonctions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
