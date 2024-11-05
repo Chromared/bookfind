@@ -17,6 +17,9 @@
                 <?php if($_SESSION['grade'] != 0){
                          if($books['statut'] == 0){?><form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>add-emprunt.php"><input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/><button type="submit" value="validate">Emprunter ce livre</button></form>
                     <?php }elseif($books['statut'] == 1){?>
+                <p>Emprunté par : </p>
+                <p>Le : </p>
+                <p>Retour prévu le : </p>
                         <form method="post" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>#"><input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/><button type="submit" value="validate">Retourner cet emprunt</button></form>
                 <?php }} ?>
             </div>

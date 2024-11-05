@@ -6,7 +6,7 @@
         $card = $_POST['card'];
         $date = $_POST['date'];
 
-        $checkIfUserAlreadyExists = $bdd->prepare('SELECT nb_emprunt_max, nb_emprunt FROM users WHERE carte = ?');
+        $checkIfUserAlreadyExists = $bdd->prepare('SELECT nb_emprunt_max, nb_emprunt, nom, prenom FROM users WHERE carte = ?');
         $checkIfUserAlreadyExists->execute(array($card));
         $user = $checkIfUserAlreadyExists->fetch();
 
@@ -23,11 +23,12 @@
         if($checkIfBookAlreadyExists->rowCount() > 0){
         if(NULL){
         if($user['nb_emprunt'] < $user['nb_emprunt_max']){
+
+            $firstname_name = $user['prenom'] . ' ' . $user['nom'];
             
             //Pour le statut, 1 = emprunté, 2 = retourné. NULL ou autre = erreur -> à corriger
-            
-            $addEmprunt = $bdd->prepare('INSERT INTO emprunts SET id_book = ?, date_retour = ?, card_emprunteur = ?, statut = ?, titre_book = ?');
-            $addEmprunt->execute(array($book, $date, $card, 1, $booksInfos['titre']));
+            $addEmprunt = $bdd->prepare('INSERT INTO emprunts SET id_book = ?, date_retour = ?, card_emprunteur = ?, firstname_name = ?, statut = ?, titre_book = ?');
+            $addEmprunt->execute(array($book, $date, $card, $firstname_name, 1, $booksInfos['titre']));
             
             $updateEmpruntForBooks = $bdd->prepare('UPDATE books SET statut = ? WHERE id = ?');
             $updateEmpruntForBooks->execute(array(1, $book));
