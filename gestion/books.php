@@ -1,5 +1,7 @@
 <?php require '../actions/database.php';
     require '../actions/users/securityAction.php';
+    require '../actions/fonctions/conversionDate.php';
+    require '../actions/fonctions/conversionDateHour.php';
     require 'actions/securityActionAdmin.php';
     $gestion = true; ?>
 <!DOCTYPE html>
