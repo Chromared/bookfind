@@ -3,8 +3,8 @@
       require '../actions/users/securityAction.php';
       require 'actions/securityActionAdmin.php';
       require '../actions/users/showOneUsersProfilAction.php';
-      require '../actions/fonctions/selectionnerClasse.php';
-      require '../actions/fonctions/selectionnerGrade.php';
+      require '../actions/fonctions/selectedClasse.php';
+      require '../actions/fonctions/selectedGrade.php';
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
       require 'actions/users/updateGradeAction.php';
