@@ -2,7 +2,7 @@
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
       require 'actions/users/showOneUsersProfilAction.php';
-      require 'actions/fonctions/selectionnerClasse.php';
+      require 'actions/fonctions/selectedClasse.php';
       require 'actions/users/updateInfoPersoAction.php';
       require 'actions/users/updateInfoScoAction.php';
       require 'actions/users/updateMdpAction.php';
