@@ -1,26 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap');
 
-* {
+*{
     margin: 0;
     padding: 0;
 }
 
-body {
+body{
     min-height: 100vh;
-    background: #f9f9f9; /* Fond clair */
+    background: snow;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     font-family: "Barlow", sans-serif;
-    color: #333; /* Couleur du texte sombre */
 }
 
-nav {
-    background-color: #ffffff; /* Fond de la navigation clair */
+nav{
+    background-color: #27272b;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
-nav ul {
+nav ul{
     width: 100%;
     list-style: none;
     display: flex;
@@ -28,39 +27,40 @@ nav ul {
     align-items: center;
 }
 
-nav li {
+nav li{
     height: 50px;
 }
 
-nav a {
+nav a{
     height: 100%;
     padding: 0 30px;
     text-decoration: none;
     display: flex;
     align-items: center;
-    color: #333; /* Couleur des liens sombre */
+    color: snow;
 }
 
-nav a:hover {
-    color: #db9d61; /* Couleur au survol */
+nav a:hover{
+    /*background-color: #f0f0f0;*/
+    color: /*#92BBFF*/#db9d61;
 }
 
-.logo {
+.logo{
     width: 40px;
 }
 
-nav li:first-child {
+nav li:first-child{
     margin-right: auto;
 }
 
-.sidebar {
+.sidebar{
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
     width: 250px;
     z-index: 999;
-    background-color: #ffffff; /* Fond clair pour la sidebar */
+    background-color: #27272b;
     box-shadow: -10px 10px rgba(0, 0, 0, 0.1);
     display: none;
     flex-direction: column;
@@ -68,52 +68,75 @@ nav li:first-child {
     justify-content: flex-start;
 }
 
-.sidebar li {
+.sidebar li{
     width: 100%;
 }
 
-.sidebar a {
+.sidebar a{
     width: 100%;
-    color: #333; /* Couleur des liens sombre dans la sidebar */
 }
 
-.menu-button {
-    display: none;
+.menu-button{
+    display:none;
 }
 
-@media(max-width: 600px) {
-    .hideOnMobile {
+@media(max-width: 600px){
+    .hideOnMobile{
         display: none;
     }
-    .menu-button {
+    .menu-button{
         display: block;
     }
 }
 
-@media(max-width: 300px) {
-    .sidebar {
+@media(max-width: 300px){
+    .sidebar{
         width: 100%;
     }
-    .menu-button {
+    .menu-button{
         display: block;
     }
 }
 
-input[type=text], select, input[type=password], input[type=number], textarea {
+/*input[type="search"] {
+    border-style: solid;
+    border-color: #27272b;
+    border-width: medium;
+    width: 12cm;
+    height: 1cm;
+    background-color: snow;
+    color: #27272b;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+input[type="search"]:focus {
+    outline: none;
+    border-style: double;
+    border-color: #2e63eb;
+    border-width: 4px;
+    width: 12cm;
+    height: 1cm;
+    background-color: snow;
+    color: #27272b;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}*/
+
+input[type=text], select, input[type=password], input[type=number] {
     height: 0.75cm;
     width: 10cm;
     border-style: solid;
     border-width: 1px;
-    border-color: #ccc; /* Couleur de bordure claire */
+    border-color: #27272b;
     border-radius: 4px;
     resize: vertical;
-    background-color: #ffffff; /* Fond blanc pour les zones de texte */
-    color: #333; /* Texte sombre */
 }
 
 input[type=text]:focus, select:focus, input[type=password]:focus, input[type=number]:focus {
+    border-style: solid;
     border-width: 2px;
-    border-color: #db9d61; /* Couleur de bordure au focus */
+    border-color: #db9d61;
 }
 
 input[type=search] {
@@ -121,69 +144,96 @@ input[type=search] {
     width: 12cm;
     border-style: solid;
     border-width: 1px;
-    border-color: #ccc; /* Couleur de bordure claire */
+    border-color: #27272b;
     border-radius: 4px;
     resize: vertical;
     font-size: 1.2rem;
-    background-color: #ffffff; /* Fond blanc */
-    color: #333; /* Texte sombre */
 }
 
 input[type=search]:focus {
+    border-style: solid;
     border-width: 2px;
-    border-color: #db9d61; /* Couleur de bordure au focus */
+    border-color: #db9d61;
 }
 
-input[type=submit], input[type=reset], button, .profil-part button {
-    background-color: #db9d61; /* Couleur des boutons */
-    color: white; /* Texte blanc */
+
+input[type=submit] {
+    background-color: /*#04AA6D*/#db9d61;
+    color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-hr {
-    border-style: solid;
-    border-width: 3px;
-    border-color: #db9d61; /* Couleur de l'hr */
+input[type=reset] {
+    background-color: /*#04AA6D*/#db9d61;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.form-signup, .form-login, .search-part, .booksearch-part, .profil-info-page, .reader-part, .update-part, .usersgestion-part {
+
+button{
+    height: 1cm;
+    width: 1cm;
+    background-color: /*#04AA6D*/#db9d61;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+hr{
+    border-style: solid;
+    border-width: 3px;
+    border-color: #db9d61;
+}
+
+.profil-part button{
+    background-color: /*#04AA6D*/#db9d61;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.form-signup, .form-login, .search-part, .booksearch-part, .profil-info-page, .reader-part, .update-part, .usersgestion-part{
     margin-left: 10px;
 }
 
-.form-signup input, select, .form-login input, .update-part input {
+.form-signup input, select{
     margin-bottom: 10px;
 }
 
+.form-login input, p, h4{
+    margin-bottom: 10px;
+}
+
+.update-part input, hr{
+    margin-bottom: 10px;
+}
+
+/*.update-part input[type=submit]{
+    margin-left: 5px;
+}*/
+
+.update-part input[type=text], select, input[type=password], input[type=number]{
+    margin-right: 7px;
+}
 .list {
-    width: 100%;
-    background-color: #ffffff; /* Fond clair pour la liste */
-    border-radius: 0 0 5px 5px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0 0 5px 5px;
 }
-
 .list-items {
-    padding: 10px 5px;
-    color: #333; /* Couleur du texte dans la liste */
+  padding: 10px 5px;
 }
-
 .list-items:hover {
-    background-color: #f0f0f0; /* Couleur de fond au survol */
-}
-
-/* Aligner les labels et masquer les fieldset */
-label {
-    display: inline-block;
-    width: 150px; /* Largeur fixe pour l'alignement */
-    color: #333; /* Couleur des labels sombre */
-}
-
-legend {
-    color: #333; /* Couleur des légendes sombre */
-    margin-bottom: 5px; /* Espacement sous les légendes */
-}
-
-fieldset {
-    display: none; /* Masquer les fieldset */
+  background-color: #dddddd;
 }
