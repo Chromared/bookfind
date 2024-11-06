@@ -25,7 +25,7 @@
                 <p>Emprunté par : <?= htmlspecialchars($emprunts['firstname_name']); ?></p>
                 <p>Le : <?php ConversionDateHour($emprunts['date_emprunt']); ?></p>
                 <p>Retour prévu le : <?php ConversionDate($emprunts['date_retour']); ?></p>
-                        <form method="post" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>#"><input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/><button type="submit" value="validate">Retourner cet emprunt</button></form>
+                        <form method="post" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>#"><input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/><input type="hidden" name="card" value="<?= htmlspecialchars($emprunts['card_emprunteur']); ?>"/><button type="submit" value="validate">Retourner cet emprunt</button></form>
                 <?php }} ?>
             </div>
             <br />

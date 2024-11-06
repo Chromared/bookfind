@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 27 sep. 2024 à 18:55
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Généré le : mer. 06 nov. 2024 à 18:44
+-- Version du serveur : 10.4.32-MariaDB
+-- Version de PHP : 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,8 +42,8 @@ CREATE TABLE `authors` (
 INSERT INTO `authors` (`id`, `nom`, `prenom`, `nomprenom`, `biographie`) VALUES
 (3, 'Riordans', 'Rick', 'Riordans, Rick', 'Auteur de Percy Jackson'),
 (4, 'Laucoin', 'Joachim', 'Laucoin, Joachim', NULL),
-(5, 'Gaudron', 'Thomas', 'Gaudron, Thomas', 'Une personne admirable, drôle, est un modèle pour certaine personne. Développeur CSS de Bookfind'),
-(6, 'Muller', 'Alban', 'Muller, Alban', 'Développeur principal de bookfind pour la partie backend et auteur de la série best seller "Les aventures de Nabla", qui est inspiré de sa vie. ');
+(5, 'Gaudron', 'Thomas', 'Gaudron, Thomas', NULL),
+(6, 'Muller', 'Alban', 'Muller, Alban', 'Il est le développeur backend de Bookfind. Il est génial !');
 
 -- --------------------------------------------------------
 
@@ -71,8 +71,7 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `titre`, `auteur`, `isbn`, `id_unique`, `resume`, `editeur`, `type`, `serie`, `tome`, `statut`, `genre`) VALUES
-(1, 'Alban', 'Muller, Alban', 123456, 'a', 'b', 'Albin Michel', 'Manuel scolaire', 'Alban', 1, 1, 'Horreur'),
-(2, 'Muller', 'Muller, Alban', 321654, 'b', 'caca', 'WIZ', 'Roman', 'Alban', 2, 1, 'Humour');
+(1, 'Alban', 'Muller, Alban', 123, '', '', 'WIZ', 'Manuel scolaire', '', 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -106,16 +105,9 @@ CREATE TABLE `emprunts` (
   `date_emprunt` datetime NOT NULL DEFAULT current_timestamp(),
   `date_retour` date NOT NULL,
   `card_emprunteur` int(11) NOT NULL,
-  `statut` int(1) NOT NULL DEFAULT '1'
+  `firstname_name` varchar(255) NOT NULL,
+  `statut` int(3) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `emprunts`
---
-
-INSERT INTO `emprunts` (`id`, `id_book`, `titre_book`, `date_emprunt`, `date_retour`, `card_emprunteur`, `statut`) VALUES
-(1, 1, 'Alban', '2024-09-27 17:11:18', '2024-10-29', 89702661, '1'),
-(2, 2, 'Muller', '2024-09-27 17:56:10', '2024-10-28', 89702661, '1');
 
 -- --------------------------------------------------------
 
@@ -141,6 +133,22 @@ INSERT INTO `genres` (`id`, `nom`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `log`
+--
+
+CREATE TABLE `log` (
+  `id` int(11) NOT NULL,
+  `page` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_card` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `datetime` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `types`
 --
 
@@ -156,7 +164,6 @@ CREATE TABLE `types` (
 INSERT INTO `types` (`id`, `nom`) VALUES
 (1, 'Manuel scolaire'),
 (2, 'Bande dessinées'),
-(3, 'Test'),
 (4, 'Roman');
 
 -- --------------------------------------------------------
@@ -224,6 +231,12 @@ ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `types`
 --
 ALTER TABLE `types`
@@ -250,7 +263,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT pour la table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `editeurs`
@@ -262,13 +275,19 @@ ALTER TABLE `editeurs`
 -- AUTO_INCREMENT pour la table `emprunts`
 --
 ALTER TABLE `emprunts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `genres`
 --
 ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `log`
+--
+ALTER TABLE `log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `types`
