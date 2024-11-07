@@ -21,7 +21,7 @@
 
         if($checkIfUserAlreadyExists->rowCount() > 0){   
         if($checkIfBookAlreadyExists->rowCount() > 0){
-        if(NULL){
+        //if(){
         if($user['nb_emprunt'] < $user['nb_emprunt_max']){
 
             $firstname_name = $user['prenom'] . ' ' . $user['nom'];
@@ -38,7 +38,7 @@
             $updateEmpruntForBooks->execute(array($user_nb_emprunt, $card));
             
     }else{$msg = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
-    }else{$msg = 'Ce livre est déjà emprunté.';}
+    //}else{$msg = 'Ce livre est déjà emprunté.';}
     }else{$msg = 'Cet id (' . $book . ') ne correspond à aucun livre enregistré.';}
     }else{$msg = 'Ce numéro de carte (' . $card . ') n\'est associé à aucun utilisateur.';}
     }else{$msg = 'Tous les champs ne sont pas remplis.';}
