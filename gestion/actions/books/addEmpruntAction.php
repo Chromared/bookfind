@@ -21,7 +21,7 @@
 
         if($checkIfUserAlreadyExists->rowCount() > 0){   
         if($checkIfBookAlreadyExists->rowCount() > 0){
-        //if(){
+        //if(NULL){
         if($user['nb_emprunt'] < $user['nb_emprunt_max']){
 
             $firstname_name = $user['prenom'] . ' ' . $user['nom'];
@@ -36,6 +36,8 @@
             $user_nb_emprunt = $user['nb_emprunt'] +1;
             $updateEmpruntForBooks = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
             $updateEmpruntForBooks->execute(array($user_nb_emprunt, $card));
+
+            header('Location: books.php');
             
     }else{$msg = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
     //}else{$msg = 'Ce livre est déjà emprunté.';}

@@ -21,6 +21,7 @@
                 <li><a href="index.php"><img src="../style/img/logopourpage.png" alt="logo" class="logo"></a></li>
                 <li class="hideOnMobile"><a href="index.php">Accueil</a></li>
                 <li class="hideOnMobile"><a href="books.php">Livres</a></li>
+                <li class="hideOnMobile"><a href="emprunts.php">Emprunts</a></li>
                 <li class="hideOnMobile"><a href="add-books.php">Ajouter un livre</a></li>
                 <li class="hideOnMobile"><a href="users.php">Utilisateurs</a></li>
 
