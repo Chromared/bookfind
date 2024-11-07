@@ -14,5 +14,7 @@
         $updateMaxEmpruntUser = $bdd->prepare('UPDATE users SET nb_emprunt_max = ? WHERE carte = ?');
         $updateMaxEmpruntUser->execute(array(-1, $card));
 
+        header('Location: books.php');
+
     }
 }
