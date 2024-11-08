@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php if (isset($_POST['validateGrade'])) {
     if (isset($_POST['grade'])){
         if (!empty($_POST['grade']) OR $_POST['grade'] == '0'){
