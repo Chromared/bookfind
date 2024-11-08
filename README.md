@@ -93,8 +93,8 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
 ## Dépendances
 
 - **PHP** : version 7.4 ou supérieure.
-- **MySQL** : Pour la gestion de la base de données.
-- **Serveur Web** : Apache ou équivalent (ex : via XAMPP ou WAMP).
+- **SQL** : Pour la gestion de la base de données, MariaDB est fortement recommandée.
+- **Serveur Web** : Apache
 
 ## Licence
 
