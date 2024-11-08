@@ -1,1 +1,4 @@
 Une partie de la navbar disparait et est inaccessible sur les iPad Mini et Air ainsi que sur le Asus Zenbook Fold
+
+Et donc, est-il possible de corriger ce probleme ?
+Thomas
