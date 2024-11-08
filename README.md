@@ -45,11 +45,11 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
 
 ### Répertoires
 
-- `actions/` : Contient les scripts PHP pour les actions de gestion, comme la connexion à la base de données, et les fonctions associées.
+- `actions/` : Contient les scripts PHP et JavaScript pour les actions de gestion, comme la connexion à la base de données, et les fonctions associées.
   - `database.php` : Configuration et connexion à la base de données.
   - `users/loginAction.php` : Gestion des actions de connexion des utilisateurs.
-- `includes/` : Composants inclus dans les différentes pages, comme le `header` et la `navbar` pour un affichage cohérent.
-- `assets/` : Ressources telles que les fichiers CSS et JavaScript (à ajouter selon les besoins).
+- `includes/` : Composants inclus dans les différentes pages, comme le `header` et la `navbar` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et ou le changement impacteront toutes les pages.
+- `assets/` : Ressources telles que les fichiers CSS, images et icones.
 
 ## Installation
 
