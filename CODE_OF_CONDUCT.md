@@ -25,7 +25,7 @@ Ce projet **BookFind** est sous licence [MIT](LICENSE), propriété exclusive de
 ## Reproduction, Modification et Attribution
 
 - Toute modification, copie ou utilisation de ce code, en tout ou en partie, dans d’autres projets ou environnements externes, doit mentionner explicitement **Chromared** en tant que créateur et propriétaire du code.
-- Si le code est réutilisé ou adapté, il est impératif de citer l’origine du code et de fournir un lien vers le dépôt source, conformément à la licence X11.
+- Si le code est réutilisé ou adapté, il est impératif de citer l’origine du code et de fournir un lien vers le dépôt source, conformément à la licence MIT.
   
 ## Signalement de Comportements Inappropriés
 
