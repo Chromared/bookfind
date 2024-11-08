@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php if(isset($_POST['validate'])){
     if(isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['isbn']) AND isset($_POST['editeur']) AND isset($_POST['type'])){
         if(!empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['isbn']) AND !empty($_POST['editeur']) AND !empty($_POST['type'])){

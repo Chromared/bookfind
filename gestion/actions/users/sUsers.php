@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php include '../actions/fonctions/transfoGradeIntVersText.php';
 
 // Liste des colonnes valides pour la recherche

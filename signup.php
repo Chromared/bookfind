@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php session_start() ?>
 <?php require 'actions/database.php';?>
 <?php require 'actions/users/signupAction.php'; ?>

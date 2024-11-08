@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php session_start();
     require 'actions/database.php';
     require 'actions/books/showOneBooksAction.php'; ?>

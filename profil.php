@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php require 'actions/database.php'; 
       require 'actions/users/securityAction.php';
       require 'actions/users/showOneUsersProfilAction.php';
