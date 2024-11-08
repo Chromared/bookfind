@@ -1,5 +1,5 @@
 # X11 License
-# Copyright © 2024 Chromared
+# 2024 Chromared
 
 
 <?php session_start();
