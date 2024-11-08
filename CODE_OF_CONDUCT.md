@@ -15,7 +15,7 @@ Tous les contributeurs doivent :
 
 ## Propriété et Licence
 
-Ce projet **BookFind** est sous licence [X11](LICENSE), propriété exclusive de **Chromared**.
+Ce projet **BookFind** est sous licence [MIT](LICENSE), propriété exclusive de **Chromared**.
 
 ### Droits de Chromared
 
