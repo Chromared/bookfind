@@ -1,0 +1,1 @@
+contributing : quelles sont les conditions de contribution au projet ( il faut les détailler, que se soit pour chromared ou pour des développeur externe au projet)
