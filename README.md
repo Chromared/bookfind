@@ -60,7 +60,7 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
 2. **Configuration du serveur local** :
     - Utilisez XAMPP, WAMP, ou un autre serveur avec PHP et MySQL.
 3. **Déplacer le projet** :
-    - Placez le dossier extrait dans le répertoire racine de votre serveur web (ex : `htdocs` pour XAMPP).
+    - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général 'htdocs' sur les serveurs web et XAMPP ou 'www' pour WAMP).
 4. **Importer la base de données** :
     - Dans votre interface MySQL (comme phpMyAdmin), créez une base de données et importez-y le fichier SQL fourni pour créer les tables nécessaires.
 
