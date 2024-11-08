@@ -62,7 +62,7 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
 3. **Déplacer le projet** :
     - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général 'htdocs' sur les serveurs web et XAMPP ou 'www' pour WAMP).
 4. **Importer la base de données** :
-    - Dans votre interface MySQL (comme phpMyAdmin), créez une base de données et importez-y le fichier SQL fourni pour créer les tables nécessaires.
+    - Dans votre interface MySQL (comme phpMyAdmin), créez une base de données et importez-y le fichier SQL fourni (le fichier est dans 'actions/bookfind.sql') pour créer les tables nécessaires.
 
 ## Configuration de la Base de Données
 
