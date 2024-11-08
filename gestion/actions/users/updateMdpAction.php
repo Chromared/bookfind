@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php if (isset($_POST['validateMdp'])) {
     if (isset($_POST['new-password']) AND isset($_POST['confirm-new-password'])) {
     if (!empty($_POST['new-password']) AND !empty($_POST['confirm-new-password'])) {

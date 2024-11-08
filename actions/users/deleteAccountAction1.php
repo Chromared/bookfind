@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php if(isset($_POST['validateDelete1'])){
     if(isset($_POST['password'])){
         if(!empty($_POST['password'])){

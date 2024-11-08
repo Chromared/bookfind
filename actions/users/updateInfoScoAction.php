@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php if (isset($_POST['validateInfoSco'])) {
     if (isset($_POST['card']) AND isset($_POST['classe'])){
     if (!empty($_POST['card']) AND !empty($_POST['classe'])){

@@ -1,3 +1,7 @@
+# X11 License
+# Copyright © 2024 Chromared
+
+
 <?php if(isset($_POST['validateAuthor'])){
     if(isset($_POST['firstname']) AND isset($_POST['name'])){
     if(!empty($_POST['firstname']) AND !empty($_POST['name']))
