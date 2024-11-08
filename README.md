@@ -55,7 +55,7 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
 
 1. **Cloner le dépôt ou télécharger le ZIP** :
     ```bash
-    git clone <URL_du_dépôt>
+    git clone https://github.com/chromared/bookfind.git
     ```
 2. **Configuration du serveur local** :
     - Utilisez XAMPP, WAMP, ou un autre serveur avec PHP et MySQL.
