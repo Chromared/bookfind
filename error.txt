@@ -2,3 +2,5 @@ Une partie de la navbar disparait et est inaccessible sur les iPad Mini et Air a
 
 Et donc, est-il possible de corriger ce probleme ?
 Thomas
+
+Oui, en changeant des paramètres CSS et JavaScript.
