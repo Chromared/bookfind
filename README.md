@@ -49,7 +49,7 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
   - `database.php` : Configuration et connexion à la base de données.
   - `users/loginAction.php` : Gestion des actions de connexion des utilisateurs.
 - `includes/` : Composants inclus dans les différentes pages, comme le `header` et la `navbar` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et ou le changement impacteront toutes les pages.
-- `assets/` : Ressources telles que les fichiers CSS, images et icones.
+- `style/` : Ressources telles que les fichiers CSS, images et icones.
 
 ## Installation
 
@@ -75,6 +75,7 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
     $password = 'mot_de_passe';
     ```
 3. Enregistrez les modifications.
+4. Importez le fichier 'actions/bookfind.sql' dans phpMyAdmin.
 
 ## Utilisation
 
@@ -93,7 +94,7 @@ Cette application offre une solution efficace pour le personnel du CDI et les ut
 ## Dépendances
 
 - **PHP** : version 7.4 ou supérieure.
-- **SQL** : Pour la gestion de la base de données. MariaDB est fortement recommandée.
+- **MySQL** : Pour la gestion de la base de données. MariaDB est fortement recommandée.
 - **Serveur Web** : Apache
 
 ## Licence
