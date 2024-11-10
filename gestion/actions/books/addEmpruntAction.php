@@ -21,14 +21,9 @@
         $checkIfBookAlreadyExists->execute(array($book));
         $booksInfos = $checkIfBookAlreadyExists->fetch();
 
-
-        $checkIfBookAlreadyAvailable = $bdd->prepare('SELECT statut FROM emprunts WHERE id_book = ? AND statut = ?');
-        $checkIfBookAlreadyAvailable->execute(array($book, 0));
-        $empruntsInfos = $checkIfBookAlreadyAvailable->fetch();
-
         if($checkIfUserAlreadyExists->rowCount() > 0){   
         if($checkIfBookAlreadyExists->rowCount() > 0){
-        //if(NULL){
+        if($booksInfos['statut'] != 1){
         if($user['nb_emprunt'] < $user['nb_emprunt_max']){
 
             $firstname_name = $user['prenom'] . ' ' . $user['nom'];
@@ -41,13 +36,13 @@
             $updateEmpruntForBooks->execute(array(1, $book));
             
             $user_nb_emprunt = $user['nb_emprunt'] +1;
-            $updateEmpruntForBooks = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
-            $updateEmpruntForBooks->execute(array($user_nb_emprunt, $card));
+            $updateUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
+            $updateUser->execute(array($user_nb_emprunt, $card));
 
             header('Location: books.php');
             
     }else{$msg = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
-    //}else{$msg = 'Ce livre est déjà emprunté.';}
+    }else{$msg = 'Ce livre est déjà emprunté.';}
     }else{$msg = 'Cet id (' . $book . ') ne correspond à aucun livre enregistré.';}
     }else{$msg = 'Ce numéro de carte (' . $card . ') n\'est associé à aucun utilisateur.';}
     }else{$msg = 'Tous les champs ne sont pas remplis.';}
