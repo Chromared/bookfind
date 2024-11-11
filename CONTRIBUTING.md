@@ -29,7 +29,7 @@ Ce projet adhère à un [Code de Conduite](CODE_OF_CONDUCT.md) afin de garantir 
 ### Processus de Contribution
 
 1. **Fork le dépôt** et clonez-le localement.
-2. Créez une nouvelle branche avec un nom descriptif (ex : `feature/recherche-filtrée`).
+2. Créez une nouvelle branche avec un nom descriptif (ex : `feature`).
 3. Effectuez vos modifications sur cette branche.
 4. Testez et assurez-vous que le code est fonctionnel avant de faire une demande de tirage (pull request).
 
