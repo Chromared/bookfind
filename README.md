@@ -25,7 +25,7 @@ Le projet **BookFind** est conçu pour simplifier la gestion des emprunts de liv
 - De consulter leurs emprunts en cours
 - De se connecter pour accéder aux fonctionnalités protégées.
 
-Cette application offre une solution efficace pour le personnel du CDI et les utilisateurs.
+Cette application offre une solution efficace pour le personnel du CDI et leurs       utilisateurs.
 
 ## Fonctionnalités
 
