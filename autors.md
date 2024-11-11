@@ -1,6 +1,6 @@
 ## Contributeurs actifs :
 
-- [@](https://gitlab.com/MythUp3)
+- [@AMu11er](https://gitlab.com/MythUp3)
 - [@joachimlaucoin](https://gitlab.com/joacksleloupgit)
 - [@TagSteel](https://gitlab.com/TagSteel)
 
