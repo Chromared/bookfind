@@ -1,8 +1,11 @@
-# This file belongs to the Bookfind project.
-#
-# Bookfind is distributed under the terms of the MIT software license.
-#
-# Copyright (C) 2024 Chromared
+<?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2024 Chromared
+?>
+
 
 
 <?php
@@ -14,7 +17,7 @@ $password = ''; // Remplacez par votre mot de passe
 
 try {
     // Création de la connexion avec PDO
-    $bdd = new PDO('mysql:host=$host;dbname=$dbname;charset=utf8', $username, $password);
+    $bdd = new PDO('mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
     // Configuration pour afficher les erreurs (utile en développement)
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
