@@ -9,7 +9,9 @@
 
 
 <?php
-session_start();
-$_SESSION = [];
-session_destroy();
-header('Location: ../../login.php');
+function Selected($a, $b) {
+
+    if ($a == $b) {
+        echo'selected="selected"';
+}
+}

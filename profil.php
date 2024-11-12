@@ -1,14 +1,19 @@
-# This file belongs to the Bookfind project.
-#
-# Bookfind is distributed under the terms of the MIT software license.
-#
-# Copyright (C) 2024 Chromared
+<?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2024 Chromared
+?>
 
-<?php require 'actions/database.php'; 
-      require 'actions/users/securityAction.php';
-      require 'actions/users/showOneUsersProfilAction.php';
-      require 'actions/fonctions/transfoGradeIntVersText.php';
-      require 'actions/fonctions/conversionDateHour.php'; ?>
+<?php $page = 'profil.php'; ?>
+
+<?php require 'actions/database.php';
+    require 'actions/fonctions/logFunction.php';
+    require 'actions/users/securityAction.php';
+    require 'actions/users/showOneUsersProfilAction.php';
+    require 'actions/fonctions/transfoGradeIntVersText.php';
+    require 'actions/fonctions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
