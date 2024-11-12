@@ -9,7 +9,7 @@
 <?php $page = 'profil.php'; ?>
 
 <?php require 'actions/database.php';
-    require 'actions/fonctions/logFunction.php';
+    //require 'actions/fonctions/logFunction.php';
     require 'actions/users/securityAction.php';
     require 'actions/users/showOneUsersProfilAction.php';
     require 'actions/fonctions/transfoGradeIntVersText.php';

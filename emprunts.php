@@ -9,7 +9,7 @@
 <?php $page = 'emprunts.php'; ?>
 
 <?php require 'actions/database.php';
-    require 'actions/fonctions/logFunction.php';
+    //require 'actions/fonctions/logFunction.php';
     require 'actions/users/securityAction.php';
     require 'actions/books/showEmprunts.php';
     require 'actions/fonctions/conversionDateHour.php';
