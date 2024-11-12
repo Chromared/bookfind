@@ -1,23 +1,25 @@
-# This file belongs to the Bookfind project.
-#
-# Bookfind is distributed under the terms of the MIT software license.
-#
-# Copyright (C) 2024 Chromared
+<?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2024 Chromared
+?>
 
+<?php $page = 'gestion/update-user.php'; ?>
 
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require '../actions/database.php'; 
-      require '../actions/users/securityAction.php';
-      require 'actions/securityActionAdmin.php';
-      require '../actions/users/showOneUsersProfilAction.php';
-      require '../actions/fonctions/selectedClasse.php';
-      require '../actions/fonctions/selectedGrade.php';
-      require 'actions/users/updateInfoPersoAction.php';
-      require 'actions/users/updateInfoScoAction.php';
-      require 'actions/users/updateGradeAction.php';
-      require 'actions/users/updateMdpAction.php';
-      require 'actions/users/deleteAccountAction1.php';
-      require 'actions/users/deleteAccountAction2.php'; ?>
+    require '../actions/users/securityAction.php';
+    require 'actions/securityActionAdmin.php';
+    require '../actions/users/showOneUsersProfilAction.php';
+    require '../actions/fonctions/selected.php';
+    require 'actions/users/updateInfoPersoAction.php';
+    require 'actions/users/updateInfoScoAction.php';
+    require 'actions/users/updateGradeAction.php';
+    require 'actions/users/updateMdpAction.php';
+    require 'actions/users/deleteAccountAction1.php';
+    require 'actions/users/deleteAccountAction2.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -47,7 +49,7 @@
 <h4>Informations scolaire</h4>
 <form method="post" class="form">
     <label class="form-label">Carte :</label> <input class="form-control" name="card" type="number" value="<?= htmlspecialchars($usersInfos['carte']); ?>" />
-    <label class="form-label">Classe :</label> <select class="form-control" name="classe" ><option value="6B" <?php Classe('6B', $usersInfos['classe']); ?> >6B</option><option value="5B" <?php Classe('5B', $usersInfos['classe']); ?> >5B</option><option value="4B" <?php Classe('4B', $usersInfos['classe']); ?> >4B</option><option value="3B" <?php Classe('3B', $usersInfos['classe']); ?> >3B</option><option value="6R" <?php Classe('6R', $usersInfos['classe']); ?> >6R</option><option value="5R" <?php Classe('5R', $usersInfos['classe']); ?> >5R</option><option value="4R" <?php Classe('4R', $usersInfos['classe']); ?> >4R</option><option value="3R" <?php Classe('3R', $usersInfos['classe']); ?> >3R</option><option value="6J" <?php Classe('6J', $usersInfos['classe']); ?> >6J</option><option value="5J" <?php Classe('5J', $usersInfos['classe']); ?> >5J</option><option value="4J" <?php Classe('4J', $usersInfos['classe']); ?> >4J</option><option value="3J" <?php Classe('3J', $usersInfos['classe']); ?> >3J</option><option value="6V" <?php Classe('6V', $usersInfos['classe']); ?> >6V</option><option value="5V" <?php Classe('5V', $usersInfos['classe']); ?> >5V</option><option value="4V" <?php Classe('4V', $usersInfos['classe']); ?> >4V</option><option value="3V" <?php Classe('3V', $usersInfos['classe']); ?> >3V</option></select>
+    <label class="form-label">Classe :</label> <select class="form-control" name="classe" ><option value="6B" <?php Selected('6B', $usersInfos['classe']); ?> >6B</option><option value="5B" <?php Selected('5B', $usersInfos['classe']); ?> >5B</option><option value="4B" <?php Selected('4B', $usersInfos['classe']); ?> >4B</option><option value="3B" <?php Selected('3B', $usersInfos['classe']); ?> >3B</option><option value="6R" <?php Selected('6R', $usersInfos['classe']); ?> >6R</option><option value="5R" <?php Selected('5R', $usersInfos['classe']); ?> >5R</option><option value="4R" <?php Selected('4R', $usersInfos['classe']); ?> >4R</option><option value="3R" <?php Selected('3R', $usersInfos['classe']); ?> >3R</option><option value="6J" <?php Selected('6J', $usersInfos['classe']); ?> >6J</option><option value="5J" <?php Selected('5J', $usersInfos['classe']); ?> >5J</option><option value="4J" <?php Selected('4J', $usersInfos['classe']); ?> >4J</option><option value="3J" <?php Selected('3J', $usersInfos['classe']); ?> >3J</option><option value="6V" <?php Selected('6V', $usersInfos['classe']); ?> >6V</option><option value="5V" <?php Selected('5V', $usersInfos['classe']); ?> >5V</option><option value="4V" <?php Selected('4V', $usersInfos['classe']); ?> >4V</option><option value="3V" <?php Selected('3V', $usersInfos['classe']); ?> >3V</option></select>
     <input type="submit" class="form-btn-blue" name="validateInfoSco" value="Valider" />
 </form>
 </div>
@@ -56,7 +58,7 @@
 <?php if($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2'){?>
 <h4>Grade</h4>
 <form method="post" class="form">
-    <label class="form-label">Grade :</label> <select class="form-control" name="grade" ><option value="0" <?php Grade('0', $usersInfos['grade']); ?> >Aucun</option><option value="3" <?php Grade('3', $usersInfos['grade']); ?> >Assistant</option><option value="2" <?php Grade('2', $usersInfos['grade']); ?> >Gérant</option><?php if($_SESSION['grade'] == '1'){ ?><option value="1" <?php Grade('1', $usersInfos['grade']); ?> >Administrateur</option><?php } ?></select>
+    <label class="form-label">Grade :</label> <select class="form-control" name="grade" ><option value="0" <?php Selected('0', $usersInfos['grade']); ?> >Aucun</option><option value="3" <?php Selected('3', $usersInfos['grade']); ?> >Assistant</option><option value="2" <?php Selected('2', $usersInfos['grade']); ?> >Gérant</option><?php if($_SESSION['grade'] == '1'){ ?><option value="1" <?php Selected('1', $usersInfos['grade']); ?> >Administrateur</option><?php } ?></select>
     <input type="submit" class="form-btn-blue" name="validateGrade" value="Valider" />
 </form>
 </div>

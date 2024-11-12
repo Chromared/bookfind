@@ -4,3 +4,4 @@ Et donc, est-il possible de corriger ce probleme ?
 Thomas
 
 Oui, en changeant des paramètres CSS et JavaScript.
+Alban
