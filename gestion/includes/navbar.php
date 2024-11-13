@@ -16,16 +16,16 @@
         <ul class="sidebar">
             <li onclick=hideSidebar()><a href="#"><i class="fa-solid fa-xmark" style="color: #FFD43B;"></i></a></li>
             <li><a href="index.php">Accueil</a></li>
-
-            <li><a href="../index.php">Quitter la Gestion</a></li>
-            <li class="li-nav"><a href="books.php">Livres</a></li>
-
+            <li><a href="books.php">Livres</a></li>
+            <li><a href="emprunts.php">Emprunts</a></li>
+            <li><a href="add-books.php">Ajouter un livre</a></li>
             <li><a href="users.php">Utilisateurs</a></li>
 
             <?php if ($_SESSION['grade'] == '1') { ?>
                 <li><a href="log.php">Logs</a></li>
             <?php } ?>
 
+            <li><a href="../index.php">Quitter la Gestion</a></li>
         </ul>
         <ul>
                 <li><a href="index.php"><img src="../style/img/logopourpage.png" alt="logo" class="logo"></a></li>
