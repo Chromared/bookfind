@@ -21,11 +21,11 @@
 
             <?php if (!isset($_SESSION['auth'])) { ?>
                 <li><a href="login.php">Se connecter</a></li>
-                <li class="li-nav"><a href="signup.php">S'inscrire</a></li>
+                <li><a href="signup.php">S'inscrire</a></li>
 
             <?php } elseif (isset($_SESSION['auth'])) { ?>
                 <li><a href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Mon profil</a></li>
-                <li><a href="">Mes emprunts</a></li>
+                <li><a href="emprunts.php?card=<?= htmlspecialchars($_SESSION['card']); ?>">Mes emprunts</a></li>
 
             <?php if ($_SESSION['grade'] > '0') { ?>
                 <li><a href="gestion/index.php">Gestion</a></li>

@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $page = 'gestion/update-user.php'; ?>
-
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require '../actions/database.php'; 
     require '../actions/users/securityAction.php';

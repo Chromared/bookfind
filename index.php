@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $page = 'index.php'; ?>
-
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr">

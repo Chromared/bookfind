@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $page = 'books.php'; ?>
-
 <?php session_start(); 
     require 'actions/database.php';
     require 'actions/fonctions/conversionDate.php';
