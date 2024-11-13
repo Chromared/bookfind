@@ -47,6 +47,8 @@
                     $_SESSION['classe'] = $usersInfos['classe'];
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
+
+                    Log($page, '1', $_SESSION['firstname'] . ' ' . $_SESSION['name'] . ' s\'est inscrit.');
                     
                     header('Location: index.php');
 
