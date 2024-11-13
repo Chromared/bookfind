@@ -39,6 +39,8 @@
                 $_SESSION['grade'] = $usersInfos['grade'];
                 $_SESSION['theme'] = $usersInfos['theme'];
 
+                Log($page, '2', $_SESSION['firstname'] . ' ' . $_SESSION['name'] . ' s\'est connecté sur le site.');
+
                 //Rediriger l'utilisateur vers la page d'accueil
                 header('Location: index.php');
                 
