@@ -48,7 +48,7 @@
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
 
-                    Log($page, '1', $_SESSION['firstname'] . ' ' . $_SESSION['name'] . ' s\'est inscrit.');
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun');
                     
                     header('Location: index.php');
 

@@ -6,11 +6,9 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $page = 'login.php'; ?>
-
 <?php session_start(); ?>
 <?php require 'actions/database.php';
-    //require 'actions/fonctions/logFunction.php';
+    require 'actions/fonctions/logFunction.php';
     require 'actions/users/loginAction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">

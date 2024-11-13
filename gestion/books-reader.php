@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $page = 'gestion/books-reader.php'; ?>
-
 <?php require '../actions/database.php';
     require '../actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';

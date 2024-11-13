@@ -5,8 +5,6 @@
 //
 //Copyright (C) 2024 Chromared
 ?>
-
-<?php $page = 'updateProfil.php'; ?>
     
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require 'actions/database.php';

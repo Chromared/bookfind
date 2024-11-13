@@ -8,9 +8,7 @@
 
 
 
-<?php function Log($page, $type, $comment){
-
-    //$type correspond au type de log. 1 = inscription, 2 = connexion, ...
+<?php function SaveLog($bdd, $page, $type, $comment){
 
     $userSystem = $_SERVER['HTTP_USER_AGENT'];
     $browserInfo = get_browser($userSystem, true);
@@ -21,11 +19,7 @@
     $version = $browserInfo['version'];
     $os = $browserInfo['platform'];
 
-    if(isset($bdd)){
-
     $insertLog = $bdd->prepare('INSERT INTO log SET page = ?, user_id = ?, user_card = ?, browser = ?, version = ?, os = ?, type = ?, comment = ?');
     $insertLog->execute(array($page, $user_id, $user_card, $browser, $version, $os, $type, $comment));
-
-    }
 
 }

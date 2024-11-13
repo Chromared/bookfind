@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $page = 'profil.php'; ?>
-
 <?php require 'actions/database.php';
     //require 'actions/fonctions/logFunction.php';
     require 'actions/users/securityAction.php';
