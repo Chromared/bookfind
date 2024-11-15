@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap');
 
+/* pallet de couleur à utiliser pour la V1.5 */
+
+:root {
+    --bianchi-green: #36d2c1;
+    --shimmering-expanse-cyan: #48f4f0;
+    --atoll: #26787c;
+    --caulerpa-lentillifera: #549c9c;
+    --smoke-cloud: #adb4bc;
+    --little-mermaid: #2e424e;
+    --error-red: #f44336;
+}
+
 *{
     margin: 0;
     padding: 0;
