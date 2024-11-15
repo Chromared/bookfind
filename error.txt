@@ -5,3 +5,6 @@ Thomas
 
 Oui, en changeant des paramètres CSS et JavaScript.
 Alban
+
+Super et bien on corrigera ça pour la V1.5 la on ce concentre sur le reste. 
+Thomas
