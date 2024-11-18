@@ -7,11 +7,11 @@
 ?>
 
 
-<?php $id = htmlspecialchars($_GET['id']);
+<?php $id = $_GET['id'];
       if($booksInfos['statut'] == 1){
 
       $selectInfosFromEmprunts= $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ? AND statut = 1');
       $selectInfosFromEmprunts->execute(array($id));
 
       $emprunt = $selectInfosFromEmprunts->fetch();
-      }
+      }else{$emprunts = [];}
