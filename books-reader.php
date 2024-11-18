@@ -40,10 +40,10 @@
         <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
         if($booksInfos['statut'] == 0){?><form method="get" action="add-emprunt.php"><input type="hidden" name="id" value="<?= htmlspecialchars($booksInfos['id']); ?>"/><input type="submit" name="validate" value="Emprunter ce livre"/></form>
         
-        <?php }elseif($booksInfos['statut'] == 1 AND isset($emprunts)){?>
-        <p>Emprunté par : <?= htmlspecialchars($emprunts['firstname_name']); ?></p>
-        <p>Le : <?php ConversionDateHour($emprunts['date_emprunt']); ?></p>
-        <p>Retour prévu le : <?php ConversionDate($emprunts['date_retour']); ?></p>
+        <?php }elseif($booksInfos['statut'] == 1 AND isset($emprunt['id'])){?>
+        <p>Emprunté par : <?= htmlspecialchars($emprunt['firstname_name']); ?></p>
+        <p>Le : <?php ConversionDateHour($emprunt['date_emprunt']); ?></p>
+        <p>Retour prévu le : <?php ConversionDate($emprunt['date_retour']); ?></p>
         <form method="post" action="#"><input type="hidden" name="id" value="<?= htmlspecialchars($booksInfos['id']); ?>"/><input type="hidden" name="card" value="<?= htmlspecialchars($emprunts['card_emprunteur']); ?>"/><input type="submit" name="validate" value="Retourner cet emprunt"/></form>
         <?php }}} ?>
 
