@@ -11,7 +11,7 @@
 <?php include '../actions/fonctions/transfoGradeIntVersText.php';
 
 // Liste des colonnes valides pour la recherche
-$colonnes_valides = ['id', 'carte', 'classe', 'nom', 'prenom', 'mdp', 'grade', 'datetime', 'regles', 'pdc', 'nb_emprunt_max', 'nb_emprunt'];
+$colonnes_valides = ['id', 'carte', 'classe', 'nom', 'prenom', 'grade', 'nb_emprunt_max', 'nb_emprunt'];
 
 if (isset($_GET['s']) && !empty($_GET['s']) && isset($_GET['where']) && !empty($_GET['where'])) {
 
