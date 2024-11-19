@@ -6,20 +6,15 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-
-
 <?php function SaveLog($bdd, $page, $type, $comment){
 
     $userSystem = $_SERVER['HTTP_USER_AGENT'];
-    $browserInfo = get_browser($userSystem, true);
 
     $user_id = $_SESSION['id'];
     $user_card = $_SESSION['card'];
-    $browser = $browserInfo['browser'];
-    $version = $browserInfo['version'];
-    $os = $browserInfo['platform'];
+    $name = $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];
 
-    $insertLog = $bdd->prepare('INSERT INTO log SET page = ?, user_id = ?, user_card = ?, browser = ?, version = ?, os = ?, type = ?, comment = ?');
-    $insertLog->execute(array($page, $user_id, $user_card, $browser, $version, $os, $type, $comment));
+    $insertLog = $bdd->prepare('INSERT INTO log SET page = ?, user_id = ?, user_card = ?, user_name = ?, type = ?, comment = ?');
+    $insertLog->execute(array($page, $user_id, $user_card, $name, $type, $comment));
 
 }

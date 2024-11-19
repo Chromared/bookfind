@@ -25,7 +25,7 @@
     <br><div class="booksearch-part">
     <form method="GET">
             <input type="search" name="s" placeholder="Rechercher ici les livres du CDI"/>
-            <button type="submit"><i class="fa-solid fa-magnifying-glass fa-beat" style="color: snow;"></i></button>
+            <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: snow;"></i></button>
         </form>
         <br />
         <?php include '../actions/books/sBooks.php'; ?>
