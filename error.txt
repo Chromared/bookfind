@@ -6,5 +6,5 @@ Thomas
 Oui, en changeant des paramètres CSS et JavaScript.
 Alban
 
-Super et bien on corrigera ça pour la V1.x.x la on ce concentre sur le reste. 
+Super et bien on corrigera ça pour la V1.x.x et là on ce concentre sur le reste. 
 Thomas
