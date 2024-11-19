@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-
-
 <?php if(isset($_GET['s']) AND !empty($_GET['s'])){
 
         $s = $_GET['s'];

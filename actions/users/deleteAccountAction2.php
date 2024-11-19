@@ -14,7 +14,7 @@
 
         $checkPassword = $bdd->prepare('DELETE * FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
-
+        
         header('Location: actions/users/logoutAction.php');
 }
 }
