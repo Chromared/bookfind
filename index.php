@@ -21,7 +21,7 @@
         <h1>Bienvenue sur BookFind ! Ici, empruntez les livres du C.D.I !</h1><br>
         <form method="GET" action="books.php">
                 <input type="search" name="s" action="books.php" class="searchbar" placeholder="Rechercher ici les livres du CDI" />
-                <button type="submit" class="searchbutton" ><i class="fa-solid fa-magnifying-glass fa-beat" style="color: snow;"></i></button>
+                <button type="submit" class="searchbutton" ><i class="fa-solid fa-magnifying-glass" style="color: snow;"></i></button>
         </form>
     </div>
 </body>

@@ -6,8 +6,6 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
