@@ -14,19 +14,19 @@ function Grade($grade)
     switch ($grade)
     {
     case 0:
-    echo htmlspecialchars('Aucun');
+    echo 'Aucun';
     break;
 
     case 1:
-    echo '<span class="red strong">Administrateur</span>';
+    echo 'Administrateur';
     break;
 
     case 2:
-    echo '<span class="blue strong">Gérant</span>';
+    echo 'Gérant';
     break;
 
     case 3:
-    echo '<span class="green strong">Assistant</span>';
+    echo 'Assistant';
     break;
 
     default:
