@@ -24,7 +24,15 @@
         $updateInfoSco = $bdd->prepare('UPDATE users SET carte = ?, classe = ? WHERE id = ?');
         $updateInfoSco->execute(array($card, $classe, $id));
 
-        $_SESSION['carte'] = $card;
+        if($card != $_SESSION['card'] AND $classe == $_SESSION['classe']){
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du numéro de carte. Ancien n° : ' . $_SESSION['card'] . '. Nouveau n° : ' . $card . '.');
+        }elseif($card == $_SESSION['card'] AND $classe != $_SESSION['classe']){
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification de la classe. Ancienne classe : ' . $_SESSION['classe'] . '. Nouvelle classe : ' . $classe . '.');
+        }elseif($card != $_SESSION['card'] AND $classe != $_SESSION['classe']){
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du numéro de carte. Ancien n° : ' . $_SESSION['card'] . '. Nouveau n° : ' . $card . '. Modification de la classe. Ancienne classe : ' . $_SESSION['classe'] . '. Nouvelle classe : ' . $classe . '.');
+        }
+
+        $_SESSION['card'] = $card;
         $_SESSION['classe'] = $classe;
 
         header('Location: updateProfil.php?id=' . $id .'&msg=true');
