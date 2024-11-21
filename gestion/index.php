@@ -35,6 +35,7 @@ require 'actions/securityActionAdmin.php';
         <i class="fa-solid fa-user"></i> <span id="utilisateurs"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br>
         <i class="fa-solid fa-book"></i> <span id="livres"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br>
         <i class="fa-solid fa-upload"></i> <span id="emprunts"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br>
+        <i class="fa-solid fa-newspaper"> <span id="log"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span></i>
     </p>
 
     <script>
@@ -48,6 +49,7 @@ require 'actions/securityActionAdmin.php';
                 document.getElementById('utilisateurs').textContent = data.total_utilisateurs;
                 document.getElementById('livres').textContent = data.total_livres;
                 document.getElementById('emprunts').textContent = data.total_emprunts;
+                document.getElementById('log').textContent = data.total_log;
             } else {
                 console.error('Erreur dans la réponse AJAX');
             }
