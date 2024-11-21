@@ -148,9 +148,7 @@ CREATE TABLE `log` (
   `page` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_card` int(11) NOT NULL,
-  `browser` varchar(255) NOT NULL,
-  `version` varchar(255) NOT NULL,
-  `os` varchar(255) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `comment` text NOT NULL,
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
@@ -160,8 +158,8 @@ CREATE TABLE `log` (
 -- Déchargement des données de la table `log`
 --
 
-INSERT INTO `log` (`id`, `page`, `user_id`, `user_card`, `browser`, `version`, `os`, `type`, `comment`, `datetime`) VALUES
-(1, '/bf/login.php', 1, 89702661, 'Default Browser', '0', 'unknown', 'Connexion', 'Aucun', '2024-11-13 18:22:37');
+INSERT INTO `log` (`id`, `page`, `user_id`, `user_card`, `user_name`, `type`, `comment`, `datetime`) VALUES
+(1, '/bf/login.php', 1, 89702661, 'Alban Muller', 'Connexion', 'Aucun', '2024-11-13 18:22:37');
 
 -- --------------------------------------------------------
 
