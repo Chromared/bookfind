@@ -41,7 +41,7 @@ if (!$resultat_users || !$resultat_books || !$resultat_emprunts || !$resultat_lo
 echo json_encode([
     'total_utilisateurs' => $nbCount1,
     'total_livres' => $nbCount2,
-    'total_emprunts' => $nbCount3
-    'total_logs' => $nbCount4
+    'total_emprunts' => $nbCount3,
+    'total_logs' => $nbCount4,
 ]);
 ?>
