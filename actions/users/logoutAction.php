@@ -8,8 +8,8 @@
 
 
 
-<?php require './actions/database.php';
-    require './actions/fonctions/logFunction.php';
+<?php require '../database.php';
+    require '../fonctions/logFunction.php';
 session_start();
 
     SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun');
