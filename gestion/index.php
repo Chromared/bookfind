@@ -49,7 +49,7 @@ require 'actions/securityActionAdmin.php';
                 document.getElementById('utilisateurs').textContent = data.total_utilisateurs;
                 document.getElementById('livres').textContent = data.total_livres;
                 document.getElementById('emprunts').textContent = data.total_emprunts;
-                document.getElementById('log').textContent = data.total_log;
+                document.getElementById('log').textContent = data.total_logs;
             } else {
                 console.error('Erreur dans la réponse AJAX');
             }
