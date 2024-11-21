@@ -27,7 +27,7 @@ if (isset($_POST['validateInfoPerso'])) {
                 SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille. Ancien prénom : ' . $_SESSION['firstname'] . '. Nouveau prénom : ' . $firstname . '. Ancien nom : ' . $_SESSION['lastname'] . '. Nouveau nom : ' . $name . '.');
             }
 
-            $_SESSION['name'] = $name;
+            $_SESSION['lastname'] = $name;
             $_SESSION['firstname'] = $firstname;
 
             header('Location: updateProfil.php?id=' . $id .'&msg=true');
