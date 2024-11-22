@@ -41,7 +41,7 @@
                     $_SESSION['auth'] = true;
                     $_SESSION['admin'] = false;
                     $_SESSION['id'] = $usersInfos['id'];
-                    $_SESSION['name'] = $usersInfos['nom'];
+                    $_SESSION['lastname'] = $usersInfos['nom'];
                     $_SESSION['firstname'] = $usersInfos['prenom'];
                     $_SESSION['card'] = $usersInfos['carte'];
                     $_SESSION['classe'] = $usersInfos['classe'];
