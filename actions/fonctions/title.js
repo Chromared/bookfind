@@ -10,7 +10,7 @@ let pageTitleTimeout;
 
 const startPageTitleFlashing = () => {
     pageTitleTimeout = setInterval(function () {
-        document.title = document.title === pageTitle ? "Bookfind" : pageTitle;
+        document.title = document.title === pageTitle ? "BookFind" : pageTitle;
     }, 1500);
 };
 
