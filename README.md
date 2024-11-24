@@ -48,7 +48,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 - `actions/` : Contient les scripts PHP et JavaScript pour les actions de gestion, comme la connexion à la base de données, et les fonctions associées.
   - `database.php` : Configuration et connexion à la base de données.
   - `users/loginAction.php` : Gestion des actions de connexion des utilisateurs.
-- `includes/` : Composants inclus dans les différentes pages, comme le `header` et la `navbar` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et ou le changement impacteront toutes les pages.
+- `includes/` : Composants inclus dans les différentes pages, comme le `header.php` et la `navbar.php` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et ou le changement impacteront toutes les pages.
 - `style/` : Ressources telles que les fichiers CSS, images et icones.
 
 ## Installation
@@ -60,9 +60,9 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 2. **Configuration du serveur local** :
     - Utilisez XAMPP, WAMP, ou un autre serveur avec PHP et MySQL.
 3. **Déplacer le projet** :
-    - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général 'htdocs' sur les serveurs web et XAMPP ou 'www' pour WAMP).
+    - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP).
 4. **Importer la base de données** :
-    - Dans votre interface MySQL (comme phpMyAdmin), créez une base de données et importez-y le fichier SQL fourni (le fichier est dans 'actions/bookfind.sql') pour créer les tables nécessaires.
+    - Dans votre interface MySQL (comme phpMyAdmin), créez une base de données et importez-y le fichier SQL fourni (le fichier est dans `actions/bookfind.sql`) pour créer les tables nécessaires.
 
 ## Configuration de la Base de Données
 
@@ -75,7 +75,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
     $password = 'mot_de_passe';
     ```
 3. Enregistrez les modifications.
-4. Importez le fichier 'actions/bookfind.sql' dans phpMyAdmin.
+4. Importez le fichier `actions/bookfind.sql` dans phpMyAdmin.
 
 ## Utilisation
 
