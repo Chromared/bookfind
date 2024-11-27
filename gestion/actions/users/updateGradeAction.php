@@ -10,20 +10,26 @@
 
 <?php if (isset($_POST['validateGrade'])) {
     if (isset($_POST['grade'])){
-        if (!empty($_POST['grade']) OR $_POST['grade'] == '0'){
+        if (!empty($_POST['grade']) OR $_POST['grade'] != '0'){
+
+            if(($_POST['grade'] == 1 AND $_SESSION['grade'] == 1) OR $_POST['grade'] != 1){
     
             $grade = $_POST['grade'];
             $id = $_GET['id'];
 
             $updateInfoSco = $bdd->prepare('UPDATE users SET grade = ? WHERE id = ?');
             $updateInfoSco->execute(array($grade, $id));
+
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' à été changé de ' . $usersInfos['grade'] . ' vers ' . $grade . '.');
     
             header('Location: update-user.php?id=' . $id .'');
-
+            }else{
+                $Msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+            }
         }else{
-            $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
+            $Msg = 'Veuillez remplir tous les champs.';
         }
     }else{
-        $Msg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.</div></div>';
+        $Msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
     }
     }
