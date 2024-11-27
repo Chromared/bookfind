@@ -10,6 +10,7 @@
 <?php require '../actions/database.php'; 
     require '../actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
+    require '../actions/fonctions/logFunction.php';
     require '../actions/users/showOneUsersProfilAction.php';
     require '../actions/fonctions/selected.php';
     require 'actions/users/updateInfoPersoAction.php';
