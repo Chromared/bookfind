@@ -20,6 +20,8 @@
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
             $updateMdp->execute(array($newPassword, $id));
 
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de mot de passe', 'Le mot de passe de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' (' . $usersInfos['carte'] . ') à été changé.');
+
             header('Location: update-user.php?id=' . $id .'');
 
 }else{

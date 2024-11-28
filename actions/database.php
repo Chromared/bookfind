@@ -24,4 +24,3 @@ try {
     // Gestion de l'erreur
     echo 'Connexion failed : ' . $e->getMessage();
 }
-?>
