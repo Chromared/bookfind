@@ -91,11 +91,15 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 5. **Suivre les emprunts** :
     - Rendez-vous sur `emprunts.php` pour consulter vos livres empruntés et leur statut.
 
+## Environnement
+
+- **Serveur Web** : Apache
+    - **PHP** : version 7.4 ou supérieure.
+    - **MySQL** : Pour la gestion de la base de données. MariaDB est utilisé par notre équipe lors du développement.
+
 ## Dépendances
 
-- **PHP** : version 7.4 ou supérieure.
-- **MySQL** : Pour la gestion de la base de données. MariaDB est fortement recommandée.
-- **Serveur Web** : Apache
+- **Aucune** : Il n'y a pour l'instant pas de dépendances nécessaires au fonctionnement de BookFind.
 
 ## Licence
 
