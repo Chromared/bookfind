@@ -22,5 +22,6 @@
 <body>
     <?php include 'includes/navbar.php'; ?>
     <br>
+    
 </body>
 </html>
