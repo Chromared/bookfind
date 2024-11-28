@@ -13,6 +13,7 @@
     require '../actions/fonctions/logFunction.php';
     require '../actions/users/showOneUsersProfilAction.php';
     require '../actions/fonctions/selected.php';
+    require '../actions/fonctions/transfoGradeIntVersText.php';
     require 'actions/users/updateInfoPersoAction.php';
     require 'actions/users/updateInfoScoAction.php';
     require 'actions/users/updateGradeAction.php';
@@ -61,10 +62,10 @@
     <input type="submit" class="form-btn-blue" name="validateGrade" value="Valider" />
 </form>
 </div>
-<hr>
-<div class="update-part">
 <?php } ?>
+<hr>
 <?php if($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2'){ ?>
+<div class="update-part">
 </h4>Mot de passe</h4>
 <form method="post" class="form">
     <label class="form-label">Nouveau mot de passe :</label> <input type="password" name="new-password" class="form-control" />

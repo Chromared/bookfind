@@ -20,7 +20,7 @@
             $updateInfoSco = $bdd->prepare('UPDATE users SET grade = ? WHERE id = ?');
             $updateInfoSco->execute(array($grade, $id));
 
-            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' à été changé de ' . $usersInfos['grade'] . ' vers ' . $grade . '.');
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' (' . $usersInfos['carte'] . ') à été changé de ' . NoEchoGrade($usersInfos['grade']) . ' vers ' . NoEchoGrade($grade) . '.');
     
             header('Location: update-user.php?id=' . $id .'');
             }else{
