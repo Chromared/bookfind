@@ -11,7 +11,8 @@
 <?php if (isset($_POST['validateDelete2'])){
     if(isset($_POST['confirm-delete'])){
     if(!empty($_POST['confirm-delete'])){
-
+        if($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2){
+            
         $id = $_GET['id'];
 
         $DeleteUserAccount = $bdd->prepare('DELETE FROM users WHERE id = ?');
@@ -19,7 +20,9 @@
 
         header('Location: users.php');
         
-        
+    }else{
+        $Msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+    }
 }
 }
 }

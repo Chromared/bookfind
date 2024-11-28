@@ -30,6 +30,26 @@ function Grade($grade)
     break;
 
     default:
-    echo htmlspecialchars('?');
+    echo '?';
+    }
+}
+function NoEchoGrade($grade)
+{
+    switch ($grade)
+    {
+    case 0:
+    return 'Aucun';
+
+    case 1:
+    echo 'Administrateur';
+
+    case 2:
+    return 'Gérant';
+
+    case 3:
+    return 'Assistant';
+
+    default:
+    return '?';
     }
 }
