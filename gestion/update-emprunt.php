@@ -9,7 +9,8 @@
 <?php require '../actions/database.php';
     require '../actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
-    require 'actions/books/showOneEmprunt.php'; ?>
+    require 'actions/books/showOneEmprunt.php';
+    require 'actions/books/returnEmprunt.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
