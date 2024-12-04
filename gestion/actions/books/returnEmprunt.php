@@ -8,7 +8,7 @@
 
 
 
-<?php if(isset($_POST['validate'])){
+<?php if(isset($_POST['validateReturn'])){
     if(isset($_POST['id']) AND !empty($_POST['id']) AND isset($_POST['card']) AND !empty($_POST['card'])){
 
         $book = $_POST['id'];

@@ -10,7 +10,7 @@
     require '../actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
     require 'actions/books/addEmpruntAction.php';
-    $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
+    $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -25,7 +25,7 @@
 <h4>Ajouter un emprunt</h4>
 <form method="post">
     <label>N° de carte de l'emprunteur : </label><input type="number" name="card" min="0" max="99999999"/><br />
-    <label>À rendre pour le : </label><input type="date" value="<?php echo htmlspecialchars($dateDans30Jours); ?>" name="date" /><br />
+    <label>À rendre pour le : </label><input type="date" value="<?php echo $dateDans30Jours; ?>" name="date" /><br />
     <input type="hidden" name="id_book" value="<?= htmlspecialchars($_GET['id']); ?>" />
     <input type="submit" name="validate" value="Ajouter l'emprunt"/>
 </form>
