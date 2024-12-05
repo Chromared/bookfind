@@ -22,7 +22,7 @@ $resultat_books = $requete_books->fetch();
 $nbCount2 = $resultat_books['total_livres'];
 
 // Récupération du nombre total d'emprunts
-$requete_emprunts = $bdd->query('SELECT COUNT(*) AS total_emprunts FROM emprunts');
+$requete_emprunts = $bdd->query('SELECT COUNT(*) AS total_emprunts FROM emprunts WHERE statut = 1');
 $resultat_emprunts = $requete_emprunts->fetch();
 $nbCount3 = $resultat_emprunts['total_emprunts'];
 
