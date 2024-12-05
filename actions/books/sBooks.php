@@ -30,7 +30,7 @@
                 <p>Résumé : <?php if(!empty($books['resume'])){ echo $books['resume']; }else{ echo 'Il n\'y a pas de résumé pour ce livre.'; } ?></p>
                 <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>">Voir le livre</a></p>
                 <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
-                         if($books['statut'] == 0){?>
+                         if($books['statut'] != 0){?>
 
                             <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>add-emprunt.php">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/>
