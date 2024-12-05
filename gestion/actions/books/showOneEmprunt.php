@@ -7,8 +7,8 @@
 ?>
 
 
-<?php $card = htmlspecialchars($_GET['card']);
-      $selectInfosFromEmprunts= $bdd->prepare('SELECT * FROM emprunts WHERE card_emprunteur = ?');
-      $selectInfosFromEmprunts->execute(array($card));
+<?php $id = htmlspecialchars($_GET['id']);
+      $selectInfosFromEmprunts= $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ?');
+      $selectInfosFromEmprunts->execute(array($id));
 
       $empruntInfos = $selectInfosFromEmprunts->fetch();

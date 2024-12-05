@@ -21,10 +21,10 @@
         $updateEmprunt = $bdd->prepare('UPDATE emprunts SET statut = ? WHERE id_book = ?');
         $updateEmprunt->execute(array(2, $book));
 
-        $updateMaxEmpruntUser = $bdd->prepare('UPDATE users SET nb_emprunt_max = ? WHERE carte = ?');
+        $updateMaxEmpruntUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
         $updateMaxEmpruntUser->execute(array(-1, $card));
 
-        header('Location: books.php');
+        header('Location: emprunt.php?id=' . $book);
 
     }
 }

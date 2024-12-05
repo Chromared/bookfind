@@ -30,9 +30,9 @@
                 <p>Résumé : <?php if(!empty($books['resume'])){ echo $books['resume']; }else{ echo 'Il n\'y a pas de résumé pour ce livre.'; } ?></p>
                 <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>">Voir le livre</a></p>
                 <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
-                         if($books['statut'] != 0){?>
+                         if($books['statut'] == 0 OR $books['statut'] == 2){?>
 
-                            <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>add-emprunt.php">
+                            <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/>
                                 <input type="submit" value="Emprunter ce livre"/>
                             </form>
@@ -42,7 +42,7 @@
                             <p>Emprunté par : <?= htmlspecialchars($emprunts['firstname_name']); ?></p>
                             <p>Le : <?php ConversionDateHour($emprunts['date_emprunt']); ?></p>
                             <p>Retour prévu le : <?php ConversionDate($emprunts['date_retour']); ?></p>
-                            <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-emprunt.php">
+                            <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php">
                                 <input type="hidden" name="id" value="<?= htmlspecialchars($books['id']); ?>"/>
                                 <input type="hidden" name="card" value="<?= htmlspecialchars($emprunts['card_emprunteur']); ?>"/>
                                 <input type="submit" value="Modifier l'emprunt de ce livre"/>
