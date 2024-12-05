@@ -8,7 +8,7 @@
 
 
 
-<?php if(isset($_POST['validate'])){
+<?php if(isset($_POST['validateAdd'])){
     if(isset($_POST['card']) AND isset($_POST['date'])){
     if(!empty($_POST['card']) AND !empty($_POST['date'])){
 
@@ -16,16 +16,11 @@
         $card = $_POST['card'];
         $date = $_POST['date'];
 
-        $checkIfUserAlreadyExists = $bdd->prepare('SELECT nb_emprunt_max, nb_emprunt, nom, prenom FROM users WHERE carte = ?');
+        $checkIfUserAlreadyExists = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
         $checkIfUserAlreadyExists->execute(array($card));
         $user = $checkIfUserAlreadyExists->fetch();
 
-        $checkIfBookAlreadyExists = $bdd->prepare('SELECT id, titre FROM books WHERE id = ?');
-        $checkIfBookAlreadyExists->execute(array($book));
-        $booksInfos = $checkIfBookAlreadyExists->fetch();
-
-        if($checkIfUserAlreadyExists->rowCount() > 0){   
-        if($checkIfBookAlreadyExists->rowCount() > 0){
+        if($checkIfUserAlreadyExists->rowCount() > 0){
         if($booksInfos['statut'] != 1){
         if($user['nb_emprunt'] < $user['nb_emprunt_max']){
 
@@ -42,11 +37,10 @@
             $updateUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
             $updateUser->execute(array($user_nb_emprunt, $card));
 
-            header('Location: books.php');
+            header('Location: emprunt.php?id=' . $book . '&card=' . $card);
             
     }else{$msg = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
     }else{$msg = 'Ce livre est déjà emprunté.';}
-    }else{$msg = 'Cet id (' . $book . ') ne correspond à aucun livre enregistré.';}
     }else{$msg = 'Ce numéro de carte (' . $card . ') n\'est associé à aucun utilisateur.';}
     }else{$msg = 'Tous les champs ne sont pas remplis.';}
     }else{$msg = 'Tous les champs n\'existent pas.';}
