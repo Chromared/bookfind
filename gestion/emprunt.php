@@ -39,7 +39,7 @@
     <div class="update-part">
         <h4>Modifier la date de retour de l'emprunt</h4>
         <form method="get">
-        <input type="date" name="date" value="<?= $empruntInfos['date_retour'] ?>" /><br />
+        <input type="date" name="date" value="<?= $empruntInfos['date_futur_retour'] ?>" /><br />
         <input type="submit" name="validateUpdate" value="Enregistrer" />
         </form>
     </div>

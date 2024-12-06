@@ -18,8 +18,8 @@
         $updateEmpruntForBooks = $bdd->prepare('UPDATE books SET statut = ? WHERE id = ?');
         $updateEmpruntForBooks->execute(array(2, $book));
 
-        $updateEmprunt = $bdd->prepare('UPDATE emprunts SET statut = ? WHERE id_book = ?');
-        $updateEmprunt->execute(array(2, $book));
+        $updateEmprunt = $bdd->prepare('UPDATE emprunts SET statut = ?, date_retour = NOW() WHERE id_book = ? AND card_emprunteur = ? AND statut = 1');
+        $updateEmprunt->execute(array(2, $book, $card));
 
         $updateMaxEmpruntUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
         $updateMaxEmpruntUser->execute(array(-1, $card));

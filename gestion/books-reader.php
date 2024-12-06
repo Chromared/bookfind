@@ -43,7 +43,7 @@
         <?php }elseif($booksInfos['statut'] == 1 AND isset($emprunt['id'])){?>
             <p>Emprunté par : <?= htmlspecialchars($emprunt['firstname_name']); ?></p>
             <p>Le : <?php ConversionDateHour($emprunt['date_emprunt']); ?></p>
-            <p>Retour prévu le : <?php ConversionDate($emprunt['date_retour']); ?></p>
+            <p>Retour prévu le : <?php ConversionDate($emprunt['date_futur_retour']); ?></p>
             <form method="post" action="#"><input type="hidden" name="id" value="<?= htmlspecialchars($booksInfos['id']); ?>"/><input type="hidden" name="card" value="<?= htmlspecialchars($emprunts['card_emprunteur']); ?>"/><input type="submit" name="validate" value="Retourner cet emprunt"/></form>
         <?php } ?>
 
