@@ -22,7 +22,5 @@
         $addAuthor = $bdd->prepare('INSERT INTO authors SET prenom = ?, nom = ?, biographie = ?');
         $addAuthor->execute(array($firstname, $name, $bio));
 
-        header('Location: add-books.php');
-
     }
 }
