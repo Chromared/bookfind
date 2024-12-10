@@ -95,7 +95,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 - **Serveur Web** : Apache
     - **PHP** : version 7.4 ou supérieure.
-    - **MySQL** : Pour la gestion de la base de données. MySQL et MariaDB sont utilisés par notre équipe lors du développement.
+- **MySQL** : Pour la gestion de la base de données. MySQL et MariaDB sont utilisés par notre équipe lors du développement.
 
 ## Dépendances
 
