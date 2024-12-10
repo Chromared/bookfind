@@ -8,7 +8,7 @@
 
 <?php 
 require '../actions/database.php'; 
-require '../actions/users/securityAction.php';
+require 'actions/users/securityAction.php';
 require 'actions/securityActionAdmin.php';
 ?>
 

@@ -8,7 +8,7 @@
 
 
 
-<?php require '../actions/users/securityAction.php';
+<?php require 'actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
 ?>
 <!DOCTYPE html>

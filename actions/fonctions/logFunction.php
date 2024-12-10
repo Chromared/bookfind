@@ -14,7 +14,7 @@
     $user_card = $_SESSION['card'];
     $name = $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];
 
-    $insertLog = $bdd->prepare('INSERT INTO log SET page = ?, user_id = ?, user_card = ?, user_name = ?, type = ?, comment = ?');
+    $insertLog = $bdd->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_card = ?, user_name = ?, type = ?, comment = ?');
     $insertLog->execute(array($page, $user_id, $user_card, $name, $type, $comment));
 
 }
