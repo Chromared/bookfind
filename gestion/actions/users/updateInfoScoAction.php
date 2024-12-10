@@ -19,10 +19,18 @@
         $checkIfCardAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
         $checkIfCardAlreadyExists->execute(array($card));
 
-        if ($_SESSION['card'] == $card OR ($_SESSION['card'] != $card AND $checkIfCardAlreadyExists->rowCount() == 0)){
+        if ($usersInfos['carte'] == $card OR ($_SESSION['card'] != $card AND $checkIfCardAlreadyExists->rowCount() == 0)){
 
         $updateInfoSco = $bdd->prepare('UPDATE users SET carte = ?, classe = ? WHERE id = ?');
         $updateInfoSco->execute(array($card, $classe, $id));
+
+        if($card != $usersInfos['carte'] AND $classe == $usersInfos['classe']){
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du numéro de carte. Ancien n° : ' . $usersInfos['carte'] . '. Nouveau n° : ' . $card . '.');
+        }elseif($card == $usersInfos['carte'] AND $classe != $usersInfos['classe']){
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification de la classe. Ancienne classe : ' . $usersInfos['classe'] . '. Nouvelle classe : ' . $classe . '.');
+        }elseif($card != $usersInfos['carte'] AND $classe != $usersInfos['classe']){
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du numéro de carte. Ancien n° : ' . $usersInfos['carte'] . '. Nouveau n° : ' . $card . '. Modification de la classe. Ancienne classe : ' . $usersInfos['classe'] . '. Nouvelle classe : ' . $classe . '.');
+        }
 
         header('Location: update-user.php?id=' . $id .'');
 

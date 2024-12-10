@@ -19,6 +19,14 @@ if (isset($_POST['validateInfoPerso'])) {
             $updateInfoPerso = $bdd->prepare('UPDATE users SET nom = ?, prenom = ? WHERE id = ?');
             $updateInfoPerso->execute(array($name, $firstname, $id));
 
+            if($name != $usersInfos['nom'] AND $firstname == $usersInfos['prenom']){
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de famille. Ancien nom : ' . $usersInfos['nom'] . '. Nouveau nom : ' . $name . '.');
+            }elseif($name == $usersInfos['nom'] AND $firstname != $usersInfos['prenom']){
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom. Ancien prénom : ' . $usersInfos['prenom'] . '. Nouveau prénom : ' . $firstname . '.');
+            }elseif($name != $usersInfos['nom'] AND $firstname != $usersInfos['prenom']){
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille. Ancien prénom : ' . $usersInfos['prenom'] . '. Nouveau prénom : ' . $firstname . '. Ancien nom : ' . $usersInfos['nom'] . '. Nouveau nom : ' . $name . '.');
+            }
+
             header('Location: update-user.php?id=' . $id .'');
 
     }else {
