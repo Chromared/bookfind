@@ -33,7 +33,7 @@
             $updateEmpruntForBooks = $bdd->prepare('UPDATE books SET statut = ? WHERE id = ?');
             $updateEmpruntForBooks->execute(array(1, $book));
             
-            $user_nb_emprunt = $user['nb_emprunt'] +1;
+            $user_nb_emprunt = $user['nb_emprunt'] + 1;
             $updateUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
             $updateUser->execute(array($user_nb_emprunt, $card));
 

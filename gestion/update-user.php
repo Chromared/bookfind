@@ -8,7 +8,7 @@
 
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require '../actions/database.php'; 
-    require '../actions/users/securityAction.php';
+    require 'actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
     require '../actions/fonctions/logFunction.php';
     require '../actions/users/showOneUsersProfilAction.php';

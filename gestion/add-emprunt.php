@@ -7,7 +7,7 @@
 ?>
 
 <?php require '../actions/database.php';
-    require '../actions/users/securityAction.php';
+    require 'actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
     require 'actions/books/addEmpruntAction.php';
     $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
