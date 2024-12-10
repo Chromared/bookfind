@@ -7,7 +7,7 @@
 ?>
 
 <?php require '../actions/database.php';
-    require '../actions/users/securityAction.php';
+    require 'actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';
     require '../actions/books/showOneBooksAction.php';
     require '../actions/books/showOneEmprunt.php';

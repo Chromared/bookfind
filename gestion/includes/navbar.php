@@ -34,7 +34,7 @@
                 <li class="hideOnMobile"><a href="users.php">Utilisateurs</a></li>
 
             <?php if ($_SESSION['grade'] == '1') { ?>
-                <li class="hideOnMobile"><a href="log.php">Logs</a></li>
+                <li class="hideOnMobile"><a href="logs.php">Logs</a></li>
             <?php } ?>
             <li class="hideOnMobile"><a href="../index.php">Quitter la gestion</a></li>
 

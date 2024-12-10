@@ -7,7 +7,7 @@
 ?>
 
 <?php require '../actions/database.php'; 
-    require '../actions/users/securityAction.php';
+    require 'actions/users/securityAction.php';
     require 'actions/securityActionAdmin.php';?>
 <!DOCTYPE html>
 <html lang="fr">
