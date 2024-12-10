@@ -208,15 +208,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `users`
---
-
-INSERT INTO `users` (`id`, `carte`, `classe`, `nom`, `prenom`, `mdp`, `grade`, `datetime`, `regles`, `pdc`, `nb_emprunt_max`, `nb_emprunt`, `theme`) VALUES
-(1, 89702661, '3B', 'Muller', 'Alban', 'youWantMyPassword?', 1, '2024-09-27 17:35:04', 1, 1, 5, -1, 0),
-(50, 1, '6B', '1', '1', '2y.e123ltUAK.', 3, '2024-11-27 18:06:40', 1, 1, 5, 0, 0),
-(51, 2, '6B', '2', '2', '2yXTT36samgcE', 2, '2024-11-27 18:07:13', 1, 1, 5, 0, 0);
-
---
 -- Index pour les tables déchargées
 --
 
