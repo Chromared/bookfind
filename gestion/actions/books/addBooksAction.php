@@ -19,8 +19,8 @@
             $type = $_POST['type'];
 
             if (preg_match('/^([^,]+),\s*(.+)$/', $author, $matches)) {
-                $authorname = $matches[1];       // Contient "Riordan"
-                $authorfirstname = $matches[2];  // Contient "Rick"       
+                $authorname = $matches[1];
+                $authorfirstname = $matches[2];
 
             $checkAndInsertAuthor = $bdd->prepare('SELECT nomprenom FROM authors WHERE nomprenom = ?');
             $checkAndInsertAuthor->execute(array($author));
