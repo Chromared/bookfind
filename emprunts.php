@@ -29,9 +29,9 @@
             
             while($empruntsInfos1 = $selectInfosFromEmprunts1->fetch()){
                 
-            $selectInfosFromBooksEmprunts= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-            $selectInfosFromBooksEmprunts->execute(array($empruntsInfos1['id_book']));
-            $recupBooks = $selectInfosFromBooksEmprunts->fetch(); ?>
+            $selectInfosFromBooksEmprunts1= $bdd->prepare('SELECT * FROM books WHERE id = ?');
+            $selectInfosFromBooksEmprunts1->execute(array($empruntsInfos1['id_book']));
+            $recupBooks = $selectInfosFromBooksEmprunts1->fetch(); ?>
 
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
@@ -50,15 +50,15 @@ if($selectInfosFromEmprunts2->rowCount() > 0){
             
     while($empruntsInfos2= $selectInfosFromEmprunts2->fetch()){
 
-            $selectInfosFromBooksEmprunts= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-            $selectInfosFromBooksEmprunts->execute(array($empruntsInfos1['id_book']));
-            $recupBooks = $selectInfosFromBooksEmprunts->fetch(); ?>
+            $selectInfosFromBooksEmprunts2= $bdd->prepare('SELECT * FROM books WHERE id = ?');
+            $selectInfosFromBooksEmprunts2->execute(array($empruntsInfos2['id_book']));
+            $recupBooks = $selectInfosFromBooksEmprunts2->fetch(); ?>
 
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos2['date_emprunt']); ?></p>
-            <p>Date de retour prévue : <?= ConversionDate($empruntsInfos2['date_retour']); ?></p>
+            <p>Date de retour : <?= ConversionDate($empruntsInfos2['date_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
         </div>
         <br />

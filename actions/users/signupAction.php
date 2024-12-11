@@ -48,7 +48,7 @@
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun');
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun commentaire.');
                     
                     header('Location: index.php');
 

@@ -14,15 +14,15 @@
 
             if(($_POST['grade'] == 1 AND $_SESSION['grade'] == 1) OR $_POST['grade'] != 1){
     
-            $grade = $_POST['grade'];
+            $newGrade = $_POST['grade'];
             $id = $_GET['id'];
 
             $updateInfoSco = $bdd->prepare('UPDATE users SET grade = ? WHERE id = ?');
-            $updateInfoSco->execute(array($grade, $id));
+            $updateInfoSco->execute(array($newGrade, $id));
 
-            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' (' . $usersInfos['carte'] . ') à été changé de ' . NoEchoGrade($usersInfos['grade']) . ' vers ' . NoEchoGrade($grade) . '.');
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' (' . $usersInfos['carte'] . ') à été changé de ' . NoEchoGrade($usersInfos['grade']) . ' vers ' . NoEchoGrade($newGrade) . '.');
     
-            header('Location: update-user.php?id=' . $id .'');
+            header('Location: update-user.php?id=' . $id);
             }else{
                 $Msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
             }

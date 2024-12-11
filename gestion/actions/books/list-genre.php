@@ -1,67 +1,86 @@
 <?php
-//This file belongs to the Bookfind project.
+// This file belongs to the Bookfind project.
 //
-//Bookfind is distributed under the terms of the MIT software license.
+// Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+// Copyright (C) 2024 Chromared
 ?>
-
-
-
 <script>
 let names_genre = [
   <?php
-
     $recupNames = $bdd->query('SELECT nom FROM genres ORDER BY nom');
-
-    while($names = $recupNames->fetch()){?>
-
+    while ($names = $recupNames->fetch()) { ?>
       "<?= htmlspecialchars($names['nom']); ?>",
-
-    <?php }
-
-  ?>
+  <?php } ?>
 ];
-//Sort names in ascending order
-let sortedNameGenre = names_genre.sort();
 
-//reference
+// Trier les noms dans l'ordre alphabétique
+let sortedNamesGenre = names_genre.sort();
+
+// Références à l'entrée et à la liste
 let inputGenre = document.getElementById("genre");
+let listGenre = document.querySelector(".list-genre");
+let currentFocusGenre = -1;
 
-//Execute function on keyup
-inputGenre.addEventListener("keyup", (e) => {
-  //loop through above array
-  //Initially remove all elements ( so if user erases a letter or adds new letter then clean previous outputs)
-  removeElements();
-  for (let iGenre of sortedNameGenre) {
-    //convert input to lowercase and compare with each string
+// Fonction principale exécutée lors de la saisie
+inputGenre.addEventListener("input", () => {
+  let value = inputGenre.value.toLowerCase();
+  removeGenreElements();
+  currentFocusGenre = -1;
 
-    if (
-      iGenre.toLowerCase().startsWith(inputGenre.value.toLowerCase()) && inputGenre.value != "") {
-      //create li element
+  if (!value) return;
+
+  for (let iGenre of sortedNamesGenre) {
+    if (iGenre.toLowerCase().startsWith(value)) {
       let listItemGenre = document.createElement("li");
-      //One common class name
       listItemGenre.classList.add("list-items");
-      listItemGenre.style.cursor = "pointer";
-      listItemGenre.setAttribute("onclick", "displayNamesGenre('" + iGenre + "')");
-      //Display matched part in bold
-      let wordGenre = "<b>" + iGenre.substr(0, inputGenre.value.length) + "</b>";
-      wordGenre += iGenre.substr(inputGenre.value.length);
-      //display the value in array
-      listItemGenre.innerHTML = wordGenre;
-      document.querySelector(".list-genre").appendChild(listItemGenre);
+      listItemGenre.textContent = iGenre;
+
+      listItemGenre.addEventListener("click", () => {
+        inputGenre.value = iGenre;
+        removeGenreElements();
+      });
+
+      listGenre.appendChild(listItemGenre);
     }
   }
 });
-function displayNamesGenre(value) {
-  inputGenre.value = value;
-  removeElements();
+
+// Navigation au clavier
+inputGenre.addEventListener("keydown", (e) => {
+  let items = listGenre.querySelectorAll(".list-items");
+
+  if (e.key === "ArrowDown") {
+    currentFocusGenre++;
+    if (currentFocusGenre >= items.length) currentFocusGenre = 0;
+    addActiveGenre(items);
+  } else if (e.key === "ArrowUp") {
+    currentFocusGenre--;
+    if (currentFocusGenre < 0) currentFocusGenre = items.length - 1;
+    addActiveGenre(items);
+  } else if (e.key === "Enter") {
+    e.preventDefault(); // Empêche la soumission du formulaire
+    if (currentFocusGenre > -1 && items[currentFocusGenre]) {
+      items[currentFocusGenre].click();
+    }
+  }
+});
+
+function addActiveGenre(items) {
+  if (!items) return;
+  removeActiveGenre(items);
+  if (currentFocusGenre >= 0 && currentFocusGenre < items.length) {
+    items[currentFocusGenre].classList.add("active");
+  }
 }
-function removeElements() {
-  //clear all the item
-  let itemsGenre = document.querySelectorAll(".list-items");
-  itemsGenre.forEach((item) => {
-    item.remove();
-  });
+
+function removeActiveGenre(items) {
+  items.forEach((item) => item.classList.remove("active"));
+}
+
+function removeGenreElements() {
+  while (listGenre.firstChild) {
+    listGenre.removeChild(listGenre.firstChild);
+  }
 }
 </script>

@@ -5,63 +5,82 @@
 //
 //Copyright (C) 2024 Chromared
 ?>
-
-
-
 <script>
 let names_authors = [
   <?php
-
     $recupNames = $bdd->query('SELECT nomprenom FROM authors ORDER BY nomprenom');
-
-    while($names = $recupNames->fetch()){?>
-
+    while ($names = $recupNames->fetch()) { ?>
       "<?= htmlspecialchars($names['nomprenom']); ?>",
-
-    <?php }
-
-  ?>
+  <?php } ?>
 ];
-//Sort names in ascending order
+
+// Trier les noms dans l'ordre alphabétique
 let sortedNamesAuthor = names_authors.sort();
 
-//reference
+// Références à l'entrée et à la liste
 let inputAuthor = document.getElementById("author");
+let listAuthor = document.querySelector(".list-author");
+let currentFocus = -1;
 
-//Execute function on keyup
-inputAuthor.addEventListener("keyup", (e) => {
-  //loop through above array
-  //Initially remove all elements ( so if user erases a letter or adds new letter then clean previous outputs)
+// Fonction principale exécutée lors de la saisie
+inputAuthor.addEventListener("input", () => {
+  let value = inputAuthor.value.toLowerCase();
   removeElements();
-  for (let iAuthor of sortedNamesAuthor) {
-    //convert input to lowercase and compare with each string
+  currentFocus = -1;
 
-    if (
-      iAuthor.toLowerCase().startsWith(inputAuthor.value.toLowerCase()) && inputAuthor.value != "") {
-      //create li element
+  if (!value) return;
+
+  for (let iAuthor of sortedNamesAuthor) {
+    if (iAuthor.toLowerCase().startsWith(value)) {
       let listItemAuthor = document.createElement("li");
-      //One common class name
       listItemAuthor.classList.add("list-items");
-      listItemAuthor.style.cursor = "pointer";
-      listItemAuthor.setAttribute("onclick", "displayNamesAuthor('" + iAuthor + "')");
-      //Display matched part in bold
-      let wordAuthor = "<b>" + iAuthor.substr(0, inputAuthor.value.length) + "</b>";
-      wordAuthor += iAuthor.substr(inputAuthor.value.length);
-      //display the value in array
-      listItemAuthor.innerHTML = wordAuthor;
-      document.querySelector(".list-author").appendChild(listItemAuthor);
+      listItemAuthor.textContent = iAuthor;
+
+      listItemAuthor.addEventListener("click", () => {
+        inputAuthor.value = iAuthor;
+        removeElements();
+      });
+
+      listAuthor.appendChild(listItemAuthor);
     }
   }
 });
-function displayNamesAuthor(value) {
-  inputAuthor.value = value;
-  removeElements();
+
+// Navigation au clavier
+inputAuthor.addEventListener("keydown", (e) => {
+  let items = listAuthor.querySelectorAll(".list-items");
+
+  if (e.key === "ArrowDown") {
+    currentFocus++;
+    if (currentFocus >= items.length) currentFocus = 0;
+    addActive(items);
+  } else if (e.key === "ArrowUp") {
+    currentFocus--;
+    if (currentFocus < 0) currentFocus = items.length - 1;
+    addActive(items);
+  } else if (e.key === "Enter") {
+    e.preventDefault(); // Empêche la soumission du formulaire
+    if (currentFocus > -1 && items[currentFocus]) {
+      items[currentFocus].click();
+    }
+  }
+});
+
+function addActive(items) {
+  if (!items) return;
+  removeActive(items);
+  if (currentFocus >= 0 && currentFocus < items.length) {
+    items[currentFocus].classList.add("active");
+  }
 }
+
+function removeActive(items) {
+  items.forEach((item) => item.classList.remove("active"));
+}
+
 function removeElements() {
-  //clear all the item
-  let itemsAuthor = document.querySelectorAll(".list-items");
-  items.forEach((item) => {
-    item.remove();
-  });
+  while (listAuthor.firstChild) {
+    listAuthor.removeChild(listAuthor.firstChild);
+  }
 }
 </script>

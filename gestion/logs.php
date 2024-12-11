@@ -14,17 +14,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log</title>
+    <title>Logs</title>
     <?php include '../includes/header.php'; ?>
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
 <br />
-<p id="log"></p>
+<div id="log"></div>
 <script>
             function load_logs(){
                 $('#log').load('actions/fonctions/loadLogs.php');}
-            setInterval('load_logs()', 250);
+            setInterval('load_logs()', 1000);
        </script>
 </body>
 </html>
