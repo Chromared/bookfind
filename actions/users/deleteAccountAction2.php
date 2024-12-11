@@ -15,7 +15,7 @@
         $checkPassword = $bdd->prepare('DELETE FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
 
-        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Aucun');
+        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Aucun commentaire.');
         
         header('Location: actions/users/logoutAction.php');
 }

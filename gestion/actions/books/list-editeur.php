@@ -1,67 +1,86 @@
 <?php
-//This file belongs to the Bookfind project.
+// This file belongs to the Bookfind project.
 //
-//Bookfind is distributed under the terms of the MIT software license.
+// Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+// Copyright (C) 2024 Chromared
 ?>
-
-
-
 <script>
 let names_editeur = [
   <?php
-
     $recupNames = $bdd->query('SELECT nom FROM editeurs ORDER BY nom');
-
-    while($names = $recupNames->fetch()){?>
-
+    while ($names = $recupNames->fetch()) { ?>
       "<?= htmlspecialchars($names['nom']); ?>",
-
-    <?php }
-
-  ?>
+  <?php } ?>
 ];
-//Sort names in ascending order
+
+// Trier les noms dans l'ordre alphabétique
 let sortedNamesEditeur = names_editeur.sort();
 
-//reference
+// Références à l'entrée et à la liste
 let inputEditeur = document.getElementById("editeur");
+let listEditeur = document.querySelector(".list-editeur");
+let currentFocusEditeur = -1;
 
-//Execute function on keyup
-inputEditeur.addEventListener("keyup", (e) => {
-  //loop through above array
-  //Initially remove all elements ( so if user erases a letter or adds new letter then clean previous outputs)
-  removeElements();
+// Fonction principale exécutée lors de la saisie
+inputEditeur.addEventListener("input", () => {
+  let value = inputEditeur.value.toLowerCase();
+  removeEditeurElements();
+  currentFocusEditeur = -1;
+
+  if (!value) return;
+
   for (let iEditeur of sortedNamesEditeur) {
-    //convert input to lowercase and compare with each string
-
-    if (
-      iEditeur.toLowerCase().startsWith(inputEditeur.value.toLowerCase()) && inputEditeur.value != "") {
-      //create li element
+    if (iEditeur.toLowerCase().startsWith(value)) {
       let listItemEditeur = document.createElement("li");
-      //One common class name
       listItemEditeur.classList.add("list-items");
-      listItemEditeur.style.cursor = "pointer";
-      listItemEditeur.setAttribute("onclick", "displayNamesEditeur('" + iEditeur + "')");
-      //Display matched part in bold
-      let wordEditeur = "<b>" + iEditeur.substr(0, inputEditeur.value.length) + "</b>";
-      wordEditeur += iEditeur.substr(inputEditeur.value.length);
-      //display the value in array
-      listItemEditeur.innerHTML = wordEditeur;
-      document.querySelector(".list-editeur").appendChild(listItemEditeur);
+      listItemEditeur.textContent = iEditeur;
+
+      listItemEditeur.addEventListener("click", () => {
+        inputEditeur.value = iEditeur;
+        removeEditeurElements();
+      });
+
+      listEditeur.appendChild(listItemEditeur);
     }
   }
 });
-function displayNamesEditeur(value) {
-  inputEditeur.value = value;
-  removeElements();
+
+// Navigation au clavier
+inputEditeur.addEventListener("keydown", (e) => {
+  let items = listEditeur.querySelectorAll(".list-items");
+
+  if (e.key === "ArrowDown") {
+    currentFocusEditeur++;
+    if (currentFocusEditeur >= items.length) currentFocusEditeur = 0;
+    addActiveEditeur(items);
+  } else if (e.key === "ArrowUp") {
+    currentFocusEditeur--;
+    if (currentFocusEditeur < 0) currentFocusEditeur = items.length - 1;
+    addActiveEditeur(items);
+  } else if (e.key === "Enter") {
+    e.preventDefault(); // Empêche la soumission du formulaire
+    if (currentFocusEditeur > -1 && items[currentFocusEditeur]) {
+      items[currentFocusEditeur].click();
+    }
+  }
+});
+
+function addActiveEditeur(items) {
+  if (!items) return;
+  removeActiveEditeur(items);
+  if (currentFocusEditeur >= 0 && currentFocusEditeur < items.length) {
+    items[currentFocusEditeur].classList.add("active");
+  }
 }
-function removeElements() {
-  //clear all the item
-  let itemsEditeur = document.querySelectorAll(".list-items");
-  itemsEditeur.forEach((item) => {
-    item.remove();
-  });
+
+function removeActiveEditeur(items) {
+  items.forEach((item) => item.classList.remove("active"));
+}
+
+function removeEditeurElements() {
+  while (listEditeur.firstChild) {
+    listEditeur.removeChild(listEditeur.firstChild);
+  }
 }
 </script>
