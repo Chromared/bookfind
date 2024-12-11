@@ -41,7 +41,7 @@ function NoEchoGrade($grade)
     return 'Aucun';
 
     case 1:
-    echo 'Administrateur';
+    return 'Administrateur';
 
     case 2:
     return 'Gérant';

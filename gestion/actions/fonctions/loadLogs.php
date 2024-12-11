@@ -7,5 +7,5 @@
     {
         $dateFormattee = date("d/m/Y à H:i:s", strtotime($log['datetime']));
 
-        echo '<h2>' . $log['type'] . '</h2><h3><a href="../profil.php?id=' . $log['user_id'] . '" target="_blank">' . $log['user_name'] . '</a></h3><em>' . $log['page'] . '</em><br /><br />' . $log['comment'] . '<br /><br />Le ' . $dateFormattee . '<br /><br /><br />';
+        echo '<h2>' . $log['type'] . '</h2><h4><a href="../profil.php?id=' . $log['user_id'] . '" target="_blank">' . $log['user_name'] . '</a></h4><p><em>' . $log['page'] . '</em></p><p>' . $log['comment'] . '</p><p>Le ' . $dateFormattee . '</p><br />';
     }

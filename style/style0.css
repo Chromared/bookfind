@@ -248,3 +248,6 @@ hr{
 .list-items:hover {
   background-color: #dddddd;
 }
+.list-items.active {
+    color: rgb(255, 0, 0);
+  }

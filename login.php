@@ -28,7 +28,7 @@
 
             <br /><label class="form-label">Mot de passe : </label><input type="password" name="password" class="form-control" />
 
-            <br /><input class="form-btn-blue" type="submit" name="validate" value="Connexion" /> <input type="reset" value="Réinitialiser le formulaire" class="form-btn-blue" />
+            <br /><input class="form-btn-blue" type="submit" name="validate" value="Connexion" />
         </div>
 </form>
 </p>

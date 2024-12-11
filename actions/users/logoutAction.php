@@ -12,7 +12,7 @@
     require '../fonctions/logFunction.php';
 session_start();
 
-    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun');
+    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
 
 $_SESSION = [];
 session_destroy();
