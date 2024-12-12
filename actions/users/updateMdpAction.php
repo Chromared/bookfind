@@ -36,15 +36,15 @@
             header('Location: updateProfil.php?id=' . $id .'&msg=true');
 
     }else{
-        $Msg = '<div class="msg"><div class="msg-alerte">Votre mot de passe actuel n\'est pas bon.</div></div>';
+        $msg = 'Votre mot de passe actuel n\'est pas bon.';
 }
 }else{
-    $Msg = '<div class="msg"><div class="msg-alerte">Les deux nouveaux mot de passe ne sont pas identiques.</div></div>';
+    $msg = 'Les deux nouveaux mot de passe ne sont pas identiques.';
 }
 }else{
-    $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
+    $msg = 'Veuillez remplir tous les champs.';
 }
 }else{
-    $Msg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.</div></div>';
+    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
 }
 }

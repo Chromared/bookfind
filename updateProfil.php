@@ -27,7 +27,7 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'?>
-<?php if(isset($Msg)){ echo '<p>'.$Msg.'</p>'; } ?>
+<?php if(isset($msg)){ echo '<p>'.$msg.'</p>'; } ?>
 <div class="update-part">
 <p>
 <h4>Informations personnelle</h4>

@@ -30,9 +30,9 @@ if (isset($_POST['validateInfoPerso'])) {
             header('Location: update-user.php?id=' . $id .'');
 
     }else {
-        $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
+        $msg = 'Veuillez remplir tous les champs.';
     }
 }else{
-    $Msg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.</div></div>';
+    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
 }
 }

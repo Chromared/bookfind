@@ -24,12 +24,12 @@
     
             header('Location: update-user.php?id=' . $id);
             }else{
-                $Msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+                $msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
             }
         }else{
-            $Msg = 'Veuillez remplir tous les champs.';
+            $msg = 'Veuillez remplir tous les champs.';
         }
     }else{
-        $Msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
+        $msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
     }
     }
