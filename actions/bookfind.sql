@@ -35,16 +35,6 @@ CREATE TABLE `authors` (
   `biographie` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `authors`
---
-
-INSERT INTO `authors` (`id`, `nom`, `prenom`, `nomprenom`, `biographie`) VALUES
-(3, 'Riordans', 'Rick', 'Riordans, Rick', 'Auteur de Percy Jackson'),
-(4, 'Laucoin', 'Joachim', 'Laucoin, Joachim', NULL),
-(5, 'Gaudron', 'Thomas', 'Gaudron, Thomas', 'Il est cool.'),
-(6, 'Muller', 'Alban', 'Muller, Alban', 'Il est développeur de Bookfind. Il est génial !');
-
 -- --------------------------------------------------------
 
 --
@@ -67,15 +57,6 @@ CREATE TABLE `books` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `books`
---
-
-INSERT INTO `books` (`id`, `titre`, `auteur`, `isbn`, `id_unique`, `resume`, `editeur`, `type`, `serie`, `tome`, `statut`, `genre`) VALUES
-(1, 'Alban', 'Muller, Alban', 123, '', '', 'WIZ', 'Manuel scolaire', '', 0, 2, '');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `editeurs`
 --
 
@@ -83,14 +64,6 @@ CREATE TABLE `editeurs` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `editeurs`
---
-
-INSERT INTO `editeurs` (`id`, `nom`) VALUES
-(1, 'WIZ'),
-(2, 'Albin Michel');
 
 -- --------------------------------------------------------
 
@@ -121,23 +94,13 @@ CREATE TABLE `genres` (
   `nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `genres`
---
-
-INSERT INTO `genres` (`id`, `nom`) VALUES
-(1, 'Horreur'),
-(2, 'Humour'),
-(3, 'Fantasy'),
-(4, 'Fantastique');
-
 -- --------------------------------------------------------
 
 --
--- Structure de la table `log`
+-- Structure de la table `logs`
 --
 
-CREATE TABLE `log` (
+CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `page` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -147,22 +110,6 @@ CREATE TABLE `log` (
   `comment` text NOT NULL,
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `log`
---
-
-INSERT INTO `log` (`id`, `page`, `user_id`, `user_card`, `user_name`, `type`, `comment`, `datetime`) VALUES
-(1, '/bookfind/login.php', 1, 89702661, 'Alban Muller', 'Connexion', 'Aucun', '2024-11-28 17:45:32'),
-(2, '/bookfind/gestion/update-user.php?id=51', 1, 89702661, 'Alban Muller', 'Modification de grade', 'Le grade de 2 2 (2) à été changé de  vers .', '2024-11-28 17:46:30'),
-(3, '/bookfind/gestion/update-user.php?id=51', 1, 89702661, 'Alban Muller', 'Modification de grade', 'Le grade de 2 2 (2) à été changé de Assistant vers Gérant.', '2024-11-28 17:50:17'),
-(4, '/bookfind/actions/users/logoutAction.php', 1, 89702661, 'Alban Muller', 'Déconnexion', 'Aucun', '2024-11-28 18:00:15'),
-(5, '/bookfind/login.php', 51, 2, '2 2', 'Connexion', 'Aucun', '2024-11-28 18:00:17'),
-(6, '/bookfind/gestion/update-user.php?id=50', 51, 2, '2 2', 'Modification de mot de passe', 'Le mot de passe de 1 1 (1) à été changé.', '2024-11-28 18:40:37'),
-(7, '/BookFind/login.php', 1, 89702661, 'Alban Muller', 'Connexion', 'Aucun', '2024-12-04 18:15:05'),
-(8, '/BookFind/login.php', 1, 89702661, 'Alban Muller', 'Connexion', 'Aucun', '2024-12-05 18:00:27'),
-(9, '/BookFind/login.php', 1, 89702661, 'Alban Muller', 'Connexion', 'Aucun', '2024-12-05 18:03:39'),
-(10, '/bookfind/login.php', 1, 89702661, 'Alban Muller', 'Connexion', 'Aucun', '2024-12-06 17:51:16');
 
 -- --------------------------------------------------------
 
@@ -174,16 +121,6 @@ CREATE TABLE `types` (
   `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `types`
---
-
-INSERT INTO `types` (`id`, `nom`) VALUES
-(1, 'Manuel scolaire'),
-(2, 'Bande dessinées'),
-(4, 'Roman'),
-(5, 'Manga');
 
 -- --------------------------------------------------------
 
