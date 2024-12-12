@@ -33,7 +33,7 @@
 
 <?php if(($_SESSION['grade'] != '1' AND $usersInfos['grade'] == '1') OR ($_SESSION['grade'] != '1' AND $_SESSION['grade'] != '2' AND $usersInfos['grade'] == '2')){echo '<p>Vous n\'avez pas le droit de modifier cet utilisateur.</p>';}else{ ?>
 
-<?php if(isset($Msg)){ echo '<p>' . $Msg . '</p>'; } ?>
+<?php if(isset($msg)){ echo '<p>' . $msg . '</p>'; } ?>
 <p>
 <hr>
 <div class="update-part">

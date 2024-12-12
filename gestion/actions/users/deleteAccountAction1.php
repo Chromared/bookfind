@@ -22,6 +22,6 @@
             $deleteAccount = true;
 
     }else{
-        $Msg = '<div class="msg"><div class="msg-alerte">Vous devez avoir rendu tous vos emprunts pour supprimer votre compte. Il vous reste actuellement ' . $InfoDelete['nb_emprunt'] . ' livre(s) emprunté(s).</div></div>';
+        $msg = 'Vous devez avoir rendu tous vos emprunts pour supprimer votre compte. Il vous reste actuellement ' . $InfoDelete['nb_emprunt'] . ' livre(s) emprunté(s).';
     }
 }

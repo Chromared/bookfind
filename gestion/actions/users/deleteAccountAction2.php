@@ -23,7 +23,7 @@
         header('Location: users.php');
         
     }else{
-        $Msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+        $msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
     }
 }
 }

@@ -38,12 +38,12 @@
         header('Location: updateProfil.php?id=' . $id .'&msg=true');
 
         }else{
-            $Msg = '<div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div>';
+            $msg = 'Un compte à déjà été créé avec cette carte.';
         }
     }else{
-        $Msg = '<div class="msg"><div class="msg-alerte">Veuillez remplir tous les champs.</div></div>';
+        $msg = 'Veuillez remplir tous les champs.';
     }
 }else{
-    $Msg = '<div class="msg"><div class="msg-alerte">Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.</div></div>';
+    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
 }
 }

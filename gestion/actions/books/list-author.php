@@ -59,7 +59,7 @@ inputAuthor.addEventListener("keydown", (e) => {
     if (currentFocus < 0) currentFocus = items.length - 1;
     addActive(items);
   } else if (e.key === "Enter") {
-    e.preventDefault(); // Empêche la soumission du formulaire
+    e.preventDefault();
     if (currentFocus > -1 && items[currentFocus]) {
       items[currentFocus].click();
     }

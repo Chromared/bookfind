@@ -32,26 +32,6 @@
 
             }
             
-            $checkAndInsertEditor = $bdd->prepare('SELECT nom FROM editeurs WHERE nom = ?');
-            $checkAndInsertEditor->execute(array($editeur));
-
-            if($checkAndInsertEditor->rowCount() == 0){
-
-                $addAuthor = $bdd->prepare('INSERT INTO editeurs SET nom = ?');
-                $addAuthor->execute(array($editeur));
-
-            }
-
-            $checkAndInsertType = $bdd->prepare('SELECT nom FROM types WHERE nom = ?');
-            $checkAndInsertType->execute(array($type));
-
-            if($checkAndInsertType->rowCount() == 0){
-
-                $addType = $bdd->prepare('INSERT INTO types SET nom = ?');
-                $addType->execute(array($type));
-
-            }
-
             if(isset($_POST['resume']) AND !empty($_POST['resume'])){
                 $resume = $_POST['resume'];
             }else{$resume = false;}
@@ -59,15 +39,6 @@
             if(isset($_POST['genre']) AND !empty($_POST['genre'])){
                 $genre = $_POST['genre'];
 
-                $checkAndInsertGenre = $bdd->prepare('SELECT nom FROM genres WHERE nom = ?');
-                $checkAndInsertGenre->execute(array($genre));
-    
-                if($checkAndInsertGenre->rowCount() == 0){
-    
-                    $addGenre = $bdd->prepare('INSERT INTO genres SET nom = ?');
-                    $addGenre->execute(array($genre));
-    
-                }
             }else{$genre = false;}
 
             if(isset($_POST['id_unique']) AND !empty($_POST['id_unique'])){
@@ -82,7 +53,6 @@
                 $id_u = true;
 
                 }
-
             }else{$id_unique = false; $id_u = true;}
 
             if(isset($_POST['serie']) AND isset($_POST['tome']) AND !empty($_POST['serie']) AND !empty($_POST['tome'])){
@@ -95,12 +65,10 @@
                 $addBook = $bdd->prepare('INSERT INTO books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ?, statut = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, 0));
 
-                header('Location: add-books.php');
+                header('Location: add-books.php?msg=true');
             }
 
-        }else {
-                $msg = 'Le format de l\'auteur n\'est pas valide.';
-            }
-        }
-    }
+        }else { $msg = 'Le format de l\'auteur n\'est pas valide.';}
+        }else{ $msg = 'Tout les champs ne sont pas remplis.'; }
+    }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="add-books.php">recharger</a> la page.'; }
 }

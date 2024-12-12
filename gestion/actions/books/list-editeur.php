@@ -8,9 +8,9 @@
 <script>
 let names_editeur = [
   <?php
-    $recupNames = $bdd->query('SELECT nom FROM editeurs ORDER BY nom');
-    while ($names = $recupNames->fetch()) { ?>
-      "<?= htmlspecialchars($names['nom']); ?>",
+    $recupEditors = $bdd->query('SELECT editeur FROM books ORDER BY editeur');
+    while ($editors = $recupEditors->fetch()) { ?>
+      "<?= htmlspecialchars($editors['editeur']); ?>",
   <?php } ?>
 ];
 

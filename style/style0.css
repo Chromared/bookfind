@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap');
 
-/* pallet de couleur à utiliser pour la V1.5 */
+/* pallet de couleur à utiliser pour la V1.x.x */
 
 :root {
     --bianchi-green: #36d2c1;
@@ -162,6 +162,10 @@ input[type=text]:focus, select:focus, input[type=password]:focus, input[type=num
     border-color: #db9d61;
 }
 
+textarea {
+    flex: 1;
+}
+
 input[type=search] {
     height: 1cm;
     width: 12cm;
@@ -237,6 +241,11 @@ hr{
 .update-part input[type=text], select, input[type=password], input[type=number]{
     margin-right: 7px;
 }
+
+label {
+    margin-right: 10px;
+}
+
 .list {
   width: 100%;
   background-color: #ffffff;
@@ -246,8 +255,10 @@ hr{
   padding: 10px 5px;
 }
 .list-items:hover {
-  background-color: #dddddd;
+  color: red;
+  cursor: pointer;
 }
 .list-items.active {
-    color: rgb(255, 0, 0);
-  }
+    color: red;
+    cursor: pointer;
+}
