@@ -8,9 +8,9 @@
 <script>
 let names_type = [
   <?php
-    $recupNames = $bdd->query('SELECT nom FROM types ORDER BY nom');
-    while ($names = $recupNames->fetch()) { ?>
-      "<?= htmlspecialchars($names['nom']); ?>",
+    $recupTypes = $bdd->query('SELECT type FROM books ORDER BY type');
+    while ($types = $recupTypes->fetch()) { ?>
+      "<?= htmlspecialchars($types['type']); ?>",
   <?php } ?>
 ];
 

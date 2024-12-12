@@ -8,9 +8,9 @@
 <script>
 let names_genre = [
   <?php
-    $recupNames = $bdd->query('SELECT nom FROM genres ORDER BY nom');
-    while ($names = $recupNames->fetch()) { ?>
-      "<?= htmlspecialchars($names['nom']); ?>",
+    $recupGenres = $bdd->query('SELECT genre FROM books ORDER BY genre');
+    while ($genres = $recupNames->fetch()) { ?>
+      "<?= htmlspecialchars($genres['genre']); ?>",
   <?php } ?>
 ];
 

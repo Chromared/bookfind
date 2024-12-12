@@ -58,7 +58,7 @@ if($selectInfosFromEmprunts2->rowCount() > 0){
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos2['date_emprunt']); ?></p>
-            <p>Date de retour : <?= ConversionDate($empruntsInfos2['date_retour']); ?></p>
+            <p>Date de retour : <?= ConversionDateHour($empruntsInfos2['date_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
         </div>
         <br />
