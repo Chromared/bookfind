@@ -12,6 +12,13 @@
 function Selected($a, $b) {
 
     if ($a == $b) {
-        echo'selected="selected"';
+        echo 'selected="selected"';
+}
+}
+
+function SelectedWithoutEcho($a, $b) {
+
+    if ($a == $b) {
+        return 'selected="selected"';
 }
 }

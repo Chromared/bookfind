@@ -34,7 +34,7 @@
         <br><input value="<?php if(isset($_GET['card'])){echo $_GET['card'];}?>" type="number" name="card" class="form-control"/>
 
         <br /><label class="form-label">Classe</label>
-        <br><select class="form-control" name="classe"><option value="6B">6B</option><option value="5B">5B</option><option value="4B">4B</option><option value="3B">3B</option><option value="6R">6R</option><option value="5R">5R</option><option value="4R">4R</option><option value="3R">3R</option><option value="6J">6J</option><option value="5J">5J</option><option value="4J">4J</option><option value="3J">3J</option><option value="6V">6V</option><option value="5V">5V</option><option value="4V">4V</option><option value="3V">3V</option></select>
+        <br><select class="form-control" name="classe"><?php include 'actions/fonctions/recupClassesAndOptions.php'; ?></select>
 
         <br /><label class="form-label">Mot de passe</label>
         <br><input type="password" name="password" class="form-control"/>

@@ -48,7 +48,7 @@
     <?php } ?>
 </div>
 </div>
-<?php }else{ echo '<div class="msg msg-blue>"Aucun utilisateur avec l\'id n°' . $_GET["id"] . ' n\'a été trouvé.</div>'; }} ?>
+<?php }else{ echo '<div class="msg msg-blue>"Aucun utilisateur avec l\'id n°' . htmlspecialchars($_GET["id"]) . ' n\'a été trouvé.</div>'; }} ?>
 </div>
 </body>
 </html>

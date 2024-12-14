@@ -28,16 +28,22 @@
 
                 if($checkIfUserAlreadyExists->rowCount() == 0){
 
-                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?');
-                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true));
+                    $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
 
-                    //Récupérer les informations de l'utilisateur
+                    if($checkIfOneUserExist->rowCount() == 0){
+
+                        $grade = 1;
+
+                    }else{ $grade = 0; }
+
+                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?, grade = ?');
+                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true, $grade));
+
                     $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
                     $getInfosOfThisUserReq->execute(array($card));
 
                     $usersInfos = $getInfosOfThisUserReq->fetch();
 
-                    //Authentifier l'utilisateur sur le site et récupérer ses données dans des variables globales sessions
                     $_SESSION['auth'] = true;
                     $_SESSION['admin'] = false;
                     $_SESSION['id'] = $usersInfos['id'];

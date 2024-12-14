@@ -1,11 +1,23 @@
 <?php include '../../../actions/database.php';
     include '../../../actions/fonctions/conversionDateHour.php';
 
+    $sevenDaysAgo = (new DateTime())->modify('-7 days')->format('Y-m-d H:i:s');
+    $thirtyDaysAgo = (new DateTime())->modify('-30 days')->format('Y-m-d H:i:s');
+
+    $query = $bdd->prepare("DELETE FROM logs WHERE (type = ? OR type = ?) AND datetime <= ?");
+    $query->execute(['connexion', 'inscription', $sevenDaysAgo]);
+
+    $query = $bdd->prepare("DELETE FROM logs WHERE datetime <= ?");
+    $query->execute([$thirtyDaysAgo]);
+
     $logs = $bdd->query('SELECT * FROM logs ORDER BY datetime DESC');
 
     while ($log = $logs->fetch())
     {
         $dateFormattee = date("d/m/Y à H:i:s", strtotime($log['datetime']));
 
-        echo '<h2>' . $log['type'] . '</h2><h4><a href="../profil.php?id=' . $log['user_id'] . '" target="_blank">' . $log['user_name'] . '</a></h4><p><em>' . $log['page'] . '</em></p><p>' . $log['comment'] . '</p><p>Le ' . $dateFormattee . '</p><br />';
+        echo '<h2>' . $log['type'] . '</h2>
+        <h4><a href="../profil.php?id=' . $log['user_id'] . '" target="_blank">' . $log['user_name'] . '</a></h4>
+        <p><em>' . $log['page'] . '</em></p>
+        <p>' . $log['comment'] . '</p><p>Le ' . $dateFormattee . '</p><br />';
     }
