@@ -14,15 +14,12 @@ let names_Serie = [
   <?php } ?>
 ];
 
-// Trier les noms dans l'ordre alphabétique
 let sortedNamesSerie = names_Serie.sort();
 
-// Références à l'entrée et à la liste
 let inputSerie = document.getElementById("serie");
 let listSerie = document.querySelector(".list-serie");
 let currentFocusSerie = -1;
 
-// Fonction principale exécutée lors de la saisie
 inputSerie.addEventListener("input", () => {
   let value = inputSerie.value.toLowerCase();
   removeSerieElements();
@@ -46,7 +43,6 @@ inputSerie.addEventListener("input", () => {
   }
 });
 
-// Navigation au clavier
 inputSerie.addEventListener("keydown", (e) => {
   let items = listSerie.querySelectorAll(".list-items");
 
@@ -59,7 +55,7 @@ inputSerie.addEventListener("keydown", (e) => {
     if (currentFocusSerie < 0) currentFocusSerie = items.length - 1;
     addActiveSerie(items);
   } else if (e.key === "Enter") {
-    e.preventDefault(); // Empêche la soumission du formulaire
+    e.preventDefault();
     if (currentFocusSerie > -1 && items[currentFocusSerie]) {
       items[currentFocusSerie].click();
     }

@@ -14,15 +14,12 @@ let names_editeur = [
   <?php } ?>
 ];
 
-// Trier les noms dans l'ordre alphabétique
 let sortedNamesEditeur = names_editeur.sort();
 
-// Références à l'entrée et à la liste
 let inputEditeur = document.getElementById("editeur");
 let listEditeur = document.querySelector(".list-editeur");
 let currentFocusEditeur = -1;
 
-// Fonction principale exécutée lors de la saisie
 inputEditeur.addEventListener("input", () => {
   let value = inputEditeur.value.toLowerCase();
   removeEditeurElements();
@@ -46,7 +43,6 @@ inputEditeur.addEventListener("input", () => {
   }
 });
 
-// Navigation au clavier
 inputEditeur.addEventListener("keydown", (e) => {
   let items = listEditeur.querySelectorAll(".list-items");
 
@@ -59,7 +55,7 @@ inputEditeur.addEventListener("keydown", (e) => {
     if (currentFocusEditeur < 0) currentFocusEditeur = items.length - 1;
     addActiveEditeur(items);
   } else if (e.key === "Enter") {
-    e.preventDefault(); // Empêche la soumission du formulaire
+    e.preventDefault();
     if (currentFocusEditeur > -1 && items[currentFocusEditeur]) {
       items[currentFocusEditeur].click();
     }

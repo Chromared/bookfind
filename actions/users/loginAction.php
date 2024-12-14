@@ -21,14 +21,12 @@
 
         if($checkIfUserAlreadyExists->rowCount() > 0){
 
-                 //Récupérer les informations de l'utilisateur
                 $usersInfos = $checkIfUserAlreadyExists->fetch();
             
             if(password_verify($password, $usersInfos['mdp'])){
 
 
                 
-                //Authentifier l'utilisateur sur le site et récupérer ses données dans des variables globales sessions
                 $_SESSION['auth'] = true;
                 $_SESSION['admin'] = false;
                 $_SESSION['id'] = $usersInfos['id'];
@@ -40,7 +38,7 @@
                 $_SESSION['theme'] = $usersInfos['theme'];
 
                 SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Connexion', 'Aucun commentaire.');
-                //Rediriger l'utilisateur vers la page d'accueil
+
                 header('Location: index.php');
                 
 

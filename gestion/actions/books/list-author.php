@@ -14,15 +14,12 @@ let names_authors = [
   <?php } ?>
 ];
 
-// Trier les noms dans l'ordre alphabétique
 let sortedNamesAuthor = names_authors.sort();
 
-// Références à l'entrée et à la liste
 let inputAuthor = document.getElementById("author");
 let listAuthor = document.querySelector(".list-author");
 let currentFocus = -1;
 
-// Fonction principale exécutée lors de la saisie
 inputAuthor.addEventListener("input", () => {
   let value = inputAuthor.value.toLowerCase();
   removeElements();
@@ -46,7 +43,6 @@ inputAuthor.addEventListener("input", () => {
   }
 });
 
-// Navigation au clavier
 inputAuthor.addEventListener("keydown", (e) => {
   let items = listAuthor.querySelectorAll(".list-items");
 

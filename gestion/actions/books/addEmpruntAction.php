@@ -26,7 +26,6 @@
 
             $firstname_name = $user['prenom'] . ' ' . $user['nom'];
             
-            //Pour le statut, 1 = emprunté, 2 = retourné. NULL ou autre = erreur -> à corriger
             $addEmprunt = $bdd->prepare('INSERT INTO emprunts SET id_book = ?, date_futur_retour = ?, card_emprunteur = ?, firstname_name = ?, statut = ?, titre_book = ?');
             $addEmprunt->execute(array($book, $date, $card, $firstname_name, 1, $booksInfos['titre']));
             

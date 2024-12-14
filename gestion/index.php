@@ -38,7 +38,6 @@ require 'actions/securityActionAdmin.php';
     </p>
 
     <script>
-    // Fonction pour récupérer les données avec AJAX et mettre à jour les compteurs
     function updateCounters() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'actions/fonctions/count_data.php', true);
@@ -60,10 +59,8 @@ require 'actions/securityActionAdmin.php';
         xhr.send();
     }
 
-    // Mettre à jour les compteurs immédiatement
     updateCounters();
 
-    // Mettre à jour les compteurs toutes les secondes
     setInterval(updateCounters, 1000);
     </script>
 </body>
