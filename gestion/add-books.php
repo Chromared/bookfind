@@ -44,7 +44,7 @@
     document.querySelector('form').addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
     e.preventDefault();
-    this.submit(); // Soumet le formulaire si Ctrl + Entrée est pressé
+    this.submit();
     }});
 </script>
 

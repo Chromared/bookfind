@@ -14,15 +14,12 @@ let names_genre = [
   <?php } ?>
 ];
 
-// Trier les noms dans l'ordre alphabétique
 let sortedNamesGenre = names_genre.sort();
 
-// Références à l'entrée et à la liste
 let inputGenre = document.getElementById("genre");
 let listGenre = document.querySelector(".list-genre");
 let currentFocusGenre = -1;
 
-// Fonction principale exécutée lors de la saisie
 inputGenre.addEventListener("input", () => {
   let value = inputGenre.value.toLowerCase();
   removeGenreElements();
@@ -46,7 +43,6 @@ inputGenre.addEventListener("input", () => {
   }
 });
 
-// Navigation au clavier
 inputGenre.addEventListener("keydown", (e) => {
   let items = listGenre.querySelectorAll(".list-items");
 
@@ -59,7 +55,7 @@ inputGenre.addEventListener("keydown", (e) => {
     if (currentFocusGenre < 0) currentFocusGenre = items.length - 1;
     addActiveGenre(items);
   } else if (e.key === "Enter") {
-    e.preventDefault(); // Empêche la soumission du formulaire
+    e.preventDefault();
     if (currentFocusGenre > -1 && items[currentFocusGenre]) {
       items[currentFocusGenre].click();
     }

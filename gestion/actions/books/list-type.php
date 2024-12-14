@@ -14,15 +14,12 @@ let names_type = [
   <?php } ?>
 ];
 
-// Trier les noms dans l'ordre alphabétique
 let sortedNamesType = names_type.sort();
 
-// Références à l'entrée et à la liste
 let inputType = document.getElementById("type");
 let listType = document.querySelector(".list-type");
 let currentFocusType = -1;
 
-// Fonction principale exécutée lors de la saisie
 inputType.addEventListener("input", () => {
   let value = inputType.value.toLowerCase();
   removeTypeElements();
@@ -46,7 +43,6 @@ inputType.addEventListener("input", () => {
   }
 });
 
-// Navigation au clavier
 inputType.addEventListener("keydown", (e) => {
   let items = listType.querySelectorAll(".list-items");
 
@@ -59,7 +55,7 @@ inputType.addEventListener("keydown", (e) => {
     if (currentFocusType < 0) currentFocusType = items.length - 1;
     addActiveType(items);
   } else if (e.key === "Enter") {
-    e.preventDefault(); // Empêche la soumission du formulaire
+    e.preventDefault();
     if (currentFocusType > -1 && items[currentFocusType]) {
       items[currentFocusType].click();
     }

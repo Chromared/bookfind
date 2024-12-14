@@ -20,7 +20,6 @@
 
         $nb_emprunt = $user_nb_emprunt['nb_emprunt'] - 1;
 
-        //Pour le statut, 1 = emprunté, 2 = retourné. NULL ou autre = erreur -> à corriger
         $updateEmpruntForBooks = $bdd->prepare('UPDATE books SET statut = ? WHERE id = ?');
         $updateEmpruntForBooks->execute(array(2, $book));
 

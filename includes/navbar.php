@@ -8,8 +8,6 @@
 
 
 
-<div class="navbar">
-<div class="">
     <nav>
         <!--<div class="logo">
             <a href="index.html" class="anav"><img src="./style/img/logopourpage.png" alt="beg"></img> Bookfind</a>
@@ -61,6 +59,4 @@
             sidebar.style.display = 'none'
         }
     </script>
-</div>
-</div>
 <br />

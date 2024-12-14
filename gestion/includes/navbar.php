@@ -8,8 +8,6 @@
 
 
 
-<div class="navbar">
-<div class="">
     <nav>
 
     
@@ -51,6 +49,4 @@
             sidebar.style.display = 'none'
         }
     </script>
-</div>
-</div>
 <br />

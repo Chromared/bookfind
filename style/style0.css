@@ -29,6 +29,10 @@ body{
 nav{
     background-color: #27272b;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    overflow: hidden;
 }
 
 nav ul{
@@ -261,4 +265,13 @@ label {
 .list-items.active {
     color: red;
     cursor: pointer;
+}
+.administrateur {
+    color: rgb(255, 0, 0);
+}
+.gerant {
+    color: rgb(0, 106, 255);
+}
+.assistant {
+    color: rgb(0, 190, 0);
 }
