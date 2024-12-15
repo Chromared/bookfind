@@ -65,7 +65,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 1. Dans votre navigateur, rendez-vous sur le fichier `configuration.php`.
 2. Suivez les actions **dans l'ordre** pour configurer la base de donnée, les classes de votre établissement...
-3. Quand vous avez fini, cliquez sur le bouton qui est apparu qui permet de supprimer le fichier `configuration.php` car il ne sera plus d'aucune utilité et que, sachant qu'aucune restriction de sont appliqués, il serait dangereux de le laisser.
+3. Quand vous avez fini, cliquez sur le bouton qui est apparu permettant de supprimer le fichier `configuration.php` car il ne sera plus d'aucune utilité et que, sachant qu'aucune restriction de sont appliqués, il serait dangereux de le laisser.
 
 ## Utilisation
 
