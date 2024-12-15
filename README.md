@@ -23,16 +23,16 @@ Le projet **BookFind** est conçu pour simplifier la gestion des emprunts de liv
 - De rechercher des ouvrages disponibles
 - D'emprunter des livres
 - De consulter leurs emprunts en cours
-- De se connecter pour accéder aux fonctionnalités protégées.
+- D'accéder aux fonctionnalités protégées àils sont gradés
 
 Cette application offre une solution efficace pour le personnel du CDI et leurs utilisateurs.
 
 ## Fonctionnalités
 
 - **Page d'accueil** : Présentation de l'application et formulaire de recherche de livres.
-- **Recherche de livres** : Interface permettant aux utilisateurs de trouver des livres en fonction de critères spécifiques (titre, auteur, etc.).
+- **Recherche de livres** : Interface permettant aux utilisateurs de trouver des livres en fonction de leur titre
 - **Gestion des emprunts** : Permet de voir les livres empruntés et l'historique d'emprunt.
-- **Connexion et profil utilisateur** : Authentification sécurisée avec accès aux fonctionnalités réservées, ainsi qu'un espace pour gérer le profil.
+- **Connexion et profil utilisateur** : Authentification avec mot de passe crypté, accès aux fonctionnalités réservées, ainsi qu'un espace pour gérer son profil ou modifier le profil d'un utilisateur si on est gradé. Les parties modifiables varient en fonction du niveau de permission.
 
 ## Structure du Projet
 
@@ -42,13 +42,12 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 - `profil.php` : Interface permettant aux utilisateurs de consulter et de modifier leurs informations personnelles.
 - `emprunts.php` : Page où l'utilisateur peut voir les livres qu'il a empruntés.
 - `pdc.php` : Page affichant les politiques de confidentialité et les conditions d'utilisation.
+- `rules.php` : Page affichant le règlement.
 
 ### Répertoires
 
-- `actions/` : Contient les scripts PHP et JavaScript pour les actions de gestion, comme la connexion à la base de données, et les fonctions associées.
-  - `database.php` : Configuration et connexion à la base de données.
-  - `users/loginAction.php` : Gestion des actions de connexion des utilisateurs.
-- `includes/` : Composants inclus dans les différentes pages, comme le `header.php` et la `navbar.php` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et ou le changement impacteront toutes les pages.
+- `actions/` : Contient les scripts PHP et JavaScript pour les actions, comme la connexion à la base de données, l´enregistrement d'un livre et le fonctionnement du site en général.
+- `includes/` : Composants inclus dans les différentes pages, comme le `header.php` et la `navbar.php` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et où le changement impacteront toutes les pages.
 - `style/` : Ressources telles que les fichiers CSS, images et icones.
 
 ## Installation
@@ -61,21 +60,12 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
     - Utilisez XAMPP, WAMP, ou un autre serveur avec PHP et MySQL.
 3. **Déplacer le projet** :
     - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP).
-4. **Importer la base de données** :
-    - Dans votre interface MySQL (comme phpMyAdmin), créez une base de données et importez-y le fichier SQL fourni (le fichier est dans `actions/bookfind.sql`) pour créer les tables nécessaires.
 
-## Configuration de la Base de Données
+## Configuration
 
-1. Ouvrez le fichier `actions/database.php`.
-2. Remplacez les valeurs par celles de votre environnement:
-    ```php
-    $host = 'localhost';
-    $dbname = 'nom_de_votre_base';
-    $username = 'nom_utilisateur';
-    $password = 'mot_de_passe';
-    ```
-3. Enregistrez les modifications.
-4. Importez le fichier `actions/bookfind.sql` dans phpMyAdmin.
+1. Dans votre navigateur, rendez-vous sur le fichier `configuration.php`.
+2. Suivez les actions **dans l'ordre** pour configurer la base de donnée, les classes de votre établissement...
+3. Quand vous avez fini, cliquez sur le bouton qui est apparu qui permet de supprimer le fichier `configuration.php` car il ne sera plus d'aucune utilité et que, sachant qu'aucune restriction de sont appliqués, il serait dangereux de le laisser.
 
 ## Utilisation
 
@@ -83,13 +73,15 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 1. **Accéder à la Page d'accueil** : Rendez-vous sur `index.php` pour une vue d'ensemble et un accès rapide à la recherche de livres.
 2. **Créer un compte et se connecter** :
-    - Allez sur `login.php` pour créer un compte ou vous connecter.
+    - Allez sur `signup.php` ou `login.php` pour créer un compte ou vous connecter.
 3. **Rechercher des livres** :
     - Utilisez `books.php` pour explorer les livres disponibles.
 4. **Voir et gérer le profil** :
     - Consultez et modifiez vos informations personnelles sur `profil.php`.
 5. **Suivre les emprunts** :
     - Rendez-vous sur `emprunts.php` pour consulter vos livres empruntés et leur statut.
+6. **Gestion** :
+    - Pour les gradés, un lien "Gestion" apparaît dans la barre de navigation. En fonction de vos permissions, ce lien vous permettera d'accéder à certaines options de configuration du site ou du C.D.I.
 
 ## Environnement
 
