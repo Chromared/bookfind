@@ -14,12 +14,13 @@ $colonnes_valides = ['id', 'carte', 'classe', 'nom', 'prenom', 'grade', 'nb_empr
 
 if (isset($_GET['s']) && !empty($_GET['s']) && isset($_GET['where']) && !empty($_GET['where'])) {
 
-    $s = htmlspecialchars($_GET['s']);
-    $where = htmlspecialchars($_GET['where']);
+    $s = $_GET['s'];
+    $s = "%" . $s . "%";
+    $where = $_GET['where'];
     
     if (in_array($where, $colonnes_valides)) {
         
-        $requete = "SELECT * FROM users WHERE $where = :value ORDER BY $where ASC";
+        $requete = "SELECT * FROM users WHERE $where LIKE :value ORDER BY $where ASC";
         $SearchUser = $bdd->prepare($requete);
         
         $SearchUser->bindParam(':value', $s, PDO::PARAM_STR);
