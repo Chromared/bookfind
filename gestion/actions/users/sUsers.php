@@ -35,7 +35,7 @@ if (isset($_GET['s']) && !empty($_GET['s']) && isset($_GET['where']) && !empty($
                 <p>Grade : <?= Grade($users['grade']); ?><br /></p>
                 <div class="profil-part">
                 <button onclick="window.open('../profil.php?id=<?= $users['id'] ?>', '_blank')">Voir le profil</button>
-                <button onclick="window.open('update-user.php?id=<?= $users['id'] ?>', '_blank')">Modifier l'utilisateur'</button>
+                <button onclick="window.open('update-user.php?id=<?= $users['id'] ?>', '_blank')">Modifier l'utilisateur</button>
                 </div>
             </div>
             <br />
