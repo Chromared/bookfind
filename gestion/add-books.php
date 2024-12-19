@@ -23,8 +23,7 @@
 <br />
 <p>Les champs marqués d'une * sont obligatoires.</p>
 <p>Vous pouvez utiliser <em>CTRL + ENTER</em> ou <em>CMD + ENTER</em> pour valider.</p>
-<?php if(isset($msg)){echo '<p>' . $msg . '</p>';}
-    if(isset($_GET['msg']) AND !empty($_GET['msg']) AND $_GET['msg'] == true){echo '<p>Le livre a bien été enregistré.</p>';}?>
+<?php if(isset($msg)){ echo '<p>' . $msg . '</p>'; } ?>
 <br />
 <div class="update-part"><h4>Ajouter un livre</h4>
 <form method="post" autocomplete="off">
