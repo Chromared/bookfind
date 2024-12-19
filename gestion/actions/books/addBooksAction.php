@@ -65,7 +65,6 @@
                 $addBook = $bdd->prepare('INSERT INTO books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ?, statut = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, 0));
 
-                header('Location: add-books.php?msg=true');
             }
 
         }else { $msg = 'Le format de l\'auteur n\'est pas valide.';}
