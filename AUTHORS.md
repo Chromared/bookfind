@@ -7,7 +7,7 @@
 ## Contributeurs passifs :
 
 - [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = action/fonction/title.js +
-gestion/search-*.php) 
+gestion/search/*.*.php) 
 
 
 
