@@ -288,3 +288,11 @@ label {
 p {
     margin-left: 5px;
 }
+
+.success {
+    border-style: solid;
+    border-width: 1px;
+    border-color: greenyellow;
+    border-radius: 4px;
+    background-color: #27272b;
+}
