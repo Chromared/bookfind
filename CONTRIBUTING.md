@@ -38,7 +38,7 @@ Ce projet adhère à un [Code de Conduite](CODE_OF_CONDUCT.md) afin de garantir 
 1. Assurez-vous d’avoir installé les versions requises de PHP et MySQL.
 2. Cloner le projet :
     ```bash
-    git clone https://github.com/chromared/bookfind.git
+    git clone https://gitlab.com/chromared/bookfind.git
     ```
 3. Installez les dépendances requises et configurez votre base de données locale comme décrit dans le fichier `README.md`.
 4. Vérifiez que toutes les pages fonctionnent correctement après chaque changement.
