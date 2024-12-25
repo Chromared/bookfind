@@ -21,7 +21,7 @@
         <h1>Bienvenue sur BookFind ! Ici, empruntez les livres du C.D.I !</h1><br />
         <h2>Bienvenue sur le fichier de configuration ! Ici, vous allez finir la configuration du site.</h2>
         <h3>Attention ! Il est important de suivre les étapes dans l'ordre. Certaines disparaîtrons au fur et à mesure, quand elles seront effectués.</h3><br />
-                <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de donnée (cela fera disparaître l'erreur en haut de l'écran) :</strong> si vous ne l'avez as déjà fait, ouvrez le fichier database.php dans votre IDE ou dans le bloc-note Windows, par exemple, et remplissez vos informztions de connexions là ou il le faut. Sinon, servez-vous de ce formulaire : <br />
+                <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de donnée (cela fera disparaître l'erreur en haut de l'écran) :</strong> Rentrez vos informations de connexion à MySQL fourni par votre hébergeur dans ce formulaire : <br />
                 <div id="db" class="update-part">    
                 <form method="post">
                         <label for="host">Hôte :</label>
@@ -120,16 +120,16 @@
                 }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }
             } if(!empty($host) AND !empty($dbname) AND !empty($username)){
             $checkIfTwoClassesExists = $bdd->query('SELECT name FROM classes');
-            if($checkIfTwoClassesExists->rowCount() >= 2){ echo 'Étape 3 validée. Vous pouvez toujours continuer d\'ajouter des classes.'; $step3 = true; }} ?>
+            if($checkIfTwoClassesExists->rowCount() >= 2){ echo 'Étape 3 validée. Vous pouvez toujours ajouter des classes.'; $step3 = true; }} ?>
             </p>
                 <?php if(!empty($host) AND !empty($dbname) AND !empty($username)){
                     $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
                                     if($checkIfOneUserExist->rowCount() == 0){ ?>
 
-                <p><strong>4. Création d'un compte administrateur :</strong> vous pouvez créer le premier compte, qui sera automatiquement gradé en tant que "administrateur". Pour cela, rendez-vous sur la page d'<a href="signup.php" target="_blank">inscription</a> pour vous inscrire.</p>
+                <p><strong>4. Création d'un compte administrateur :</strong> vous devez créer le premier compte, qui sera automatiquement gradé en tant que "administrateur". Pour cela, rendez-vous sur la page d'<a href="signup.php" target="_blank">inscription</a> pour vous inscrire.</p>
             <?php }else{ echo 'Étape 4 validée.'; $step4 = true; }} ?>
 
-            <?php if(isset($step1) AND isset($step2) AND isset($step3) AND isset( $step4)){
+            <?php if(isset($step1) AND isset($step2) AND isset($step3) AND isset($step4)){
                 if($step1 === true AND $step2 === true AND $step3 === true AND $step4 === true){ ?>
 
                 <h4>Vous avez validé toutes les étapes ! Pour des raisons de sécurité, veuillez détruire ce fichier en cliquant sur ce bouton :</h4>
@@ -139,7 +139,7 @@
 
             <?php  if(isset($_POST['delete'])){ 
                 unlink('configuration.php');
-                echo 'Page supprimée. Vous pouvez fermer la page ou vous rendre à l\'accueil en cliquant <a href="index.php">ici</a>.';
+                echo '<p>Page supprimée. Vous pouvez fermer la page ou vous rendre à l\'accueil en cliquant <a href="index.php">ici</a>.</p>';
              }}} ?>
 </body>
 </html>
