@@ -17,20 +17,6 @@
             $isbn = $_POST['isbn'];
             $editeur = $_POST['editeur'];
             $type = $_POST['type'];
-
-            if (preg_match('/^([^,]+),\s*(.+)$/', $author, $matches)) {
-                $authorname = $matches[1];
-                $authorfirstname = $matches[2];
-
-            $checkAndInsertAuthor = $bdd->prepare('SELECT nomprenom FROM authors WHERE nomprenom = ?');
-            $checkAndInsertAuthor->execute(array($author));
-
-            if($checkAndInsertAuthor->rowCount() == 0){
-
-                $addAuthor = $bdd->prepare('INSERT INTO authors SET nom = ?, prenom = ?, nomprenom = ?');
-                $addAuthor->execute(array($authorname, $authorfirstname, $author));
-
-            }
             
             if(isset($_POST['resume']) AND !empty($_POST['resume'])){
                 $resume = $_POST['resume'];
@@ -65,10 +51,10 @@
                 $addBook = $bdd->prepare('INSERT INTO books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ?, statut = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, 0));
 
-                header('Location: add-books.php?msg=true');
+                $msg = 'Livre enregistré avec succès';
+
             }
 
-        }else { $msg = 'Le format de l\'auteur n\'est pas valide.';}
         }else{ $msg = 'Tout les champs ne sont pas remplis.'; }
     }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="add-books.php">recharger</a> la page.'; }
 }
