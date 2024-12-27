@@ -99,6 +99,10 @@
                                 <input type="text" id="classe" name="classe" required />
                                 <input type="submit" name="validate" value="Ajouter cette classe" required />
                 </form>
+                <input type="test" list="classes" placeholder="Liste des classes" />
+                <datalist id="classes">
+                    <?php include 'actions/fonctions/recupClassesAndOptions.php'; ?>
+                </datalist>
                 </div>
 
                 <?php if(isset($_POST['validate']) AND isset($_POST['classe']) AND !empty($_POST['classe'])){
