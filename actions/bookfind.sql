@@ -26,6 +26,20 @@ USE `bookfind`;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `authors`
+--
+
+CREATE TABLE `authors` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `nomprenom` varchar(255) NOT NULL,
+  `biographie` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `books`
 --
 
