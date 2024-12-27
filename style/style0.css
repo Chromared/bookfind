@@ -150,7 +150,8 @@ input[type="search"]:focus {
     font-size: 1.2rem;
 }*/
 
-input[type=text], select, input[type=password], input[type=number] {
+input[type=text], select, input[type=password], input[type=number], textarea {
+    flex: 1;
     height: 0.75cm;
     width: 10cm;
     border-style: solid;
@@ -160,14 +161,16 @@ input[type=text], select, input[type=password], input[type=number] {
     resize: vertical;
 }
 
-input[type=text]:focus, select:focus, input[type=password]:focus, input[type=number]:focus {
+input[type=text]:focus, select:focus, input[type=password]:focus, input[type=number]:focus, textarea:focus {
     border-style: solid;
     border-width: 2px;
     border-color: #db9d61;
 }
 
-textarea {
-    flex: 1;
+textarea::placeholder {
+    font-size: 15px;
+    padding: 0;
+    line-height: 0.75cm;
 }
 
 input[type=search] {
@@ -250,28 +253,18 @@ label {
     margin-right: 10px;
 }
 
-.list {
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 0 0 5px 5px;
-}
-.list-items {
-  padding: 10px 5px;
-}
-.list-items:hover {
-  color: red;
-  cursor: pointer;
-}
-.list-items.active {
-    color: red;
-    cursor: pointer;
-}
 .administrateur {
     color: rgb(255, 0, 0);
 }
+
 .gerant {
     color: rgb(0, 106, 255);
 }
+
 .assistant {
     color: rgb(0, 190, 0);
+}
+
+p {
+    margin-left: 5px;
 }
