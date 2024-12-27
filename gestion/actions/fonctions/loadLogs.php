@@ -4,8 +4,8 @@
     $sevenDaysAgo = (new DateTime())->modify('-7 days')->format('Y-m-d H:i:s');
     $thirtyDaysAgo = (new DateTime())->modify('-30 days')->format('Y-m-d H:i:s');
 
-    $query = $bdd->prepare("DELETE FROM logs WHERE (type = ? OR type = ?) AND datetime <= ?");
-    $query->execute(['connexion', 'inscription', $sevenDaysAgo]);
+    $query = $bdd->prepare("DELETE FROM logs WHERE (type = ? OR type = ? OR type = ?) AND datetime <= ?");
+    $query->execute(['Connexion', 'Inscription', 'Déconnexion', $sevenDaysAgo]);
 
     $query = $bdd->prepare("DELETE FROM logs WHERE datetime <= ?");
     $query->execute([$thirtyDaysAgo]);

@@ -12,8 +12,12 @@
         <!--<div class="logo">
             <a href="index.html" class="anav"><img src="./style/img/logopourpage.png" alt="beg"></img> Bookfind</a>
         </div>-->
-    
         <ul class="sidebar">
+        <?php if(file_exists('configuration.php')) { ?>
+
+            <li><a href="configuration.php">Configurer BookFind</a></li>
+
+            <?php }else{ ?>
             <li onclick=hideSidebar()><a href="#"><i class="fa-solid fa-xmark" style="color: #FFD43B;"></i></a></li>
             <li><a href="index.php">Accueil</a></li>
 
@@ -27,10 +31,15 @@
 
             <?php if ($_SESSION['grade'] > '0') { ?>
                 <li><a href="gestion/index.php">Gestion</a></li>
-            <?php }} ?>
+            <?php }}} ?>
 
         </ul>
         <ul>
+        <?php if(file_exists('configuration.php')) { ?>
+
+            <li><a href="configuration.php">Configurer BookFind</a></li>
+
+            <?php }else{ ?>
             <li><a href="index.php"><img src="./style/img/logopourpage.png" alt="logo" class="logo"></a></li>
             <li class="hideOnMobile"><a href="index.php">Accueil</a></li>
 
@@ -44,7 +53,7 @@
 
             <?php if ($_SESSION['grade'] > '0') { ?>
                 <li class="hideOnMobile"><a href="gestion/index.php">Gestion</a></li>
-            <?php }} ?>
+            <?php }}} ?>
 
                 <li class="menu-button" onclick=showSidebar()><a href="#"><i class="fa-solid fa-bars" style="color: #FFD43B;"></i></a></li>
         </ul>
