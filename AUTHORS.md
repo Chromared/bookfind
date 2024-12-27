@@ -6,5 +6,4 @@
 
 ## Contributeurs passifs :
 
-- [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = action/fonction/title.js +
-gestion/actions/books/list-*.php)
+- [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = action/fonction/title.js)
