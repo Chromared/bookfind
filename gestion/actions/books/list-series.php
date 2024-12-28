@@ -6,7 +6,7 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $selectSeries= $bdd->query('SELECT serie FROM books');
+<?php $selectSeries= $bdd->query('SELECT DISTINCT serie FROM books');
 
     //if(isset($['series'])){
         //while($series = $selectSeries->fetch()){
