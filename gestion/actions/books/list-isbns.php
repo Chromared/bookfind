@@ -6,7 +6,7 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $selectISBNs= $bdd->query('SELECT isbn FROM books');
+<?php $selectISBNs= $bdd->query('SELECT DISTINCT isbn FROM books');
 
     //if(isset($['isbn'])){
         //while($isbns = $selectISBNs->fetch()){
