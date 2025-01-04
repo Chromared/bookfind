@@ -6,7 +6,7 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $selectAuthors= $bdd->query('SELECT auteur FROM books');
+<?php $selectAuthors= $bdd->query('SELECT DISTINCT auteur FROM books');
 
     //if(isset($['auteur'])){
         //while($authors = $selectAuthors->fetch()){
