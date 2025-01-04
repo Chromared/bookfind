@@ -28,16 +28,16 @@
 <div class="update-part"><h4>Ajouter un livre</h4>
 <form method="post" autocomplete="off">
 
-<input placeholder=" Titre*" type="text" id="title" name="title" required/><br />
-<input placeholder=" Auteur*" type="text" id="author" name="author" list="authors" required/><datalist id="authors"><?php include 'actions/books/list-authors.php'; ?></datalist><br />
-<input placeholder=" ISBN*" type="number" id="isbn" name="isbn" list="isbns" required/><datalist id="isbns"><?php include 'actions/books/list-isbns.php'; ?></datalist><br />
-<input placeholder=" Type*" type="text" id="type" name="type" list="types" required/><datalist id="types"><?php include 'actions/books/list-types.php'; ?></datalist><br />
-<input placeholder=" Éditeur*" type="text" itemid="editeur" name="editeur" id="editeur" list="publishers" required/><datalist id="publishers"><?php include 'actions/books/list-publishers.php'; ?></datalist><br />
-<textarea placeholder=" Résumé" id="resume" name="resume"></textarea><br />
-<input placeholder=" Identifiant unique" type="text" id="id_u" name="id_unique"/><br />
-<input placeholder=" Genre" type="text" id="genre" name="genre" list="genres"/><datalist id="genres"><?php include 'actions/books/list-genres.php'; ?></datalist><br />
-<input placeholder=" Série" type="text" id="serie" name="serie" list="series"/><datalist id="series"><?php include 'actions/books/list-series.php'; ?></datalist><br />
-<input placeholder=" Tome (n°)" type="number" id="tome" name="tome" /><br />
+<input placeholder="Titre*" type="text" id="title" name="title" required/><br />
+<input placeholder="Auteur*" type="text" id="author" name="author" list="authors" required/><datalist id="authors"><?php include 'actions/books/list-authors.php'; ?></datalist><br />
+<input placeholder="ISBN*" type="number" id="isbn" name="isbn" list="isbns" required/><datalist id="isbns"><?php include 'actions/books/list-isbns.php'; ?></datalist><br />
+<input placeholder="Type*" type="text" id="type" name="type" list="types" required/><datalist id="types"><?php include 'actions/books/list-types.php'; ?></datalist><br />
+<input placeholder="Éditeur*" type="text" itemid="editeur" name="editeur" id="editeur" list="publishers" required/><datalist id="publishers"><?php include 'actions/books/list-publishers.php'; ?></datalist><br />
+<textarea placeholder="Résumé" id="resume" name="resume"></textarea><br />
+<input placeholder="Identifiant unique" type="text" id="id_u" name="id_unique"/><br />
+<input placeholder="Genre" type="text" id="genre" name="genre" list="genres"/><datalist id="genres"><?php include 'actions/books/list-genres.php'; ?></datalist><br />
+<input placeholder="Série" type="text" id="serie" name="serie" list="series"/><datalist id="series"><?php include 'actions/books/list-series.php'; ?></datalist><br />
+<input placeholder="Tome (n°)" type="number" id="tome" name="tome" /><br />
 <input type="submit" name="validate" title="Ctrl + Enter / Cmd + Enter" value="Enregistrer"/>
 
 </form>
