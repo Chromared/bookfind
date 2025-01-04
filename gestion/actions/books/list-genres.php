@@ -6,7 +6,7 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $selectGenres= $bdd->query('SELECT genre FROM books');
+<?php $selectGenres= $bdd->query('SELECT DISTINCT genre FROM books');
 
     //if(isset($['genre'])){
         //while($genres = $selectGenres->fetch()){

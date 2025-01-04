@@ -126,12 +126,11 @@
             $checkIfTwoClassesExists = $bdd->query('SELECT name FROM classes');
             if($checkIfTwoClassesExists->rowCount() >= 2){ echo 'Étape 3 validée. Vous pouvez toujours ajouter des classes.'; $step3 = true; }} ?>
             </p>
-                <?php if(!empty($host) AND !empty($dbname) AND !empty($username)){
-                    $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
-                                    if($checkIfOneUserExist->rowCount() == 0){ ?>
+                <?php $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
+                    if($checkIfOneUserExist->rowCount() == 0){ ?>
 
                 <p><strong>4. Création d'un compte administrateur :</strong> vous devez créer le premier compte, qui sera automatiquement gradé en tant que "administrateur". Pour cela, rendez-vous sur la page d'<a href="signup.php" target="_blank">inscription</a> pour vous inscrire.</p>
-            <?php }else{ echo 'Étape 4 validée.'; $step4 = true; }} ?>
+            <?php }else{ echo 'Étape 4 validée.'; $step4 = true; } ?>
 
             <?php if(isset($step1) AND isset($step2) AND isset($step3) AND isset($step4)){
                 if($step1 === true AND $step2 === true AND $step3 === true AND $step4 === true){ ?>
