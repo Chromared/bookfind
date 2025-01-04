@@ -6,7 +6,7 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $selectTypes= $bdd->query('SELECT type FROM books');
+<?php $selectTypes= $bdd->query('SELECT DISTINCT type FROM books');
 
     //if(isset($['types'])){
         //while($types = $selectTypes->fetch()){
