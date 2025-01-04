@@ -6,7 +6,7 @@
 //Copyright (C) 2024 Chromared
 ?>
 
-<?php $selectPublishers= $bdd->query('SELECT editeur FROM books');
+<?php $selectPublishers= $bdd->query('SELECT DISTINCT editeur FROM books');
 
     //if(isset($['editeurs'])){
         //while($publishers = $selectPublishers->fetch()){

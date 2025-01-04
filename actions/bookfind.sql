@@ -26,20 +26,6 @@ USE `bookfind`;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `authors`
---
-
-CREATE TABLE `authors` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `prenom` varchar(255) NOT NULL,
-  `nomprenom` varchar(255) NOT NULL,
-  `biographie` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `books`
 --
 
@@ -138,12 +124,6 @@ CREATE TABLE `users` (
 --
 
 --
--- Index pour la table `authors`
---
-ALTER TABLE `authors`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `books`
 --
 ALTER TABLE `books`
@@ -178,12 +158,6 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
-
---
--- AUTO_INCREMENT pour la table `authors`
---
-ALTER TABLE `authors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `books`
