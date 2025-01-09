@@ -31,7 +31,7 @@
                 
             $selectInfosFromBooksEmprunts1= $bdd->prepare('SELECT * FROM books WHERE id = ?');
             $selectInfosFromBooksEmprunts1->execute(array($empruntsInfos1['id_book']));
-            $recupBooks = $selectInfosFromBooksEmprunts1->fetch(); ?>
+            $recupBooks = $selectInfosFromBooksEmprunts1->fetch()}; ?>
 
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
