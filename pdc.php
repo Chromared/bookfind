@@ -15,7 +15,8 @@
     <?php include 'includes/header.php'; ?>
 </head>
 <body>
-    <h1>Bonne nouvelle !</h1>
-    <h4>Pour l'instant, nous ne récupérons aucune de vos données.</h4>
+<?php include 'includes/navbar.php'; ?>
+    <h1>Coming soon !</h1>
+    <h4>Notre équipe travail sur la rédaction de cette page.</h4>
 </body>
 </html>
