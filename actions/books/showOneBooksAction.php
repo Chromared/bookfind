@@ -8,8 +8,10 @@
 
 
 
-<?php $id = htmlspecialchars($_GET['id']);
+<?php if(isset($_GET['id']) AND !empty($_GET['id'])){
+      $id = $_GET['id'];
       $selectInfosFromBooks= $bdd->prepare('SELECT * FROM books WHERE id = ?');
       $selectInfosFromBooks->execute(array($id));
 
       $booksInfos = $selectInfosFromBooks->fetch();
+}else{die('Variable d\'URL (GET) manquante');}
