@@ -23,7 +23,7 @@
     <?php include 'includes/navbar.php'?>
     <?php if (isset($_GET['card'])) {
 
-        echo '<h4>Emprunts en cours : </h4>';
+        echo '<h3>Emprunts en cours : </h3>';
 
         if($selectInfosFromEmprunts1->rowCount() > 0){
             
@@ -44,7 +44,7 @@
 
 <?php }}else{ echo '<p>Vous n\'avez pas d\'emprunts en cours.</p>'; }
 
-    echo '<h4>Emprunts retournés : </h4>';
+    echo '<h3>Emprunts retournés : </h3>';
 
 if($selectInfosFromEmprunts2->rowCount() > 0){
             
