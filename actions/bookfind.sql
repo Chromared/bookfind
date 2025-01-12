@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 27 déc. 2024 à 12:37
+-- Généré le : dim. 05 jan. 2025 à 14:23
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -106,7 +106,7 @@ CREATE TABLE `logs` (
 CREATE TABLE `users` (
   `id` int(255) NOT NULL,
   `carte` int(8) NOT NULL,
-  `classe` varchar(2) NOT NULL,
+  `classe` varchar(255) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(25) NOT NULL,
   `mdp` text NOT NULL,
@@ -169,7 +169,7 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT pour la table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `emprunts`

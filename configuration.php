@@ -21,7 +21,7 @@
         <h1>Bienvenue sur BookFind ! Ici, empruntez les livres du C.D.I !</h1><br />
         <h2>Bienvenue sur le fichier de configuration ! Ici, vous allez finir la configuration du site.</h2>
         <h3>Attention ! Il est important de suivre les étapes dans l'ordre. Certaines disparaîtrons au fur et à mesure, quand elles seront effectués.</h3><br />
-                <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de donnée (cela fera disparaître l'erreur en haut de l'écran) :</strong> Rentrez vos informations de connexion à MySQL fourni par votre hébergeur dans ce formulaire : <br />
+                <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de donnée :</strong> Rentrez vos informations de connexion à MySQL fourni par votre hébergeur dans ce formulaire : <br />
                 <div id="db" class="update-part">    
                 <form method="post">
                         <label for="host">Hôte :</label>
