@@ -12,10 +12,10 @@
 
     if(isset($usersInfos['classe'])){
         while($classes = $selectClasses->fetch()){
-            echo '<option value="' . $classes['name'] . '" ' . SelectedWithoutEcho($classes['name'], $usersInfos['classe']) . '>' . $classes['name'] . '</option>';
+            echo '<option value="' . htmlspecialchars($classes['name']) . '" ' . SelectedWithoutEcho(htmlspecialchars($classes['name']), $usersInfos['classe']) . '>' . $classes['name'] . '</option>';
         }
     }else{
 
     while($classes = $selectClasses->fetch()){
-        echo '<option value="' . $classes['name'] . '">' . $classes['name'] . '</option>';
+        echo '<option value="' . htmlspecialchars($classes['name']) . '">' . htmlspecialchars($classes['name']) . '</option>';
     }}

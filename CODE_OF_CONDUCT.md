@@ -20,7 +20,7 @@ Ce projet **BookFind** est sous licence [MIT](LICENSE), propriété exclusive de
 ### Droits de Chromared
 
 - **Chromared** se réserve le droit de modifier, d'ajuster ou de refuser toute contribution qui ne serait pas conforme aux valeurs ou aux besoins du projet.
-- **Chromared** conserve tous les droits d’auteur sur le code source de **BookFind**, y compris le droit de le modifier, le distribuer ou le publier.
+- **Chromared** conserve tous les droits d’auteur sur le code source de **BookFind**, y compris le droit de le distribuer ou de le publier.
 
 ## Reproduction, Modification et Attribution
 

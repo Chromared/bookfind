@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 05 jan. 2025 à 14:23
+-- Généré le : mer. 05 mars 2025 à 18:08
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -42,6 +42,17 @@ CREATE TABLE `books` (
   `tome` int(11) DEFAULT NULL,
   `statut` int(11) NOT NULL,
   `genre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `censure`
+--
+
+CREATE TABLE `censure` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -90,6 +101,7 @@ CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `page` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `user_ip` varchar(255) NOT NULL,
   `user_card` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -130,6 +142,12 @@ ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `censure`
+--
+ALTER TABLE `censure`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `classes`
 --
 ALTER TABLE `classes`
@@ -166,10 +184,16 @@ ALTER TABLE `books`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `censure`
+--
+ALTER TABLE `censure`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `emprunts`

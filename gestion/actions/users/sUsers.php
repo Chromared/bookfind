@@ -8,7 +8,7 @@
 
 
 
-<?php include '../actions/fonctions/transfoGradeIntVersText.php';
+<?php include '../actions/functions/transfoGradeIntVersText.php';
 
 $colonnes_valides = ['id', 'carte', 'classe', 'nom', 'prenom', 'grade', 'nb_emprunt_max', 'nb_emprunt'];
 

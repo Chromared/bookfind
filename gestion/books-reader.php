@@ -8,11 +8,11 @@
 
 <?php require '../actions/database.php';
     require 'actions/users/securityAction.php';
-    require 'actions/securityActionAdmin.php';
+    require 'actions/users/securityAdminAction.php';
     require '../actions/books/showOneBooksAction.php';
     require '../actions/books/showOneEmprunt.php';
-    require '../actions/fonctions/conversionDate.php';
-    require '../actions/fonctions/conversionDateHour.php'; ?>
+    require '../actions/functions/conversionDate.php';
+    require '../actions/functions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

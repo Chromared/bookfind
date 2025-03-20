@@ -18,8 +18,8 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-        <h1>Bienvenue sur BookFind ! Ici, empruntez les livres du C.D.I !</h1><br />
-        <h2>Bienvenue sur le fichier de configuration ! Ici, vous allez finir la configuration du site.</h2>
+        <h1>Bienvenue sur BookFind !</h1><br />
+        <h2>Bienvenue sur le fichier de configuration ! Ici, vous allez pouvoir finir la configuration du site.</h2>
         <h3>Attention ! Il est important de suivre les étapes dans l'ordre. Certaines disparaîtrons au fur et à mesure, quand elles seront effectués.</h3><br />
                 <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de donnée :</strong> Rentrez vos informations de connexion à MySQL fourni par votre hébergeur dans ce formulaire : <br />
                 <div id="db" class="update-part">    
@@ -30,36 +30,47 @@
                         <label for="username">Nom d'utilisateur :</label>
                         <input type="text" id="username" name="username" required /><br><br>
 
-                        <label for="password">Mot de Passe :</label>
+                        <label for="dbname">Nom de la base de donnée :</label>
+                        <input type="text" name="dbname" id="dbname" value="bookfind" required /><br /><br />
+
+                        <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" /><br><br>
 
                         <input type="submit" value="Enregistrer" />
                 </form>
                 </div>
                                 <?php if (isset($_POST['host']) AND isset($_POST['username']) AND isset($_POST['password']) AND !empty($_POST['host']) AND !empty($_POST['username'])) {
-                                    $newHost = $_POST['host'];
-                                    $newUsername = $_POST['username'];
-                                    $newPassword = $_POST['password'];
+                                    $host = $_POST['host'];
+                                    $username = $_POST['username'];
+                                    $password = $_POST['password'];
+                                    $dbname = $_POST['dbname'];
                                 
                                     $filePath = 'actions/database.php';
                                 
                                     $fileContent = file_get_contents($filePath);
                                 
-                                    $fileContent = preg_replace("/\\\$host = '';/", "\$host = '$newHost';", $fileContent);
-                                    $fileContent = preg_replace("/\\\$username = '';/", "\$username = '$newUsername';", $fileContent);
-                                    $fileContent = preg_replace("/\\\$password = '';/", "\$password = '$newPassword';", $fileContent);
-                                
+                                    $fileContent = preg_replace("/\\\$host = '';/", "\$host = '$host';", $fileContent);
+                                    $fileContent = preg_replace("/\\\$username = '';/", "\$username = '$username';", $fileContent);
+                                    $fileContent = preg_replace("/\\\$password = '';/", "\$password = '$password';", $fileContent);
+                                    $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = '$dbname';", $fileContent);
+
                                     file_put_contents($filePath, $fileContent);
-                                
-                                    echo 'Fichier de configuration mis à jour avec succès. Rechargez la page <a href="configuration.php">ici</a>.';
-                                }
-                                ?>
+                                    
+                                    echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
+                                } ?>
                 <?php }else{ echo 'Étape 1 validée.'; $step1 = true; } ?></p>
 
                 <?php if (file_exists('actions/bookfind.sql')) { ?>
                 <p><strong>2. Configurer la base de donnée :</strong> En cliquant sur ce bouton, la base de donnée va être importé sur le serveur : <form method="post"><input type="submit" name="import" value="Importer la base de donnée" /></form>
+                <br /><form method="post"><input type="submit" name="alreadyImport" value="J'ai déjà importé la base de donnée manuellement" /></form>
                 
-                <?php if(isset($_POST['import'])){
+                <?php if(isset($_POST['alreadyImport'])){
+                    if(!empty($host) AND !empty($username)){
+                        unlink('actions/bookfind.sql');
+                    echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
+                }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
+
+                if(isset($_POST['import'])){
                     if(!empty($host) AND !empty($username)){
                     $sqlFile = 'actions/bookfind.sql';
 
@@ -71,11 +82,6 @@
 
                     $createDatabase = $bdd->exec('CREATE DATABASE bookfind');
 
-                    $filePath = 'actions/database.php';
-                    $fileContent = file_get_contents($filePath);
-                    $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = 'bookfind';", $fileContent);
-                    file_put_contents($filePath, $fileContent);
-
                     $queries = array_filter(array_map('trim', explode(';', $sql)));
 
                     foreach ($queries as $query) {
@@ -86,7 +92,8 @@
                         }
                     }
                     unlink('actions/bookfind.sql');
-                    echo 'Importation de la base de donnée terminée avec succès. Rechargez la page <a href="configuration.php">ici</a>.';
+                    
+                    echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
                 }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
             }else{ echo 'Étape 2 validée.'; $step2 = true; } ?>
                     <br /></p>
@@ -95,13 +102,13 @@
             
                 <div class="update-part">
                 <form method="post">                                
-                                <label for="classe">Classe : </label>
-                                <input type="text" id="classe" name="classe" required />
-                                <input type="submit" name="validate" value="Ajouter cette classe" required />
+                    <label for="classe">Classe : </label>
+                    <input type="text" list="classes" id="classe" name="classe" required />
+                    <input type="submit" name="validate" value="Ajouter cette classe" />
                 </form>
-                <input type="test" list="classes" placeholder="Liste des classes" />
                 <datalist id="classes">
-                    <?php include 'actions/fonctions/recupClassesAndOptions.php'; ?>
+                    <?php echo '<option value="' . htmlspecialchars($_POST['classe']) . '">' . htmlspecialchars($_POST['classe']) . '</option>'; ?>
+                    <?php include 'actions/functions/recupClassesAndOptions.php'; ?>
                 </datalist>
                 </div>
 
@@ -129,7 +136,7 @@
                 <?php $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
                     if($checkIfOneUserExist->rowCount() == 0){ ?>
 
-                <p><strong>4. Création d'un compte administrateur :</strong> vous devez créer le premier compte, qui sera automatiquement gradé en tant que "administrateur". Pour cela, rendez-vous sur la page d'<a href="signup.php" target="_blank">inscription</a> pour vous inscrire.</p>
+                <p><strong>4. Création d'un compte administrateur :</strong> vous devez créer le premier compte, qui sera automatiquement gradé en tant que "administrateur". Pour cela, rendez-vous sur la page d'<a href="signup.php">inscription</a> pour vous inscrire.</p>
             <?php }else{ echo 'Étape 4 validée.'; $step4 = true; } ?>
 
             <?php if(isset($step1) AND isset($step2) AND isset($step3) AND isset($step4)){
@@ -142,7 +149,8 @@
 
             <?php  if(isset($_POST['delete'])){ 
                 unlink('configuration.php');
-                echo '<p>Page supprimée. Vous pouvez fermer la page ou vous rendre à l\'accueil en cliquant <a href="index.php">ici</a>.</p>';
+                header('Location: index.php');
+                exit;
              }}} ?>
 </body>
 </html>
