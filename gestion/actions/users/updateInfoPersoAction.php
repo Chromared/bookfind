@@ -20,11 +20,11 @@ if (isset($_POST['validateInfoPerso'])) {
             $updateInfoPerso->execute(array($name, $firstname, $id));
 
             if($name != $usersInfos['nom'] AND $firstname == $usersInfos['prenom']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de famille. Ancien nom : ' . $usersInfos['nom'] . '. Nouveau nom : ' . $name . '.');
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> passant de ' . $usersInfos['nom'] . ' à ' . $name . '.');
             }elseif($name == $usersInfos['nom'] AND $firstname != $usersInfos['prenom']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom. Ancien prénom : ' . $usersInfos['prenom'] . '. Nouveau prénom : ' . $firstname . '.');
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de prénom de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> passant de ' . $usersInfos['prenom'] . ' à ' . $firstname . '.');
             }elseif($name != $usersInfos['nom'] AND $firstname != $usersInfos['prenom']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille. Ancien prénom : ' . $usersInfos['prenom'] . '. Nouveau prénom : ' . $firstname . '. Ancien nom : ' . $usersInfos['nom'] . '. Nouveau nom : ' . $name . '.');
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a>. Son ancien prénom était ' . $usersInfos['prenom'] . ' et est maintenant ' . $firstname . '. Quant à son nom, il passe de ' . $usersInfos['nom'] . ' à ' . $name . '.');
             }
 
             header('Location: update-user.php?id=' . $id .'');

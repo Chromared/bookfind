@@ -54,18 +54,18 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 1. **Cloner le dépôt ou télécharger le ZIP** :
     ```bash
-    git clone https://github.com/chromared/bookfind.git
+    git clone https://github.com/amu11er/bookfind.git
     ```
 2. **Configuration du serveur local** :
     - Utilisez XAMPP, WAMP, ou un autre serveur avec PHP et MySQL.
 3. **Déplacer le projet** :
-    - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP).
+    - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP et uWAMP).
 
 ## Configuration
 
 1. Dans votre navigateur, rendez-vous sur le fichier `configuration.php`.
 2. Suivez les actions **dans l'ordre** pour configurer la base de donnée, les classes de votre établissement...
-3. Quand vous avez fini, cliquez sur le bouton qui est apparu permettant de supprimer le fichier `configuration.php` car il ne sera plus d'aucune utilité et que, sachant qu'aucune restriction de sont appliqués, il serait dangereux de le laisser.
+3. Quand vous avez fini, cliquez sur le bouton qui est apparu permettant de supprimer le fichier `configuration.php` car il ne sera plus d'aucune utilité et que, sachant qu'aucune restriction n'est appliquée, il serait dangereux de le laisser.
 
 ## Utilisation
 

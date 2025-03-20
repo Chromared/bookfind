@@ -9,7 +9,7 @@
 
 
 <?php require '../database.php';
-    require '../fonctions/logFunction.php';
+    require '../functions/logFunction.php';
 session_start();
 
     SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');

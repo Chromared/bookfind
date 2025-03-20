@@ -8,7 +8,7 @@
 
 <?php session_start(); ?>
 <?php require 'actions/database.php';
-    require 'actions/fonctions/logFunction.php';
+    require 'actions/functions/logFunction.php';
     require 'actions/users/loginAction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -24,9 +24,9 @@
 <?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
 <form method="POST" class="form">
         <div class="form-login">
-            <br><label class="form-label">Numéro de carte : </label><input type="text" name="card" class="form-control" />
+            <br><label class="form-label" for="card">Numéro de carte : </label><input type="text" name="card" id="card" class="form-control" />
 
-            <br /><label class="form-label">Mot de passe : </label><input type="password" name="password" class="form-control" />
+            <br /><label class="form-label" for="password">Mot de passe : </label><input type="password" name="password" id="password" class="form-control" />
 
             <br /><input class="form-btn-blue" type="submit" name="validate" value="Connexion" />
         </div>

@@ -23,47 +23,48 @@
                 $card = $_POST['card'];
                 $classe = $_POST['classe'];
 
-                $checkIfUserAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
-                $checkIfUserAlreadyExists->execute(array($card));
+                $checkIfClasseAlreadyExists = $bdd->prepare('SELECT name FROM classes WHERE name = ?');
+                $checkIfClasseAlreadyExists->execute(array($classe));
 
-                if($checkIfUserAlreadyExists->rowCount() == 0){
+                if($checkIfClasseAlreadyExists->rowCount() > 0){
 
-                    $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
+                    $checkIfUserAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
+                    $checkIfUserAlreadyExists->execute(array($card));
 
-                    if($checkIfOneUserExist->rowCount() == 0){
+                    if($checkIfUserAlreadyExists->rowCount() == 0){
 
-                        $grade = 1;
+                        $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
 
-                    }else{ $grade = 0; }
+                        if($checkIfOneUserExist->rowCount() == 0){
+                            $grade = 1;
+                        }else{ $grade = 0; }
 
-                    $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?, grade = ?');
-                    $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true, $grade));
+                        $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET carte = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?, grade = ?');
+                        $insertUserOnWebsite->execute(array($card, $classe, $name, $firstname, $mdp, true, true, $grade));
 
-                    $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
-                    $getInfosOfThisUserReq->execute(array($card));
+                        $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE carte = ?');
+                        $getInfosOfThisUserReq->execute(array($card));
 
-                    $usersInfos = $getInfosOfThisUserReq->fetch();
+                        $usersInfos = $getInfosOfThisUserReq->fetch();
 
-                    $_SESSION['auth'] = true;
-                    $_SESSION['admin'] = false;
-                    $_SESSION['id'] = $usersInfos['id'];
-                    $_SESSION['lastname'] = $usersInfos['nom'];
-                    $_SESSION['firstname'] = $usersInfos['prenom'];
-                    $_SESSION['card'] = $usersInfos['carte'];
-                    $_SESSION['classe'] = $usersInfos['classe'];
-                    $_SESSION['grade'] = $usersInfos['grade'];
-                    $_SESSION['theme'] = $usersInfos['theme'];
+                        $_SESSION['auth'] = true;
+                        $_SESSION['admin'] = false;
+                        $_SESSION['id'] = $usersInfos['id'];
+                        $_SESSION['lastname'] = $usersInfos['nom'];
+                        $_SESSION['firstname'] = $usersInfos['prenom'];
+                        $_SESSION['card'] = $usersInfos['carte'];
+                        $_SESSION['classe'] = $usersInfos['classe'];
+                        $_SESSION['grade'] = $usersInfos['grade'];
+                        $_SESSION['theme'] = $usersInfos['theme'];
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun commentaire.');
-                    
-                    header('Location: index.php');
+                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun commentaire.');
 
-                }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Un compte à déjà été créé avec cette carte.</p></div></div>'; }
+                        header('Location: index.php');
 
-            } else { $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Vous devez accepté-e les conditions d\'utilisation et les règles.</p></div></div>'; }
-
-        }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Les deux mot de passe ne sont pas identique.</p></div></div>'; }
-
-    }else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Veuillez remplir tous les champs.<p></div></div>'; }
-}else{ $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Tous les champs n\'existe pas. Veuillez <a href="signup.php">recharger</a> la page.</p></div></div>'; }
+                    }else{ $errorMsg = 'Un compte à déjà été créé avec cette carte.'; }
+                }else{ $errorMsg = 'La classe sélectionnée n\'existe pas. Veuillez en choisir une parmi celles proposées.'; }
+            }else{ $errorMsg = 'Vous devez accepté-e les conditions d\'utilisation et les règles.'; }
+        }else{ $errorMsg = 'Les deux mot de passe ne sont pas identique.'; }
+    }else{ $errorMsg = 'Veuillez remplir tous les champs.'; }
+}else{ $errorMsg = 'Tous les champs n\'existe pas. Veuillez <a href="signup.php">recharger</a> la page.'; }
 }

@@ -18,7 +18,7 @@
         $DeleteUserAccount = $bdd->prepare('DELETE FROM users WHERE id = ?');
         $DeleteUserAccount->execute(array($id));
 
-        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Le compte de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' (' . $usersInfos['carte'] . ') à été supprimé.');
+        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Le compte de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' a été supprimé.');
 
         header('Location: users.php');
         

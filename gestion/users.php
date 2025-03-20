@@ -8,7 +8,7 @@
 
 <?php require '../actions/database.php'; 
     require 'actions/users/securityAction.php';
-    require 'actions/securityActionAdmin.php';?>
+    require 'actions/users/securityAdminAction.php';?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,7 +24,7 @@
         <div class="usersgestion-part">
     <form method="GET" class="form">
         <br /><input type="search" name="s" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher un utilisateur" class="form-control" /> 
-        <select name="where"><option <?php Selected($getwhere, 'id'); ?> value="id">ID</option><option <?php Selected($getwhere, 'carte'); ?> value="carte">Carte</option><option <?php Selected($getwhere, 'classe'); ?> value="classe">Classe</option><option <?php Selected($getwhere, 'nom'); ?> value="nom">Nom</option><option <?php Selected($getwhere, 'prenom'); ?> value="prenom">Prénom</option><option <?php Selected($getwhere, 'grade'); ?> value="grade">Grade</option></select>
+        <select name="where"><option <?php Selected($getwhere, 'carte'); ?> value="carte">Carte</option><option <?php Selected($getwhere, 'id'); ?> value="id">ID</option><option <?php Selected($getwhere, 'classe'); ?> value="classe">Classe</option><option <?php Selected($getwhere, 'nom'); ?> value="nom">Nom</option><option <?php Selected($getwhere, 'prenom'); ?> value="prenom">Prénom</option><option <?php Selected($getwhere, 'grade'); ?> value="grade">Grade</option></select>
         <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
     </form>
     <?php include 'actions/users/sUsers.php'; ?>

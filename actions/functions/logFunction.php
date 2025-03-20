@@ -8,13 +8,12 @@
 
 <?php function SaveLog($bdd, $page, $type, $comment){
 
-    $userSystem = $_SERVER['HTTP_USER_AGENT'];
-
     $user_id = $_SESSION['id'];
+    $user_ip = $_SERVER['REMOTE_ADDR'];
     $user_card = $_SESSION['card'];
     $name = $_SESSION['firstname'] . ' ' . $_SESSION['lastname'];
 
-    $insertLog = $bdd->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_card = ?, user_name = ?, type = ?, comment = ?');
-    $insertLog->execute(array($page, $user_id, $user_card, $name, $type, $comment));
+    $insertLog = $bdd->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_ip = ?, user_card = ?, user_name = ?, type = ?, comment = ?');
+    $insertLog->execute(array($page, $user_id, $user_ip, $user_card, $name, $type, $comment));
 
 }
