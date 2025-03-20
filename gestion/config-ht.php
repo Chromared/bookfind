@@ -9,7 +9,7 @@
 
 
 <?php require 'actions/users/securityAction.php';
-    require 'actions/securityActionAdmin.php';
+    require 'actions/users/securityAdminAction.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -9,11 +9,11 @@
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require '../actions/database.php'; 
     require 'actions/users/securityAction.php';
-    require 'actions/securityActionAdmin.php';
-    require '../actions/fonctions/logFunction.php';
+    require 'actions/users/securityAdminAction.php';
+    require '../actions/functions/logFunction.php';
     require '../actions/users/showOneUsersProfilAction.php';
-    require '../actions/fonctions/selected.php';
-    require '../actions/fonctions/transfoGradeIntVersText.php';
+    require '../actions/functions/selected.php';
+    require '../actions/functions/transfoGradeIntVersText.php';
     require 'actions/users/updateInfoPersoAction.php';
     require 'actions/users/updateInfoScoAction.php';
     require 'actions/users/updateGradeAction.php';
@@ -49,7 +49,7 @@
 <h4>Informations scolaire</h4>
 <form method="post" class="form">
     <label class="form-label">Carte :</label> <input class="form-control" name="card" type="number" value="<?= htmlspecialchars($usersInfos['carte']); ?>" />
-    <label class="form-label">Classe :</label> <select class="form-control" name="classe"><?php include '../actions/fonctions/recupClassesAndOptions.php'; ?></select>
+    <label class="form-label">Classe :</label> <select class="form-control" name="classe"><?php include '../actions/functions/recupClassesAndOptions.php'; ?></select>
     <input type="submit" class="form-btn-blue" name="validateInfoSco" value="Valider" />
 </form>
 </div>

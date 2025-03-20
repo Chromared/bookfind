@@ -9,8 +9,8 @@
 <?php require 'actions/database.php';
     require 'actions/users/securityAction.php';
     require 'actions/books/showEmprunts.php';
-    require 'actions/fonctions/conversionDateHour.php';
-    require 'actions/fonctions/conversionDate.php'; ?>
+    require 'actions/functions/conversionDateHour.php';
+    require 'actions/functions/conversionDate.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

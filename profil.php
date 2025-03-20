@@ -7,11 +7,11 @@
 ?>
 
 <?php require 'actions/database.php';
-    //require 'actions/fonctions/logFunction.php';
+    //require 'actions/functions/logFunction.php';
     require 'actions/users/securityAction.php';
-    require 'actions/users/showOneUsersProfilAction.php';
-    require 'actions/fonctions/transfoGradeIntVersText.php';
-    require 'actions/fonctions/conversionDateHour.php'; ?>
+    if (isset($_GET['id']) AND !empty($_GET['id'])) { require 'actions/users/showOneUsersProfilAction.php'; }else{ die('La variable URL contenant l\'ID de l\'utilisateur est absente ou vide.'); }
+    require 'actions/functions/transfoGradeIntVersText.php';
+    require 'actions/functions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,10 +22,9 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'?>
-    <?php if (isset($_GET['id'])) { ?>
     <?php
 
-    if($selectInfosFromUsers->rowCount() >= 1){
+    if($selectInfosFromUsers->rowCount() === 1){
 ?>
 <div class="contour">
 <div class="profil-info-page">
@@ -48,7 +47,7 @@
     <?php } ?>
 </div>
 </div>
-<?php }else{ echo '<div class="msg msg-blue>"Aucun utilisateur avec l\'id n°' . htmlspecialchars($_GET["id"]) . ' n\'a été trouvé.</div>'; }} ?>
+<?php }else{ echo 'Aucun utilisateur avec l\'id n°' . htmlspecialchars($_GET["id"]) . ' n\'a été trouvé.'; } ?>
 </div>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <?php 
 require '../actions/database.php'; 
 require 'actions/users/securityAction.php';
-require 'actions/securityActionAdmin.php';
+require 'actions/users/securityAdminAction.php';
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ require 'actions/securityActionAdmin.php';
     <script>
     function updateCounters() {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'actions/fonctions/count_data.php', true);
+        xhr.open('GET', 'actions/others/count_data.php', true);
         xhr.onload = function() {
             if (xhr.status == 200) {
                 var data = JSON.parse(xhr.responseText);

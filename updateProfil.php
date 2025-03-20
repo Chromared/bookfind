@@ -8,10 +8,10 @@
     
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 <?php require 'actions/database.php';
-    require 'actions/fonctions/logFunction.php';
+    require 'actions/functions/logFunction.php';
     require 'actions/users/securityAction.php';
     require 'actions/users/showOneUsersProfilAction.php';
-    require 'actions/fonctions/selected.php';
+    require 'actions/functions/selected.php';
     require 'actions/users/updateInfoPersoAction.php';
     require 'actions/users/updateInfoScoAction.php';
     require 'actions/users/updateMdpAction.php';
@@ -27,7 +27,7 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'?>
-<?php if(isset($msg)){ echo '<p>'.$msg.'</p>'; } ?>
+<?php if(isset($_GET['msg']) AND $_GET['msg'] == 'true'){ echo '<p>Vos modifications ont bien été enregistré.</p>'; } if(isset($msg)){ echo '<p>' . $msg . '</p>'; } ?>
 <div class="update-part">
 <p>
 <h4>Informations personnelle</h4>
@@ -42,7 +42,7 @@
 <h4>Informations scolaire</h4>
 <form method="post" class="form">
     <label class="form-label">Carte :</label> <input class="form-control" name="card" type="number" value="<?= htmlspecialchars($usersInfos['carte']); ?>" />
-    <label class="form-label">Classe :</label> <select class="form-control" name="classe"><?php include 'actions/fonctions/recupClassesAndOptions.php'; ?></select>
+    <label class="form-label">Classe :</label> <select class="form-control" name="classe"><?php include 'actions/functions/recupClassesAndOptions.php'; ?></select>
     <input type="submit" class="form-btn-blue" name="validateInfoSco" value="Valider" />
 </form>
 </div>
