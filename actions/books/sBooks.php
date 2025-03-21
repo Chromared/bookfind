@@ -9,10 +9,20 @@
 <?php if(isset($_GET['s']) AND !empty($_GET['s'])){
 
         $s = $_GET['s'];
-        $s = "%" . $s . "%";
+        $keywords = explode(' ', $s);
+        $searchConditions = [];
 
-        $recupBooks = $bdd->prepare('SELECT * FROM books WHERE titre LIKE ? ORDER BY titre');
-        $recupBooks->execute([$s]);
+        foreach ($keywords as $keyword) {
+            $searchConditions[] = "(titre LIKE ? OR auteur LIKE ? OR resume LIKE ? OR isbn LIKE ? OR editeur LIKE ? OR genre LIKE ? OR type LIKE ? OR serie LIKE ? OR id_unique LIKE ?)";
+        }
+
+        $sql = 'SELECT * FROM books WHERE ' . implode(' AND ', $searchConditions) . ' ORDER BY titre';
+        $recupBooks = $bdd->prepare($sql);
+        $params = [];
+        foreach ($keywords as $keyword) {
+            $params = array_merge($params, array_fill(0, 9, "%$keyword%"));
+        }
+        $recupBooks->execute($params);
 
             if($recupBooks->rowCount() == 0){
                 echo '<p>Aucun livre n\'a été trouvée.</p>';
@@ -27,6 +37,7 @@
             <div class="bordure">
                 <h4><?= htmlspecialchars($books['titre']); ?></h4>
                 <p>Auteur : <?= htmlspecialchars($books['auteur']); ?></p>
+                <?php if(!empty($books['serie'])){?><p>Série : <?= htmlspecialchars($books['serie']) ?></p><?php } ?>
                 <p>Résumé : <?php if(!empty($books['resume'])){ echo $books['resume']; }else{ echo 'Il n\'y a pas de résumé pour ce livre.'; } ?></p>
                 <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>">Voir le livre</a></p>
                 <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
