@@ -1,6 +1,6 @@
 ## Contributeurs actifs :
 
-- [@AMu11er](https://gitlab.com/AMu11er)  -->  Backend (PHP)
+- [@AMu11er](https://gitlab.com/AMu11er)  -->  Backend (PHP) + Frontend (CSS / JS)
 - [@joachimlaucoin](https://gitlab.com/joacksleloupgit)  -->  Frontend (CSS / JS) + Gestion dépôt GitLab 
 - [@TagSteel](https://gitlab.com/TagSteel)  -->  Frontend (CSS) + Gestion dépôt GitLab
 
