@@ -13,14 +13,14 @@
         $searchConditions = [];
 
         foreach ($keywords as $keyword) {
-            $searchConditions[] = "(titre LIKE ? OR auteur LIKE ? OR resume LIKE ? OR isbn LIKE ? OR editeur LIKE ? OR genre LIKE ? OR type LIKE ? OR serie LIKE ? OR id_unique LIKE ?)";
+            $searchConditions[] = "(titre LIKE ? OR auteur LIKE ? OR isbn LIKE ? OR editeur LIKE ? OR genre LIKE ? OR type LIKE ? OR serie LIKE ? OR id_unique LIKE ?)";
         }
 
         $sql = 'SELECT * FROM books WHERE ' . implode(' AND ', $searchConditions) . ' ORDER BY titre';
         $recupBooks = $bdd->prepare($sql);
         $params = [];
         foreach ($keywords as $keyword) {
-            $params = array_merge($params, array_fill(0, 9, "%$keyword%"));
+            $params = array_merge($params, array_fill(0, 8, "%$keyword%"));
         }
         $recupBooks->execute($params);
 
