@@ -10,7 +10,7 @@
 
 <?php if (isset($_POST['validateGrade'])) {
     if (isset($_POST['grade'])){
-        if (!empty($_POST['grade']) OR $_POST['grade'] != '0'){
+        if (!empty($_POST['grade']) OR $_POST['grade'] == 0){
 
             if(($_POST['grade'] == 1 AND $_SESSION['grade'] == 1) OR $_POST['grade'] != 1){
     
