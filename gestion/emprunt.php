@@ -31,8 +31,8 @@
         if($booksInfos['statut'] == 0 OR $booksInfos['statut'] == 2){ ?>
     <h4>Ajouter un emprunt</h4>
     <form method="post">
-        <label>N° de carte de l'emprunteur : </label><input type="number" name="card" min="0" max="99999999"/><br />
-        <label>À rendre pour le : </label><input type="date" value="<?= $dateDans30Jours; ?>" name="date" /><br />
+        <label>N° de carte de l'emprunteur : </label><input type="number" name="card" min="0" max="99999999" required/><br />
+        <label>À rendre pour le : </label><input type="date" value="<?= $dateDans30Jours; ?>" name="date" required/><br />
         <input type="hidden" name="id_book" value="<?= htmlspecialchars($_GET['id']); ?>" />
         <input type="submit" name="validateAdd" value="Ajouter l'emprunt"/>
     </form>
