@@ -22,7 +22,7 @@
     <?php include 'includes/navbar.php'; ?>
     <br><div class="booksearch-part">   
         <form method="GET">
-            <input type="search" name="s" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher ici les livres du CDI"/>
+            <input type="search" name="s" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher ici les livres du CDI" <?php if(!isset($_GET['s']) OR empty($_GET['s'])){ echo 'autofocus'; } ?>/>
             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
         <br />
