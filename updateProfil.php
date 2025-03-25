@@ -32,8 +32,8 @@
 <p>
 <h4>Informations personnelle</h4>
 <form method="POST" class="form">
-    <label class="form-label">Prénom :</label> <input name="firstname" class="form-control" type="text" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" />
-    <label class="form-label">Nom :</label> <input name="name" type="text" class="form-control" value="<?= htmlspecialchars($usersInfos['nom']); ?>" />
+    <label class="form-label">Prénom :</label> <input name="firstname" class="form-control" type="text" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
+    <label class="form-label">Nom :</label> <input name="name" type="text" class="form-control" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
     <input type="submit" class="form-btn-blue" value="Valider" name="validateInfoPerso" />
 </form>
 </div>
@@ -41,8 +41,8 @@
 <div class="update-part">
 <h4>Informations scolaire</h4>
 <form method="post" class="form">
-    <label class="form-label">Carte :</label> <input class="form-control" name="card" type="number" value="<?= htmlspecialchars($usersInfos['carte']); ?>" />
-    <label class="form-label">Classe :</label> <select class="form-control" name="classe"><?php include 'actions/functions/recupClassesAndOptions.php'; ?></select>
+    <label class="form-label">Carte :</label> <input class="form-control" name="card" type="number" value="<?= htmlspecialchars($usersInfos['carte']); ?>" required/>
+    <label class="form-label">Classe :</label> <select class="form-control" name="classe" required><?php include 'actions/functions/recupClassesAndOptions.php'; ?></select>
     <input type="submit" class="form-btn-blue" name="validateInfoSco" value="Valider" />
 </form>
 </div>
@@ -50,9 +50,9 @@
 <div class="update-part">
 <h4>Mot de passe</h4>
 <form method="post" class="form">
-    <label class="form-label">Mot de passe actuel :</label> <input type="password" name="actual-password" class="form-control" />
-    <label class="form-label">Nouveau mot de passe :</label> <input type="password" name="new-password" class="form-control" />
-    <label class="form-label">Confirmer le nouveau mot de passe :</label> <input type="password" name="confirm-new-password" class="form-control" />
+    <label class="form-label">Mot de passe actuel :</label> <input type="password" name="actual-password" class="form-control" required/>
+    <label class="form-label">Nouveau mot de passe :</label> <input type="password" name="new-password" class="form-control" required/>
+    <label class="form-label">Confirmer le nouveau mot de passe :</label> <input type="password" name="confirm-new-password" class="form-control" required/>
     <input class="form-btn-blue" value="Valider" name="validateMdp" type="submit" />
 </form>
 </div>
@@ -61,12 +61,12 @@
 <h4>Supprimer le compte</h4>
 <?php if(!isset($deleteAccount)){ ?>
 <form class="form" method="POST">
-    <label class="form-label">Mot de passe :</label> <input type="password" name="password" class="form-control" />
+    <label class="form-label">Mot de passe :</label> <input type="password" name="password" class="form-control" required/>
     <input type="submit" value="Supprimer le compte" name="validateDelete1" class="form-btn-orange" />
 </form>
 <?php }elseif(isset($deleteAccount)){ ?>
 <form class="form" method="POST">
-    <label class="form-label">Je confirme vouloir supprimer mon compte (Attention ! Cette action est irreversible.):</label> <input type="checkbox" name="confirm-delete" class="form-checkbox" />
+    <label class="form-label">Je confirme vouloir supprimer mon compte (Attention ! Cette action est irreversible.):</label> <input type="checkbox" name="confirm-delete" class="form-checkbox" required/>
     <input type="submit" value="Supprimer le compte" name="validateDelete2" class="form-btn-red" />
 </form>
 <?php }?>

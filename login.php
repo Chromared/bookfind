@@ -24,9 +24,9 @@
 <?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
 <form method="POST" class="form">
         <div class="form-login">
-            <br><label class="form-label" for="card">Numéro de carte : </label><input type="text" name="card" id="card" class="form-control" />
+            <br><label class="form-label" for="card">Numéro de carte : </label><input type="text" name="card" id="card" class="form-control" required/>
 
-            <br /><label class="form-label" for="password">Mot de passe : </label><input type="password" name="password" id="password" class="form-control" />
+            <br /><label class="form-label" for="password">Mot de passe : </label><input type="password" name="password" id="password" class="form-control" required/>
 
             <br /><input class="form-btn-blue" type="submit" name="validate" value="Connexion" />
         </div>

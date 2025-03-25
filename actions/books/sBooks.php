@@ -38,7 +38,6 @@
                 <h4><?= htmlspecialchars($books['titre']); ?></h4>
                 <p>Auteur : <?= htmlspecialchars($books['auteur']); ?></p>
                 <?php if(!empty($books['serie'])){?><p>Série : <?= htmlspecialchars($books['serie']) ?></p><?php } ?>
-                <p>Résumé : <?php if(!empty($books['resume'])){ echo $books['resume']; }else{ echo 'Il n\'y a pas de résumé pour ce livre.'; } ?></p>
                 <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>">Voir le livre</a></p>
                 <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
                          if($books['statut'] == 0 OR $books['statut'] == 2){?>
