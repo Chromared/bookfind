@@ -48,7 +48,6 @@
                         $usersInfos = $getInfosOfThisUserReq->fetch();
 
                         $_SESSION['auth'] = true;
-                        $_SESSION['admin'] = false;
                         $_SESSION['id'] = $usersInfos['id'];
                         $_SESSION['lastname'] = $usersInfos['nom'];
                         $_SESSION['firstname'] = $usersInfos['prenom'];

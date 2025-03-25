@@ -7,7 +7,6 @@
 ?>
 
 <?php require 'actions/database.php';
-    //require 'actions/functions/logFunction.php';
     require 'actions/users/securityAction.php';
     if (isset($_GET['id']) AND !empty($_GET['id'])) { require 'actions/users/showOneUsersProfilAction.php'; }else{ die('La variable URL contenant l\'ID de l\'utilisateur est absente ou vide.'); }
     require 'actions/functions/transfoGradeIntVersText.php';
@@ -37,17 +36,20 @@
         Date d'inscription : Le <?php ConversionDateHour($usersInfos['datetime']); ?><br />
         Grade : <?php Grade($usersInfos['grade']); ?><br />
     </p>
-    <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
+    <div class="profil-part">
     <p>
-            <div class="profil-part">
+        <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
             <button onclick="location.href='actions/users/logoutAction.php'">Se déconnecter</button>
             <button onclick="location.href='updateProfil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>'">Modifier le compte</button>
-            </div>
+        <?php } if($_SESSION['grade'] != 0 AND $_SESSION['id'] != $usersInfos['id']){ ?>
+            <button onclick="location.href='gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>'">Modifier cet utilisateur</button>
+            <button onclick="location.href='gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>'">Voir ses emprunts</button>
+        <?php } ?>
     </p>
-    <?php } ?>
+    </div>
 </div>
 </div>
-<?php }else{ echo 'Aucun utilisateur avec l\'id n°' . htmlspecialchars($_GET["id"]) . ' n\'a été trouvé.'; } ?>
+<?php }else{ echo 'Aucun utilisateur avec l\'id n°' . htmlspecialchars($_GET['id']) . ' n\'a été trouvé.'; } ?>
 </div>
 </body>
 </html>

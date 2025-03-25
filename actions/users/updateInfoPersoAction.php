@@ -20,11 +20,11 @@ if (isset($_POST['validateInfoPerso'])) {
             $updateInfoPerso->execute(array($name, $firstname, $id));
 
             if($name != $_SESSION['lastname'] AND $firstname == $_SESSION['firstname']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de famille. Ancien nom : ' . $_SESSION['lastname'] . '. Nouveau nom : ' . $name . '.');
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Le nouveau nom est ' . $name . '.');
             }elseif($name == $_SESSION['lastname'] AND $firstname != $_SESSION['firstname']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom. Ancien prénom : ' . $_SESSION['firstname'] . '. Nouveau prénom : ' . $firstname . '.');
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Le nouveau prénom est ' . $firstname . '.');
             }elseif($name != $_SESSION['lastname'] AND $firstname != $_SESSION['firstname']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille. Ancien prénom : ' . $_SESSION['firstname'] . '. Nouveau prénom : ' . $firstname . '. Ancien nom : ' . $_SESSION['lastname'] . '. Nouveau nom : ' . $name . '.');
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Cette utilisateur se nomme maintenant ' . $name . ' ' . $firstname . '.');
             }
 
             $_SESSION['lastname'] = $name;
