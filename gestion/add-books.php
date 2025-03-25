@@ -28,7 +28,7 @@
 <div class="update-part"><h4>Ajouter un livre</h4>
 <form method="post" autocomplete="off">
 
-<input placeholder="ISBN*" type="number" id="isbn" name="isbn" list="isbns" required/><datalist id="isbns"><?php include 'actions/books/list-isbns.php'; ?></datalist><br />
+<input placeholder="ISBN*" type="number" id="isbn" name="isbn" list="isbns" autofocus required/><datalist id="isbns"><?php include 'actions/books/list-isbns.php'; ?></datalist><br />
 <input placeholder="Titre*" type="text" id="title" name="title" required/><br />
 <input placeholder="Auteur*" type="text" id="author" name="author" list="authors" required/><datalist id="authors"><?php include 'actions/books/list-authors.php'; ?></datalist><br />
 <input placeholder="Type*" type="text" id="type" name="type" list="types" required/><datalist id="types"><?php include 'actions/books/list-types.php'; ?></datalist><br />
