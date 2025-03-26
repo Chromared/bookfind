@@ -56,5 +56,5 @@
             }
 
         }else{ $msg = 'Tout les champs ne sont pas remplis.'; }
-    }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="add-books.php">recharger</a> la page.'; }
+    }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="add-book.php">recharger</a> la page.'; }
 }
