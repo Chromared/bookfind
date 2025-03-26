@@ -9,7 +9,7 @@
 <?php require '../actions/database.php';
     require 'actions/users/securityAction.php';
     require 'actions/users/securityAdminAction.php';
-    require '../actions/books/showOneBooksAction.php';
+    require '../actions/books/showOneBookAction.php';
     require 'actions/books/updateEmprunt.php';
     if($booksInfos['statut'] == 1){ require 'actions/books/showOneEmprunt.php'; }
     require 'actions/books/addEmpruntAction.php';
