@@ -33,7 +33,7 @@ CREATE TABLE `books` (
   `id` int(11) NOT NULL,
   `titre` varchar(255) NOT NULL,
   `auteur` varchar(255) NOT NULL,
-  `isbn` int(255) NOT NULL,
+  `isbn` bigint(13) NOT NULL,
   `id_unique` varchar(255) DEFAULT NULL,
   `resume` text DEFAULT NULL,
   `editeur` varchar(255) NOT NULL,
