@@ -11,7 +11,7 @@
     require 'actions/users/securityAction.php';
     require 'actions/users/securityAdminAction.php';
     require '../actions/functions/logFunction.php';
-    require '../actions/users/showOneUsersProfilAction.php';
+    require '../actions/users/showOneUserProfilAction.php';
     require '../actions/functions/selected.php';
     require '../actions/functions/transfoGradeIntVersText.php';
     require 'actions/users/updateInfoPersoAction.php';
