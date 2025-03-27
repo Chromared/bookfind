@@ -10,17 +10,18 @@
     require 'actions/users/securityAction.php';
     require 'actions/books/showEmprunts.php';
     require 'actions/functions/conversionDateHour.php';
-    require 'actions/functions/conversionDate.php'; ?>
+    require 'actions/functions/conversionDate.php';
+    require 'actions/functions/colorDateEmpruntFunction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprunts</title>
-    <?php include 'includes/header.php' ?>
+    <?php include 'includes/header.php'; ?>
 </head>
 <body>
-    <?php include 'includes/navbar.php'?>
+    <?php include 'includes/navbar.php'; ?>
     <?php if (isset($_GET['card'])) {
 
         echo '<h3>Emprunts en cours : </h3>';
@@ -37,7 +38,7 @@
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos1['date_emprunt']); ?></p>
-            <p>Date de retour prévue : <?= ConversionDate($empruntsInfos1['date_futur_retour']); ?></p>
+            <p>Date de retour prévue : <?= ColorDateEmprunt($empruntsInfos1['date_futur_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
         </div>
         <br />

@@ -16,6 +16,7 @@
             <li><a href="index.php">Accueil</a></li>
             <li><a href="books.php">Livres</a></li>
             <li><a href="add-book.php">Ajouter un livre</a></li>
+            <li><a href="emprunts.php">Emprunts</a></li>
             <li><a href="users.php">Utilisateurs</a></li>
 
             <?php if ($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2) { ?>
@@ -34,6 +35,7 @@
                 <li class="hideOnMobileGestion"><a href="index.php">Accueil</a></li>
                 <li class="hideOnMobileGestion"><a href="books.php">Livres</a></li>
                 <li class="hideOnMobileGestion"><a href="add-book.php">Ajouter un livre</a></li>
+                <li class="hideOnMobileGestion"><a href="emprunts.php">Emprunts</a></li>
                 <li class="hideOnMobileGestion"><a href="users.php">Utilisateurs</a></li>
 
                 <?php if ($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2) { ?>

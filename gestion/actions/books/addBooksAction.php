@@ -38,7 +38,7 @@
 
                 $id_u = true;
 
-                }
+                }else{die('Identifiant unique déjà attribué à un autre livre');}
             }else{$id_unique = false; $id_u = true;}
 
             if(isset($_POST['serie']) AND isset($_POST['tome']) AND !empty($_POST['serie']) AND !empty($_POST['tome'])){

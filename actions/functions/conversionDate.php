@@ -17,3 +17,10 @@ if (preg_match('/(\d{4})-(\d{2})-(\d{2})/', $date, $matches)) {
     echo "Format de date invalide";
 }
 }
+
+function NoEchoConversionDate($date) {
+
+    if (preg_match('/(\d{4})-(\d{2})-(\d{2})/', $date, $matches)) {
+        $newDate = "{$matches[3]}/{$matches[2]}/{$matches[1]}";
+        return $newDate;
+    }}
