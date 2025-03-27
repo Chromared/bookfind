@@ -38,24 +38,20 @@
         <?php if(!empty($booksInfos['serie'])){ echo 'Tome ' . $booksInfos['tome'] . ' de la série ' . $booksInfos['serie'] . '.'; } ?><br />
         
         <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
-                         if($booksInfos['statut'] == 0 OR $booksInfos['statut'] == 2){?>
+            if($booksInfos['statut'] == 0 OR $booksInfos['statut'] == 2){ ?>
 
-                            <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php">
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($booksInfos['id']); ?>"/>
-                                <input type="submit" value="Emprunter ce livre"/>
-                            </form>
-                    
-                        <?php }elseif($booksInfos['statut'] == 1){?>
+            <button onclick="location.href='gestion/emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>'">Emprunter ce livre</button>
 
-                            <p>Emprunté par : <?= htmlspecialchars($emprunt['firstname_name']); ?></p>
-                            <p>Le : <?php ConversionDateHour($emprunt['date_emprunt']); ?></p>
-                            <p>Retour prévu le : <?php ConversionDate($emprunt['date_futur_retour']); ?></p>
-                            <form method="get" action="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php">
-                                <input type="hidden" name="id" value="<?= htmlspecialchars($booksInfos['id']); ?>"/>
-                                <input type="hidden" name="card" value="<?= htmlspecialchars($emprunt['card_emprunteur']); ?>"/>
-                                <input type="submit" value="Modifier l'emprunt de ce livre"/>
-                            </form>
-                <?php }}} ?>
+        <?php }elseif($booksInfos['statut'] == 1){?>
+
+            <p>Emprunté par : <?= htmlspecialchars($emprunt['firstname_name']); ?></p>
+            <p>Le : <?php ConversionDateHour($emprunt['date_emprunt']); ?></p>
+            <p>Retour prévu le : <?php ConversionDate($emprunt['date_futur_retour']); ?></p>
+
+            <button onclick="location.href='gestion/emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>&card=<?= htmlspecialchars($emprunts['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
+
+        <?php }}} ?>
+            <button onclick="location.href='gestion/update-book.php?id=<?= htmlspecialchars($booksInfos['id']); ?>'">Modifier ce livre</button>
 
     </p>
 </div></div>
