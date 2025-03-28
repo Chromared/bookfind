@@ -3,7 +3,7 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 
@@ -41,7 +41,7 @@
 
                 	$id_u = true;
 
-                }else{die('Identifiant unique déjà attribué à un autre livre');}
+                }
             }else{$id_unique = false; $id_u = true;}
 
             if(isset($_POST['serie']) AND isset($_POST['tome']) AND !empty($_POST['serie']) AND !empty($_POST['tome'])){
@@ -56,7 +56,7 @@
 
                 $msg = 'Livre modifié avec succès';
 
-            }
+            }else{ $msg = 'Identifiant unique déjà attribué à un autre livre'; }
 
         }else{ $msg = 'Tout les champs ne sont pas remplis.'; }
     }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="update-book.php?id=' . $id . '">recharger</a> la page.'; }
