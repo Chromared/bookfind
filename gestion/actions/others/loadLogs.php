@@ -1,3 +1,13 @@
+<?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2025 Chromared
+?>
+
+
+
 <?php require_once '../../../actions/database.php';
     require_once '../../../actions/functions/conversionDateHour.php';
 

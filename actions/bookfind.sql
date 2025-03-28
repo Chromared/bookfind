@@ -1,3 +1,11 @@
+-- This file belongs to the Bookfind project.
+-- 
+-- Bookfind is distributed under the terms of the MIT software license.
+-- 
+-- Copyright (C) 2025 Chromared
+
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/

@@ -3,13 +3,12 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 
 
-<?php 
-require '../../../actions/database.php';
+<?php require '../../../actions/database.php';
 
 // Récupération du nombre total d'utilisateurs
 $requete_users = $bdd->query('SELECT COUNT(*) AS total_utilisateurs FROM users');

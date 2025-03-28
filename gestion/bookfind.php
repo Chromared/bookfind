@@ -1,3 +1,13 @@
+<?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2025 Chromared
+?>
+
+
+
 <?php require '../actions/database.php';
     require 'actions/users/securityAction.php';
     require 'actions/users/securityAdminAction.php';

@@ -3,7 +3,7 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 <?php session_start();
@@ -30,9 +30,6 @@
                         <label for="username">Nom d'utilisateur :</label>
                         <input type="text" id="username" name="username" required /><br><br>
 
-                        <label for="dbname">Nom de la base de donnée :</label>
-                        <input type="text" name="dbname" id="dbname" value="bookfind" required /><br /><br />
-
                         <label for="password">Mot de passe :</label>
                         <input type="password" id="password" name="password" /><br><br>
 
@@ -43,7 +40,6 @@
                                     $host = $_POST['host'];
                                     $username = $_POST['username'];
                                     $password = $_POST['password'];
-                                    $dbname = $_POST['dbname'];
                                 
                                     $filePath = 'actions/database.php';
                                 
@@ -52,7 +48,6 @@
                                     $fileContent = preg_replace("/\\\$host = '';/", "\$host = '$host';", $fileContent);
                                     $fileContent = preg_replace("/\\\$username = '';/", "\$username = '$username';", $fileContent);
                                     $fileContent = preg_replace("/\\\$password = '';/", "\$password = '$password';", $fileContent);
-                                    $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = '$dbname';", $fileContent);
 
                                     file_put_contents($filePath, $fileContent);
                                     
@@ -62,16 +57,23 @@
 
                 <?php if (file_exists('actions/bookfind.sql')) { ?>
                 <p><strong>2. Configurer la base de donnée :</strong> En cliquant sur ce bouton, la base de donnée va être importé sur le serveur : <form method="post"><input type="submit" name="import" value="Importer la base de donnée" /></form>
-                <br /><form method="post"><input type="submit" name="alreadyImport" value="J'ai déjà importé la base de donnée manuellement" /></form>
+                <br /><form method="post"><input type="text" name="dbname" placeholder="Nom de la base de donnée" required/> <input type="submit" name="alreadyImport" value="J'ai déjà importé la base de donnée manuellement" /></form>
                 
-                <?php if(isset($_POST['alreadyImport'])){
+                <?php if(isset($_POST['dbname']) AND !empty($_POST['dbname']) AND isset($_POST['alreadyImport'])){
                     if(!empty($host) AND !empty($username)){
+                        $dbname = $_POST['dbname'];
+
+                        $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = '$dbname';", $fileContent);
+
                         unlink('actions/bookfind.sql');
                     echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
                 }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
 
                 if(isset($_POST['import'])){
                     if(!empty($host) AND !empty($username)){
+
+                    $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = 'bookfind';", $fileContent);
+
                     $sqlFile = 'actions/bookfind.sql';
 
                     $sql = file_get_contents($sqlFile);
