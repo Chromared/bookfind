@@ -95,7 +95,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 ## Licence
 
-Ce projet est distribué selon les termes de la license [MIT]. 2024 Chromared.
+Ce projet est distribué selon les termes de la license [MIT]. 2025 Chromared.
 
 ---
 
