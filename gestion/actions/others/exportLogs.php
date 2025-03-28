@@ -1,4 +1,14 @@
 <?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2025 Chromared
+?>
+
+
+
+<?php
 if (isset($_POST['export'])) {
     // Nettoyer la sortie pour éviter les sauts de ligne inutiles
     if (ob_get_length()) ob_clean();
