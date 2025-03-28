@@ -3,7 +3,7 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 <?php require '../actions/database.php';
@@ -20,6 +20,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprunts</title>
     <?php include '../includes/header.php'; ?>
+    <style>
+    /* Correction pour la navbar sticky */
+    h3 {
+        scroll-margin-top: 50px; /* Ajuster selon la hauteur réelle de la navbar */
+    }
+</style>
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>

@@ -3,7 +3,7 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 
@@ -14,7 +14,7 @@
         <ul class="sidebar">
             <li onclick=hideSidebar()><a href="#"><i class="fa-solid fa-xmark" style="color: #FFD43B;"></i></a></li>
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="books.php">Livres</a></li>
+            <li><a href="books.php">Rechercher des livres</a></li>
             <li><a href="add-book.php">Ajouter un livre</a></li>
             <li><a href="emprunts.php">Emprunts</a></li>
             <li><a href="users.php">Utilisateurs</a></li>
@@ -33,7 +33,7 @@
         <ul>
                 <li><a href="index.php"><img src="../style/img/logopourpage.png" alt="logo" class="logo"></a></li>
                 <li class="hideOnMobileGestion"><a href="index.php">Accueil</a></li>
-                <li class="hideOnMobileGestion"><a href="books.php">Livres</a></li>
+                <li class="hideOnMobileGestion"><a href="books.php">Rechercher des livres</a></li>
                 <li class="hideOnMobileGestion"><a href="add-book.php">Ajouter un livre</a></li>
                 <li class="hideOnMobileGestion"><a href="emprunts.php">Emprunts</a></li>
                 <li class="hideOnMobileGestion"><a href="users.php">Utilisateurs</a></li>

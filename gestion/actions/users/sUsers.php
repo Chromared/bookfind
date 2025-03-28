@@ -3,7 +3,7 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 
@@ -39,6 +39,7 @@
                 <div class="profil-part">
                 <button onclick="window.open('../profil.php?id=<?= $users['id'] ?>', '_blank')">Voir le profil</button>
                 <button onclick="window.open('update-user.php?id=<?= $users['id'] ?>', '_blank')">Modifier l'utilisateur</button>
+                <button onclick="location.href='user-emprunts.php?card=<?= htmlspecialchars($users['carte']) ?>'">Voir ses emprunts</button>
                 </div>
             </div>
             <br />

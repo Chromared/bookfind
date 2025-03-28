@@ -3,7 +3,7 @@
 //
 //Bookfind is distributed under the terms of the MIT software license.
 //
-//Copyright (C) 2024 Chromared
+//Copyright (C) 2025 Chromared
 ?>
 
 <?php function SaveLog($bdd, $page, $type, $comment){
