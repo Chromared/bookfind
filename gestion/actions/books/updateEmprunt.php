@@ -8,8 +8,7 @@
 
 
 
-<?php require_once('');
-    if(isset($_POST['validateUpdate'])){
+<?php if(isset($_POST['validateUpdate'])){
     if(isset($_POST['date']) AND !empty($_POST['date']) AND isset($_POST['id']) AND !empty($_POST['id']) AND isset($_POST['card']) AND !empty($_POST['card'])){
     
         $date = $_POST['date'];
