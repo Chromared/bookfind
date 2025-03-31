@@ -8,13 +8,15 @@
 
 
 
-<?php
-function ConversionDateHour($datehour) {
+<?php function ConversionDateHour($datehour) {
+    // On tente de convertir la date avec heure
+    $timestamp = strtotime($datehour);
 
-    if (preg_match('/(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):\d{2}/', $datehour, $matches)) {
-        $newDate = "{$matches[3]}/{$matches[2]}/{$matches[1]} à {$matches[4]}h{$matches[5]}";
-        echo $newDate;
-    } else {
+    // Si strtotime échoue, le format est invalide
+    if (!$timestamp) {
         echo "Format de date invalide";
+    } else {
+        // Affichage au format français avec heure
+        echo date("d/m/Y à H\hi", $timestamp);
     }
 }

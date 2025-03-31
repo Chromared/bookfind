@@ -50,8 +50,9 @@
 
             <button onclick="location.href='gestion/emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>&card=<?= htmlspecialchars($emprunts['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
 
-        <?php }}} ?>
+        <?php }} ?>
             <button onclick="location.href='gestion/update-book.php?id=<?= htmlspecialchars($booksInfos['id']); ?>'">Modifier ce livre</button>
+        <?php } ?>
 
     </p>
 </div></div>
