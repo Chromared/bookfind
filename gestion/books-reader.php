@@ -43,11 +43,11 @@
             
         <?php }elseif($booksInfos['statut'] == 1){?>
 
-            <p>Emprunté par : <?= htmlspecialchars($emprunts['firstname_name']); ?></p>
-            <p>Le : <?php ConversionDateHour($emprunts['date_emprunt']); ?></p>
-            <p>Retour prévu le : <?php ConversionDate($emprunts['date_futur_retour']); ?></p>
+            <p>Emprunté par : <?= htmlspecialchars($emprunt['firstname_name']); ?></p>
+            <p>Le : <?php ConversionDateHour($emprunt['date_emprunt']); ?></p>
+            <p>Retour prévu le : <?php ConversionDate($emprunt['date_futur_retour']); ?></p>
 
-            <button onclick="location.href='emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>&card=<?= htmlspecialchars($emprunts['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
+            <button onclick="location.href='emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>&card=<?= htmlspecialchars($emprunt['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
         
         <?php } ?>
             <button onclick="location.href='update-book.php?id=<?= htmlspecialchars($booksInfos['id']); ?>'">Modifier ce livre</button>
