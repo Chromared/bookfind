@@ -63,7 +63,10 @@
                     if(!empty($host) AND !empty($username)){
                         $dbname = $_POST['dbname'];
 
+                        $filePath = 'actions/database.php';
+                        $fileContent = file_get_contents($filePath);
                         $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = '$dbname';", $fileContent);
+                        file_put_contents($filePath, $fileContent);
 
                         unlink('actions/bookfind.sql');
                     echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
