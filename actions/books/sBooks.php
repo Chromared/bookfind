@@ -52,9 +52,10 @@
 
                     <button onclick="location.href='<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>&card=<?= htmlspecialchars($emprunts['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
                     
-                <?php }}} ?>
+                <?php }} ?>
+                    <button onclick="location.href='<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>'">Modifier ce livre</button>
+                <?php } ?>
                 
-                <button onclick="location.href='<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>'">Modifier ce livre</button>
             </div>
             <br />
             
