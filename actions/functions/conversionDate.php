@@ -9,18 +9,26 @@
 
 
 <?php function ConversionDate($date) {
+    // On tente de convertir la date
+    $timestamp = strtotime($date);
 
-if (preg_match('/(\d{4})-(\d{2})-(\d{2})/', $date, $matches)) {
-    $newDate = "{$matches[3]}/{$matches[2]}/{$matches[1]}";
-    echo $newDate;
-} else {
-    echo "Format de date invalide";
-}
-}
+    // Si strtotime échoue, le format est invalide
+    if (!$timestamp) {
+        echo "Format de date invalide";
+    }
 
+    // On retourne au format français (d/m/Y)
+    echo date("d/m/Y", $timestamp);
+}
 function NoEchoConversionDate($date) {
+    // On tente de convertir la date
+    $timestamp = strtotime($date);
 
-    if (preg_match('/(\d{4})-(\d{2})-(\d{2})/', $date, $matches)) {
-        $newDate = "{$matches[3]}/{$matches[2]}/{$matches[1]}";
-        return $newDate;
-    }}
+    // Si strtotime échoue, le format est invalide
+    if (!$timestamp) {
+        return "Format de date invalide";
+    }
+
+    // On retourne au format français (d/m/Y)
+    return date("d/m/Y", $timestamp);
+}
