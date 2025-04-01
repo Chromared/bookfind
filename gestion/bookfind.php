@@ -27,11 +27,11 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    <h2>Base de donnée</h2>
+    <h2>Base de données</h2>
     <h3>Identifiants de connexion</h3>
     <form method="post">
         <label for="host">Hôte : </label><input type="text" id="host" name="host" value="<?= $host; ?>" required /><br />
-        <label for="dbname">Nom de la base de donnée : </label><input type="text" id="dbname" name="dbname" value="<?= $dbname; ?>" required /><br />
+        <label for="dbname">Nom de la base de données : </label><input type="text" id="dbname" name="dbname" value="<?= $dbname; ?>" required /><br />
         <label for="user">Nom d'utilisateur : </label><input type="text" id="user" name="user" value="<?= $username; ?>" required /><br />
         <label for="password">Mot de passe : </label><input type="password" id="password" name="password" value="<?= $password; ?>" placeholder="Aucun mot de passe" /><br />
         <input type="submit" name="databaseValidate" value="Enregistrer">
