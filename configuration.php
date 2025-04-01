@@ -21,7 +21,7 @@
         <h1>Bienvenue sur BookFind !</h1><br />
         <h2>Bienvenue sur le fichier de configuration ! Ici, vous allez pouvoir finir la configuration du site.</h2>
         <h3>Attention ! Il est important de suivre les étapes dans l'ordre. Certaines disparaîtrons au fur et à mesure, quand elles seront effectués.</h3><br />
-                <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de donnée :</strong> Rentrez vos informations de connexion à MySQL fourni par votre hébergeur dans ce formulaire : <br />
+                <?php if(empty($host) AND empty($dbname) AND empty($username)){ ?><p><strong>1. Configurer les accès à la base de données :</strong> Rentrez vos informations de connexion à MySQL fourni par votre hébergeur dans ce formulaire : <br />
                 <div id="db" class="update-part">    
                 <form method="post">
                         <label for="host">Hôte :</label>
@@ -56,8 +56,8 @@
                 <?php }else{ echo 'Étape 1 validée.'; $step1 = true; } ?></p>
 
                 <?php if (file_exists('actions/bookfind.sql')) { ?>
-                <p><strong>2. Configurer la base de donnée :</strong> En cliquant sur ce bouton, la base de donnée va être importé sur le serveur : <form method="post"><input type="submit" name="import" value="Importer la base de donnée" /></form>
-                <br /><form method="post"><input type="text" name="dbname" placeholder="Nom de la base de donnée" required/> <input type="submit" name="alreadyImport" value="J'ai déjà importé la base de donnée manuellement" /></form>
+                <p><strong>2. Configurer la base de données :</strong> En cliquant sur ce bouton, la base de données va être importé sur le serveur : <form method="post"><input type="submit" name="import" value="Importer la base de données" /></form>
+                <br /><form method="post"><input type="text" name="dbname" placeholder="Nom de la base de données" required/> <input type="submit" name="alreadyImport" value="J'ai déjà importé la base de données manuellement" /></form>
                 
                 <?php if(isset($_POST['dbname']) AND !empty($_POST['dbname']) AND isset($_POST['alreadyImport'])){
                     if(!empty($host) AND !empty($username)){
@@ -70,7 +70,7 @@
 
                         unlink('actions/bookfind.sql');
                     echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
-                }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
+                }else{ echo 'Les identifiants de la base de données n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
 
                 if(isset($_POST['import'])){
                     if(!empty($host) AND !empty($username)){
@@ -99,7 +99,7 @@
                     unlink('actions/bookfind.sql');
                     
                     echo 'Enregistré avec succès ! Veuillez recharger la page en cliquant <a href="configuration.php">ici</a>.';
-                }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
+                }else{ echo 'Les identifiants de la base de données n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }}
             }else{ echo 'Étape 2 validée.'; $step2 = true; } ?>
                     <br /></p>
 
@@ -133,7 +133,7 @@
 
                     }else{ echo 'Cette classe existe déjà. <br />'; }
                     
-                }else{ echo 'Les identifiants de la base de donnée n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }
+                }else{ echo 'Les identifiants de la base de données n\'ont pas été indiqués. Veuillez le faire à l\'aide du <a href="#db">formulaire</a> plus haut.'; }
             } if(!empty($host) AND !empty($dbname) AND !empty($username)){
             $checkIfTwoClassesExists = $bdd->query('SELECT name FROM classes');
             if($checkIfTwoClassesExists->rowCount() >= 2){ echo 'Étape 3 validée. Vous pouvez toujours ajouter des classes.'; $step3 = true; }} ?>
