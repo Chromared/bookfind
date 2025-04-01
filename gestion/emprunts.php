@@ -43,6 +43,7 @@
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
+            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos1['date_emprunt']); ?></p>
             <p>Date de retour prévue : <?= ColorDateEmprunt($empruntsInfos1['date_futur_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
@@ -64,6 +65,7 @@
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
+            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos2['date_emprunt']); ?></p>
             <p>Date de retour prévue : <?= ColorDateEmprunt($empruntsInfos2['date_futur_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
@@ -85,6 +87,7 @@
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
+            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos3['date_emprunt']); ?></p>
             <p>Date de retour prévue : <?= ColorDateEmprunt($empruntsInfos3['date_futur_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
@@ -106,6 +109,7 @@ if($selectInfosFromEmprunts4->rowCount() > 0){
         <div class="bordure">
             <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
             <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
+            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></p>
             <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos4['date_emprunt']); ?></p>
             <p>Date de retour : <?= ConversionDateHour($empruntsInfos4['date_retour']); ?></p>
             <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
