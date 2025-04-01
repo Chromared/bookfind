@@ -8,62 +8,46 @@
 
 
 
-    <nav>
-        <ul class="sidebar">
-            <li onclick=hideSidebar()><a href="#"><i class="fa-solid fa-xmark" style="color: #FFD43B;"></i></a></li>
-
-        <?php if(file_exists('configuration.php')) { ?>
-
-            <li><a href="configuration.php">Configurer BookFind</a></li>
-
+<?php $pageActuelle = basename($_SERVER['SCRIPT_NAME']); ?>
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="index.php">
+      <img src="style/img/iconesite.png" alt="BookFind logo" width="30" height="30" class="d-inline-block align-text-top">
+      BookFind
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link <?php if($pageActuelle == 'index.php'){ echo 'active'; } ?>" aria-current="page" href="index.php">Accueil</a>
+        </li>
+        <?php if(!isset($_SESSION['auth'])){ ?>
+            <li class="nav-item">
+              <a class="nav-link <?php if($pageActuelle == 'login.php'){ echo 'active'; } ?>" href="login.php">Se connecter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($pageActuelle == 'signup.php'){ echo 'active'; } ?>" href="signup.php">S'inscrire</a>
+            </li>
+        <?php }else{ ?>
+            <li class="nav-item">
+              <a class="nav-link <?php if($pageActuelle == 'profil.php'){ echo 'active'; } ?>" href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php?card=<?= htmlspecialchars($_SESSION['card']); ?>">Emprunts</a>
+            </li>
+        <?php } if($_SESSION['grade'] != 0){ ?>
+            <li class="nav-item">
+              <a class="nav-link" href="gestion/">Gestion</a>
+            </li>
         <?php } ?>
-            <li><a href="index.php">Accueil</a></li>
-
-            <?php if (!isset($_SESSION['auth'])) { ?>
-                <li><a href="login.php">Se connecter</a></li>
-                <li><a href="signup.php">S'inscrire</a></li>
-
-            <?php } elseif (isset($_SESSION['auth'])) { ?>
-                <li><a href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Mon profil</a></li>
-                <li><a href="emprunts.php?card=<?= htmlspecialchars($_SESSION['card']); ?>">Mes emprunts</a></li>
-
-            <?php if ($_SESSION['grade'] > '0') { ?>
-                <li><a href="gestion/index.php">Gestion</a></li>
-            <?php }} ?>
-
-        </ul>
-        <ul>
-
-            <li><a href="./"><img src="./style/img/logopourpage.png" alt="logo" class="logo"></a></li>
-            <?php if(file_exists('configuration.php')) { ?>
-                <li class="hideOnMobile"><a href="configuration.php">Configurer BookFind</a></li>
-            <?php } ?>
-
-            <li class="hideOnMobile"><a href="index.php">Accueil</a></li>
-
-            <?php if (!isset($_SESSION['auth'])) { ?>
-                <li class="hideOnMobile"><a href="login.php">Se connecter</a></li>
-                <li class="hideOnMobile"><a href="signup.php">S'inscrire</a></li>
-
-            <?php } elseif (isset($_SESSION['auth'])) { ?>
-                <li class="hideOnMobile"><a href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Mon profil</a></li>
-                <li class="hideOnMobile"><a href="emprunts.php?card=<?= htmlspecialchars($_SESSION['card']); ?>">Mes emprunts</a></li>
-
-            <?php if ($_SESSION['grade'] > '0') { ?>
-                <li class="hideOnMobile"><a href="gestion/index.php">Gestion</a></li>
-            <?php }} ?>
-
-                <li class="menu-button" onclick=showSidebar()><a href="#"><i class="fa-solid fa-bars" style="color: #FFD43B;"></i></a></li>
-        </ul>
-    </nav>
-    <script>
-        function showSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-            sidebar.style.display = 'flex'
-        }
-        function hideSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-            sidebar.style.display = 'none'
-        }
-    </script>
+      </ul>
+      <form method="get" action="books.php" class="d-flex" role="search">
+        <input name="s" class="form-control me-2" type="search" placeholder="Rechercher un livre" aria-label="Rechercher un livre">
+        <button class="btn btn-outline-light" type="submit">Rechercher</button>
+      </form>
+    </div>
+  </div>
+</nav>
 <br />
