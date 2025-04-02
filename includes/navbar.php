@@ -9,7 +9,7 @@
 
 
 <?php $pageActuelle = basename($_SERVER['SCRIPT_NAME']); ?>
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+<nav class="navbar fixed-top navbar-expand-lg bg-primary" data-bs-theme="dark">
   <div class="container-fluid">
   <a class="navbar-brand" href="index.php">
       <img src="style/img/iconesite.png" alt="BookFind logo" width="30" height="30" class="d-inline-block align-text-top">
@@ -23,6 +23,11 @@
         <li class="nav-item">
           <a class="nav-link <?php if($pageActuelle == 'index.php'){ echo 'active'; } ?>" aria-current="page" href="index.php">Accueil</a>
         </li>
+        <?php if(file_exists('configuration.php')) { ?>
+            <li class="nav-item">
+              <a class="nav-link <?php if($pageActuelle == 'configuration.php'){ echo 'active'; } ?>" href="configuration.php">Configurer BookFind</a>
+            </li>
+        <?php } ?>
         <?php if(!isset($_SESSION['auth'])){ ?>
             <li class="nav-item">
               <a class="nav-link <?php if($pageActuelle == 'login.php'){ echo 'active'; } ?>" href="login.php">Se connecter</a>
@@ -37,7 +42,7 @@
             <li class="nav-item">
               <a class="nav-link <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php?card=<?= htmlspecialchars($_SESSION['card']); ?>">Emprunts</a>
             </li>
-        <?php } if($_SESSION['grade'] != 0){ ?>
+        <?php } if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
             <li class="nav-item">
               <a class="nav-link" href="gestion/">Gestion</a>
             </li>
@@ -50,4 +55,6 @@
     </div>
   </div>
 </nav>
+<br />
+<br />
 <br />

@@ -17,12 +17,17 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    <div class="search-part">
         <h1>Bienvenue sur BookFind ! Ici, empruntez les livres du C.D.I !</h1><br />
-        <form method="GET" action="books.php">
-                <input type="search" name="s" action="books.php" class="searchbar" placeholder="Rechercher ici les livres du CDI" />
-                <button type="submit" class="searchbutton" ><i class="fa-solid fa-magnifying-glass" style="color: snow;"></i></button>
-        </form>
-    </div>
+        <div class="container mt-3">
+            <form method="GET" action="books.php">
+                <div class="input-group mb-3">
+                  <input type="text" name="s" class="form-control" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher un livre" <?php if(!isset($_GET['s']) OR empty($_GET['s'])){ echo 'autofocus'; } ?> />
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                    <i class="bi bi-search"></i>
+                    Rechercher
+                  </button>
+                </div>
+            </form>
+        </div>
 </body>
 </html>
