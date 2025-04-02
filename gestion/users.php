@@ -19,12 +19,17 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-        <div class="usersgestion-part">
-    <form method="GET" class="form">
-        <br /><input type="search" name="s" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher un utilisateur" class="form-control" <?php if(!isset($_GET['s']) OR empty($_GET['s'])){ echo 'autofocus'; } ?>/> 
-        <button class="btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </form>
-    <?php include 'actions/users/sUsers.php'; ?>
+    <div class="container mt-3">
+        <form method="GET">
+            <div class="input-group mb-3">
+              <input type="text" name="s" class="form-control" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher un utilisateur" <?php if(!isset($_GET['s']) OR empty($_GET['s'])){ echo 'autofocus'; } ?> />
+              <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                <i class="bi bi-search"></i>
+                Rechercher
+              </button>
+            </div>
+        </form>
     </div>
+    <?php include 'actions/users/sUsers.php'; ?>
 </body>
 </html>

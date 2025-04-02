@@ -8,58 +8,54 @@
 
 
 
-    <nav>
-
-    
-        <ul class="sidebar">
-            <li onclick=hideSidebar()><a href="#"><i class="fa-solid fa-xmark" style="color: #FFD43B;"></i></a></li>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="books.php">Rechercher des livres</a></li>
-            <li><a href="add-book.php">Ajouter un livre</a></li>
-            <li><a href="emprunts.php">Emprunts</a></li>
-            <li><a href="users.php">Utilisateurs</a></li>
-
-            <?php if ($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2) { ?>
-                <!--<li><a href="cdi.php">C.D.I</a></li>-->
-            <?php } ?>
-
-            <?php if ($_SESSION['grade'] == 1) { ?>
-                <li><a href="bookfind.php">BookFind</a></li>
-                <li><a href="logs.php">Logs</a></li>
-            <?php } ?>
-
-            <li><a href="../index.php">Quitter la gestion</a></li>
-        </ul>
-        <ul>
-                <li><a href="index.php"><img src="../style/img/logopourpage.png" alt="logo" class="logo"></a></li>
-                <li class="hideOnMobileGestion"><a href="index.php">Accueil</a></li>
-                <li class="hideOnMobileGestion"><a href="books.php">Rechercher des livres</a></li>
-                <li class="hideOnMobileGestion"><a href="add-book.php">Ajouter un livre</a></li>
-                <li class="hideOnMobileGestion"><a href="emprunts.php">Emprunts</a></li>
-                <li class="hideOnMobileGestion"><a href="users.php">Utilisateurs</a></li>
-
-                <?php if ($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2) { ?>
-                <!--<li class="hideOnMobileGestion"><a href="cdi.php">C.D.I</a></li>-->
-            <?php } ?>
-
-            <?php if ($_SESSION['grade'] == 1) { ?>
-                <li class="hideOnMobileGestion"><a href="bookfind.php">BookFind</a></li>
-                <li class="hideOnMobileGestion"><a href="logs.php">Logs</a></li>
-            <?php } ?>
-
-            <li class="hideOnMobileGestion"><a href="../index.php">Quitter la gestion</a></li>
-
-            <li class="menu-buttonGestion" onclick=showSidebar()><a href="#"><i class="fa-solid fa-bars" style="color: #FFD43B;"></i></a></li>
-        </ul>
-    </nav>
-    <script>
-        function showSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-            sidebar.style.display = 'flex'
-        }
-        function hideSidebar() {
-            const sidebar = document.querySelector('.sidebar')
-            sidebar.style.display = 'none'
-        }
-    </script>
+<?php $pageActuelle = basename($_SERVER['SCRIPT_NAME']); ?>
+<nav class="navbar fixed-top navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="index.php">
+      <img src="../style/img/iconesite.png" alt="BookFind logo" width="30" height="30" class="d-inline-block align-text-top">
+      BookFind
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link <?php if($pageActuelle == 'index.php'){ echo 'active'; } ?>" aria-current="page" href="index.php">Accueil</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?php if($pageActuelle == 'books.php' OR $pageActuelle == 'add-book.php' OR $pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Livres
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?php if($pageActuelle == 'books.php'){ echo 'active'; } ?>" href="books.php">Rechercher</a></li>
+            <li><a class="dropdown-item <?php if($pageActuelle == 'add-books.php'){ echo 'active'; } ?>" href="add-book.php">Ajouter</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php">Emprunts</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if($pageActuelle == 'users.php'){ echo 'active'; } ?>" href="users.php">Utilisateurs</a>
+        </li>
+        <?php if($_SESSION['grade'] == 1){ ?>
+        <li class="nav-item">
+          <a class="nav-link <?php if($pageActuelle == 'bookfind.php'){ echo 'active'; } ?>" href="bookfind.php">BookFind</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if($pageActuelle == 'logs.php'){ echo 'active'; } ?>" href="logs.php">Logs</a>
+        </li>
+        <?php } ?>
+        <li class="nav-item">
+          <a class="nav-link" href="../">Quitter</a>
+        </li>
+      </ul>
+      <form method="get" action="books.php" class="d-flex" role="search">
+        <input name="s" class="form-control me-2" type="search" placeholder="Rechercher un livre" aria-label="Rechercher un livre">
+        <button class="btn btn-outline-light" type="submit">Rechercher</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<br />
+<br />
 <br />
