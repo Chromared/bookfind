@@ -51,8 +51,8 @@
 
             if($id_u = true){
 
-                $addBook = $bdd->prepare('UPDATE books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ?, statut = ? WHERE id = ?');
-                $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, 0, $id));
+                $addBook = $bdd->prepare('UPDATE books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ? WHERE id = ?');
+                $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, $id));
 
                 $msg = 'Livre modifié avec succès';
 
