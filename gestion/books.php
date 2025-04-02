@@ -10,6 +10,7 @@
     require 'actions/users/securityAction.php';
     require '../actions/functions/conversionDate.php';
     require '../actions/functions/conversionDateHour.php';
+    require '../actions/functions/colorDateEmpruntFunction.php';
     require 'actions/users/securityAdminAction.php';
     $gestion = true; ?>
 <!DOCTYPE html>
@@ -22,13 +23,17 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    <br><div class="booksearch-part">
-    <form method="GET">
-            <input type="search" name="s" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher ici les livres du CDI" <?php if(!isset($_GET['s']) OR empty($_GET['s'])){ echo 'autofocus'; } ?>/>
-            <button type="submit"><i class="fa-solid fa-magnifying-glass" style="color: snow;"></i></button>
+    <div class="container mt-3">
+        <form method="GET">
+            <div class="input-group mb-3">
+              <input type="text" name="s" class="form-control" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher un livre" <?php if(!isset($_GET['s']) OR empty($_GET['s'])){ echo 'autofocus'; } ?> />
+              <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                <i class="bi bi-search"></i>
+                Rechercher
+              </button>
+            </div>
         </form>
-        <br />
-        <?php include '../actions/books/sBooks.php'; ?>
     </div>
+    <?php include '../actions/books/sBooks.php'; ?>
 </body>
 </html>

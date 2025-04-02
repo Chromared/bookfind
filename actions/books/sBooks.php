@@ -33,36 +33,27 @@
             $recupEmprunts = $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ?');
             $recupEmprunts->execute(array($books['id']));
             $emprunts = $recupEmprunts->fetch(); ?>
-
-            <div class="bordure">
-                <h4><?= htmlspecialchars($books['titre']); ?></h4>
-                <p>Auteur : <?= htmlspecialchars($books['auteur']); ?></p>
-                <?php if(!empty($books['serie'])){?><p>Série : <?= htmlspecialchars($books['serie']) ?></p><?php } ?>
-                <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>">Voir le livre</a></p>
-                <?php if(isset($_SESSION['auth'])){ if($_SESSION['grade'] != 0){
-                    if($books['statut'] == 0 OR $books['statut'] == 2){?>
-
-                    <button onclick="location.href='<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?>'">Emprunter ce livre</button>
-                    
-                <?php }elseif($books['statut'] == 1){?>
-
-                    <p>Emprunté par : <?= htmlspecialchars($emprunts['firstname_name']); ?></p>
-                    <p>Le : <?php ConversionDateHour($emprunts['date_emprunt']); ?></p>
-                    <p>Retour prévu le : <?php ConversionDate($emprunts['date_futur_retour']); ?></p>
-
-                    <button onclick="location.href='<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?>&card=<?= htmlspecialchars($emprunts['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
-                    
-                <?php }} ?>
-                    <button onclick="location.href='<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>'">Modifier ce livre</button>
+          <div class="d-flex justify-content-center mt-4">
+            <div class="card text-center" style="width: 50rem;">
+              <div class="card-body">
+                <h5 class="card-title"><?= htmlspecialchars($books['titre']); ?></h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($books['auteur']); ?></h6>
+                <p class="card-text"><?= htmlspecialchars($books['resume']); ?></p>
+                <?php if(!empty($books['serie'])){ ?><p class="card-text">Tome <?= htmlspecialchars($books['tome']); ?> de la série <?= htmlspecialchars($books['serie']); ?></p><?php } ?>
+                <?php if($books['statut'] == 1){ ?>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunts['firstname_name']); ?></li>
+                    <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
+                  </ul>
                 <?php } ?>
-                
+                <div class="btn-group" role="group">
+                  <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-primary">Modifier</a>
+                  <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-secondary">Voir</a>
+                  <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunts['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                </div>
+              </div>
             </div>
+          </div>
             <br />
             
-<?php }}
-}else{
-
-?>
-
-<?php
-}
+<?php }}}
