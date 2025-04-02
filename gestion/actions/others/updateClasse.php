@@ -23,7 +23,7 @@
     $updateClasseForUsers = $bdd->prepare('UPDATE users SET classe = ? WHERE classe = ?');
     $updateClasseForUsers->execute(array($newClasse, $existingClasse));
 
-    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification d\'une classe', 'La classe "' . htmlspecialchars($newClasse) . '" à été renommé en ' . $newClasse . '.');
+    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification d\'une classe', 'La classe "' . htmlspecialchars($existingClasse) . '" à été renommé en ' . htmlspecialchars($newClasse) . '.');
 
     header('Location: bookfind.php');
 
