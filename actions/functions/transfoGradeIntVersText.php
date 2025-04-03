@@ -18,15 +18,15 @@ function Grade($grade)
     break;
 
     case 1:
-    echo '<span class="administrateur">Administrateur</span>';
+    echo '<span class="badge text-bg-danger">Administrateur</span>';
     break;
 
     case 2:
-    echo '<span class="gerant">Gérant</span>';
+    echo '<span class="badge text-bg-primary">Gérant</span>';
     break;
 
     case 3:
-    echo '<span class="assistant">Assistant</span>';
+    echo '<span class="badge text-bg-success">Assistant</span>';
     break;
 
     default:

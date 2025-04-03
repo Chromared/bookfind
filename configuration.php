@@ -75,11 +75,10 @@
                 if(isset($_POST['import'])){
                     if(!empty($host) AND !empty($username)){
 
+                    $filePath = 'actions/database.php';
+                    $fileContent = file_get_contents($filePath);
                     $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = 'bookfind';", $fileContent);
-
-                    $sqlFile = 'actions/bookfind.sql';
-
-                    $sql = file_get_contents($sqlFile);
+                    file_put_contents($filePath, $fileContent);
 
                     if ($sql === false) {
                         die("Impossible de lire le fichier SQL.");
