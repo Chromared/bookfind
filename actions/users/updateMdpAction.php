@@ -33,18 +33,18 @@
             SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du mot de passe.');
 
 
-            header('Location: updateProfil.php?id=' . $id .'&msg=true');
+            header('Location: updateProfil.php?id=' . $id .'&msg3=true');
 
     }else{
-        $msg = 'Votre mot de passe actuel n\'est pas bon.';
+        $errorMsg3 = 'Votre mot de passe actuel n\'est pas bon.';
 }
 }else{
-    $msg = 'Les deux nouveaux mot de passe ne sont pas identiques.';
+    $errorMsg3 = 'Les deux nouveaux mot de passe ne sont pas identiques.';
 }
 }else{
-    $msg = 'Veuillez remplir tous les champs.';
+    $errorMsg3 = 'Veuillez remplir tous les champs.';
 }
 }else{
-    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
+    $errorMsg3 = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
 }
 }

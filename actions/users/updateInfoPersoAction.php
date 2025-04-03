@@ -30,12 +30,12 @@ if (isset($_POST['validateInfoPerso'])) {
             $_SESSION['lastname'] = $name;
             $_SESSION['firstname'] = $firstname;
 
-            header('Location: updateProfil.php?id=' . $id .'&msg=true');
+            header('Location: updateProfil.php?id=' . $id .'&msg1=true');
 
     }else {
-        $msg = 'Veuillez remplir tous les champs.';
+        $errorMsg1 = 'Veuillez remplir tous les champs.';
     }
 }else{
-    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
+    $errorMsg1 = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
 }
 }

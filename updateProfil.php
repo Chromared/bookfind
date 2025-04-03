@@ -28,50 +28,156 @@
 <body>
 <?php include 'includes/navbar.php'?>
 <?php if(isset($_GET['msg']) AND $_GET['msg'] == 'true'){ echo '<p>Vos modifications ont bien été enregistré.</p>'; } if(isset($msg)){ echo '<p>' . $msg . '</p>'; } ?>
-<div class="update-part">
-<p>
-<h4>Informations personnelle</h4>
-<form method="POST" class="form">
-    <label class="form-label">Prénom :</label> <input name="firstname" class="form-control" type="text" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
-    <label class="form-label">Nom :</label> <input name="name" type="text" class="form-control" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
-    <input type="submit" class="form-btn-blue" value="Valider" name="validateInfoPerso" />
+<form method="post">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">Informations personnelles</h5>
+            <?php if(isset($errorMsg1)){ ?>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  <?= $errorMsg1; ?>
+                </div>
+              </div>
+            <?php } ?>
+            <?php if(isset($_GET['msg1'])){ ?>
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  Vos modifications ont bien été enregistré.
+                </div>
+              </div>
+            <?php } ?>
+            <div class="mb-3">
+              <input type="text" name="firstname" class="form-control" placeholder="Prénom" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="name" class="form-control" placeholder="Nom de famille" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validateInfoPerso" class="btn btn-primary" value="Enregistrer" />
+              <input type="reset" class="btn btn-secondary" value="Réinitialiser" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </form>
-</div>
-<hr>
-<div class="update-part">
-<h4>Informations scolaire</h4>
-<form method="post" class="form">
-    <label class="form-label">Carte :</label> <input class="form-control" name="card" type="number" value="<?= htmlspecialchars($usersInfos['carte']); ?>" required/>
-    <label class="form-label">Classe :</label> <select class="form-control" name="classe" required><?php include 'actions/functions/recupClassesAndOptions.php'; ?></select>
-    <input type="submit" class="form-btn-blue" name="validateInfoSco" value="Valider" />
+
+<form method="post">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">Informations scolaires</h5>
+            <?php if(isset($errorMsg2)){ ?>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  <?= $errorMsg2; ?>
+                </div>
+              </div>
+            <?php } ?>
+            <?php if(isset($_GET['msg2'])){ ?>
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  Vos modifications ont bien été enregistré.
+                </div>
+              </div>
+            <?php } ?>
+            <div class="mb-3">
+              <input type="text" name="card" class="form-control" placeholder="Carte" value="<?= htmlspecialchars($usersInfos['carte']); ?>" required/>
+            </div>
+            <div class="mb-3">
+              <select name="classe" class="form-select" required>
+                <?php include 'actions/functions/recupClassesAndOptions.php'; ?>
+              </select>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validateInfoSco" class="btn btn-primary" value="Enregistrer" />
+              <input type="reset" class="btn btn-secondary" value="Réinitialiser" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </form>
-</div>
-<hr>
-<div class="update-part">
-<h4>Mot de passe</h4>
-<form method="post" class="form">
-    <label class="form-label">Mot de passe actuel :</label> <input type="password" name="actual-password" class="form-control" required/>
-    <label class="form-label">Nouveau mot de passe :</label> <input type="password" name="new-password" class="form-control" required/>
-    <label class="form-label">Confirmer le nouveau mot de passe :</label> <input type="password" name="confirm-new-password" class="form-control" required/>
-    <input class="form-btn-blue" value="Valider" name="validateMdp" type="submit" />
+
+<form method="post">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <h5 class="card-title">Mot de passe</h5>
+            <?php if(isset($errorMsg3)){ ?>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  <?= $errorMsg3; ?>
+                </div>
+              </div>
+            <?php } ?>
+            <?php if(isset($_GET['msg3'])){ ?>
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  Vos modifications ont bien été enregistré.
+                </div>
+              </div>
+            <?php } ?>
+            <div class="mb-3">
+              <input type="password" name="actual-password" class="form-control" placeholder="Mot de passe actuel" required/>
+            </div>
+            <div class="mb-3">
+              <input type="password" name="new-password" class="form-control" placeholder="Nouveau mot de passe" required/>
+            </div>
+            <div class="mb-3">
+              <input type="password" name="confirm-new-password" class="form-control" placeholder="Confirmer le nouveau mot de passe" required/>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validateMdp" class="btn btn-primary" value="Enregistrer" />
+              <input type="reset" class="btn btn-secondary" value="Réinitialiser" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </form>
-</div>
-<hr>
-<div class="update-part">
-<h4>Supprimer le compte</h4>
-<?php if(!isset($deleteAccount)){ ?>
-<form class="form" method="POST">
-    <label class="form-label">Mot de passe :</label> <input type="password" name="password" class="form-control" required/>
-    <input type="submit" value="Supprimer le compte" name="validateDelete1" class="form-btn-orange" />
+
+<form method="post">
+  <div class="container mt-3">
+    <div class="d-flex justify-content-center mt-4">
+      <div class="card text-center mb-3" style="width: 50rem;">
+        <div class="card-body">
+          <h5 class="card-title">Supprimer le compte</h5>
+          <?php if(isset($errorMsg4)){ ?>
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+              <div>
+                <?= $errorMsg4; ?>
+              </div>
+            </div>
+          <?php } ?>
+          <?php if(!isset($deleteAccount)){ ?>
+            <div class="mb-3">
+              <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validateDelete1" class="btn btn-danger" value="Supprimer le compte" />
+            </div>
+          <?php }elseif(isset($deleteAccount)){ ?>
+            <div class="mb-3">
+              <input type="submit" value="Je confirme vouloir supprimer mon compte. Cette action est irréversible." name="validateDelete2" class="btn btn-danger" />
+            </div>
+          <?php } ?>
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
-<?php }elseif(isset($deleteAccount)){ ?>
-<form class="form" method="POST">
-    <label class="form-label">Je confirme vouloir supprimer mon compte (Attention ! Cette action est irreversible.):</label> <input type="checkbox" name="confirm-delete" class="form-checkbox" required/>
-    <input type="submit" value="Supprimer le compte" name="validateDelete2" class="form-btn-red" />
-</form>
-<?php }?>
-</p>
-</div>
 </body>
 </html>
 <?php } ?>
