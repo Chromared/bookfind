@@ -40,10 +40,10 @@
                     $_SESSION['card'] = $card;
                     $_SESSION['classe'] = $classe;
 
-                    header('Location: updateProfil.php?id=' . $id .'&msg=true');
+                    header('Location: updateProfil.php?id=' . $id .'&msg2=true');
 
-                }else{ $msg = 'Un compte à déjà été créé avec cette carte.'; }
-            }else{ $msg = 'La classe sélectionnée n\'existe pas. Veuillez en choisir une parmi celles proposées.'; }   
-        }else{ $msg = 'Veuillez remplir tous les champs.'; }
-    }else{ $msg = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.'; }
+                }else{ $errorMsg2 = 'Un compte à déjà été créé avec cette carte.'; }
+            }else{ $errorMsg2 = 'La classe sélectionnée n\'existe pas. Veuillez en choisir une parmi celles proposées.'; }   
+        }else{ $errorMsg2 = 'Veuillez remplir tous les champs.'; }
+    }else{ $errorMsg2 = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.'; }
 }
