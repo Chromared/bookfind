@@ -20,17 +20,32 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
-<p>
-<?php if(isset($errorMsg)){ echo '<p>'.$errorMsg.'</p>'; } ?>
-<form method="POST" class="form">
-        <div class="form-login">
-            <br><label class="form-label" for="card">Numéro de carte : </label><input type="text" name="card" id="card" class="form-control" autofocus required/>
-
-            <br /><label class="form-label" for="password">Mot de passe : </label><input type="password" name="password" id="password" class="form-control" required/>
-
-            <br /><input class="form-btn-blue" type="submit" name="validate" value="Connexion" />
+<form method="POST">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <?php if(isset($errorMsg)){ ?>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  <?= $errorMsg; ?>
+                </div>
+              </div>
+            <?php } ?>
+            <div class="mb-3">
+              <input type="text" name="card" class="form-control" placeholder="Numéro de carte" autofocus required/>
+            </div>
+            <div class="mb-3">
+              <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validate" class="btn btn-primary" value="Inscription" />
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 </form>
-</p>
 </body>
 </html>
