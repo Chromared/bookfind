@@ -33,27 +33,32 @@
             $recupEmprunts = $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ?');
             $recupEmprunts->execute(array($books['id']));
             $emprunts = $recupEmprunts->fetch(); ?>
-          <div class="d-flex justify-content-center mt-4">
-            <div class="card text-center" style="width: 50rem;">
-              <div class="card-body">
-                <h5 class="card-title"><?= htmlspecialchars($books['titre']); ?></h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($books['auteur']); ?></h6>
-                <p class="card-text"><?= htmlspecialchars($books['resume']); ?></p>
-                <?php if(!empty($books['serie'])){ ?><p class="card-text">Tome <?= htmlspecialchars($books['tome']); ?> de la série <?= htmlspecialchars($books['serie']); ?></p><?php } ?>
-                <?php if($books['statut'] == 1){ ?>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunts['firstname_name']); ?></li>
-                    <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
-                  </ul>
-                <?php } ?>
-                <div class="btn-group" role="group">
-                  <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-primary">Modifier</a>
-                  <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-secondary">Voir</a>
-                  <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunts['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+              <div class="container mt-3">
+                <div class="d-flex justify-content-center mt-4">
+                  <div class="card text-center" style="width: 50rem;">
+                    <div class="card-body">
+                      <h5 class="card-title"><?= htmlspecialchars($books['titre']); ?></h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($books['auteur']); ?></h6>
+                      <p class="card-text"><?= htmlspecialchars($books['resume']); ?></p>
+                      <?php if(!empty($books['serie'])){ ?><p class="card-text">Tome <?= htmlspecialchars($books['tome']); ?> de la série <?= htmlspecialchars($books['serie']); ?></p><?php } ?>
+                      <?php if($books['statut'] == 1){ ?>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunts['firstname_name']); ?></li>
+                          <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
+                        </ul>
+                      <?php } ?>
+                      <div class="btn-group" role="group">
+                        <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
+                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-primary">Modifier</a><?php } ?>
+                        <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-secondary">Voir</a>
+                        <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
+                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunts['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                        <?php } ?>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
             <br />
             
 <?php }}}
