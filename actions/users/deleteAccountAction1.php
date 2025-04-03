@@ -27,17 +27,17 @@
             $deleteAccount = true;
         
         }else{
-            $msg = 'Votre mot de passe actuel n\'est pas bon.';
+            $errorMsg4 = 'Votre mot de passe actuel n\'est pas bon.';
         }
 
     }else{
-        $msg = 'Vous devez avoir rendu tous vos emprunts pour supprimer votre compte. Il vous reste actuellement ' . $InfoDelete['nb_emprunt'] . ' livre(s) emprunté(s).';
+        $errorMsg4 = 'Vous devez avoir rendu tous vos emprunts pour supprimer votre compte. Il vous reste actuellement ' . $InfoDelete['nb_emprunt'] . ' livre(s) emprunté(s).';
     }
 
     }else{
-        $msg = 'Veuillez remplir tous les champs.';
+        $errorMsg4 = 'Veuillez remplir tous les champs.';
     }
 }else{
-    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
+    $errorMsg4 = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
 }
 }

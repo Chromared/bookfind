@@ -29,18 +29,26 @@
         $sUsers->execute($params);
         
         while ($users = $sUsers->fetch()) { ?>
-            <div class="bordure" class="profil-part">
-                <h4><?= htmlspecialchars($users['prenom']); ?> <?= htmlspecialchars($users['nom']); ?></h4>
-                <p>ID : <?= htmlspecialchars($users['id']); ?></p>
-                <p>Carte : <?= htmlspecialchars($users['carte']); ?></p>
-                <p>Classe : <?= htmlspecialchars($users['classe']); ?></p>
-                <p>Nombre d'emprunt(s) : <?= htmlspecialchars($users['nb_emprunt']) . '/' . htmlspecialchars($users['nb_emprunt_max']); ?></p>
-                <p>Grade : <?= Grade($users['grade']); ?><br /></p>
-                <div class="profil-part">
-                <button onclick="window.open('../profil.php?id=<?= $users['id'] ?>', '_blank')">Voir le profil</button>
-                <button onclick="window.open('update-user.php?id=<?= $users['id'] ?>', '_blank')">Modifier l'utilisateur</button>
-                <button onclick="location.href='user-emprunts.php?card=<?= htmlspecialchars($users['carte']) ?>'">Voir ses emprunts</button>
+            <div class="container mt-3">
+              <div class="d-flex justify-content-center mt-4">
+                <div class="card text-center mb-3" style="width: 50rem;">
+                  <div class="card-body">
+                    <h5 class="card-title"><?= htmlspecialchars($users['prenom']); ?> <?= htmlspecialchars($users['nom']); ?></h4></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($users['carte']); ?></h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">ID n°<?= htmlspecialchars($users['id']); ?></li>
+                        <li class="list-group-item">En classe de <?= htmlspecialchars($users['classe']); ?></li>
+                        <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' emprunts en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
+                        <li class="list-group-item">Grade : <?php Grade($users['grade']); ?></li>
+                    </ul>
+                    <div class="btn-group" role="group">
+                      <a href="update-user.php?id=<?= $users['id'] ?>" target="_blank" class="btn btn-primary">Modifier</a>
+                      <a href="../profil.php?id=<?= $users['id'] ?>" target="_blank" class="btn btn-secondary">Voir</a>
+                      <a href="user-emprunts.php?card=<?= htmlspecialchars($users['carte']) ?>" target="_blank" class="btn btn-success">Emprunts</a>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
             <br />
-        <?php }}
+<?php }}

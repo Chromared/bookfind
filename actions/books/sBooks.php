@@ -49,10 +49,10 @@
                       <?php } ?>
                       <div class="btn-group" role="group">
                         <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
-                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-primary">Modifier</a><?php } ?>
-                        <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-secondary">Voir</a>
+                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>" target="_blank" class="btn btn-primary">Modifier</a><?php } ?>
+                        <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
                         <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
-                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunts['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunts['card_emprunteur']); } ?>" target="_blank" class="btn btn-success">Emprunt</a>
                         <?php } ?>
                       </div>
                     </div>

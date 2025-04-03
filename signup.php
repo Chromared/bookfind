@@ -20,33 +20,50 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
-<p>
-<?php if(isset($errorMsg)){ echo '<p>' . $errorMsg . '</p>'; } ?>
-<form method="POST" class="form">
-    <div class="form-signup">
-        <br><label class="form-label" for="name">Nom</label>
-        <br><input type="text" maxlength="50" id="name" name="name" class="form-control" required/>
-
-        <br /><label class="form-label" for="firstname">Prénom</label>
-        <br><input type="text" maxlength="25" id="firstname" name="firstname" class="form-control" required/>
-
-        <br /><label class="form-label" for="card">Numéro de carte</label>
-        <br><input value="<?php if(isset($_GET['card'])){echo $_GET['card'];}?>" type="number" id="card" name="card" class="form-control" required/>
-
-        <br /><label class="form-label" for="classe">Classe</label>
-        <br><select class="form-control" name="classe" id="classe" required><option value>--- Sélectionner une classe ---</option><?php include 'actions/functions/recupClassesAndOptions.php'; ?></select>
-
-        <br /><label class="form-label" for="password">Mot de passe</label>
-        <br><input type="password" id="password" name="password" class="form-control" required/>
-
-        <br /><label class="form-label" for="confirm_password">Confirmer le mot de passe</label>
-        <br><input type="password" id="confirm_password" name="confirm_password" class="form-control" required/>
-
-        <br /><input class="form-checkbox" type="checkbox" id="rules-pdc" name="rules-pdc" required/> <label for="rules-pdc" class="form-label">Je confirme avoir lu et accepté le <a href="rules.php" target="_blank">règlement</a> et la <a href="pdc.php" target="_blank">politique de confidentialité</a></label>
-
-        <br /><input class="form-btn-blue" type="submit" name="validate" value="Inscription" /> <input type="reset" value="Réinitialiser le formulaire" class="form-btn-blue" />
+<form method="POST">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <?php if(isset($errorMsg)){ ?>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  <?= $errorMsg; ?>
+                </div>
+              </div>
+            <?php } ?>
+            <div class="input-group mb-3">
+              <input type="text" name="firstname" class="form-control" placeholder="Prénom" required/>
+              <input type="text" name="name" class="form-control" placeholder="Nom de famille" required/>
+            </div>
+            <div class="mb-3">
+              <input type="number" name="card" class="form-control" placeholder="Numéro de carte" value="<?php if(isset($_GET['card'])){echo $_GET['card'];}?>" required/>
+            </div>
+            <div class="mb-3">
+              <select name="classe" class="form-select" required>
+                <option value>--- Sélectionner une classe ---</option>
+                <?php include 'actions/functions/recupClassesAndOptions.php'; ?>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
+              <input type="password" name="confirm_password" class="form-control" placeholder="Confirmer le mot de passe" required/>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" name="rules-pdc" class="btn-check" id="rules-pdc" autocomplete="off" required>
+              <label class="btn" for="rules-pdc">
+                Je confirme avoir lu et accepté le <a href="rules.php" target="_blank">règlement</a> et la <a href="pdc.php" target="_blank">politique de confidentialité</a>
+              </label>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validate" class="btn btn-primary" value="Inscription" />
+              <?php if(isset($_GET['card']) AND !empty($_GET['card'])){ ?><input type="reset" class="btn btn-secondary" value="Réinitialiser le formulaire" /><?php } ?>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </form>
-</p>
 </body>
 </html>
