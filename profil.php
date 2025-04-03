@@ -21,39 +21,34 @@
 </head>
 <body>
     <?php include 'includes/navbar.php'?>
-    <?php
-
-    if($selectInfosFromUsers->rowCount() === 1){
-?>
-<h4><?= htmlspecialchars($usersInfos['prenom']); ?> <?= htmlspecialchars($usersInfos['nom']); ?></h4></div>
-    <p>
-        ID : <?= htmlspecialchars($usersInfos['id']); ?><br />
-        Numéro de carte : <?= htmlspecialchars($usersInfos['carte']); ?><br />
-        Classe : <?= htmlspecialchars($usersInfos['classe']); ?><br />
-        Date d'inscription : Le <?php ConversionDateHour($usersInfos['datetime']); ?><br />
-        Grade : <?php Grade($usersInfos['grade']); ?><br />
-    </p>
-    <div class="profil-part">
-    <p>
-        <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
-            <button onclick="location.href='actions/users/logoutAction.php'">Se déconnecter</button>
-            <button onclick="location.href='updateProfil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>'">Modifier le compte</button>
-        <?php } if($_SESSION['grade'] != 0 AND $_SESSION['id'] != $usersInfos['id']){ ?>
-            <button onclick="location.href='gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>'">Modifier cet utilisateur</button>
-            <button onclick="location.href='gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>'">Voir ses emprunts</button>
-        <?php } ?>
-    </p>
-
-
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title"><?= htmlspecialchars($usersInfos['prenom']); ?> <?= htmlspecialchars($usersInfos['nom']); ?></h4></h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($usersInfos['carte']); ?></h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
-  </div>
-</div>
+    <?php if($selectInfosFromUsers->rowCount() === 1){ ?>
+      <div class="container mt-3">
+        <div class="d-flex justify-content-center mt-4">
+          <div class="card text-center mb-3" style="width: 50rem;">
+            <div class="card-body">
+              <h5 class="card-title"><?= htmlspecialchars($usersInfos['prenom']); ?> <?= htmlspecialchars($usersInfos['nom']); ?></h4></h5>
+              <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($usersInfos['carte']); ?></h6>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item">ID n°<?= htmlspecialchars($usersInfos['id']); ?></li>
+                  <li class="list-group-item">En classe <?= htmlspecialchars($usersInfos['classe']); ?></li>
+                  <li class="list-group-item">Inscris le <?php ConversionDateHour($usersInfos['datetime']); ?></li>
+                  <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
+                      <li class="list-group-item">Grade : <?php Grade($usersInfos['grade']); ?></li>
+                      <li class="list-group-item">
+                          <a href="actions/users/logoutAction.php" class="btn btn-secondary">Déconnexion</a>
+                          <a href="updateProfil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>" class="btn btn-primary">Modifier</a>
+                      </li>
+                  <?php } if($_SESSION['grade'] != 0 AND $_SESSION['id'] != $usersInfos['id']){ ?>
+                      <li class="list-group-item">
+                          <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-secondary">Déconnexion</a>
+                          <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn-primary">Modifier</a>
+                      </li>
+                  <?php } ?>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
 <?php }else{ echo 'Aucun utilisateur avec l\'id n°' . htmlspecialchars($_GET['id']) . ' n\'a été trouvé.'; } ?>
 </body>
 </html>

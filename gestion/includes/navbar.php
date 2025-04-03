@@ -29,7 +29,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item <?php if($pageActuelle == 'books.php'){ echo 'active'; } ?>" href="books.php">Rechercher</a></li>
-            <li><a class="dropdown-item <?php if($pageActuelle == 'add-books.php'){ echo 'active'; } ?>" href="add-book.php">Ajouter</a></li>
+            <li><a class="dropdown-item <?php if($pageActuelle == 'add-book.php'){ echo 'active'; } ?>" href="add-book.php">Ajouter</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php">Emprunts</a></li>
           </ul>
