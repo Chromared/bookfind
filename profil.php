@@ -38,9 +38,9 @@
                           <a href="actions/users/logoutAction.php" class="btn btn-secondary">Déconnexion</a>
                           <a href="updateProfil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>" class="btn btn-primary">Modifier</a>
                       </li>
-                  <?php } if($_SESSION['grade'] != 0 AND $_SESSION['id'] != $usersInfos['id']){ ?>
+                  <?php }elseif($_SESSION['grade'] != 0){ ?>
                       <li class="list-group-item">
-                          <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-secondary">Déconnexion</a>
+                          <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-secondary">Emprunts</a>
                           <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn-primary">Modifier</a>
                       </li>
                   <?php } ?>
