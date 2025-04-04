@@ -40,7 +40,7 @@
               <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
             </div>
             <div class="mb-3">
-              <input type="submit" name="validate" class="btn btn-primary" value="Inscription" />
+              <input type="submit" name="validate" class="btn btn-primary" value="Connexion" />
             </div>
           </div>
         </div>
