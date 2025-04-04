@@ -51,10 +51,10 @@
                 $addBook = $bdd->prepare('INSERT INTO books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ?, statut = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, 0));
 
-                $msg = 'Livre enregistré avec succès';
+                $successMsg = true;
 
-            }else{ $msg = 'Identifiant unique déjà attribué à un autre livre'; }
+            }else{ $errorMsg = 'Identifiant unique déjà attribué à un autre livre'; }
 
-        }else{ $msg = 'Tout les champs ne sont pas remplis.'; }
-    }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="add-book.php">recharger</a> la page.'; }
+        }else{ $errorMsg = 'Tout les champs ne sont pas remplis.'; }
+    }else{ $errorMsg = 'Tout les champs n\'existent pas. Veuillez <a href="add-book.php">recharger</a> la page.'; }
 }
