@@ -26,7 +26,7 @@
         <div class="card text-center mb-3" style="width: 50rem;">
           <div class="card-body">
             <?php if(isset($errorMsg)){ ?>
-              <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                 <div>
                   <?= $errorMsg; ?>
