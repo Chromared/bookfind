@@ -54,10 +54,10 @@
                 $addBook = $bdd->prepare('UPDATE books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ? WHERE id = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, $id));
 
-                $msg = 'Livre modifié avec succès';
+                $successMsg = 'Livre modifié avec succès';
 
-            }else{ $msg = 'Identifiant unique déjà attribué à un autre livre'; }
+            }else{ $errorMsg = 'Identifiant unique déjà attribué à un autre livre'; }
 
-        }else{ $msg = 'Tout les champs ne sont pas remplis.'; }
-    }else{ $msg = 'Tout les champs n\'existent pas. Veuillez <a href="update-book.php?id=' . $id . '">recharger</a> la page.'; }
+        }else{ $errorMsg = 'Tout les champs ne sont pas remplis.'; }
+    }else{ $errorMsg = 'Tout les champs n\'existent pas. Veuillez <a href="update-book.php?id=' . $id . '">recharger</a> la page.'; }
 }

@@ -24,9 +24,19 @@
         }
         $recupBooks->execute($params);
 
-            if($recupBooks->rowCount() == 0){
-                echo '<p>Aucun livre n\'a été trouvée.</p>';
-            }elseif($recupBooks->rowCount() > 0){
+            if($recupBooks->rowCount() == 0){ ?>
+            <div class="container mt-3">
+              <div class="d-flex justify-content-center mt-4">
+                <div class="card text-center" style="width: 50rem;">
+                  <div class="card-body">
+                    <p class="card-text">
+                      Aucun livre trouvé avec ces critères de recherche.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <?php }elseif($recupBooks->rowCount() > 0){
 
             while($books = $recupBooks->fetch()){ 
             
