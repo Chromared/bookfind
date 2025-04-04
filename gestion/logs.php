@@ -33,7 +33,7 @@
         <p class="card-text">
           <div class="mb-3">
             <div class="form-check form-switch d-flex justify-content-center">
-              <input type="checkbox" class="form-check-input" role="switch" id="toggleAutoRefresh" selected>
+              <input type="checkbox" class="form-check-input" role="switch" id="toggleAutoRefresh" checked>
               <label class="form-check-label" for="toggleAutoRefresh">
                 Actualisation automatique
               </label>
