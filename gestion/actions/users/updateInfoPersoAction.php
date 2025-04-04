@@ -27,12 +27,12 @@ if (isset($_POST['validateInfoPerso'])) {
                 SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a>. Son ancien prénom était ' . $usersInfos['prenom'] . ' et est maintenant ' . $firstname . '. Quant à son nom, il passe de ' . $usersInfos['nom'] . ' à ' . $name . '.');
             }
 
-            header('Location: update-user.php?id=' . $id .'');
+            header('Location: update-user.php?id=' . $id .'&msg1=true');
 
     }else {
-        $msg = 'Veuillez remplir tous les champs.';
+        $errorMsg1 = 'Veuillez remplir tous les champs.';
     }
 }else{
-    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
+    $errorMsg1 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
 }
 }

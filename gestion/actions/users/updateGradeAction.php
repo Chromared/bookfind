@@ -22,14 +22,14 @@
 
             SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> à été changé de ' . NoEchoGrade($usersInfos['grade']) . ' vers ' . NoEchoGrade($newGrade) . '.');
     
-            header('Location: update-user.php?id=' . $id);
+            header('Location: update-user.php?id=' . $id . '&msg5=true');
             }else{
-                $msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+                $errorMsg5 = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
             }
         }else{
-            $msg = 'Veuillez remplir tous les champs.';
+            $errorMsg5 = 'Veuillez remplir tous les champs.';
         }
     }else{
-        $msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
+        $errorMsg5 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
     }
     }

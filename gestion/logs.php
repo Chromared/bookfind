@@ -23,9 +23,43 @@
 <?php include 'includes/navbar.php'; ?>
 <br />
 <?php if($_SESSION['grade'] !== 1){ die('Vous n\'avez pas les permissions d\'administrateur et elles sont nécessaire pour accéder à cette page.'); } ?>
-<form method="post"><p><label for="toggleAutoRefresh">Actualisation automatique</label><input type="checkbox" id="toggleAutoRefresh" checked> / <input type="submit" method="post" name="export" value="Exporter au format .csv"/></p></form>
 
-    <div id="log"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i> Chargement des logs...</div>
+<div class="container mt-3">
+  <div class="d-flex justify-content-center mt-4">
+    <div class="card text-center mb-3" style="width: 50rem;">
+      <div class="card-body">
+        <h5 class="card-title">Logs</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">Paramètres</h6>
+        <p class="card-text">
+          <div class="mb-3">
+            <div class="form-check form-switch d-flex justify-content-center">
+              <input type="checkbox" class="form-check-input" role="switch" id="toggleAutoRefresh" selected>
+              <label class="form-check-label" for="toggleAutoRefresh">
+                Actualisation automatique
+              </label>
+            </div>
+          </div>
+          <form method="post">
+            <input type="submit" class="btn btn-primary" name="export" value="Exporter au format .csv"/>
+          </form>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="log">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <button class="btn btn-primary" type="button" disabled>
+              <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+              <span role="status">Chargement...</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
         function load_logs() {
