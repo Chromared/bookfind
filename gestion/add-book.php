@@ -47,7 +47,7 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="number" name="isbn" class="form-control" placeholder="ISBN*" list="isbn" min="1000000000" max="9999999999999" autofocus required/>
+              <input type="number" name="isbn" id="isbn" class="form-control" placeholder="ISBN*" list="isbn" min="1000000000" max="9999999999999" autofocus required/>
               <datalist id="isbns">
                 <?php include 'actions/books/list-isbns.php'; ?>
               </datalist>
