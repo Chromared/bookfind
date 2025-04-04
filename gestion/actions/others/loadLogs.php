@@ -26,8 +26,21 @@
     {
         $dateFormattee = date("d/m/Y à H:i:s", strtotime($log['datetime']));
 
-        echo '<div class="loadLogs"><h2>' . $log['type'] . '</h2>
-        <h4><a href="../profil.php?id=' . $log['user_id'] . '" target="_blank">' . $log['user_name'] . '</a> | ' . $log['user_ip'] . '</h4>
-        <p><em><a id="aLogs" href="' . $log['page'] . '" target="_blank">' . $log['page'] . '</a></em></p>
-        <p>' . $log['comment'] . '</p><p>Le ' . $dateFormattee . '</p></div><br />';
+        echo '<div class="container mt-3">
+                <div class="d-flex justify-content-center mt-4">
+                  <div class="card text-center mb-3" style="width: 50rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">' . $log['type'] . '</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">' . $log['user_name'] . '</h6>
+                      <p class="card-text">' . $log['comment'] . '</p>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Le ' . $dateFormattee . '</li>
+                        <li class="list-group-item">' . $log['user_ip'] . '</li>
+                        <li class="list-group-item"><a href="' . $log['page'] . '" class="card-link" target="_blank">' . $log['page'] . '</a></li>
+                        <li class="list-group-item"><a href="../profil.php?id=' . $log['user_id'] . '" class="btn btn-primary" target="_blank">Voir l\'utilisateur</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>';
     }

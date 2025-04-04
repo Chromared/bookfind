@@ -22,15 +22,15 @@
 
             SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de mot de passe', 'Le mot de passe de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> à été changé.');
 
-            header('Location: update-user.php?id=' . $id .'');
+            header('Location: update-user.php?id=' . $id . '&msg3=true');
 
 }else{
-    $msg = 'Les deux nouveaux mot de passe ne sont pas identiques.';
+    $errorMsg3 = 'Les deux nouveaux mot de passe ne sont pas identiques.';
 }
 }else{
-    $msg = 'Veuillez remplir tous les champs.';
+    $errorMsg3 = 'Veuillez remplir tous les champs.';
 }
 }else{
-    $msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
+    $errorMsg3 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
 }
 }

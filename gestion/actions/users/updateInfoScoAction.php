@@ -37,10 +37,10 @@
                         SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'La classe de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['classe'] . ' à ' . $classe . '. Son numéro de carte à aussi été modifié passant de ' . $usersInfos['carte'] . ' à ' . $card . '.');
                     }
                 
-                    header('Location: update-user.php?id=' . $id .'');
+                    header('Location: update-user.php?id=' . $id .'&msg2=true');
 
-                }else{ $msg = 'Un compte à déjà été créé avec cette carte.'; }
-            }else{ $msg = 'La classe sélectionnée n\'existe pas. Veuillez en choisir une parmi celles proposées.'; }
-        }else{ $msg = 'Veuillez remplir tous les champs.'; }
-    }else{ $msg = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.'; }
+                }else{ $errorMsg2 = 'Un compte à déjà été créé avec cette carte.'; }
+            }else{ $errorMsg2 = 'La classe sélectionnée n\'existe pas. Veuillez en choisir une parmi celles proposées.'; }
+        }else{ $errorMsg2 = 'Veuillez remplir tous les champs.'; }
+    }else{ $errorMsg2 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.'; }
 }
