@@ -20,29 +20,88 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
-<br />
-<p>Les champs marqués d'une * sont obligatoires.</p>
-<?php if(isset($msg)){ echo '<p>' . $msg . '</p>'; } ?>
-<br />
-
-<div class="update-part"><h4>Ajouter un livre</h4>
-<form method="post" autocomplete="off">
-
-<input placeholder="ISBN*" type="number" id="isbn" name="isbn" list="isbns" min="0000000001" max="9999999999999" autofocus required/><datalist id="isbns"><?php include 'actions/books/list-isbns.php'; ?></datalist><br />
-<input placeholder="Titre*" type="text" id="title" name="title" required/><br />
-<input placeholder="Auteur*" type="text" id="author" name="author" list="authors" required/><datalist id="authors"><?php include 'actions/books/list-authors.php'; ?></datalist><br />
-<input placeholder="Type*" type="text" id="type" name="type" list="types" required/><datalist id="types"><?php include 'actions/books/list-types.php'; ?></datalist><br />
-<input placeholder="Éditeur*" type="text" itemid="editeur" name="editeur" id="editeur" list="publishers" required/><datalist id="publishers"><?php include 'actions/books/list-publishers.php'; ?></datalist><br />
-<textarea placeholder="Résumé" id="resume" name="resume"></textarea><br />
-<input placeholder="Identifiant unique" type="text" id="id_u" name="id_unique"/><br />
-<input placeholder="Genre" type="text" id="genre" name="genre" list="genres"/><datalist id="genres"><?php include 'actions/books/list-genres.php'; ?></datalist><br />
-<input placeholder="Série" type="text" id="serie" name="serie" list="series"/><datalist id="series"><?php include 'actions/books/list-series.php'; ?></datalist><br />
-<input placeholder="Tome (n°)" type="number" id="tome" name="tome" min="0"/><br />
-<input type="submit" name="validate" value="Enregistrer"/>
-
+<form method="POST" autocomplete="off">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <div class="alert alert-primary d-flex align-items-center" role="alert">
+              <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+              <div>
+                Les champs marqués d'une * doivent être remplis.
+              </div>
+            </div>
+            <?php if(isset($errorMsg)){ ?>
+              <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  <?= $errorMsg; ?>
+                </div>
+              </div>
+            <?php }elseif (isset($successMsg)) { ?>
+              <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                <div>
+                  Livre enregistré avec succès
+                </div>
+              </div>
+            <?php } ?>
+            <div class="mb-3">
+              <input type="number" name="isbn" class="form-control" placeholder="ISBN*" list="isbn" min="1000000000" max="9999999999999" autofocus required/>
+              <datalist id="isbns">
+                <?php include 'actions/books/list-isbns.php'; ?>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="title" class="form-control" placeholder="Titre*" required/>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="author" class="form-control" placeholder="Auteur*" list="authors" required/>
+              <datalist id="authors">
+                <?php include 'actions/books/list-authors.php'; ?>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="type" class="form-control" placeholder="Type*" list="types" required/>
+              <datalist id="types">
+                <?php include 'actions/books/list-types.php'; ?>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="editeur" class="form-control" placeholder="Editeur*" list="publishers" required/>
+              <datalist id="publishers">
+                <?php include 'actions/books/list-publishers.php'; ?>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <textarea name="resume" class="form-control" placeholder="Résumé" rows="1"></textarea>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="id_unique" class="form-control" placeholder="Identifiant unique"/>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="genre" class="form-control" placeholder="Genre" list="genres" />
+              <datalist id="genres">
+                <?php include 'actions/books/list-genres.php'; ?>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="serie" class="form-control" placeholder="Série" list="series"/>
+              <datalist id="series">
+                <?php include 'actions/books/list-series.php'; ?>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <input type="number" name="tome" class="form-control" placeholder="Tome n°"/>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="validate" class="btn btn-primary" value="Enregistrer" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </form>
-</div>
-
 <script>
 document.getElementById('isbn').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
@@ -90,9 +149,5 @@ document.getElementById('isbn').addEventListener('keydown', function(event) {
     }
 });
 </script>
-
-
-
-
 </body>
 </html>
