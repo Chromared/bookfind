@@ -27,7 +27,6 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'?>
-<?php if(isset($_GET['msg']) AND $_GET['msg'] == 'true'){ echo '<p>Vos modifications ont bien été enregistré.</p>'; } if(isset($msg)){ echo '<p>' . $msg . '</p>'; } ?>
 <form method="post">
     <div class="container mt-3">
       <div class="d-flex justify-content-center mt-4">
@@ -35,7 +34,7 @@
           <div class="card-body">
             <h5 class="card-title">Informations personnelles</h5>
             <?php if(isset($errorMsg1)){ ?>
-              <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                 <div>
                   <?= $errorMsg1; ?>
@@ -43,7 +42,7 @@
               </div>
             <?php } ?>
             <?php if(isset($_GET['msg1'])){ ?>
-              <div class="alert alert-success d-flex align-items-center" role="alert">
+              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
                 <div>
                   Vos modifications ont bien été enregistré.
@@ -73,7 +72,7 @@
           <div class="card-body">
             <h5 class="card-title">Informations scolaires</h5>
             <?php if(isset($errorMsg2)){ ?>
-              <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                 <div>
                   <?= $errorMsg2; ?>
@@ -81,7 +80,7 @@
               </div>
             <?php } ?>
             <?php if(isset($_GET['msg2'])){ ?>
-              <div class="alert alert-success d-flex align-items-center" role="alert">
+              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
                 <div>
                   Vos modifications ont bien été enregistré.
@@ -113,7 +112,7 @@
           <div class="card-body">
             <h5 class="card-title">Mot de passe</h5>
             <?php if(isset($errorMsg3)){ ?>
-              <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                 <div>
                   <?= $errorMsg3; ?>
@@ -121,7 +120,7 @@
               </div>
             <?php } ?>
             <?php if(isset($_GET['msg3'])){ ?>
-              <div class="alert alert-success d-flex align-items-center" role="alert">
+              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
                 <div>
                   Vos modifications ont bien été enregistré.
@@ -139,7 +138,6 @@
             </div>
             <div class="mb-3">
               <input type="submit" name="validateMdp" class="btn btn-primary" value="Enregistrer" />
-              <input type="reset" class="btn btn-secondary" value="Réinitialiser" />
             </div>
           </div>
         </div>
@@ -154,7 +152,7 @@
         <div class="card-body">
           <h5 class="card-title">Supprimer le compte</h5>
           <?php if(isset($errorMsg4)){ ?>
-            <div class="alert alert-warning d-flex align-items-center" role="alert">
+            <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
               <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
               <div>
                 <?= $errorMsg4; ?>
@@ -169,8 +167,14 @@
               <input type="submit" name="validateDelete1" class="btn btn-danger" value="Supprimer le compte" />
             </div>
           <?php }elseif(isset($deleteAccount)){ ?>
+            <div class="alert alert-danger d-flex align-items-center justify-content-center" role="alert">
+              <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+              <div>
+                Je confirme vouloir supprimer mon compte. Cette action est irréversible.
+              </div>
+            </div>
             <div class="mb-3">
-              <input type="submit" value="Je confirme vouloir supprimer mon compte. Cette action est irréversible." name="validateDelete2" class="btn btn-danger" />
+              <input type="submit" value="Supprimer" name="validateDelete2" class="btn btn-danger" />
             </div>
           <?php } ?>
         </div>

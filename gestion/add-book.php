@@ -32,14 +32,14 @@
               </div>
             </div>
             <?php if(isset($errorMsg)){ ?>
-              <div class="alert alert-warning d-flex align-items-center" role="alert">
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                 <div>
                   <?= $errorMsg; ?>
                 </div>
               </div>
             <?php }elseif (isset($successMsg)) { ?>
-              <div class="alert alert-success d-flex align-items-center" role="alert">
+              <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
                 <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
                 <div>
                   Livre enregistré avec succès
@@ -53,10 +53,10 @@
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="title" class="form-control" placeholder="Titre*" required/>
+              <input type="text" name="title" id="title" class="form-control" placeholder="Titre*" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="author" class="form-control" placeholder="Auteur*" list="authors" required/>
+              <input type="text" name="author" id="author" class="form-control" placeholder="Auteur*" list="authors" required/>
               <datalist id="authors">
                 <?php include 'actions/books/list-authors.php'; ?>
               </datalist>
@@ -68,13 +68,13 @@
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="editeur" class="form-control" placeholder="Editeur*" list="publishers" required/>
+              <input type="text" name="editeur" id="editeur" class="form-control" placeholder="Editeur*" list="publishers" required/>
               <datalist id="publishers">
                 <?php include 'actions/books/list-publishers.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <textarea name="resume" class="form-control" placeholder="Résumé" rows="1"></textarea>
+              <textarea name="resume" id="resume" class="form-control" placeholder="Résumé" rows="1"></textarea>
             </div>
             <div class="mb-3">
               <input type="text" name="id_unique" class="form-control" placeholder="Identifiant unique"/>
@@ -86,7 +86,7 @@
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="serie" class="form-control" placeholder="Série" list="series"/>
+              <input type="text" name="serie" id="serie" class="form-control" placeholder="Série" list="series"/>
               <datalist id="series">
                 <?php include 'actions/books/list-series.php'; ?>
               </datalist>

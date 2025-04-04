@@ -9,8 +9,7 @@
 
 
 <?php if (isset($_POST['validateDelete2'])){
-    if(isset($_POST['confirm-delete'])){
-    if(!empty($_POST['confirm-delete'])){
+    if(isset($_POST['confirm-delete']) AND !empty($_POST['confirm-delete'])){
         if($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2){
             
         $id = $_GET['id'];
@@ -23,8 +22,6 @@
         header('Location: users.php');
         
     }else{
-        $msg = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+        $msg = 'Vous n\'avez pas de permissions suffisentes pour supprimer cet utilisateur.';
     }
-}
-}
-}
+}}
