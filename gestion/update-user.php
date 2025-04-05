@@ -171,9 +171,6 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="password" name="actual-password" class="form-control" placeholder="Mot de passe actuel" required/>
-            </div>
-            <div class="mb-3">
               <input type="password" name="new-password" class="form-control" placeholder="Nouveau mot de passe" required/>
             </div>
             <div class="mb-3">
