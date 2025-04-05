@@ -14,7 +14,7 @@ function Grade($grade)
     switch ($grade)
     {
     case 0:
-    echo 'Aucun';
+    echo '<span class="badge text-bg-secondary">Aucun</span>';
     break;
 
     case 1:
