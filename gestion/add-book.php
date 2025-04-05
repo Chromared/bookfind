@@ -25,7 +25,7 @@
       <div class="d-flex justify-content-center mt-4">
         <div class="card text-center mb-3" style="width: 50rem;">
           <div class="card-body">
-            <div class="alert alert-primary d-flex align-items-center" role="alert">
+            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
               <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
               <div>
                 Les champs marqués d'une * doivent être remplis.
