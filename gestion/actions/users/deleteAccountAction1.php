@@ -10,7 +10,7 @@
 
 <?php if(isset($_POST['validateDelete1'])){
 
-        $id = $_SESSION['id'];
+        $id = $_GET['id'];
 
         $checkPassword = $bdd->prepare('SELECT nb_emprunt FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
