@@ -32,17 +32,17 @@
                   <li class="list-group-item">ID n°<?= htmlspecialchars($usersInfos['id']); ?></li>
                   <li class="list-group-item">En classe de <?= htmlspecialchars($usersInfos['classe']); ?></li>
                   <li class="list-group-item">Inscris le <?php ConversionDateHour($usersInfos['datetime']); ?></li>
+                  <li class="list-group-item">Grade : <?php Grade($usersInfos['grade']); ?></li>
                   <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
-                      <li class="list-group-item">Grade : <?php Grade($usersInfos['grade']); ?></li>
-                      <li class="list-group-item">
-                          <a href="actions/users/logoutAction.php" class="btn btn-secondary">Déconnexion</a>
-                          <a href="updateProfil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>" class="btn btn-primary">Modifier</a>
-                      </li>
+                    <li class="list-group-item">
+                        <a href="actions/users/logoutAction.php" class="btn btn-secondary">Déconnexion</a>
+                        <a href="updateProfil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>" class="btn btn-primary">Modifier</a>
+                    </li>
                   <?php }elseif($_SESSION['grade'] != 0){ ?>
-                      <li class="list-group-item">
-                          <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-secondary">Emprunts</a>
-                          <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn-primary">Modifier</a>
-                      </li>
+                    <li class="list-group-item">
+                        <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-secondary">Emprunts</a>
+                        <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn-primary">Modifier</a>
+                    </li>
                   <?php } ?>
               </ul>
             </div>
