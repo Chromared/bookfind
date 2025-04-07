@@ -11,7 +11,7 @@
 <?php if(isset($_GET['id']) AND !empty($_GET['id'])){
 
       $id = $_GET['id'];
-      $selectInfosFromBooks= $bdd->prepare('SELECT * FROM books WHERE id = ?');
+      $selectInfosFromBooks= $bdd->prepare('SELECT * FROM books WHERE id = ? AND statut = 1');
       $selectInfosFromBooks->execute(array($id));
 
       $booksInfos = $selectInfosFromBooks->fetch();
