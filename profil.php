@@ -40,7 +40,7 @@
                     </li>
                   <?php }elseif($_SESSION['grade'] != 0){ ?>
                     <li class="list-group-item">
-                        <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-secondary">Emprunts</a>
+                        <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-success">Emprunts</a>
                         <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn-primary">Modifier</a>
                     </li>
                   <?php } ?>
