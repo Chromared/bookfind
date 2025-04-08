@@ -35,6 +35,8 @@
     $nbEnCours = $selectInfosFromEmprunts3->rowCount();
     $nbRetournes = $selectInfosFromEmprunts4->rowCount(); ?>
 
+<div class="container mt-3">
+  <div class="d-flex justify-content-center mt-4">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link <?php if($nbRetards > 0){ echo 'active'; } ?>" id="retard-tab" data-bs-toggle="tab" data-bs-target="#retard" type="button" role="tab" aria-controls="retard" aria-selected="<?php if($nbRetards > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbRetards == 0){ echo 'disabled'; } ?>>En retard</button>
@@ -49,15 +51,17 @@
         <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'active'; } ?>" id="retournes-tab" data-bs-toggle="tab" data-bs-target="#retournes" type="button" role="tab" aria-controls="retournes" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbRetournes == 0){ echo 'disabled'; } ?>>Retournés</button>
       </li>
     </ul>
+  </div>
+</div>
+
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade <?php if($nbRetards > 0){ echo 'show active'; } ?>" id="retard" role="tabpanel" tabindex="0">
         <?php if($selectInfosFromEmprunts1->rowCount() > 0){
             while($empruntsInfos1 = $selectInfosFromEmprunts1->fetch()){
-                
-                $selectInfosFromBooksEmprunts1= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-                $selectInfosFromBooksEmprunts1->execute(array($empruntsInfos1['id_book']));
-                $recupBooks = $selectInfosFromBooksEmprunts1->fetch(); ?>
 
+                $selectInfosFromBooksEmprunts1 = $bdd->prepare('SELECT * FROM books WHERE id = ?');
+                $selectInfosFromBooksEmprunts1->execute(array($empruntsInfos1['id_book']));
+                $recupBooks = $selectInfosFromBooksEmprunts1->fetch(); ?>   
                     <div class="container mt-3">
                       <div class="d-flex justify-content-center mt-4">
                         <div class="card text-center" style="width: 50rem;">
@@ -66,7 +70,7 @@
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></li>
-                              <li class="list-group-item">Emprunté le <?php ColorDateEmprunt($empruntsInfos1['date_emprunt']); ?></li>
+                              <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos1['date_emprunt']); ?></li>
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos1['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
@@ -76,18 +80,16 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
+                    </div>    
         <?php }} ?>
       </div>
       <div class="tab-pane fade <?php if($nbRetards == 0 AND $nbAujourdhui > 0){ echo 'show active'; } ?>" id="aujourdhui" role="tabpanel" tabindex="0">
         <?php if($selectInfosFromEmprunts2->rowCount() > 0){
             while($empruntsInfos2 = $selectInfosFromEmprunts2->fetch()){
-                
-                $selectInfosFromBooksEmprunts2= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-                $selectInfosFromBooksEmprunts2->execute(array($empruntsInfos2['id_book']));
-                $recupBooks = $selectInfosFromBooksEmprunts2->fetch(); ?>
 
+                $selectInfosFromBooksEmprunts2 = $bdd->prepare('SELECT * FROM books WHERE id = ?');
+                $selectInfosFromBooksEmprunts2->execute(array($empruntsInfos2['id_book']));
+                $recupBooks = $selectInfosFromBooksEmprunts2->fetch(); ?>   
                     <div class="container mt-3">
                       <div class="d-flex justify-content-center mt-4">
                         <div class="card text-center" style="width: 50rem;">
@@ -96,7 +98,7 @@
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos2['firstname_name']); ?></li>
-                              <li class="list-group-item">Emprunté le <?php ColorDateEmprunt($empruntsInfos2['date_emprunt']); ?></li>
+                              <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos2['date_emprunt']); ?></li>
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos2['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
@@ -106,18 +108,16 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
+                    </div>    
         <?php }} ?>
       </div>
       <div class="tab-pane fade <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours > 0){ echo 'show active'; } ?>" id="encours" role="tabpanel" tabindex="0">
         <?php if($selectInfosFromEmprunts3->rowCount() > 0){
             while($empruntsInfos3 = $selectInfosFromEmprunts3->fetch()){
-                
-                $selectInfosFromBooksEmprunts3= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-                $selectInfosFromBooksEmprunts3->execute(array($empruntsInfos3['id_book']));
-                $recupBooks = $selectInfosFromBooksEmprunts3->fetch(); ?>
 
+                $selectInfosFromBooksEmprunts3 = $bdd->prepare('SELECT * FROM books WHERE id = ?');
+                $selectInfosFromBooksEmprunts3->execute(array($empruntsInfos3['id_book']));
+                $recupBooks = $selectInfosFromBooksEmprunts3->fetch(); ?>   
                     <div class="container mt-3">
                       <div class="d-flex justify-content-center mt-4">
                         <div class="card text-center" style="width: 50rem;">
@@ -126,7 +126,7 @@
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos3['firstname_name']); ?></li>
-                              <li class="list-group-item">Emprunté le <?php ColorDateEmprunt($empruntsInfos3['date_emprunt']); ?></li>
+                              <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos3['date_emprunt']); ?></li>
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos3['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
@@ -136,81 +136,35 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-
+                    </div>    
         <?php }} ?>
       </div>
-      <div class="tab-pane fade <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'show active'; } ?>" id="retournes" role="tabpanel" tabindex="0">Retournés</div>
+      <div class="tab-pane fade <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'show active'; } ?>" id="retournes" role="tabpanel" tabindex="0">
+      <?php if($selectInfosFromEmprunts4->rowCount() > 0){
+            while($empruntsInfos4 = $selectInfosFromEmprunts4->fetch()){
+
+                $selectInfosFromBooksEmprunts4 = $bdd->prepare('SELECT * FROM books WHERE id = ?');
+                $selectInfosFromBooksEmprunts4->execute(array($empruntsInfos4['id_book']));
+                $recupBooks = $selectInfosFromBooksEmprunts4->fetch(); ?>   
+                    <div class="container mt-3">
+                      <div class="d-flex justify-content-center mt-4">
+                        <div class="card text-center" style="width: 50rem;">
+                          <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($recupBooks['titre']); ?></h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos4['firstname_name']); ?></li>
+                              <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos4['date_emprunt']); ?></li>
+                              <li class="list-group-item">Retourné le <?php ConversionDate($empruntsInfos4['date_retour']); ?></li>
+                            </ul>
+                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        <?php }} ?>
+      </div>
     </div>
-
-
-
-
-<?php echo '<h3 id="aujourdhui">Emprunts qui doivent être rendus aujourd\'hui : </h3>';
-
-        if($selectInfosFromEmprunts2->rowCount() > 0){
-            
-            while($empruntsInfos2 = $selectInfosFromEmprunts2->fetch()){
-                
-            $selectInfosFromBooksEmprunts2= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-            $selectInfosFromBooksEmprunts2->execute(array($empruntsInfos2['id_book']));
-            $recupBooks = $selectInfosFromBooksEmprunts2->fetch(); ?>
-
-        <div class="bordure">
-            <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
-            <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
-            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos2['firstname_name']); ?></p>
-            <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos2['date_emprunt']); ?></p>
-            <p>Date de retour prévue : <?= ColorDateEmprunt($empruntsInfos2['date_futur_retour']); ?></p>
-            <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
-        </div>
-        <br />
-
-<?php }}else{ echo '<p>Il n\'y a pas d\'emprunts qui doivent être rendus aujourd\'hui.</p>'; }
-
-    echo '<h3 id="en_cours">Emprunts en cours : </h3>';
-        
-        if($selectInfosFromEmprunts3->rowCount() > 0){
-            
-            while($empruntsInfos3 = $selectInfosFromEmprunts3->fetch()){
-                
-            $selectInfosFromBooksEmprunts3= $bdd->prepare('SELECT * FROM books WHERE id = ?');
-            $selectInfosFromBooksEmprunts3->execute(array($empruntsInfos3['id_book']));
-            $recupBooks = $selectInfosFromBooksEmprunts3->fetch(); ?>
-        
-        <div class="bordure">
-            <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
-            <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
-            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos3['firstname_name']); ?></p>
-            <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos3['date_emprunt']); ?></p>
-            <p>Date de retour prévue : <?= ColorDateEmprunt($empruntsInfos3['date_futur_retour']); ?></p>
-            <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
-        </div>
-        <br />
-
-<?php }}else{ echo '<p>Il n\'y a pas d\'emprunts en cours.</p>'; }
-
-    echo '<h3 id="retournes">Emprunts retournés : </h3>';
-
-if($selectInfosFromEmprunts4->rowCount() > 0){
-            
-    while($empruntsInfos4 = $selectInfosFromEmprunts4->fetch()){
-
-            $selectInfosFromBooksEmprunts4 = $bdd->prepare('SELECT * FROM books WHERE id = ?');
-            $selectInfosFromBooksEmprunts4->execute(array($empruntsInfos4['id_book']));
-            $recupBooks = $selectInfosFromBooksEmprunts4->fetch(); ?>
-
-        <div class="bordure">
-            <h4><?= htmlspecialchars($recupBooks['titre']); ?></h4>
-            <p>Auteur : <?= htmlspecialchars($recupBooks['auteur']); ?></p>
-            <p>Emprunteur : <?= htmlspecialchars($empruntsInfos4['firstname_name']); ?></p>
-            <p>Date de l'emprunt : <?= ConversionDateHour($empruntsInfos4['date_emprunt']); ?></p>
-            <p>Date de retour : <?= ConversionDateHour($empruntsInfos4['date_retour']); ?></p>
-            <p><a style="color: black;" href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>">Voir le livre</a></p>
-        </div>
-        <br />
-
-<?php }}else{ echo 'Il n\'y pas d\'emprunts qui ont été retournés.'; } ?>
-</div>
+<br />
 </body>
 </html>

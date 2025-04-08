@@ -8,7 +8,7 @@
 
 
 <?php $id = htmlspecialchars($_GET['id']);
-      $selectInfosFromEmprunts= $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ?');
+      $selectInfosFromEmprunts= $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ? AND statut = 1');
       $selectInfosFromEmprunts->execute(array($id));
 
       $empruntInfos = $selectInfosFromEmprunts->fetch();
