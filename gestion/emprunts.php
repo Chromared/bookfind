@@ -155,7 +155,7 @@
                             <ul class="list-group list-group-flush">
                               <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos4['firstname_name']); ?></li>
                               <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos4['date_emprunt']); ?></li>
-                              <li class="list-group-item">Retourné le <?php ConversionDate($empruntsInfos4['date_retour']); ?></li>
+                              <li class="list-group-item">Retourné le <?php ConversionDateHour($empruntsInfos4['date_retour']); ?></li>
                             </ul>
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
                           </div>
