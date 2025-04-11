@@ -38,13 +38,15 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID n°<?= htmlspecialchars($users['id']); ?></li>
                         <li class="list-group-item">En classe de <?= htmlspecialchars($users['classe']); ?></li>
-                        <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' emprunts en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
+                        <?php if($users['nb_emprunt'] > 0){ ?>
+                          <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' emprunts en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
+                        <?php } ?>
                         <li class="list-group-item">Grade : <?php Grade($users['grade']); ?></li>
                     </ul>
                     <div class="btn-group" role="group">
-                      <a href="update-user.php?id=<?= $users['id'] ?>" target="_blank" class="btn btn-primary">Modifier</a>
-                      <a href="../profil.php?id=<?= $users['id'] ?>" target="_blank" class="btn btn-secondary">Voir</a>
-                      <a href="user-emprunts.php?card=<?= htmlspecialchars($users['carte']) ?>" target="_blank" class="btn btn-success">Emprunts</a>
+                      <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn-primary">Modifier</a>
+                      <a href="../profil.php?id=<?= $users['id'] ?>" class="btn btn-secondary">Voir</a>
+                      <a href="user-emprunts.php?card=<?= htmlspecialchars($users['carte']) ?>" class="btn btn-success">Emprunts</a>
                     </div>
                   </div>
                 </div>

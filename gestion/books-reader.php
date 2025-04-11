@@ -12,7 +12,8 @@
     require '../actions/books/showOneBookAction.php';
     require '../actions/books/showOneEmprunt.php';
     require '../actions/functions/conversionDate.php';
-    require '../actions/functions/conversionDateHour.php'; ?>
+    require '../actions/functions/conversionDateHour.php';
+    require '../actions/functions/colorDateEmpruntFunction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -22,37 +23,42 @@
     <?php include '../includes/header.php'; ?>
 </head>
 <body>
-    <?php include 'includes/navbar.php'; ?>
-<div class="contour">
-<div class="book-name"><h4><?= htmlspecialchars($booksInfos['titre']); ?></h4></div>
-<hr />
-<div class="books-infos">
-    <p>
-        ID : <?= htmlspecialchars($booksInfos['id']); ?><br />
-        Auteur : <?= htmlspecialchars($booksInfos['auteur']); ?><br />
-        Résumé : <?php if(!empty($booksInfos['resume'])){ echo $booksInfos['resume']; }else{ echo 'Il n\'y a pas de résumé pour ce livre.'; } ?><br />
-        Identifiant unique : <?php if(!empty($booksInfos['id_unique'])){ echo $booksInfos['id_unique']; }else{ echo 'Il n\'y a pas d\'identifiant unique pour ce livre.'; } ?><br />
-        ISBN : <?= htmlspecialchars($booksInfos['isbn']); ?><br />
-        Éditeur : <?= htmlspecialchars($booksInfos['editeur']); ?><br />
-        Type : <?= htmlspecialchars($booksInfos['type']); ?><br />
-        Genre : <?php if(!empty($booksInfos['genre'])){ echo $booksInfos['genre']; }else{ echo 'Il n\'y a pas de genre pour ce livre.'; } ?><br />
-        <?php if(!empty($booksInfos['serie'])){ echo 'Tome ' . $booksInfos['tome'] . ' de la série ' . $booksInfos['serie'] . '.'; } ?><br />
-        <?php if($booksInfos['statut'] == 0 OR $booksInfos['statut'] == 2){?>
-
-            <button onclick="location.href='emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>'">Emprunter ce livre</button>
-            
-        <?php }elseif($booksInfos['statut'] == 1){?>
-
-            <p>Emprunté par : <?= htmlspecialchars($emprunt['firstname_name']); ?></p>
-            <p>Le : <?php ConversionDateHour($emprunt['date_emprunt']); ?></p>
-            <p>Retour prévu le : <?php ConversionDate($emprunt['date_futur_retour']); ?></p>
-
-            <button onclick="location.href='emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?>&card=<?= htmlspecialchars($emprunt['card_emprunteur']); ?>'">Modifier l'emprunt de ce livre</button>
-        
-        <?php } ?>
-            <button onclick="location.href='update-book.php?id=<?= htmlspecialchars($booksInfos['id']); ?>'">Modifier ce livre</button>
-
-    </p>
-</div></div>
+  <?php include 'includes/navbar.php'; ?>
+  <div class="container mt-3">
+    <div class="d-flex justify-content-center mt-4">
+      <div class="card text-center" style="width: 50rem;">
+        <div class="card-body">
+          <h5 class="card-title"><?= htmlspecialchars($booksInfos['titre']); ?></h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($booksInfos['auteur']); ?></h6>
+          <p class="card-text"><?= htmlspecialchars($booksInfos['resume']); ?></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID n°<?= htmlspecialchars($booksInfos['id']); ?></li>
+            <li class="list-group-item">ISBN : <?= htmlspecialchars($booksInfos['isbn']); ?></li>
+            <li class="list-group-item">Éditeur : <?= htmlspecialchars($booksInfos['editeur']); ?></li>
+            <li class="list-group-item">Type : <?= htmlspecialchars($booksInfos['type']); ?></li>
+            <?php if(!empty($booksInfos['genre'])){ ?>
+              <li class="list-group-item">Genre : <?= htmlspecialchars($booksInfos['genre']); ?></li>
+            <?php } ?>
+            <?php if(!empty($booksInfos['id_unique'])){ ?>
+              <li class="list-group-item">Identifiant unique : <?php echo htmlspecialchars($booksInfos['id_unique']); ?></li>
+            <?php } ?>
+            <?php if(!empty($booksInfos['serie'])){ ?>
+              <li class="list-group-item">Tome <?= htmlspecialchars($booksInfos['tome']); ?> de la série <?= htmlspecialchars($booksInfos['serie']); ?></li>
+            <?php } ?>
+          </ul>
+          <?php if($booksInfos['statut'] == 1){ ?>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunt['firstname_name']); ?></li>
+              <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunt['date_futur_retour']); ?></li>
+            </ul>
+          <?php } ?>
+          <div class="btn-group" role="group">
+              <a href="update-book.php?id=<?= htmlspecialchars($booksInfos['id']); ?>" class="btn btn-primary">Modifier</a>
+              <a href="emprunt.php?id=<?= htmlspecialchars($booksInfos['id']); ?><?php if($booksInfos['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunt['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
