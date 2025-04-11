@@ -30,11 +30,11 @@
                     $updateInfoSco->execute(array($card, $classe, $id));
 
                     if($card != $usersInfos['carte'] AND $classe == $usersInfos['classe']){
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Le numéro de carte de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['carte'] . ' à ' . $card . '.');
+                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Le numéro de carte de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['carte'] . ' à ' . $card . '.');
                     }elseif($card == $usersInfos['carte'] AND $classe != $usersInfos['classe']){
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'La classe de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['classe'] . ' à ' . $classe . '.');
+                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'La classe de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['classe'] . ' à ' . $classe . '.');
                     }elseif($card != $usersInfos['carte'] AND $classe != $usersInfos['classe']){
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'La classe de <a href="../profil.php?id=' . $usersInfos['id'] . '" target="_blank">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['classe'] . ' à ' . $classe . '. Son numéro de carte à aussi été modifié passant de ' . $usersInfos['carte'] . ' à ' . $card . '.');
+                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'La classe de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> a été modifié passant de ' . $usersInfos['classe'] . ' à ' . $classe . '. Son numéro de carte à aussi été modifié passant de ' . $usersInfos['carte'] . ' à ' . $card . '.');
                     }
                 
                     header('Location: update-user.php?id=' . $id .'&msg2=true');
