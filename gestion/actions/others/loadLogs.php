@@ -36,8 +36,8 @@
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item">Le ' . $dateFormattee . '</li>
                         <li class="list-group-item">' . $log['user_ip'] . '</li>
-                        <li class="list-group-item"><a href="' . $log['page'] . '" class="card-link" target="_blank">' . $log['page'] . '</a></li>
-                        <li class="list-group-item"><a href="../profil.php?id=' . $log['user_id'] . '" class="btn btn-primary" target="_blank">Voir l\'utilisateur</a></li>
+                        <li class="list-group-item"><a href="' . $log['page'] . '" class="card-link">' . $log['page'] . '</a></li>
+                        <li class="list-group-item"><a href="../profil.php?id=' . $log['user_id'] . '" class="btn btn-primary">Voir l\'utilisateur</a></li>
                       </ul>
                     </div>
                   </div>
