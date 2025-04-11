@@ -74,8 +74,8 @@
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos1['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
-                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
-                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos1['card_emprunteur']); } ?>" target="_blank" class="btn btn-success">Emprunt</a>
+                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
+                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos1['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                             </div>
                           </div>
                         </div>
@@ -102,8 +102,8 @@
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos2['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
-                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
-                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos2['card_emprunteur']); } ?>" target="_blank" class="btn btn-success">Emprunt</a>
+                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
+                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos2['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                             </div>
                           </div>
                         </div>
@@ -130,8 +130,8 @@
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos3['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
-                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
-                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos3['card_emprunteur']); } ?>" target="_blank" class="btn btn-success">Emprunt</a>
+                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
+                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos3['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                             </div>
                           </div>
                         </div>
@@ -157,7 +157,7 @@
                               <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos4['date_emprunt']); ?></li>
                               <li class="list-group-item">Retourné le <?php ConversionDateHour($empruntsInfos4['date_retour']); ?></li>
                             </ul>
-                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" target="_blank" class="btn btn-secondary">Voir</a>
+                            <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
                           </div>
                         </div>
                       </div>
