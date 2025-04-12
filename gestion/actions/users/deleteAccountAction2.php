@@ -9,7 +9,6 @@
 
 
 <?php if (isset($_POST['validateDelete2'])){
-    if(isset($_POST['confirm-delete']) AND !empty($_POST['confirm-delete'])){
         if($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2){
             
         $id = $_GET['id'];
