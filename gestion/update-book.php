@@ -63,7 +63,7 @@
               <input type="text" name="editeur" class="form-control" placeholder="Editeur*" value="<?= htmlspecialchars($booksInfos['editeur']); ?>" required/>
             </div>
             <div class="mb-3">
-              <textarea name="resume" class="form-control" placeholder="Résumé" rows="1" value="<?= htmlspecialchars($booksInfos['resume']); ?>"></textarea>
+              <textarea name="resume" class="form-control" placeholder="Résumé" rows="1"><?= htmlspecialchars($booksInfos['resume']); ?></textarea>
             </div>
             <div class="mb-3">
               <input type="text" name="id_unique" class="form-control" placeholder="Identifiant unique" value="<?= htmlspecialchars($booksInfos['id_unique']); ?>"/>
