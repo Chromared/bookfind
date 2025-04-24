@@ -23,4 +23,4 @@
     }else{
         $msg = 'Vous n\'avez pas de permissions suffisentes pour supprimer cet utilisateur.';
     }
-}}
+}
