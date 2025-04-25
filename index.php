@@ -18,7 +18,7 @@
 <body>
     <?php include 'includes/navbar.php'; ?>
     <div class="container text-center mt-5">
-      <img src="style/iconesite.png" class="display-4" />
+      <img src="style/iconesite.png" class="img-fluid w-25 display-4" />
       <h1 class="mt-3">Bienvenue sur BookFind !</h1>
     </div>
     <div class="container mt-3">

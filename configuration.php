@@ -80,6 +80,9 @@
                     $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = 'bookfind';", $fileContent);
                     file_put_contents($filePath, $fileContent);
 
+                    $sqlFilePath = 'actions/bookfind.sql';
+                    $sql = file_get_contents($sqlFilePath);
+
                     if ($sql === false) {
                         die("Impossible de lire le fichier SQL.");
                     }
