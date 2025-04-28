@@ -12,7 +12,7 @@
 <nav class="navbar fixed-top navbar-expand-lg bg-primary" data-bs-theme="dark">
   <div class="container-fluid">
   <a class="navbar-brand" href="index.php">
-      <img src="../style/iconesite.png" alt="BookFind logo" width="30" height="30" class="d-inline-block align-text-top">
+      <img src="../style/iconesite.png" alt="BookFind logo" width="40" height="30" class="d-inline-block align-text-top img-fluid">
       BookFind
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
