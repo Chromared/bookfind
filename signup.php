@@ -53,7 +53,7 @@
             <div class="mb-3">
               <input type="checkbox" name="rules-pdc" class="form-check-input" id="rules-pdc" autocomplete="off" required>
               <label class="form-check-label" for="rules-pdc">
-                Je confirme avoir lu et accepté le <a href="rules.php">règlement</a> et la <a href="pdc.php">politique de confidentialité</a>
+                Je confirme avoir lu et accepté le <a href="rules.php" target="_blank">règlement</a> et la <a href="pdc.php" target="_blank">politique de confidentialité</a>
               </label>
             </div>
             <div class="mb-3">
