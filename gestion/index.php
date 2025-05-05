@@ -1,4 +1,4 @@
-<?php
+<?php 
 //This file belongs to the Bookfind project.
 //
 //Bookfind is distributed under the terms of the MIT software license.
@@ -19,23 +19,109 @@ require 'actions/users/securityAdminAction.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil de la gestion</title>
     <?php include '../includes/header.php'; ?>
+    <style>
+        .card-widget i {
+            font-size: 2rem;
+        }
+        .card-widget .card-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
     <?php include 'includes/navbar.php'; ?>
-    
-    <h1>Bienvenue sur la gestion du C.D.I 
-        <?php if($_SESSION['grade'] == '1'){ ?> 
-            et de BookFind 
-        <?php } ?> !
-    </h1>
 
-    <p>
-        <i title="Utilisateurs inscrits" class="fa-solid fa-user"></i> <span id="utilisateurs"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br />
-        <i title="Livres enregistrés" class="fa-solid fa-book"></i> <span id="livres"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br />
-        <i title="Emprunts en cours" class="fa-solid fa-upload"></i> <span id="emprunts"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br />
-        <i title="Emprunts retournés" class="fa-solid fa-download"></i> <span id="emprunts_retournes"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br />
-        <?php if($_SESSION['grade'] == 1){ ?><i title="Logs" class="fa-solid fa-newspaper"></i> <span id="log"><i class="fa-duotone fa-solid fa-spinner fa-spin-pulse"></i></span><br /><?php } ?>
-    </p>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">
+            Bienvenue sur la gestion du C.D.I 
+            <?php if($_SESSION['grade'] == '1'){ ?> 
+                et de BookFind 
+            <?php } ?> !
+        </h1>
+
+        <div class="row g-4">
+
+            <!-- Utilisateurs -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-primary card-widget">
+                    <div class="card-body">
+                        <div><i class="fa-solid fa-user" title="Utilisateurs inscrits"></i></div>
+                        <div id="utilisateurs">
+                            <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">Utilisateurs inscrits</div>
+                </div>
+            </div>
+
+            <!-- Livres -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-success card-widget">
+                    <div class="card-body">
+                        <div><i class="fa-solid fa-book" title="Livres enregistrés"></i></div>
+                        <div id="livres">
+                            <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">Livres enregistrés</div>
+                </div>
+            </div>
+
+            <!-- Emprunts en cours -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-warning card-widget">
+                    <div class="card-body">
+                        <div><i class="fa-solid fa-upload" title="Emprunts en cours"></i></div>
+                        <div id="emprunts">
+                            <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">Emprunts en cours</div>
+                </div>
+            </div>
+
+            <!-- Emprunts retournés -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-info card-widget">
+                    <div class="card-body">
+                        <div><i class="fa-solid fa-download" title="Emprunts retournés"></i></div>
+                        <div id="emprunts_retournes">
+                            <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">Emprunts retournés</div>
+                </div>
+            </div>
+
+            <!-- Logs (admin uniquement) -->
+            <?php if($_SESSION['grade'] == 1){ ?>
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-white bg-secondary card-widget">
+                    <div class="card-body">
+                        <div><i class="fa-solid fa-newspaper" title="Logs"></i></div>
+                        <div id="log">
+                            <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">Logs</div>
+                </div>
+            </div>
+            <?php } ?>
+
+        </div>
+    </div>
 
     <script>
     function updateCounters() {
@@ -60,7 +146,6 @@ require 'actions/users/securityAdminAction.php';
     }
 
     updateCounters();
-
     setInterval(updateCounters, 1000);
     </script>
 </body>
