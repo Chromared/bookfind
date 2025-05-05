@@ -44,7 +44,7 @@
             if(isset($_POST['serie']) AND isset($_POST['tome']) AND !empty($_POST['serie']) AND !empty($_POST['tome'])){
                 $serie = $_POST['serie'];
                 $tome = $_POST['tome'];
-            }else{$serie = false; $tome = false;}
+            }else{$serie = false; $tome = null;}
 
             if($id_u = true){
 
