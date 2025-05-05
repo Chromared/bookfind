@@ -1,64 +1,147 @@
-<?php
-//This file belongs to the Bookfind project.
-//
-//Bookfind is distributed under the terms of the MIT software license.
-//
-//Copyright (C) 2025 Chromared
+<?php 
+require '../actions/database.php';
+require 'actions/users/securityAction.php';
+require 'actions/users/securityAdminAction.php';
+require '../actions/functions/logFunction.php';
+require 'actions/others/updateDatabase.php';
+require 'actions/others/addClasse.php';
+require 'actions/others/updateClasse.php';
+require 'actions/others/deleteClasse.php';
+
+if ($_SESSION['grade'] != '1') {
+    header('Location: index.php');
+    exit;
+}
 ?>
 
-
-
-<?php require '../actions/database.php';
-    require 'actions/users/securityAction.php';
-    require 'actions/users/securityAdminAction.php';
-    require '../actions/functions/logFunction.php';
-    require 'actions/others/updateDatabase.php';
-    require 'actions/others/addClasse.php';
-    require 'actions/others/updateClasse.php';
-    require 'actions/others/deleteClasse.php';
-    if($_SESSION['grade'] != '1'){header('Location: index.php'); exit;} ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gérer BookFind</title>
-    <?php include '../includes/header.php'; ?>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gérer BookFind</title>
+  <?php include '../includes/header.php'; ?>
 </head>
 <body>
-    <?php include 'includes/navbar.php'; ?>
-    <h2>Base de données</h2>
-    <h3>Identifiants de connexion</h3>
-    <form method="post">
-        <label for="host">Hôte : </label><input type="text" id="host" name="host" value="<?= $host; ?>" required /><br />
-        <label for="dbname">Nom de la base de données : </label><input type="text" id="dbname" name="dbname" value="<?= $dbname; ?>" required /><br />
-        <label for="user">Nom d'utilisateur : </label><input type="text" id="user" name="user" value="<?= $username; ?>" required /><br />
-        <label for="password">Mot de passe : </label><input type="password" id="password" name="password" value="<?= $password; ?>" placeholder="Aucun mot de passe" /><br />
-        <input type="submit" name="databaseValidate" value="Enregistrer">
-    </form>
+  <?php include 'includes/navbar.php'; ?>
 
-    <h2>Gérer les classes</h2>
+  <!-- Connexion base de données -->
+  <form method="POST" autocomplete="off">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center mt-4">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <h4 class="mb-3">Connexion à la base de données</h4>
 
-    <h3>Ajouter une classe</h3>
-    <p><?php if(isset($msgC1)){ echo $msgC1; } ?>
-    <form method="post">
-        <label for="newClasse">Nom de la classe : </label><input type="text" id="newClasse" name="newClasse" required /><br />
-        <input type="submit" name="classeAddValidate" value="Ajouter">
-    </form></p>
-    
-    <h3>Modifier une classe</h3>
-    <p><?php if(isset($msgC2)){ echo $msgC2; } ?>
-    <form method="post">
-    <label for="existingClasse">Classe à modifier : </label><select class="form-control" name="existingClasse" id="existingClasse" required><option value>--- Sélectionner une classe ---</option><?php include '../actions/functions/recupClassesAndOptions.php'; ?></select><br />
-    <label for="newClasseName">Nouveau nom de la classe : </label><input type="text" id="newClasseName" name="newClasseName" required /><br />
-    <input type="submit" name="classeUpdateValidate" value="Modifier">
-    </form></p>    
+            <div class="mb-3">
+              <input type="text" name="host" class="form-control" placeholder="Hôte *" value="<?= $host; ?>" required />
+            </div>
+            <div class="mb-3">
+              <input type="text" name="dbname" class="form-control" placeholder="Nom de la base de données *" value="<?= $dbname; ?>" required />
+            </div>
+            <div class="mb-3">
+              <input type="text" name="user" class="form-control" placeholder="Nom d'utilisateur *" value="<?= $username; ?>" required />
+            </div>
+            <div class="mb-3">
+              <input type="password" name="password" class="form-control" placeholder="Mot de passe" value="<?= $password; ?>" />
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="databaseValidate" class="btn btn-primary" value="Enregistrer" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 
-    <h3>Supprimer une classe</h3>
-    <p><?php if(isset($msgC3)){ echo $msgC3; } ?>
-    <form method="post">
-    <label for="existingClasse2">Classe à supprimer : </label><select class="form-control" name="existingClasse2" id="existingClasse2" required><option value>--- Sélectionner une classe ---</option><?php include '../actions/functions/recupClassesAndOptions.php'; ?></select><br />
-    <input type="submit" name="classeDeleteValidate" value="Supprimer">
-    </form></p>
+  <!-- Ajouter une classe -->
+  <form method="POST" autocomplete="off">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <h4 class="mb-3">Ajouter une classe</h4>
+
+            <?php if (isset($msgC1)) { ?>
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div><?= $msgC1; ?></div>
+              </div>
+            <?php } ?>
+
+            <div class="mb-3">
+              <input type="text" name="newClasse" class="form-control" placeholder="Nom de la classe *" required />
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="classeAddValidate" class="btn btn-success" value="Ajouter" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Modifier une classe -->
+  <form method="POST" autocomplete="off">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center">
+        <div class="card text-center mb-3" style="width: 50rem;">
+          <div class="card-body">
+            <h4 class="mb-3">Modifier une classe</h4>
+
+            <?php if (isset($msgC2)) { ?>
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div><?= $msgC2; ?></div>
+              </div>
+            <?php } ?>
+
+            <div class="mb-3">
+              <select name="existingClasse" class="form-select" required>
+                <option value="">--- Sélectionner une classe ---</option>
+                <?php include '../actions/functions/recupClassesAndOptions.php'; ?>
+              </select>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="newClasseName" class="form-control" placeholder="Nouveau nom de la classe *" required />
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="classeUpdateValidate" class="btn btn-primary" value="Modifier" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Supprimer une classe -->
+  <form method="POST" autocomplete="off">
+    <div class="container mt-3">
+      <div class="d-flex justify-content-center">
+        <div class="card text-center mb-5" style="width: 50rem;">
+          <div class="card-body">
+            <h4 class="mb-3">Supprimer une classe</h4>
+
+            <?php if (isset($msgC3)) { ?>
+              <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                <div><?= $msgC3; ?></div>
+              </div>
+            <?php } ?>
+
+            <div class="mb-3">
+              <select name="existingClasse2" class="form-select" required>
+                <option value="">--- Sélectionner une classe ---</option>
+                <?php include '../actions/functions/recupClassesAndOptions.php'; ?>
+              </select>
+            </div>
+            <div class="mb-3">
+              <input type="submit" name="classeDeleteValidate" class="btn btn-danger" value="Supprimer" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </body>
 </html>
