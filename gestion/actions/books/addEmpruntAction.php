@@ -38,9 +38,9 @@
 
             header('Location: emprunt.php?id=' . $book . '&card=' . $card);
             
-    }else{$msg = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
-    }else{$msg = 'Ce livre est déjà emprunté.';}
-    }else{$msg = 'Ce numéro de carte (' . $card . ') n\'est associé à aucun utilisateur.';}
-    }else{$msg = 'Tous les champs ne sont pas remplis.';}
-    }else{$msg = 'Tous les champs n\'existent pas.';}
+    }else{$msg1 = 'Cet utilisateur a atteint sa limite d\'emprunt.';}
+    }else{$msg1 = 'Ce livre est déjà emprunté.';}
+    }else{$msg1 = 'Ce numéro de carte (' . $card . ') n\'est associé à aucun utilisateur.';}
+    }else{$msg1 = 'Tous les champs ne sont pas remplis.';}
+    }else{$msg1 = 'Tous les champs n\'existent pas.';}
 }
