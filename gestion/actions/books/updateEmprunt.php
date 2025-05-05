@@ -18,6 +18,6 @@
         $updateEmprunt = $bdd->prepare('UPDATE emprunts SET date_futur_retour = ? WHERE id_book = ? AND card_emprunteur = ? AND statut = 1');
         $updateEmprunt->execute(array($date, $book, $card));
 
-        header('emprunt.php?id=' . $book . '&card=' . $card . '');
+        header('emprunt.php?id=' . $book . '&card=' . $card . '&success');
 
 }}

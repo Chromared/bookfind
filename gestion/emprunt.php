@@ -27,34 +27,92 @@
 <body>
     <?php include 'includes/navbar.php'; ?>
     <br>
-    <?php if(isset($msg)){$msg;}
-        if($booksInfos['statut'] == 0 OR $booksInfos['statut'] == 2){ ?>
-    <h4>Ajouter un emprunt</h4>
+    <?php if($booksInfos['statut'] == 0 OR $booksInfos['statut'] == 2){ ?>
     <form method="post">
-        <label>N° de carte de l'emprunteur : </label><input type="number" name="card" min="0" max="99999999" autofocus required/><br />
-        <label>À rendre pour le : </label><input type="date" value="<?= $dateDans30Jours; ?>" name="date" required/><br />
-        <input type="hidden" name="id_book" value="<?= htmlspecialchars($_GET['id']); ?>" />
-        <input type="submit" name="validateAdd" value="Ajouter l'emprunt"/>
+        <div class="container mt-3">
+          <div class="d-flex justify-content-center mt-4">
+            <div class="card text-center mb-3" style="width: 50rem;">
+              <div class="card-body">
+                <h5 class="card-title">Ajouter un emprunt</h5>
+                <?php if(isset($msg1)){ ?>
+                  <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
+                    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
+                    <div>
+                      <?= $msg1; ?>
+                    </div>
+                  </div>
+                <?php } ?>
+                <div class="mb-3">
+                  <label for="card" class="form-label">N° de carte de l'emprunteur</label>
+                  <input type="number" class="form-control" name="card" id="card" min="0" max="99999999" autofocus required/>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">À rendre pour le</label>
+                    <input type="date" class="form-control" id="date" value="<?= $dateDans30Jours; ?>" name="date" required/>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" name="validateAdd" value="Ajouter l'emprunt" class="btn btn-primary"/>
+                </div>
+                <input type="hidden" name="id_book" value="<?= htmlspecialchars($_GET['id']); ?>" />
+              </div>
+            </div>
+          </div>
+        </div>
     </form>
-        <?php }elseif($booksInfos['statut'] == 1){
-            if(isset($_GET['card']) AND !empty($_GET['card'])){ ?>
-    <div class="update-part">
-        <h4>Modifier la date de retour de l'emprunt</h4>
-        <form method="post">
-        <input type="date" name="date" value="<?= $empruntInfos['date_futur_retour'] ?>" /><br />
-        <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
-            <input type="hidden" name="card" value="<?= $_GET['card'] ?>" />
-        <input type="submit" name="validateUpdate" value="Enregistrer" />
-        </form>
-    </div>
-    <hr />
-    <div class="update-part">
-        <form method="post">
-            <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
-            <input type="hidden" name="card" value="<?= $_GET['card'] ?>" />
-            <input type="submit" name="validateReturn" value="Retourner l'emprunt" />
-        </form>
-    </div>
-<?php }else{echo 'N° de carte de l\'utilisateur manquant.';}} ?>
+
+    <?php } elseif($booksInfos['statut'] == 1){
+        if(isset($_GET['card']) AND !empty($_GET['card'])){ ?>
+
+    <!-- Modifier la date de retour -->
+    <form method="post">
+        <div class="container mt-3">
+          <div class="d-flex justify-content-center mt-4">
+            <div class="card text-center mb-3" style="width: 50rem;">
+              <div class="card-body">
+                <h5 class="card-title">Modifier la date de retour</h5>
+                <?php if(isset($_GET['success'])){ ?>
+                  <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
+                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                    <div>
+                      Date de retour modifiée avec succès !
+                    </div>
+                  </div>
+                <?php } ?>
+                <div class="mb-3">
+                    <label for="updateDate" class="form-label">Nouvelle date de retour</label>
+                    <input type="date" class="form-control" id="updateDate" name="date" value="<?= $empruntInfos['date_futur_retour'] ?>" required/>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" name="validateUpdate" value="Enregistrer" class="btn btn-primary"/>
+                </div>
+                <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
+                <input type="hidden" name="card" value="<?= $_GET['card'] ?>" />
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+
+    <!-- Retourner l'emprunt -->
+    <form method="post">
+        <div class="container mt-3">
+          <div class="d-flex justify-content-center mt-4">
+            <div class="card text-center mb-3" style="width: 50rem;">
+              <div class="card-body">
+                <h5 class="card-title">Retourner l'emprunt</h5>
+                <div class="mb-3">
+                    <input type="submit" name="validateReturn" value="Retourner l'emprunt" class="btn btn-success"/>
+                </div>
+                <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
+                <input type="hidden" name="card" value="<?= $_GET['card'] ?>" />
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+
+    <?php } else {
+        echo 'N° de carte de l\'utilisateur manquant.';
+    } } ?>
 </body>
 </html>
