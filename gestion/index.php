@@ -35,10 +35,10 @@ require 'actions/users/securityAdminAction.php';
 
     <div class="container mt-5">
         <h1 class="text-center mb-4">
-            Bienvenue sur la gestion du C.D.I 
+            Gestion du C.D.I 
             <?php if($_SESSION['grade'] == '1'){ ?> 
                 et de BookFind 
-            <?php } ?> !
+            <?php } ?>
         </h1>
 
         <div class="row g-4">
