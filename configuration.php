@@ -80,7 +80,7 @@ require 'actions/database.php';
                     <div class="input-group">
                         <input type="text" name="dbname" class="form-control" placeholder="Nom de la base de données" required>
                         <button type="submit" name="alreadyImport" class="btn btn-secondary">
-                            J'ai déjà importé
+                            J'ai déjà importé la base de données
                         </button>
                     </div>
                 </form>
