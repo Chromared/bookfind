@@ -1,4 +1,4 @@
-<?php
+<u?php
 //This file belongs to the Bookfind project.
 //
 //Bookfind is distributed under the terms of the MIT software license.
@@ -53,8 +53,12 @@
                       <?php if(!empty($books['serie'])){ ?><p class="card-text">Tome <?= htmlspecialchars($books['tome']); ?> de la série <?= htmlspecialchars($books['serie']); ?></p><?php } ?>
                       <?php if($books['statut'] == 1){ ?>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunts['firstname_name']); ?></li>
-                          <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
+                          <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>   
+                            <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunts['firstname_name']); ?></li>
+                            <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
+                          <?php }else{ ?>
+                            <li class="list-group-item">Cet ouvrage est actuellement emprunté</li>
+                          <?php } ?>
                         </ul>
                       <?php } ?>
                       <div class="btn-group" role="group">

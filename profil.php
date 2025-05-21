@@ -22,6 +22,7 @@
 <body>
     <?php include 'includes/navbar.php'?>
     <?php if($selectInfosFromUsers->rowCount() === 1){ ?>
+    <?php if($usersInfos['nb_emprunt'] == 1){$emprunts = 'emprunt';}else{$emprunts = 'emprunts';} ?>
       <div class="container mt-3">
         <div class="d-flex justify-content-center mt-4">
           <div class="card text-center mb-3" style="width: 50rem;">
@@ -31,7 +32,7 @@
               <ul class="list-group list-group-flush">
                   <li class="list-group-item">ID n°<?= htmlspecialchars($usersInfos['id']); ?></li>
                   <li class="list-group-item">En classe de <?= htmlspecialchars($usersInfos['classe']); ?></li>
-                  <?php if($usersInfos['nb_emprunt'] > 0){ ?><li class="list-group-item"><?= htmlspecialchars($usersInfos['nb_emprunt']) . ' emprunts en cours sur ' . htmlspecialchars($usersInfos['nb_emprunt_max']); ?></li><?php } ?>
+                  <?php if($usersInfos['nb_emprunt'] > 0){ ?><li class="list-group-item"><?= htmlspecialchars($usersInfos['nb_emprunt']) . ' ' . $emprunts . ' en cours sur ' . htmlspecialchars($usersInfos['nb_emprunt_max']); ?></li><?php } ?>
                   <li class="list-group-item">Inscris le <?php ConversionDateHour($usersInfos['datetime']); ?></li>
                   <li class="list-group-item">Grade : <?php Grade($usersInfos['grade']); ?></li>
                   <?php if ($usersInfos['id'] == $_SESSION['id']){ ?>
