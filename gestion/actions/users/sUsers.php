@@ -29,6 +29,7 @@
         $sUsers->execute($params);
         
         while ($users = $sUsers->fetch()) { ?>
+            <?php if($users['nb_emprunt'] == 1){$emprunts = 'emprunt';}else{$emprunts = 'emprunts';} ?>
             <div class="container mt-3">
               <div class="d-flex justify-content-center mt-4">
                 <div class="card text-center mb-3" style="width: 50rem;">
@@ -39,7 +40,7 @@
                         <li class="list-group-item">ID n°<?= htmlspecialchars($users['id']); ?></li>
                         <li class="list-group-item">En classe de <?= htmlspecialchars($users['classe']); ?></li>
                         <?php if($users['nb_emprunt'] > 0){ ?>
-                          <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' emprunts en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
+                          <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' ' . $emprunts . ' en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
                         <?php } ?>
                         <li class="list-group-item">Grade : <?php Grade($users['grade']); ?></li>
                     </ul>
