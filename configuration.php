@@ -195,8 +195,7 @@ require 'actions/database.php';
         </div>
         <?php if (isset($_POST['delete'])) {
             unlink('configuration.php');
-            header('Location: index.php');
-            exit;
+            echo '<div class="alert alert-success mt-3">Fichier supprimé avec succès. Vous pouvez maintenant accéder au <a href="index.php">site</a>.</div>';
         } } ?>
     </div>
 </body>
