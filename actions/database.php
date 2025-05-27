@@ -9,9 +9,9 @@
 
 
 <?php
-    $host = '';
-    $dbname = '';
-    $username = '';
+    $host = 'localhost';
+    $dbname = 'bookfind';
+    $username = 'root';
     $password = '';
 
     if(!empty($host) AND !empty($username)){
