@@ -148,5 +148,6 @@ require 'actions/users/securityAdminAction.php';
     updateCounters();
     setInterval(updateCounters, 1000);
     </script>
+<br />
 </body>
 </html>
