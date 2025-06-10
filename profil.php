@@ -31,7 +31,7 @@
               <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($usersInfos['carte']); ?></h6>
               <ul class="list-group list-group-flush">
                   <li class="list-group-item">ID n°<?= htmlspecialchars($usersInfos['id']); ?></li>
-                  <li class="list-group-item">En classe de <?= htmlspecialchars($usersInfos['classe']); ?></li>
+                  <li class="list-group-item"><?php if($usersInfos['classe'] === 'Aucune'){ ?>Ne fait partie d'aucune classe<?php }else{ ?>En classe de <?= htmlspecialchars($usersInfos['classe']); ?><?php } ?></li>
                   <?php if($usersInfos['nb_emprunt'] > 0){ ?><li class="list-group-item"><?= htmlspecialchars($usersInfos['nb_emprunt']) . ' ' . $emprunts . ' en cours sur ' . htmlspecialchars($usersInfos['nb_emprunt_max']); ?></li><?php } ?>
                   <li class="list-group-item">Inscris le <?php ConversionDateHour($usersInfos['datetime']); ?></li>
                   <li class="list-group-item">Grade : <?php Grade($usersInfos['grade']); ?></li>
