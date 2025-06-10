@@ -38,7 +38,7 @@
                     <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($users['carte']); ?></h6>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID n°<?= htmlspecialchars($users['id']); ?></li>
-                        <li class="list-group-item">En classe de <?= htmlspecialchars($users['classe']); ?></li>
+                        <li class="list-group-item"><?php if($users['classe'] === 'Aucune'){ ?>Ne fait partie d'aucune classe<?php }else{ ?>En classe de <?= htmlspecialchars($users['classe']); ?><?php } ?></li>
                         <?php if($users['nb_emprunt'] > 0){ ?>
                           <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' ' . $emprunts . ' en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
                         <?php } ?>
