@@ -47,7 +47,7 @@ require 'actions/users/securityAdminAction.php';
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-primary card-widget">
                     <div class="card-body">
-                        <div><i class="fa-solid fa-user" title="Utilisateurs inscrits"></i></div>
+                        <div><i class="bi bi-people" title="Utilisateurs inscrits"></i></div>
                         <div id="utilisateurs">
                             <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
                                 <span class="visually-hidden">Chargement...</span>
@@ -62,7 +62,7 @@ require 'actions/users/securityAdminAction.php';
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-success card-widget">
                     <div class="card-body">
-                        <div><i class="fa-solid fa-book" title="Livres enregistrés"></i></div>
+                        <div><i class="bi bi-journal-bookmark-fill" title="Livres enregistrés"></i></div>
                         <div id="livres">
                             <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
                                 <span class="visually-hidden">Chargement...</span>
@@ -77,7 +77,7 @@ require 'actions/users/securityAdminAction.php';
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-warning card-widget">
                     <div class="card-body">
-                        <div><i class="fa-solid fa-upload" title="Emprunts en cours"></i></div>
+                        <div><i class="bi bi-journal-arrow-up" title="Emprunts en cours"></i></div>
                         <div id="emprunts">
                             <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
                                 <span class="visually-hidden">Chargement...</span>
@@ -92,7 +92,7 @@ require 'actions/users/securityAdminAction.php';
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-info card-widget">
                     <div class="card-body">
-                        <div><i class="fa-solid fa-download" title="Emprunts retournés"></i></div>
+                        <div><i class="bi bi-journal-arrow-down" title="Emprunts retournés"></i></div>
                         <div id="emprunts_retournes">
                             <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
                                 <span class="visually-hidden">Chargement...</span>
@@ -108,7 +108,7 @@ require 'actions/users/securityAdminAction.php';
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-secondary card-widget">
                     <div class="card-body">
-                        <div><i class="fa-solid fa-newspaper" title="Logs"></i></div>
+                        <div><i class="bi bi-newspaper" title="Logs"></i></div>
                         <div id="log">
                             <div class="spinner-border text-light" role="status" style="width: 1.5rem; height: 1.5rem;">
                                 <span class="visually-hidden">Chargement...</span>
