@@ -14,7 +14,7 @@
 
         if ($_POST['new-password'] == $_POST['confirm-new-password']) {
 
-        $newPassword = crypt($_POST['new-password'], PASSWORD_DEFAULT);
+        $newPassword = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
         $id = $_GET['id'];
 
             $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
