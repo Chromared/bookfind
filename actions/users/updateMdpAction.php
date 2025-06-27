@@ -15,7 +15,7 @@
         if ($_POST['new-password'] == $_POST['confirm-new-password']) {
             
         $password = $_POST['actual-password'];
-        $newPassword = crypt($_POST['new-password'], PASSWORD_DEFAULT);
+        $newPassword = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
         $id = $_SESSION['id'];
 
         $checkPassword = $bdd->prepare('SELECT mdp FROM users WHERE id = ?');

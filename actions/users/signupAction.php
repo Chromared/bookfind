@@ -19,7 +19,7 @@
 
                 $name = $_POST['name'];
                 $firstname = $_POST['firstname'];
-                $mdp = crypt($_POST['password'], PASSWORD_DEFAULT);
+                $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $card = $_POST['card'];
                 $classe = $_POST['classe'];
 
