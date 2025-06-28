@@ -39,9 +39,34 @@
               </label>
             </div>
           </div>
-          <form method="post">
-            <input type="submit" class="btn btn-primary" name="export" value="Exporter au format .csv"/>
-          </form>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+            Exporter les logs
+          </button>
+          <div class="modal fade" id="exportModal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5">Charte RGPD</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-start">
+                  En exportant ces logs, je reconnais qu’ils peuvent contenir des données personnelles.  
+                  Je m’engage à respecter la réglementation RGPD, notamment :  
+                  <ul class="text-start mt-2">
+                    <li>à ne pas diffuser les données sans autorisation,</li>
+                    <li>à les sécuriser et les conserver de manière temporaire,</li>
+                    <li>à les supprimer sans délai si un utilisateur exerce son droit d’effacement.</li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                  <form method="post">
+                    <input type="submit" class="btn btn-primary" name="export" value="Exporter au format .csv"/>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </p>
       </div>
     </div>
