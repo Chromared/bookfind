@@ -36,6 +36,8 @@
             $updateUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
             $updateUser->execute(array($user_nb_emprunt, $card));
 
+            SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Emprunt d\'un livre', 'Le livre ' . htmlspecialchars($booksInfos['titre']) . ' a été emprunté.');
+
             header('Location: emprunt.php?id=' . $book . '&card=' . $card);
             
     }else{$msg1 = 'Cet utilisateur a atteint sa limite d\'emprunt.';}

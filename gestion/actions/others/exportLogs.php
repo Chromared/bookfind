@@ -8,8 +8,7 @@
 
 
 
-<?php
-if (isset($_POST['export'])) {
+<?php if (isset($_POST['export'])) {
     // Nettoyer la sortie pour éviter les sauts de ligne inutiles
     if (ob_get_length()) ob_clean();
 
@@ -42,7 +41,7 @@ if (isset($_POST['export'])) {
 
     fclose($output);
 
-    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Export des logs', 'Aucun commentaire');
+    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Export des logs', 'S\'engage à respecter la réglementation RGPD et reconnait que les logs peuvent contenir des données personnelles.');
 
     exit();
 }

@@ -109,7 +109,7 @@ CREATE TABLE `logs` (
   `id` int(11) NOT NULL,
   `page` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `user_ip` varchar(255) NOT NULL,
+  `user_ip` varchar(255) DEFAULT NULL,
   `user_card` int(11) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
