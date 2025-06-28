@@ -32,7 +32,12 @@ if ($_SESSION['grade'] != '1') {
         <div class="card text-center mb-3" style="width: 50rem;">
           <div class="card-body">
             <h4 class="mb-3">Connexion à la base de données</h4>
-
+            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
+              <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+              <div>
+                Les champs marqués d'une * doivent être remplis.
+              </div>
+            </div>
             <div class="mb-3">
               <input type="text" name="host" class="form-control" placeholder="Hôte *" value="<?= $host; ?>" required />
             </div>
@@ -70,7 +75,7 @@ if ($_SESSION['grade'] != '1') {
             <?php } ?>
 
             <div class="mb-3">
-              <input type="text" name="newClasse" class="form-control" placeholder="Nom de la classe *" required />
+              <input type="text" name="newClasse" class="form-control" placeholder="Nom de la classe" required />
             </div>
             <div class="mb-3">
               <input type="submit" name="classeAddValidate" class="btn btn-success" value="Ajouter" />
@@ -103,7 +108,7 @@ if ($_SESSION['grade'] != '1') {
               </select>
             </div>
             <div class="mb-3">
-              <input type="text" name="newClasseName" class="form-control" placeholder="Nouveau nom de la classe *" required />
+              <input type="text" name="newClasseName" class="form-control" placeholder="Nouveau nom de la classe" required />
             </div>
             <div class="mb-3">
               <input type="submit" name="classeUpdateValidate" class="btn btn-primary" value="Modifier" />

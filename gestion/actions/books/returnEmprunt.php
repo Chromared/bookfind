@@ -29,6 +29,8 @@
         $updateMaxEmpruntUser = $bdd->prepare('UPDATE users SET nb_emprunt = ? WHERE carte = ?');
         $updateMaxEmpruntUser->execute(array($nb_emprunt, $card));
 
+        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Retour d\'un emprunt', 'Aucun commentaire');
+
         header('Location: emprunt.php?id=' . $book);
 
     }
