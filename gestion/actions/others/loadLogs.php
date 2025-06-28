@@ -11,8 +11,8 @@
 <?php require_once '../../../actions/database.php';
     require_once '../../../actions/functions/conversionDateHour.php';
 
-    $sevenDaysAgo = (new DateTime())->modify('-7 days')->format('Y-m-d H:i:s');
-    $thirtyDaysAgo = (new DateTime())->modify('-30 days')->format('Y-m-d H:i:s');
+    $sevenDaysAgo = (new DateTime())->modify('-365 days')->format('Y-m-d H:i:s');
+    $thirtyDaysAgo = (new DateTime())->modify('-730 days')->format('Y-m-d H:i:s');
 
     $query = $bdd->prepare("DELETE FROM logs WHERE (type = ? OR type = ? OR type = ?) AND datetime <= ?");
     $query->execute(['Connexion', 'Inscription', 'Déconnexion', $sevenDaysAgo]);

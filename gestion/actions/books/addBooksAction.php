@@ -53,6 +53,8 @@
 
                 $successMsg = true;
 
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Ajout de livre', 'Le livre ' . htmlspecialchars($title) . ' a été ajouté avec succès.');
+
             }else{ $errorMsg = 'Identifiant unique déjà attribué à un autre livre'; }
 
         }else{ $errorMsg = 'Tout les champs ne sont pas remplis.'; }
