@@ -105,7 +105,7 @@
 </form>
 <script>
 document.getElementById('isbn').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === 'Tab') {
         // Empêche l'envoi du formulaire
         event.preventDefault();
         
