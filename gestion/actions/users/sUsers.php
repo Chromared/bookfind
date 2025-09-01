@@ -17,7 +17,7 @@
         $searchConditions = [];
 
         foreach ($keywords as $keyword) {
-            $searchConditions[] = "(prenom LIKE ? OR nom LIKE ? OR carte LIKE ? OR classe LIKE ? OR nb_emprunt LIKE ? OR grade LIKE ?)";
+            $searchConditions[] = "(prenom LIKE ? OR nom LIKE ? OR username LIKE ? OR classe LIKE ? OR nb_emprunt LIKE ? OR grade LIKE ?)";
         }
 
         $sql = 'SELECT * FROM users WHERE ' . implode(' AND ', $searchConditions) . '';
@@ -35,7 +35,7 @@
                 <div class="card text-center mb-3" style="width: 50rem;">
                   <div class="card-body">
                     <h5 class="card-title"><?= htmlspecialchars($users['prenom']); ?> <?= htmlspecialchars($users['nom']); ?></h4></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($users['carte']); ?></h6>
+                    <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($users['username']); ?></h6>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID n°<?= htmlspecialchars($users['id']); ?></li>
                         <li class="list-group-item"><?php if($users['classe'] === 'Aucune'){ ?>Ne fait partie d'aucune classe<?php }else{ ?>En classe de <?= htmlspecialchars($users['classe']); ?><?php } ?></li>
@@ -47,7 +47,7 @@
                     <div class="btn-group" role="group">
                       <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn-primary">Modifier</a>
                       <a href="../profil.php?id=<?= $users['id'] ?>" class="btn btn-secondary">Voir</a>
-                      <a href="user-emprunts.php?card=<?= htmlspecialchars($users['carte']) ?>" class="btn btn-success">Emprunts</a>
+                      <a href="user-emprunts.php?id=<?= htmlspecialchars($users['id']) ?>" class="btn btn-success">Emprunts</a>
                     </div>
                   </div>
                 </div>

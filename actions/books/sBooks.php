@@ -54,7 +54,7 @@
                       <?php if($books['statut'] == 1){ ?>
                         <ul class="list-group list-group-flush">
                           <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>   
-                            <li class="list-group-item">Emprunté par <?= htmlspecialchars($emprunts['firstname_name']); ?></li>
+                            <li class="list-group-item">Emprunté par <a href="../profil.php?id=<?= htmlspecialchars($emprunts['id_emprunteur']); ?>"><?= htmlspecialchars($emprunts['firstname_name']); ?></a></li>
                             <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
                           <?php }else{ ?>
                             <li class="list-group-item">Cet ouvrage est actuellement emprunté</li>
@@ -67,7 +67,7 @@
                         <?php } ?>
                         <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-secondary">Voir</a>
                         <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
-                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&card=' . htmlspecialchars($emprunts['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&user_id=' . htmlspecialchars($emprunts['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                         <?php } ?>
                       </div>
                     </div>

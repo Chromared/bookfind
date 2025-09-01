@@ -34,7 +34,7 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="text" name="card" class="form-control" placeholder="Numéro de carte" autofocus required/>
+              <input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur" autofocus required/>
             </div>
             <div class="mb-3">
               <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>

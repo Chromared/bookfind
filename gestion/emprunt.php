@@ -6,6 +6,8 @@
 //Copyright (C) 2025 Chromared
 ?>
 
+
+
 <?php require '../actions/database.php';
     require 'actions/users/securityAction.php';
     require 'actions/users/securityAdminAction.php';
@@ -44,11 +46,14 @@
                   </div>
                 <?php } ?>
                 <div class="mb-3">
-                  <label for="card" class="form-label">N° de carte de l'emprunteur</label>
-                  <input type="number" class="form-control" name="card" id="card" min="0" max="99999999" autofocus required/>
+                  <label for="user_id" class="form-label">Emprunteur :</label>
+                  <select id="user_id" name="user_id" class="form-select" style="width:100%;">
+                    <option value=""></option>
+                    <?php include 'actions/users/list-usersWithUsername.php'; ?>
+                  </select>
                 </div>
                 <div class="mb-3">
-                    <label for="date" class="form-label">À rendre pour le</label>
+                    <label for="date" class="form-label">Date de retour :</label>
                     <input type="date" class="form-control" id="date" value="<?= $dateDans30Jours; ?>" name="date" required/>
                 </div>
                 <div class="mb-3">
@@ -62,7 +67,7 @@
     </form>
 
     <?php } elseif($booksInfos['statut'] == 1){
-        if(isset($_GET['card']) AND !empty($_GET['card'])){ ?>
+        if(isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 
     <!-- Modifier la date de retour -->
     <form method="post">
@@ -87,7 +92,7 @@
                     <input type="submit" name="validateUpdate" value="Enregistrer" class="btn btn-primary"/>
                 </div>
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
-                <input type="hidden" name="card" value="<?= $_GET['card'] ?>" />
+                <input type="hidden" name="user_id" value="<?= $_GET['user_id'] ?>" />
               </div>
             </div>
           </div>
@@ -105,15 +110,25 @@
                     <input type="submit" name="validateReturn" value="Retourner l'emprunt" class="btn btn-success"/>
                 </div>
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
-                <input type="hidden" name="card" value="<?= $_GET['card'] ?>" />
+                <input type="hidden" name="user_id" value="<?= $_GET['user_id'] ?>" />
               </div>
             </div>
           </div>
         </div>
     </form>
 
-    <?php } else {
-        echo 'N° de carte de l\'utilisateur manquant.';
+    <?php }else{
+        echo 'ID de l\'utilisateur manquant.';
     } } ?>
+
+<script>
+$(document).ready(function() {
+  $('#user_id').select2({
+    placeholder: "Rechercher un utilisateur...",
+    allowClear: true
+  });
+});
+</script>
+
 </body>
 </html>

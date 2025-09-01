@@ -35,10 +35,7 @@
             <?php } ?>
             <div class="input-group mb-3">
               <input type="text" name="firstname" class="form-control" placeholder="Prénom" required/>
-              <input type="text" name="name" class="form-control" placeholder="Nom de famille" required/>
-            </div>
-            <div class="mb-3">
-              <input type="number" name="card" class="form-control" placeholder="Numéro de carte" value="<?php if(isset($_GET['card'])){echo $_GET['card'];}?>" required/>
+              <input type="text" name="lastname" class="form-control" placeholder="Nom de famille" required/>
             </div>
             <div class="mb-3">
               <select name="classe" class="form-select" required>
@@ -58,7 +55,6 @@
             </div>
             <div class="mb-3">
               <input type="submit" name="validate" class="btn btn-primary" value="Inscription" />
-              <?php if(isset($_GET['card']) AND !empty($_GET['card'])){ ?><input type="reset" class="btn btn-secondary" value="Réinitialiser le formulaire" /><?php } ?>
             </div>
           </div>
         </div>
