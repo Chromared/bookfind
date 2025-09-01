@@ -69,13 +69,13 @@
                             <h5 class="card-title"><?= htmlspecialchars($recupBooks['titre']); ?></h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></li>
+                              <li class="list-group-item">Emprunté par <a href="../profil.php?id=<?= htmlspecialchars($empruntsInfos1['id_emprunteur']); ?>"><?= htmlspecialchars($empruntsInfos1['firstname_name']); ?></a></li>
                               <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos1['date_emprunt']); ?></li>
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos1['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
-                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos1['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&user_id=' . htmlspecialchars($empruntsInfos1['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                             </div>
                           </div>
                         </div>
@@ -97,13 +97,13 @@
                             <h5 class="card-title"><?= htmlspecialchars($recupBooks['titre']); ?></h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos2['firstname_name']); ?></li>
+                              <li class="list-group-item">Emprunté par <a href="../profil.php?id=<?= htmlspecialchars($empruntsInfos2['id_emprunteur']); ?>"><?= htmlspecialchars($empruntsInfos2['firstname_name']); ?></a></li>
                               <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos2['date_emprunt']); ?></li>
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos2['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
-                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos2['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&user_id=' . htmlspecialchars($empruntsInfos2['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                             </div>
                           </div>
                         </div>
@@ -125,13 +125,13 @@
                             <h5 class="card-title"><?= htmlspecialchars($recupBooks['titre']); ?></h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos3['firstname_name']); ?></li>
+                              <li class="list-group-item">Emprunté par <a href="../profil.php?id=<?= htmlspecialchars($empruntsInfos3['id_emprunteur']); ?>"><?= htmlspecialchars($empruntsInfos3['firstname_name']); ?></a></li>
                               <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos3['date_emprunt']); ?></li>
                               <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($empruntsInfos3['date_futur_retour']); ?></li>
                             </ul>
                             <div class="btn-group" role="group">
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
-                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos3['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
+                            <a href="emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&user_id=' . htmlspecialchars($empruntsInfos3['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
                             </div>
                           </div>
                         </div>
@@ -153,7 +153,7 @@
                             <h5 class="card-title"><?= htmlspecialchars($recupBooks['titre']); ?></h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($recupBooks['auteur']); ?></h6>
                             <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Emprunté par <?= htmlspecialchars($empruntsInfos4['firstname_name']); ?></li>
+                              <li class="list-group-item">Emprunté par <a href="../profil.php?id=<?= htmlspecialchars($empruntsInfos4['id_emprunteur']); ?>"><?= htmlspecialchars($empruntsInfos4['firstname_name']); ?></a></li>
                               <li class="list-group-item">Emprunté le <?php ConversionDateHour($empruntsInfos4['date_emprunt']); ?></li>
                               <li class="list-group-item">Retourné le <?php ConversionDateHour($empruntsInfos4['date_retour']); ?></li>
                             </ul>

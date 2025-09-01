@@ -40,7 +40,7 @@
               <a class="nav-link <?php if($pageActuelle == 'profil.php'){ echo 'active'; } ?>" href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Profil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php?card=<?= htmlspecialchars($_SESSION['card']); ?>">Emprunts</a>
+              <a class="nav-link <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Emprunts</a>
             </li>
         <?php } if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
             <li class="nav-item">
