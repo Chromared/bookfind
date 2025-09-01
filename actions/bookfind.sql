@@ -1,19 +1,11 @@
--- This file belongs to the Bookfind project.
--- 
--- Bookfind is distributed under the terms of the MIT software license.
--- 
--- Copyright (C) 2025 Chromared
-
-
-
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 05 mars 2025 à 18:08
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Sep 01, 2025 at 03:20 PM
+-- Server version: 8.4.3
+-- PHP Version: 8.3.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,200 +18,193 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `bookfind`
+-- Database: `bookfind`
 --
-CREATE DATABASE IF NOT EXISTS `bookfind` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `bookfind` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `bookfind`;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `books`
+-- Table structure for table `books`
 --
 
 CREATE TABLE `books` (
-  `id` int(11) NOT NULL,
-  `titre` varchar(255) NOT NULL,
-  `auteur` varchar(255) NOT NULL,
-  `isbn` bigint(13) NOT NULL,
-  `id_unique` varchar(255) DEFAULT NULL,
-  `resume` text DEFAULT NULL,
-  `editeur` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `serie` varchar(255) DEFAULT NULL,
-  `tome` int(11) DEFAULT NULL,
-  `statut` int(11) NOT NULL,
-  `genre` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `titre` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `auteur` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `isbn` bigint NOT NULL,
+  `id_unique` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resume` text COLLATE utf8mb4_general_ci,
+  `editeur` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `serie` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tome` int DEFAULT NULL,
+  `statut` int NOT NULL,
+  `genre` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `censure`
+-- Table structure for table `censure`
 --
 
 CREATE TABLE `censure` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `classes`
+-- Table structure for table `classes`
 --
 
 CREATE TABLE `classes` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `classes`
---
-
-INSERT INTO `classes` (`id`, `name`) VALUES
-(1, 'Aucune');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `emprunts`
+-- Table structure for table `emprunts`
 --
 
 CREATE TABLE `emprunts` (
-  `id` int(11) NOT NULL,
-  `id_book` int(11) NOT NULL,
-  `titre_book` varchar(255) NOT NULL,
-  `date_emprunt` datetime NOT NULL DEFAULT current_timestamp(),
+  `id` int NOT NULL,
+  `id_book` int NOT NULL,
+  `titre_book` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `date_emprunt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_futur_retour` date NOT NULL,
   `date_retour` datetime DEFAULT NULL,
-  `id_emprunteur` int(11) NOT NULL,
-  `firstname_name` varchar(255) NOT NULL,
-  `statut` int(3) NOT NULL DEFAULT 1
+  `id_emprunteur` int NOT NULL,
+  `firstname_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `statut` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `logs`
+-- Table structure for table `logs`
 --
 
 CREATE TABLE `logs` (
-  `id` int(11) NOT NULL,
-  `page` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `user_ip` varchar(255) DEFAULT NULL,
-  `user_card` int(11) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `comment` text NOT NULL,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp()
+  `id` int NOT NULL,
+  `page` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` int NOT NULL,
+  `user_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `comment` text COLLATE utf8mb4_general_ci NOT NULL,
+  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
-  `id` int(255) NOT NULL,
-  `username` varchar(10) NOT NULL,
-  `classe` varchar(255) NOT NULL,
-  `nom` varchar(50) NOT NULL,
-  `prenom` varchar(25) NOT NULL,
-  `mdp` text NOT NULL,
-  `grade` int(1) NOT NULL DEFAULT 0,
-  `datetime` datetime NOT NULL DEFAULT current_timestamp(),
-  `regles` int(1) NOT NULL,
-  `pdc` int(1) NOT NULL,
-  `nb_emprunt_max` int(255) NOT NULL DEFAULT 5,
-  `nb_emprunt` int(255) NOT NULL DEFAULT 0,
-  `theme` int(2) NOT NULL DEFAULT 0
+  `id` int NOT NULL,
+  `username` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `classe` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `prenom` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `mdp` text COLLATE utf8mb4_general_ci NOT NULL,
+  `grade` int NOT NULL DEFAULT '0',
+  `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `regles` int NOT NULL,
+  `pdc` int NOT NULL,
+  `nb_emprunt_max` int NOT NULL DEFAULT '5',
+  `nb_emprunt` int NOT NULL DEFAULT '0',
+  `theme` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `books`
+-- Indexes for table `books`
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `censure`
+-- Indexes for table `censure`
 --
 ALTER TABLE `censure`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `classes`
+-- Indexes for table `classes`
 --
 ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
--- Index pour la table `emprunts`
+-- Indexes for table `emprunts`
 --
 ALTER TABLE `emprunts`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `logs`
+-- Indexes for table `logs`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `carte` (`username`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `books`
+-- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `censure`
+-- AUTO_INCREMENT for table `censure`
 --
 ALTER TABLE `censure`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `classes`
+-- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `emprunts`
+-- AUTO_INCREMENT for table `emprunts`
 --
 ALTER TABLE `emprunts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `logs`
+-- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
