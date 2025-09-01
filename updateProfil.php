@@ -88,9 +88,6 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="text" name="card" class="form-control" placeholder="Carte" value="<?= htmlspecialchars($usersInfos['carte']); ?>" required/>
-            </div>
-            <div class="mb-3">
               <select name="classe" class="form-select" required>
                 <?php include 'actions/functions/recupClassesAndOptions.php'; ?>
               </select>

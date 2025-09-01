@@ -23,7 +23,7 @@
 </head>
 <body>
 <?php include 'includes/navbar.php'; ?>
-<?php if (isset($_GET['card']) AND !empty($_GET['card'])){ ?>
+<?php if (isset($_GET['id']) AND !empty($_GET['id'])){ ?>
 
     <?php $nbRetards = $selectInfosFromEmprunts1->rowCount();
         $nbAujourdhui = $selectInfosFromEmprunts2->rowCount();
@@ -69,7 +69,7 @@
                             </ul>
                             <div class="btn-group" role="group">
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
-                            <?php if($_SESSION['grade'] == 1){ ?><a href="gestion/emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos1['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a><?php } ?>
+                            <?php if($_SESSION['grade'] == 1){ ?><a href="gestion/emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&user_id=' . htmlspecialchars($empruntsInfos1['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a><?php } ?>
                             </div>
                           </div>
                         </div>
@@ -96,7 +96,7 @@
                             </ul>
                             <div class="btn-group" role="group">
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
-                            <?php if($_SESSION['grade'] == 1){ ?><a href="gestion/emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos2['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a><?php } ?>
+                            <?php if($_SESSION['grade'] == 1){ ?><a href="gestion/emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&user_id=' . htmlspecialchars($empruntsInfos2['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a><?php } ?>
                             </div>
                           </div>
                         </div>
@@ -123,7 +123,7 @@
                             </ul>
                             <div class="btn-group" role="group">
                             <a href="books-reader.php?id=<?= htmlspecialchars($recupBooks['id']); ?>" class="btn btn-secondary">Voir</a>
-                            <?php if($_SESSION['grade'] == 1){ ?><a href="gestion/emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&card=' . htmlspecialchars($empruntsInfos3['card_emprunteur']); } ?>" class="btn btn-success">Emprunt</a><?php } ?>
+                            <?php if($_SESSION['grade'] == 1){ ?><a href="gestion/emprunt.php?id=<?= htmlspecialchars($recupBooks['id']); ?><?php if($recupBooks['statut'] == 1){ echo '&user_id=' . htmlspecialchars($empruntsInfos3['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a><?php } ?>
                             </div>
                           </div>
                         </div>
@@ -157,7 +157,7 @@
       </div>
     </div>
 
-<?php }else{die('Absence du n° de carte');} ?>
+<?php }else{die('Absence du n° de l\'id');} ?>
 </div>
 </body>
 </html>

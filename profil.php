@@ -9,7 +9,9 @@
 <?php require 'actions/database.php';
     require 'actions/users/securityAction.php';
     require 'actions/functions/logFunction.php';
-    if (isset($_GET['id']) AND !empty($_GET['id'])) { require 'actions/users/showOneUserProfilAction.php'; }else{ die('La variable URL contenant l\'ID de l\'utilisateur est absente ou vide.'); }
+    if (isset($_GET['id']) AND !empty($_GET['id'])) { 
+      require 'actions/users/showOneUserProfilAction.php'; 
+    }else{ die('La variable URL contenant l\'ID de l\'utilisateur est absente ou vide.'); }
     require 'actions/functions/transfoGradeIntVersText.php';
     require 'actions/functions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
@@ -29,7 +31,7 @@
           <div class="card text-center mb-3" style="width: 50rem;">
             <div class="card-body">
               <h5 class="card-title"><?= htmlspecialchars($usersInfos['prenom']); ?> <?= htmlspecialchars($usersInfos['nom']); ?></h4></h5>
-              <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($usersInfos['carte']); ?></h6>
+              <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($usersInfos['username']); ?></h6>
               <ul class="list-group list-group-flush">
                   <li class="list-group-item">ID n°<?= htmlspecialchars($usersInfos['id']); ?></li>
                   <li class="list-group-item"><?php if($usersInfos['classe'] === 'Aucune'){ ?>Ne fait partie d'aucune classe<?php }else{ ?>En classe de <?= htmlspecialchars($usersInfos['classe']); ?><?php } ?></li>
@@ -43,7 +45,7 @@
                     </li>
                   <?php }elseif($_SESSION['grade'] != 0){ ?>
                     <li class="list-group-item">
-                        <a href="gestion/user-emprunts.php?card=<?= htmlspecialchars($usersInfos['carte']) ?>" class="btn btn-success">Emprunts</a>
+                        <a href="gestion/user-emprunts.php?id=<?= htmlspecialchars($usersInfos['username']) ?>" class="btn btn-success">Emprunts</a>
                         <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn-primary">Modifier</a>
                     </li>
                   <?php } ?>

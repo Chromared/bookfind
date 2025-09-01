@@ -9,10 +9,9 @@
 
 
 <?php if (isset($_POST['validateInfoSco'])) {
-    if (isset($_POST['card']) AND isset($_POST['classe'])){
-        if (!empty($_POST['card']) AND !empty($_POST['classe'])){
+    if (isset($_POST['classe'])){
+        if (!empty($_POST['classe'])){
 
-            $card = $_POST['card'];
             $classe = $_POST['classe'];
             $id = $_SESSION['id'];
 
@@ -20,30 +19,19 @@
             $checkIfClasseAlreadyExists->execute(array($classe));
 
             if($checkIfClasseAlreadyExists->rowCount() > 0){
-
-                $checkIfCardAlreadyExists = $bdd->prepare('SELECT carte FROM users WHERE carte = ?');
-                $checkIfCardAlreadyExists->execute(array($card));
-
-                if ($_SESSION['card'] == $card OR ($_SESSION['card'] != $card AND $checkIfCardAlreadyExists->rowCount() == 0)){
                 
-                    $updateInfoSco = $bdd->prepare('UPDATE users SET carte = ?, classe = ? WHERE id = ?');
-                    $updateInfoSco->execute(array($card, $classe, $id));
+                $updateInfoSco = $bdd->prepare('UPDATE users SET classe = ? WHERE id = ?');
+                $updateInfoSco->execute(array($classe, $id));
 
-                    if($card != $_SESSION['card'] AND $classe == $_SESSION['classe']){
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du numéro de carte. Ancien n° : ' . $_SESSION['card'] . '. Nouveau n° : ' . $card . '.');
-                    }elseif($card == $_SESSION['card'] AND $classe != $_SESSION['classe']){
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification de la classe. Ancienne classe : ' . $_SESSION['classe'] . '. Nouvelle classe : ' . $classe . '.');
-                    }elseif($card != $_SESSION['card'] AND $classe != $_SESSION['classe']){
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du numéro de carte. Ancien n° : ' . $_SESSION['card'] . '. Nouveau n° : ' . $card . '. Modification de la classe. Ancienne classe : ' . $_SESSION['classe'] . '. Nouvelle classe : ' . $classe . '.');
-                    }
-                
-                    $_SESSION['card'] = $card;
-                    $_SESSION['classe'] = $classe;
+                if($classe != $_SESSION['classe']){
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification de la classe. Ancienne classe : ' . $_SESSION['classe'] . '. Nouvelle classe : ' . $classe . '.');
+                }
 
-                    header('Location: updateProfil.php?id=' . $id .'&msg2=true');
+                $_SESSION['classe'] = $classe;
 
-                }else{ $errorMsg2 = 'Un compte à déjà été créé avec cette carte.'; }
-            }else{ $errorMsg2 = 'La classe sélectionnée n\'existe pas. Veuillez en choisir une parmi celles proposées.'; }   
-        }else{ $errorMsg2 = 'Veuillez remplir tous les champs.'; }
-    }else{ $errorMsg2 = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.'; }
+                header('Location: updateProfil.php?id=' . $id .'&msg2=true');
+
+            }else{ $errorMsg2 = 'La classe sélectionnée n\'existe pas.'; }   
+        }else{ $errorMsg2 = 'Tous les champs doivent être remplis.'; }
+    }else{ $errorMsg2 = 'Tous les champs n\'existent pas. Recharger la page <a href="updateProfil.php?id=' . $id . '">ici</a>.'; }
 }
