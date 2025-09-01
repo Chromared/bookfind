@@ -1,9 +1,11 @@
-## Contributeurs actifs :
+# Liste des contributeurs
+
+## Contributeurs actifs
 
 - [@AMu11er](https://gitlab.com/AMu11er)  -->  Backend (PHP) + Frontend (CSS / JS)
 - [@joachimlaucoin](https://gitlab.com/joacksleloupgit)  -->  Gestion dépôt GitLab 
 - [@TagSteel](https://gitlab.com/TagSteel)  -->  Frontend (CSS) + Gestion dépôt GitLab
 
-## Contributeurs passifs :
+## Contributeurs passifs
 
 - [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = action/fonction/title.js)

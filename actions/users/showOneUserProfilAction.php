@@ -17,7 +17,7 @@
 
             $usersInfos = $selectInfosFromUsers->fetch();
 
-            if($id !== $_SESSION['id'] AND $selectInfosFromUsers->rowCount() === 1){
+            if($id != $_SESSION['id'] AND $selectInfosFromUsers->rowCount() === 1){
 
                   SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Consultation de profil', 'Le profil de <a href="../profil.php?id=' . htmlspecialchars($usersInfos['id']) . '">' . htmlspecialchars($usersInfos['prenom']) . ' ' . htmlspecialchars($usersInfos['nom']) . '</a> a été consulté.');
 
