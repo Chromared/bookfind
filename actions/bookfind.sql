@@ -94,7 +94,7 @@ CREATE TABLE `emprunts` (
   `date_emprunt` datetime NOT NULL DEFAULT current_timestamp(),
   `date_futur_retour` date NOT NULL,
   `date_retour` datetime DEFAULT NULL,
-  `card_emprunteur` int(11) NOT NULL,
+  `id_emprunteur` int(11) NOT NULL,
   `firstname_name` varchar(255) NOT NULL,
   `statut` int(3) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -125,7 +125,7 @@ CREATE TABLE `logs` (
 
 CREATE TABLE `users` (
   `id` int(255) NOT NULL,
-  `carte` int(8) NOT NULL,
+  `username` varchar(10) NOT NULL,
   `classe` varchar(255) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(25) NOT NULL,
@@ -179,7 +179,7 @@ ALTER TABLE `logs`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `carte` (`carte`);
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
