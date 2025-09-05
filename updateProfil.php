@@ -50,10 +50,16 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="text" name="firstname" class="form-control" placeholder="Prénom" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
+              <label for="firstname" class="form-label text-start d-block">Prénom</label>
+              <input type="text" name="firstname" id="firstname" class="form-control" placeholder="John" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="name" class="form-control" placeholder="Nom de famille" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
+              <label for="name" class="form-label text-start d-block">Nom de famille</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Doe" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label text-start d-block">Nom d'utilisateur</label>
+              <input type="text" name="username" id="username" class="form-control" value="<?= htmlspecialchars($usersInfos['username']); ?>" readonly/>
             </div>
             <div class="mb-3">
               <input type="submit" name="validateInfoPerso" class="btn btn-primary" value="Enregistrer" />
@@ -88,7 +94,8 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <select name="classe" class="form-select" required>
+              <label for="classe" class="form-label text-start d-block">Classe</label>
+              <select name="classe" id="classe" class="form-select" required>
                 <?php include 'actions/functions/recupClassesAndOptions.php'; ?>
               </select>
             </div>
@@ -125,13 +132,16 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="password" name="actual-password" class="form-control" placeholder="Mot de passe actuel" required/>
+              <label for="actual-password" class="form-label text-start d-block">Mot de passe actuel</label>
+              <input type="password" name="actual-password" id="actual-password" class="form-control" required/>
             </div>
             <div class="mb-3">
-              <input type="password" name="new-password" class="form-control" placeholder="Nouveau mot de passe" required/>
+              <label for="new-password" class="form-label text-start d-block">Nouveau mot de passe</label>
+              <input type="password" name="new-password" id="new-password" class="form-control" required/>
             </div>
             <div class="mb-3">
-              <input type="password" name="confirm-new-password" class="form-control" placeholder="Confirmer le nouveau mot de passe" required/>
+              <label for="confirm-new-password" class="form-label text-start d-block">Confirmer le nouveau mot de passe</label>
+              <input type="password" name="confirm-new-password" id="confirm-new-password" class="form-control" required/>
             </div>
             <div class="mb-3">
               <input type="submit" name="validateMdp" class="btn btn-primary" value="Enregistrer" />
@@ -158,7 +168,8 @@
           <?php } ?>
           <?php if(!isset($deleteAccount)){ ?>
             <div class="mb-3">
-              <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
+              <label for="password" class="form-label text-start d-block">Mot de passe</label>
+              <input type="password" name="password" id="password" class="form-control" required/>
             </div>
             <div class="mb-3">
               <input type="submit" name="validateDelete1" class="btn btn-danger" value="Supprimer le compte" />
