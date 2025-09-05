@@ -56,10 +56,16 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="text" name="firstname" class="form-control" placeholder="Prénom" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
+              <label for="firstname" class="form-label text-start d-block">Prénom</label>
+              <input type="text" name="firstname" id="firstname" class="form-control" placeholder="John" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="name" class="form-control" placeholder="Nom de famille" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
+              <label for="name" class="form-label text-start d-block">Nom de famille</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Doe" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required/>
+            </div>
+            <div class="mb-3">
+              <label for="username" class="form-label text-start d-block">Nom d'utilisateur</label>
+              <input type="text" name="username" id="username" class="form-control" value="<?= htmlspecialchars($usersInfos['username']); ?>" readonly/>
             </div>
             <div class="mb-3">
               <input type="submit" name="validateInfoPerso" class="btn btn-primary" value="Enregistrer" />
@@ -94,7 +100,8 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <select name="classe" class="form-select" required>
+              <label for="classe" class="form-label text-start d-block">Classe</label>
+              <select name="classe" id="classe" class="form-select" required>
                 <?php include '../actions/functions/recupClassesAndOptions.php'; ?>
               </select>
             </div>
@@ -133,7 +140,8 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <select class="form-control" name="grade" ><option value="0" <?php Selected('0', $usersInfos['grade']); ?> >Aucun</option><option value="3" <?php Selected('3', $usersInfos['grade']); ?> >Assistant</option><option value="2" <?php Selected('2', $usersInfos['grade']); ?> >Gérant</option><?php if($_SESSION['grade'] == '1'){ ?><option value="1" <?php Selected('1', $usersInfos['grade']); ?> >Administrateur</option><?php } ?></select>
+              <label for="grade" class="form-label text-start d-block">Grade actuel : <?= Grade($usersInfos['grade']); ?></label>
+              <select class="form-control" name="grade" id="grade"><option value="0" <?php Selected('0', $usersInfos['grade']); ?> >Aucun</option><option value="3" <?php Selected('3', $usersInfos['grade']); ?> >Assistant</option><option value="2" <?php Selected('2', $usersInfos['grade']); ?> >Gérant</option><?php if($_SESSION['grade'] == '1'){ ?><option value="1" <?php Selected('1', $usersInfos['grade']); ?> >Administrateur</option><?php } ?></select>
             </div>
             <div class="mb-3">
               <input type="submit" name="validateGrade" class="btn btn-primary" value="Enregistrer" />
@@ -168,10 +176,12 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="password" name="new-password" class="form-control" placeholder="Nouveau mot de passe" required/>
+              <label for="new-password" class="form-label text-start d-block">Nouveau mot de passe</label>
+              <input type="password" name="new-password" id="new-password" class="form-control" required/>
             </div>
             <div class="mb-3">
-              <input type="password" name="confirm-new-password" class="form-control" placeholder="Confirmer le nouveau mot de passe" required/>
+              <label for="confirm-new-password" class="form-label text-start d-block">Confirmer le nouveau mot de passe</label>
+              <input type="password" name="confirm-new-password" id="confirm-new-password" class="form-control" required/>
             </div>
             <div class="mb-3">
               <input type="submit" name="validateMdp" class="btn btn-primary" value="Enregistrer" />
