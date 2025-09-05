@@ -48,52 +48,62 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="number" name="isbn" id="isbn" class="form-control" placeholder="ISBN*" list="isbns" min="1000000000" max="9999999999999" autofocus required/>
+              <label for="isbn" class="form-label text-start d-block">ISBN*</label>
+              <input type="number" name="isbn" id="isbn" class="form-control" list="isbns" min="1000000000" max="9999999999999" autofocus required/>
               <datalist id="isbns">
                 <?php include 'actions/books/list-isbns.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="title" id="title" class="form-control" placeholder="Titre*" required/>
+              <label for="title" class="form-label text-start d-block">Titre*</label>
+              <input type="text" name="title" id="title" class="form-control" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="author" id="author" class="form-control" placeholder="Auteur*" list="authors" required/>
+              <label for="author" class="form-label text-start d-block">Auteur*</label>
+              <input type="text" name="author" id="author" class="form-control" list="authors" required/>
               <datalist id="authors">
                 <?php include 'actions/books/list-authors.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="type" class="form-control" placeholder="Type*" list="types" required/>
+              <label for="type" class="form-label text-start d-block">Type*</label>
+              <input type="text" name="type" id="type" class="form-control" list="types" required/>
               <datalist id="types">
                 <?php include 'actions/books/list-types.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="editeur" id="editeur" class="form-control" placeholder="Editeur*" list="publishers" required/>
+              <label for="editeur" class="form-label text-start d-block">Editeur*</label>
+              <input type="text" name="editeur" id="editeur" class="form-control" list="publishers" required/>
               <datalist id="publishers">
                 <?php include 'actions/books/list-publishers.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <textarea name="resume" id="resume" class="form-control" placeholder="Résumé" rows="1"></textarea>
+              <label for="resume" class="form-label text-start d-block">Résumé</label>
+              <textarea name="resume" id="resume" class="form-control" rows="1"></textarea>
             </div>
             <div class="mb-3">
-              <input type="text" name="id_unique" class="form-control" placeholder="Identifiant unique"/>
+              <label for="id_unique" class="form-label text-start d-block">Identifiant unique</label>
+              <input type="text" name="id_unique" id="id_unique" class="form-control" />
             </div>
             <div class="mb-3">
-              <input type="text" name="genre" class="form-control" placeholder="Genre" list="genres" />
+              <label for="genre" class="form-label text-start d-block">Genre</label>
+              <input type="text" name="genre" id="genre" class="form-control" list="genres" />
               <datalist id="genres">
                 <?php include 'actions/books/list-genres.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="text" name="serie" id="serie" class="form-control" placeholder="Série" list="series"/>
+              <label for="serie" class="form-label text-start d-block">Série</label>
+              <input type="text" name="serie" id="serie" class="form-control" list="series"/>
               <datalist id="series">
                 <?php include 'actions/books/list-series.php'; ?>
               </datalist>
             </div>
             <div class="mb-3">
-              <input type="number" name="tome" class="form-control" placeholder="Tome n°"/>
+              <label for="tome" class="form-label text-start d-block">Tome n°</label>
+              <input type="number" name="tome" id="tome" class="form-control" />
             </div>
             <div class="mb-3">
               <input type="submit" name="validate" class="btn btn-primary" value="Enregistrer" />

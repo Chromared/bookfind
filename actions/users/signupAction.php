@@ -65,7 +65,7 @@
 
                     SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun commentaire.');
 
-                    header('Location: index.php');
+                    header('Location: index.php?signup');
 
                 }else{ $errorMsg = 'La classe sélectionnée n\'existe pas.'; }
             }else{ $errorMsg = 'Les conditions d\'utilisation et les règles doivent être acceptées.'; }

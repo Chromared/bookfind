@@ -32,6 +32,34 @@
           </div>
       </form>
   </div>
+  <?php if(isset($_GET['signup']) and isset($_SESSION['auth'])){ ?>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="successModalLabel">Inscription réussie</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+          </div>
+          <div class="modal-body">
+            Votre compte a été créé avec succès. Pour vous connecter, vous aurez besoin de votre nom d'utilisateur qui est le suivant : <strong><?= htmlspecialchars($_SESSION['username']); ?></strong>.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var successModal = document.getElementById('successModal');
+            var myModal = new bootstrap.Modal(successModal, {
+                backdrop: 'static',
+                keyboard: false
+            });
+            myModal.show();
+        });
+    </script>
+  <?php } ?>
   <?php include 'includes/footer.php'; ?>
 </body>
 </html>
