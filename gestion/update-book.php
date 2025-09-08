@@ -48,34 +48,44 @@
               </div>
             <?php } ?>
             <div class="mb-3">
-              <input type="number" name="isbn" class="form-control" placeholder="ISBN*" value="<?= htmlspecialchars($booksInfos['isbn']); ?>" min="1000000000" max="9999999999999" autofocus required/>
+              <label for="isbn" class="form-label text-start d-block">ISBN*</label> 
+              <input type="number" name="isbn" id="isbn" class="form-control" value="<?= htmlspecialchars($booksInfos['isbn']); ?>" min="1000000000" max="9999999999999" autofocus required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="title" class="form-control" placeholder="Titre*" value="<?= htmlspecialchars($booksInfos['titre']); ?>" required/>
+              <label for="title" class="form-label text-start d-block">Titre*</label>
+              <input type="text" name="title" id="title" class="form-control" value="<?= htmlspecialchars($booksInfos['titre']); ?>" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="author" class="form-control" placeholder="Auteur*" value="<?= htmlspecialchars($booksInfos['auteur']); ?>" required/>
+              <label for="author" class="form-label text-start d-block">Auteur*</label>
+              <input type="text" name="author" id="author" class="form-control" value="<?= htmlspecialchars($booksInfos['auteur']); ?>" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="type" class="form-control" placeholder="Type*" value="<?= htmlspecialchars($booksInfos['type']); ?>" required/>
+              <label for="type" class="form-label text-start d-block">Type*</label>
+              <input type="text" name="type" id="type" class="form-control" value="<?= htmlspecialchars($booksInfos['type']); ?>" required/>
             </div>
             <div class="mb-3">
-              <input type="text" name="editeur" class="form-control" placeholder="Editeur*" value="<?= htmlspecialchars($booksInfos['editeur']); ?>" required/>
+              <label for="editeur" class="form-label text-start d-block">Editeur*</label>
+              <input type="text" name="editeur" id="editeur" class="form-control" value="<?= htmlspecialchars($booksInfos['editeur']); ?>" required/>
             </div>
             <div class="mb-3">
-              <textarea name="resume" class="form-control" placeholder="Résumé" rows="1"><?= htmlspecialchars($booksInfos['resume']); ?></textarea>
+              <label for="resume" class="form-label text-start d-block">Résumé</label>
+              <textarea name="resume" id="resume" class="form-control" rows="1"><?= htmlspecialchars($booksInfos['resume']); ?></textarea>
             </div>
             <div class="mb-3">
-              <input type="text" name="id_unique" class="form-control" placeholder="Identifiant unique" value="<?= htmlspecialchars($booksInfos['id_unique']); ?>"/>
+              <label for="id_unique" class="form-label text-start d-block">Identifiant unique</label>
+              <input type="text" name="id_unique" id="id_unique" class="form-control" value="<?= htmlspecialchars($booksInfos['id_unique']); ?>"/>
             </div>
             <div class="mb-3">
-              <input type="text" name="genre" class="form-control" placeholder="Genre" value="<?= htmlspecialchars($booksInfos['genre']); ?>"/>
+              <label for="genre" class="form-label text-start d-block">Genre</label>
+              <input type="text" name="genre" id="genre" class="form-control" value="<?= htmlspecialchars($booksInfos['genre']); ?>"/>
             </div>
             <div class="mb-3">
-              <input type="text" name="serie" class="form-control" placeholder="Série" value="<?= htmlspecialchars($booksInfos['serie']); ?>"/>
+              <label for="serie" class="form-label text-start d-block">Série</label>
+              <input type="text" name="serie" id="serie" class="form-control" value="<?= htmlspecialchars($booksInfos['serie']); ?>"/>
             </div>
             <div class="mb-3">
-              <input type="number" name="tome" class="form-control" placeholder="Tome n°" value="<?php if(!empty($booksInfos['serie'])){ echo htmlspecialchars($booksInfos['tome']); } ?>"/>
+              <label for="tome" class="form-label text-start d-block">Tome n°</label>
+              <input type="number" name="tome" id="tome" class="form-control" value="<?php if(!empty($booksInfos['serie'])){ echo htmlspecialchars($booksInfos['tome']); } ?>"/>
             </div>
             <div class="mb-3">
               <input type="submit" name="validate" class="btn btn-primary" value="Enregistrer" />
