@@ -8,10 +8,7 @@
 
 
 
-<footer class="mt-5 pt-0">
-  <!-- Séparation bleue foncée (style rappel navbar) -->
-  <div style="height: 6px; background-color: #0d6efd; box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);"></div>
-
+<footer class="mt-5 pt-0 bg-body-tertiary">
   <div class="container py-4">
 
     <!-- Liens de navigation -->
@@ -19,8 +16,6 @@
       <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Accueil</a></li>
       <li class="nav-item"><a href="pdc.php" class="nav-link px-2 text-body-secondary">Politique de confidentialité</a></li>
       <li class="nav-item"><a href="rules.php" class="nav-link px-2 text-body-secondary">Règlement</a></li>
-      <!--<li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Aide</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">À propos</a></li>-->
     </ul>
 
     <!-- Ligne fine de séparation -->
