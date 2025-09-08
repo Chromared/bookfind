@@ -33,22 +33,32 @@
                 </div>
               </div>
             <?php } ?>
-            <div class="input-group mb-3">
-              <input type="text" name="firstname" class="form-control" placeholder="Prénom" required/>
-              <input type="text" name="lastname" class="form-control" placeholder="Nom de famille" required/>
+            <h5 class="card-title">Inscription</h5>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="firstname" class="form-label text-start d-block">Prénom</label>
+                <input type="text" name="firstname" id="firstname" class="form-control" placeholder="John" required/>
+              </div>
+              <div class="col-md-6">
+                <label for="lastname" class="form-label text-start d-block">Nom de famille</label>
+                <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Doe" required/>
+              </div>
             </div>
             <div class="mb-3">
-              <select name="classe" class="form-select" required>
+              <label for="classe" class="form-label text-start d-block">Classe</label>
+              <select name="classe" id="classe" class="form-select" required>
                 <option value>--- Sélectionner une classe ---</option>
                 <?php include 'actions/functions/recupClassesAndOptions.php'; ?>
               </select>
             </div>
-            <div class="input-group mb-3">
-              <input type="password" name="password" class="form-control" placeholder="Mot de passe" required/>
-              <input type="password" name="confirm_password" class="form-control" placeholder="Confirmer le mot de passe" required/>
+            <div class="mb-3">
+              <label for="password" class="form-label text-start d-block">Mot de passe</label>
+              <input type="password" name="password" id="password" class="form-control" required/>
+              <label for="confirm_password" class="form-label text-start d-block">Confirmer le mot de passe</label>
+              <input type="password" name="confirm_password" id="confirm_password" class="form-control" required/>
             </div>
             <div class="mb-3">
-              <input type="checkbox" name="rules-pdc" class="form-check-input" id="rules-pdc" autocomplete="off" required>
+              <input type="checkbox" name="rules-pdc" class="form-check-input" id="rules-pdc" required>
               <label class="form-check-label" for="rules-pdc">
                 Je confirme avoir lu et accepté le <a href="rules.php" target="_blank">règlement</a> et la <a href="pdc.php" target="_blank">politique de confidentialité</a>
               </label>
