@@ -41,19 +41,19 @@ if ($_SESSION['grade'] != '1') {
             </div>
             <div class="mb-3">
               <label for="host" class="form-label text-start d-block">Hôte*</label>
-              <input type="text" name="host" id="host" class="form-control" value="<?= $host; ?>" required />
+              <input type="text" name="host" id="host" class="form-control" value="<?php if(isset($host)){ echo $host; } ?>" required />
             </div>
             <div class="mb-3">
               <label for="dbname" class="form-label text-start d-block">Nom de la base de données*</label>
-              <input type="text" name="dbname" id="dbname" class="form-control" value="<?= $dbname; ?>" placeholder="bookfind" required />
+              <input type="text" name="dbname" id="dbname" class="form-control" value="<?php if(isset($dbname)){ echo $dbname; } ?>" placeholder="bookfind" required />
             </div>
             <div class="mb-3">
               <label for="user" class="form-label text-start d-block">Nom d'utilisateur*</label>
-              <input type="text" name="user" id="user" class="form-control" value="<?= $username; ?>" required />
+              <input type="text" name="user" id="user" class="form-control" value="<?php if(isset($username)){ echo $username; } ?>" required />
             </div>
             <div class="mb-3">
               <label for="password" class="form-label text-start d-block">Mot de passe</label>
-              <input type="password" name="password" id="password" class="form-control" value="<?= $password; ?>" />
+              <input type="password" name="password" id="password" class="form-control" value="<?php if(isset($password)){ echo $password; }?>" />
             </div>
             <div class="mb-3">
               <input type="submit" name="databaseValidate" class="btn btn-primary" value="Enregistrer" />
@@ -183,9 +183,9 @@ if ($_SESSION['grade'] != '1') {
                           </div>
                       </div>
 
-                      <?php if(isset($msgImport)) { ?>
+                      <?php if(isset($msgImport) AND !empty($msgImport)){ ?>
                           <div class="alert alert-<?= $alertImportType ?? 'warning' ?> d-flex align-items-center justify-content-center" role="alert">
-                              <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
+                              <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                               <div><?= $msgImport; ?></div>
                           </div>
                       <?php } ?>
