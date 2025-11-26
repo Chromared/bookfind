@@ -49,6 +49,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 - `actions/` : Contient les scripts PHP et JavaScript pour les actions, comme la connexion à la base de données, l´enregistrement d'un livre et le fonctionnement du site en général.
 - `includes/` : Composants inclus dans les différentes pages, comme le `header.php` et la `navbar.php` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et où le changement impacteront toutes les pages.
 - `assets/` : Ressources telles que les fichiers CSS, images et icones.
+- `temp` : Contient les fichiers temporaires.
 
 ## Installation
 
@@ -100,4 +101,5 @@ Ce projet est distribué selon les termes de la license [MIT]. 2025 Chromared.
 ---
 
 [MIT]: https://opensource.org/licenses/MIT
+
 
