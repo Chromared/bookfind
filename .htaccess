@@ -1,5 +1,3 @@
-php_value mbstring.http_input UTF-8
-
 RewriteEngine On
 
 RewriteCond %{HTTPS} !=on
