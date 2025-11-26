@@ -1,0 +1,4 @@
+# Interdire l'accès direct aux fichiers temporaires
+Order Deny,Allow
+Deny from all
+

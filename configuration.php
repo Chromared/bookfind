@@ -130,7 +130,7 @@ require 'actions/database.php';
         <!-- Etape 3 : Ajout des classes -->
         <div class="card mb-4">
             <div class="card-header">
-                3. Créer des classes utilisateurs
+                3. Créer des classes
             </div>
             <div class="card-body">
                 <form method="post" class="mb-3">
