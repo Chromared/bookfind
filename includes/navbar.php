@@ -32,9 +32,12 @@
             <li class="nav-item">
               <a class="nav-link <?php if($pageActuelle == 'login.php'){ echo 'active'; } ?>" href="login.php">Se connecter</a>
             </li>
+            <?php // Afficher "S'inscrire" uniquement si l'action d'inscription est disponible ?>
+            <?php if (file_exists('actions/users/signupAction.php') && file_exists('signup.php')) { ?>
             <li class="nav-item">
               <a class="nav-link <?php if($pageActuelle == 'signup.php'){ echo 'active'; } ?>" href="signup.php">S'inscrire</a>
             </li>
+            <?php } ?>
         <?php }else{ ?>
             <li class="nav-item">
               <a class="nav-link <?php if($pageActuelle == 'profil.php'){ echo 'active'; } ?>" href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Profil</a>
