@@ -190,10 +190,10 @@ if ($_SESSION['grade'] != '1') {
                           </div>
                       <?php } ?>
 
-                      <?php if(!isset($_SESSION['csv_data'])): ?>
+                      <?php if(!isset($_SESSION['csv_preview'])): ?>
                           <!-- Formulaire d'upload du CSV -->
                           <div class="mb-3">
-                              <label for="csvFile" class="form-label text-start d-block">Fichier CSV*</label>
+                              <label for="csvFile" class="form-label text-start d-block">Fichier CSV</label>
                               <input type="file" name="csvFile" id="csvFile" class="form-control" accept=".csv" required />
                           </div>
                           <div class="mb-3">
@@ -238,7 +238,7 @@ if ($_SESSION['grade'] != '1') {
                                       </thead>
                                       <tbody>
                                           <tr>
-                                              <td><label for="map_username">Username (carte)*</label></td>
+                                              <td><label for="map_username">Username</label></td>
                                               <td>
                                                   <select name="db_mapping[username]" id="map_username" class="form-select" onchange="toggleCustomField('username')" required>
                                                       <option value="algorithm">Utiliser l'algorithme (première lettre prénom + nom)</option>
@@ -418,7 +418,7 @@ if ($_SESSION['grade'] != '1') {
                               </div>
 
                               <div class="alert alert-info mt-3">
-                                  <small>Aperçu : <?= count($_SESSION['csv_data']) ?> lignes sur <?= $_SESSION['total_rows'] ?> affichées.</small>
+                                  <small>Aperçu : <?= count($_SESSION['csv_preview']) ?> lignes sur <?= $_SESSION['total_rows'] ?> affichées.</small>
                               </div>
                           </div>
                           <div class="mb-3">
