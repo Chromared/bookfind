@@ -2,9 +2,9 @@
 
 ## Contributeurs actifs
 
-- [@AMu11er](https://gitlab.com/AMu11er)  -->  Backend (PHP) + Frontend (CSS / JS)
-- [@joachimlaucoin](https://gitlab.com/joacksleloupgit)  -->  Gestion dépôt GitLab 
-- [@TagSteel](https://gitlab.com/TagSteel)  -->  Frontend (CSS) + Gestion dépôt GitLab
+- [@MythUp_](https://github.com/MythUp)  -->  Backend (PHP) + Frontend (CSS / JS)
+- [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub 
+- [@TagSteel](https://github.com/TagSteel)  -->  Frontend (CSS) + Gestion dépôt GitHub
 
 ## Contributeurs passifs
 
