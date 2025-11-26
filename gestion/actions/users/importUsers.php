@@ -1,3 +1,13 @@
+<?php
+//This file belongs to the Bookfind project.
+//
+//Bookfind is distributed under the terms of the MIT software license.
+//
+//Copyright (C) 2025 Chromared
+?>
+
+
+
 <?php // Importation des utilisateurs via CSV
 
 // Initialisation des variables
@@ -6,6 +16,20 @@ $alertImportType = "warning";
 
 // Récupération de la connexion à la base de données (utilisée globalement)
 global $bdd;
+
+// Nettoyage automatique des fichiers temporaires de plus de 24 heures
+$tempDir = __DIR__ . '/../../../temp';
+if (is_dir($tempDir)) {
+    $files = glob($tempDir . '/csv_import_*.csv');
+    $maxAge = 24 * 60 * 60; // 24 heures
+    $now = time();
+
+    foreach ($files as $file) {
+        if (is_file($file) && ($now - filemtime($file)) > $maxAge) {
+            @unlink($file);
+        }
+    }
+}
 
 // Étape 1: Upload et analyse du CSV
 if(isset($_POST['csvUpload'])) {
@@ -38,7 +62,7 @@ if(isset($_POST['csvUpload'])) {
 
                 if (($handle = @fopen($csvFile, "r")) !== FALSE) {
                     // Lire la première ligne
-                    $firstLine = fgetcsv($handle, 0, $separator);
+                    $firstLine = fgetcsv($handle, 0, $separator, '"', "\\");
 
                     if (!$firstLine) {
                         $msgImport = "Impossible de lire le fichier CSV.";
@@ -59,28 +83,36 @@ if(isset($_POST['csvUpload'])) {
 
                         // Lire les données (max 5 lignes pour aperçu)
                         $previewRows = count($csvData); // 0 ou 1 selon si on a déjà ajouté la première ligne
-                        while (($data = fgetcsv($handle, 0, $separator)) !== FALSE && $previewRows < 5) {
+                        while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE && $previewRows < 5) {
                             $csvData[] = $data;
                             $previewRows++;
                         }
 
                         // Continuer à lire le reste des données sans stockage (juste pour compter)
                         $totalRows = $previewRows;
-                        while (($data = fgetcsv($handle, 0, $separator)) !== FALSE) {
+                        while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
                             $totalRows++;
                         }
 
                         fclose($handle);
 
-                        // Utiliser le répertoire temporaire du système
-                        $tempFile = tempnam(sys_get_temp_dir(), 'csv_import_');
+                        // Créer un dossier temporaire dédié si nécessaire
+                        $tempDir = __DIR__ . '/../../../temp';
+                        if (!is_dir($tempDir)) {
+                            @mkdir($tempDir, 0755, true);
+                        }
+
+                        // Générer un nom de fichier unique avec timestamp
+                        $uniqueId = uniqid('csv_import_', true);
+                        $tempFile = $tempDir . '/' . $uniqueId . '.csv';
+
                         if (@copy($csvFile, $tempFile)) {
-                            // Stocker les données dans la session
-                            $_SESSION['csv_data'] = $csvData;
+                            // Stocker uniquement les métadonnées dans la session (pas les données)
                             $_SESSION['csv_headers'] = $headers;
                             $_SESSION['csv_separator'] = $separator;
                             $_SESSION['csv_file'] = $tempFile;
                             $_SESSION['total_rows'] = $totalRows;
+                            $_SESSION['csv_preview'] = $csvData; // Seulement 5 lignes pour l'aperçu
 
                             $msgImport = "Fichier CSV analysé avec succès. $totalRows lignes trouvées. Veuillez associer les colonnes.";
                             $alertImportType = "success";
@@ -102,12 +134,12 @@ if(isset($_POST['csvCancel'])) {
         @unlink($_SESSION['csv_file']);
     }
 
-    unset($_SESSION['csv_data']);
     unset($_SESSION['csv_headers']);
     unset($_SESSION['csv_separator']);
     unset($_SESSION['csv_file']);
     unset($_SESSION['total_rows']);
     unset($_SESSION['csv_has_headers']);
+    unset($_SESSION['csv_preview']);
 
     $msgImport = "Importation annulée.";
 }
@@ -148,13 +180,13 @@ if(isset($_POST['csvImport'])) {
                 if (($handle = @fopen($csvFile, "r")) !== FALSE) {
                     // Sauter la première ligne si ce sont des en-têtes
                     if ($hasHeaders) {
-                        fgetcsv($handle, 0, $separator);
+                        fgetcsv($handle, 0, $separator, '"', "\\");
                     }
 
                     // Compteur de lignes pour le suivi des erreurs
                     $lineNumber = $hasHeaders ? 2 : 1;
 
-                    while (($data = fgetcsv($handle, 0, $separator)) !== FALSE) {
+                    while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
                         // Gérer les lignes avec un nombre de colonnes incorrect
                         if (count($data) !== count($headers)) {
                             $errors[] = "Ligne $lineNumber: Nombre de colonnes incorrect";
@@ -287,15 +319,6 @@ if(isset($_POST['csvImport'])) {
 
                             $importedCount++;
 
-                            // Journalisation si la fonction existe
-                            if (function_exists('addLog')) {
-                                addLog('bookfind.php', $_SESSION['id'] ?? 0, $_SERVER['REMOTE_ADDR'],
-                                    $_SESSION['username'] ?? 'système',
-                                    ($_SESSION['nom'] ?? '') . ' ' . ($_SESSION['prenom'] ?? ''),
-                                    'Importation utilisateur',
-                                    'Import utilisateur ' . $userData['username'] . ' via CSV');
-                            }
-
                         } catch (PDOException $e) {
                             $errors[] = "Ligne $lineNumber: " . $e->getMessage();
                             $errorCount++;
@@ -312,14 +335,14 @@ if(isset($_POST['csvImport'])) {
                     }
 
                     // Nettoyer la session
-                    unset($_SESSION['csv_data']);
                     unset($_SESSION['csv_headers']);
                     unset($_SESSION['csv_separator']);
                     unset($_SESSION['csv_file']);
-                    unset($_SESSION['total_rows']);
+                    unset($_SESSION['csv_total_rows']);
                     unset($_SESSION['csv_has_headers']);
+                    unset($_SESSION['csv_preview']);
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Importation d\'utilisateurs via csv', $importedCount . 'utilisateurs importés');
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Importation d\'utilisateurs via csv', $importedCount . ' utilisateurs importés');
 
                     $msgImport = "Importation terminée: $importedCount utilisateurs importés, $errorCount erreurs.";
                     if (!empty($errors)) {
