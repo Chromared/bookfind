@@ -238,20 +238,16 @@ if ($_SESSION['grade'] != '1') {
                                       </thead>
                                       <tbody>
                                           <tr>
-                                              <td><label for="map_username">Username</label></td>
+                                              <td><label for="map_username">Nom d'utilisateur</label></td>
                                               <td>
                                                   <select name="db_mapping[username]" id="map_username" class="form-select" onchange="toggleCustomField('username')" required>
                                                       <option value="algorithm">Utiliser l'algorithme (première lettre prénom + nom)</option>
-                                                      <option value="autre">Autre valeur...</option>
                                                       <optgroup label="Colonnes CSV">
                                                           <?php foreach($_SESSION['csv_headers'] as $index => $header): ?>
                                                           <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                           <?php endforeach; ?>
                                                       </optgroup>
                                                   </select>
-                                                  <div id="custom_username_div" class="mt-2" style="display: none;">
-                                                      <input type="text" name="custom_username" id="custom_username" class="form-control" placeholder="Valeur personnalisée">
-                                                  </div>
                                               </td>
                                           </tr>
                                           <tr>
