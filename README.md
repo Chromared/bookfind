@@ -10,7 +10,7 @@
 2. [Fonctionnalités](#fonctionnalités)
 3. [Structure du Projet](#structure-du-projet)
 4. [Installation](#installation)
-5. [Configuration de la Base de Données](#configuration-de-la-base-de-données)
+5. [Configuration de la base de données](#configuration-de-la-base-de-donnée)
 6. [Utilisation](#utilisation)
 7. [Dépendances](#dépendances)
 8. [Licence](#licence)
@@ -62,7 +62,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 3. **Déplacer le projet** :
     - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP et uWAMP).
 
-## Configuration
+## Configuration de la base de donnée
 
 1. Dans votre navigateur, rendez-vous sur le fichier `configuration.php`.
 2. Suivez les actions **dans l'ordre** pour configurer la base de donnée, les classes de votre établissement...
