@@ -46,7 +46,7 @@
         </li>
         <?php } ?>
         <li class="nav-item">
-          <a class="nav-link" href="../">Quitter</a>
+          <a class="nav-link" href="../index.php">Quitter</a>
         </li>
       </ul>
       <form method="get" action="books.php" class="d-flex" role="search">
@@ -58,4 +58,5 @@
 </nav>
 <br />
 <br />
+
 <br />
