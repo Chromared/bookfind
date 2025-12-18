@@ -13,7 +13,7 @@
 
     <!-- Liens de navigation -->
     <ul class="nav justify-content-center pb-2 mb-3">
-      <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+      <li class="nav-item"><a href="../index.php" class="nav-link px-2 text-body-secondary">Accueil</a></li>
       <li class="nav-item"><a href="pdc.php" class="nav-link px-2 text-body-secondary">Politique de confidentialité</a></li>
       <li class="nav-item"><a href="rules.php" class="nav-link px-2 text-body-secondary">Règlement</a></li>
     </ul>
@@ -32,11 +32,6 @@
         <li class="ms-3">
           <a class="text-body-secondary" href="https://github.com/Chromared" aria-label="GitHub">
             <i class="bi bi-github fs-5"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-body-secondary" href="https://gitlab.com/chromared/" aria-label="GitLab">
-            <i class="bi bi-gitlab fs-5"></i>
           </a>
         </li>
       </ul>
