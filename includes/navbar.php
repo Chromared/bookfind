@@ -47,7 +47,7 @@
             </li>
         <?php } if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
             <li class="nav-item">
-              <a class="nav-link" href="gestion/">Gestion</a>
+              <a class="nav-link" href="gestion/index.php">Gestion</a>
             </li>
         <?php } ?>
       </ul>
@@ -60,4 +60,5 @@
 </nav>
 <br />
 <br />
+
 <br />
