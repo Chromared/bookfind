@@ -90,6 +90,43 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 - **PHP** : version 8.3 ou supérieure.
 - **MySQL** : version 8.4 ou supérieure.
 
+## Développement (Codespaces / Dev Container)
+
+Ce dépôt inclut une configuration `.devcontainer/` et un mode "dev" qui lance :
+- un serveur PHP (port 8000)
+- BrowserSync (port 3000) qui recharge automatiquement quand tu modifies du CSS ou des fichiers PHP
+- un conteneur MySQL séparé (port 3306) pré-configuré pour BookFind
+- un gestionaire de base de donnée (Adminer) situé dans `tools/` → `https://<codespace>-3000.app.github.dev/tools/adminer.php` 
+
+### Démarrer
+
+1. Dans Codespaces : **Rebuild Container** (pour installer PHP/Node via le devcontainer)
+2. Installer les dépendances front (une fois) :
+    ```bash
+    npm install
+    ```
+3. Lancer le mode dev :
+    ```bash
+    npm run dev
+    ```
+
+Ensuite :
+- ouvre l’URL du port **3000** (onglet *Ports* Codespaces → `https://<codespace>-3000.app.github.dev`)
+- le port **8000** reste accessible si tu veux contourner BrowserSync
+
+Comme BrowserSync écoute sur `0.0.0.0`, les rechargements se déclenchent sans configuration supplémentaire quand tu modifies `assets/**/*.css` ou tes fichiers PHP.
+
+### Base de données intégrée
+
+- **SGBD** : MySQL 8.4 (service Docker lancé via le devcontainer)
+- **Host** : `mysql` (depuis PHP) ou `127.0.0.1` via le port forward Codespaces, **Port** : `3306`
+- **Database** : `bookfind`
+- **Utilisateur** : `bookfind`
+- **Mot de passe** : `bookfind`
+- **Root password** : `root`
+
+Le conteneur MySQL est géré automatiquement : après un `Rebuild Container`, PHP peut se connecter à `mysql:3306`, et tu peux exposer le port 3306 via l’onglet *Ports* pour y accéder depuis un client externe.
+
 ## Dépendances
 
 - **Aucune** : Il n'y a pour l'instant pas de dépendances nécessaires au fonctionnement de BookFind.

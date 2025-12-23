@@ -1,2 +1,10 @@
-/actions/database.php
-/.vscode/
+.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.DS_Store
+node_modules/
+dist/
+build/
+.env/
+.vscode/

@@ -9,16 +9,15 @@
 
 
 <?php
-    $host = '';
-    $dbname = '';
-    $username = '';
-    $password = '';
+    $host = '127.0.0.1';
+    $dbname = 'bookfind';
+    $username = 'bookfind';
+    $password = 'bookfind';
 
-    if(!empty($host) AND !empty($username)){
-    
+    // Open a PDO connection to the local MySQL instance
     try {
         $bdd = new PDO('mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
         echo 'Connexion failed : ' . $e->getMessage();
-    }}
+    }

@@ -1,0 +1,43 @@
+{
+  "name": "bookfind",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/php:1": {
+      "version": "8.3"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "services": {
+    "mysql": {
+      "image": "mysql:8.4",
+      "restart": "unless-stopped",
+      "env": {
+        "MYSQL_ROOT_PASSWORD": "root",
+        "MYSQL_DATABASE": "bookfind",
+        "MYSQL_USER": "bookfind",
+        "MYSQL_PASSWORD": "bookfind"
+      },
+      "ports": ["3306:3306"],
+      "volumes": ["mysql-data:/var/lib/mysql"]
+    }
+  },
+  "forwardPorts": [8000, 3000, 3306],
+  "portsAttributes": {
+    "8000": {
+      "label": "PHP (built-in server)",
+      "onAutoForward": "notify"
+    },
+    "3000": {
+      "label": "BrowserSync (live reload)",
+      "onAutoForward": "openBrowser"
+    },
+    "3306": {
+      "label": "MySQL",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "remoteUser": "vscode"
+}

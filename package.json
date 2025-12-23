@@ -1,0 +1,15 @@
+{
+  "name": "bookfind-dev",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^3.0.4",
+    "concurrently": "^9.2.1",
+    "wait-on": "^8.0.5"
+  },
+  "scripts": {
+    "mysql:start": "sh -c \"mysqladmin ping -h 127.0.0.1 -u bookfind -pbookfind --silent || (sudo mkdir -p /var/run/mysqld && sudo chown mysql:mysql /var/run/mysqld && sudo mysqld --user=mysql --daemonize --skip-networking=0 --bind-address=0.0.0.0)\"",
+    "mysql:dev": "sh -c \"npm run mysql:start >/dev/null && while true; do sleep 3600; done\"",
+    "php:serve": "/usr/bin/php -S 0.0.0.0:8000 -t .",
+    "dev": "concurrently -k -n DB,PHP,BS -c auto \"npm run mysql:dev\" \"npm run php:serve\" \"wait-on tcp:8000 && browser-sync start --proxy http://0.0.0.0:8000 --host 0.0.0.0 --port 3000 --files \\\"assets/**/*.css,**/*.php,includes/**/*.php,actions/**/*.php\\\" --no-open --no-notify\""
+  }
+}
