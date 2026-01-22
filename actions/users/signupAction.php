@@ -47,7 +47,7 @@
                     }else{ $grade = 0; }
 
                     $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET username = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?, grade = ?');
-                    $insertUserOnWebsite->execute(array($username, $username, $lastname, $firstname, $mdp, true, true, $grade));
+                    $insertUserOnWebsite->execute(array($username, $classe, $lastname, $firstname, $mdp, true, true, $grade));
 
                     $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE username = ?');
                     $getInfosOfThisUserReq->execute(array($username));
@@ -72,4 +72,5 @@
         }else{ $errorMsg = 'Les deux mot de passe ne sont pas identique.'; }
     }else{ $errorMsg = 'Veuillez remplir tous les champs.'; }
 }else{ $errorMsg = 'Tous les champs n\'existe pas. Veuillez <a href="signup.php">recharger</a> la page.'; }
+
 }
