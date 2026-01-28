@@ -53,7 +53,7 @@ if ($_SESSION['grade'] != '1') {
             </div>
             <div class="mb-3">
               <label for="password" class="form-label text-start d-block">Mot de passe</label>
-              <input type="password" name="password" id="password" class="form-control" value="<?php if(isset($password)){ echo $password; }?>" />
+              <input type="password" name="password" id="password" class="form-control" value="<?php if(isset($password)){ echo $password; } ?>" />
             </div>
             <div class="mb-3">
               <input type="submit" name="databaseValidate" class="btn btn-primary" value="Enregistrer" />
