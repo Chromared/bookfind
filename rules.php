@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politique de confidentialité</title>
+    <title>Règlement</title>
     <?php include 'includes/header.php'; ?>
 </head>
 <body>
@@ -19,6 +19,7 @@
 </head>
 <body>
     <h1>Coming soon !</h1>
+    <p>Notre équipe travaille à la rédaction de cette page.</p>
 </body>
-
 </html>
+
