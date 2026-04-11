@@ -43,9 +43,15 @@ jobs:
       shell: bash
       run: |
         set -euo pipefail
-        DANGEROUS_PATTERN='(eval\(|exec\(|shell_exec\(|passthru\(|system\(|popen\(|proc_open\()'
+        DANGEROUS_PATTERN='(eval\(|shell_exec\(|passthru\(|system\(|popen\(|proc_open\()'
         if grep -RInE --include='*.php' --exclude-dir=.git --exclude-dir=.github "$DANGEROUS_PATTERN" .; then
           echo "::error::Dangerous PHP functions detected. Please review the lines above."
+          exit 1
+        fi
+
+        # Detect bare exec() calls while ignoring method/static calls like $pdo->exec() or PDO::exec().
+        if grep -RInE --include='*.php' --exclude-dir=.git --exclude-dir=.github '(^|[^[:alnum:]_>:-])exec\(' .; then
+          echo "::error::Dangerous PHP function exec() detected."
           exit 1
         fi
         echo "No dangerous PHP function usage found."
