@@ -15,3 +15,15 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
         server-dir: ${{ secrets.WEBSITE_PATH }}
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/.github/**
+          configuration.php
+          actions/database.php
+          actions/bookfind.sql
+          README.md
+          LICENSE
+          CODE_OF_CONDUCT.md
+          CONTRIBUTING.md
+          AUTHORS.md
