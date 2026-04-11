@@ -1,9 +1,75 @@
-on: push
-name: Deploy website
+name: CI and Deploy website
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      run_phpstan:
+        description: "Run optional PHPStan analysis"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
 jobs:
+  ci-php-quality:
+    name: CI PHP quality
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get latest code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+
+    - name: Lint all PHP files
+      shell: bash
+      run: |
+        set -euo pipefail
+        while IFS= read -r -d '' file; do
+          php -l "$file"
+        done < <(find . -type f -name "*.php" -print0)
+
+    - name: Basic security check (dangerous PHP functions)
+      shell: bash
+      run: |
+        set -euo pipefail
+        DANGEROUS_PATTERN='(eval\(|exec\(|shell_exec\(|passthru\(|system\(|popen\(|proc_open\()'
+        if grep -RInE --include='*.php' --exclude-dir=.git --exclude-dir=.github "$DANGEROUS_PATTERN" .; then
+          echo "::error::Dangerous PHP functions detected. Please review the lines above."
+          exit 1
+        fi
+        echo "No dangerous PHP function usage found."
+
+    - name: Optional PHPStan (level 1)
+      if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_phpstan == 'true' }}
+      shell: bash
+      run: |
+        set -euo pipefail
+        if [ ! -f composer.json ]; then
+          echo "composer.json not found; skipping PHPStan."
+          exit 0
+        fi
+        composer require --dev phpstan/phpstan --no-interaction --no-progress
+        ./vendor/bin/phpstan analyse --level=1 .
+
   web-deploy:
     name: Deploy
+    needs: ci-php-quality
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-${{ github.ref }}
+      cancel-in-progress: true
     steps:
     - name: Get latest code
       uses: actions/checkout@v4
