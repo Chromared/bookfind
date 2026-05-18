@@ -79,9 +79,23 @@ require 'actions/database.php';
             </div>
             <div class="card-body">
                 <form method="post" class="mb-3">
-                    <button type="submit" name="import" class="btn btn-primary w-100">
-                        <i class="bi bi-database me-2"></i>Importer la base de données
-                    </button>
+                    <div class="mb-2">
+                        <button type="submit" name="import" class="btn btn-primary w-100">
+                            <i class="bi bi-database me-2"></i>Importer la base de données (créer + tables)
+                        </button>
+                    </div>
+                    <div class="form-check mt-2">
+                        <input class="form-check-input" type="checkbox" value="1" id="onlyTables" name="onlyTables">
+                        <label class="form-check-label" for="onlyTables">
+                            La base existe déjà — importer uniquement les tables
+                        </label>
+                    </div>
+                    <div class="input-group mt-2">
+                        <input type="text" name="dbname_import" class="form-control" placeholder="Nom de la base (optionnel, par défaut 'bookfind')">
+                        <button type="submit" name="import" class="btn btn-secondary">
+                            Importer
+                        </button>
+                    </div>
                 </form>
                 <form method="post">
                     <div class="input-group">
@@ -97,10 +111,30 @@ require 'actions/database.php';
                         $dbname = $_POST['dbname'];
                         $filePath = 'actions/database.php';
                         $fileContent = file_get_contents($filePath);
-                        $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = '$dbname';", $fileContent);
+                        $fileContent = preg_replace_callback('/\\$dbname\s*=\s*\'[^\']*\';/', function($m) use ($dbname) {
+                            return '$dbname = ' . var_export($dbname, true) . ';';
+                        }, $fileContent);
                         file_put_contents($filePath, $fileContent);
-                        unlink('actions/bookfind.sql');
-                        echo '<div class="alert alert-success mt-3">Enregistré avec succès ! <a href="configuration.php">Recharger la page</a>.</div>';
+                        include 'actions/database.php';
+                        $sqlFilePath = 'actions/bookfind.sql';
+                        if (file_exists($sqlFilePath)) {
+                            $sql = file_get_contents($sqlFilePath);
+                            $sql = preg_replace('/CREATE DATABASE\s+IF NOT EXISTS.*?;|CREATE DATABASE.*?;|USE `.*?`;/is', '', $sql);
+                            $queries = array_filter(array_map('trim', explode(';', $sql)));
+                            foreach ($queries as $query) {
+                                if (!empty($query)) {
+                                    try {
+                                        $bdd->exec($query);
+                                    } catch (Exception $e) {
+                                        echo '<div class="alert alert-danger">Erreur d\'exécution SQL : ' . htmlspecialchars($e->getMessage()) . '</div>';
+                                    }
+                                }
+                            }
+                            unlink($sqlFilePath);
+                            echo '<div class="alert alert-success mt-3">Tables importées. <a href="configuration.php">Recharger la page</a>.</div>';
+                        } else {
+                            echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
+                        }
                     } else {
                         echo '<div class="alert alert-danger mt-3">Identifiants MySQL manquants. Remplissez d\'abord le formulaire plus haut.</div>';
                     }
@@ -108,27 +142,84 @@ require 'actions/database.php';
 
                 if (isset($_POST['import'])) {
                     if (!empty($host) && !empty($username)) {
+                        // Si l'utilisateur demande d'importer uniquement les tables
+                        if (!empty($_POST['onlyTables'])) {
+                            $dbnameInput = !empty($_POST['dbname_import']) ? trim($_POST['dbname_import']) : 'bookfind';
+                            $filePath = 'actions/database.php';
+                            $fileContent = file_get_contents($filePath);
+                            $fileContent = preg_replace_callback('/\\$dbname\s*=\s*\'[^\']*\';/', function($m) use ($dbnameInput) {
+                                return '$dbname = ' . var_export($dbnameInput, true) . ';';
+                            }, $fileContent);
+                            file_put_contents($filePath, $fileContent);
+                            // Reconnecter sur la base fournie
+                            include 'actions/database.php';
+                            $sqlFilePath = 'actions/bookfind.sql';
+                            if (file_exists($sqlFilePath)) {
+                                $sql = file_get_contents($sqlFilePath);
+                                $cleanSql = preg_replace('/CREATE DATABASE\\s+IF NOT EXISTS.*?;|CREATE DATABASE.*?;|USE `.*?`;/is', '', $sql);
+                                $queries = array_filter(array_map('trim', explode(';', $cleanSql)));
+                                foreach ($queries as $query) {
+                                    if (!empty($query)) {
+                                        try {
+                                            $bdd->exec($query);
+                                        } catch (Exception $e) {
+                                            echo '<div class="alert alert-danger">Erreur d\'exécution SQL : ' . htmlspecialchars($e->getMessage()) . '</div>';
+                                        }
+                                    }
+                                }
+                                unlink($sqlFilePath);
+                                echo '<div class="alert alert-success mt-3">Tables importées. <a href="configuration.php">Recharger la page</a>.</div>';
+                            } else {
+                                echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
+                            }
+                            // Fin du flux d'import uniquement des tables
+                            goto end_import;
+                        }
+
                         $filePath = 'actions/database.php';
                         $fileContent = file_get_contents($filePath);
-                        $fileContent = preg_replace("/\\\$dbname = '';/", "\$dbname = 'bookfind';", $fileContent);
+                        $fileContent = preg_replace_callback('/\\$dbname\s*=\s*\'[^\']*\';/', function($m) {
+                            return '$dbname = ' . var_export('bookfind', true) . ';';
+                        }, $fileContent);
                         file_put_contents($filePath, $fileContent);
                         $sqlFilePath = 'actions/bookfind.sql';
-                        $sql = file_get_contents($sqlFilePath);
-                        $bdd->exec('CREATE DATABASE bookfind');
-                        $queries = array_filter(array_map('trim', explode(';', $sql)));
-                        foreach ($queries as $query) {
-                            if (!empty($query)) {
-                                if ($bdd->query($query) === false) {
-                                    echo '<div class="alert alert-danger">Erreur d\'exécution SQL.</div>';
+                        if (file_exists($sqlFilePath)) {
+                            $sql = file_get_contents($sqlFilePath);
+                            // Créer la base sans se connecter à une base inexistante
+                            try {
+                                $tmpDsn = 'mysql:host=' . $host . ';charset=utf8';
+                                $tmpPdo = new PDO($tmpDsn, $username, $password);
+                                $tmpPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                $tmpPdo->exec('CREATE DATABASE IF NOT EXISTS `bookfind` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci');
+                            } catch (Exception $e) {
+                                echo '<div class="alert alert-danger mt-3">Impossible de créer la base : ' . htmlspecialchars($e->getMessage()) . '</div>';
+                                // On arrête ici
+                                goto end_import;
+                            }
+                            // Recharger la config pour se connecter sur la nouvelle base
+                            include 'actions/database.php';
+                            // Retirer les éventuelles lignes CREATE DATABASE / USE du dump avant exécution
+                            $cleanSql = preg_replace('/CREATE DATABASE\\s+IF NOT EXISTS.*?;|CREATE DATABASE.*?;|USE `.*?`;/is', '', $sql);
+                            $queries = array_filter(array_map('trim', explode(';', $cleanSql)));
+                            foreach ($queries as $query) {
+                                if (!empty($query)) {
+                                    try {
+                                        $bdd->exec($query);
+                                    } catch (Exception $e) {
+                                        echo '<div class="alert alert-danger">Erreur d\'exécution SQL : ' . htmlspecialchars($e->getMessage()) . '</div>';
+                                    }
                                 }
                             }
+                            unlink($sqlFilePath);
+                            echo '<div class="alert alert-success mt-3">Base de données importée. <a href="configuration.php">Recharger la page</a>.</div>';
+                        } else {
+                            echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
                         }
-                        unlink('actions/bookfind.sql');
-                        echo '<div class="alert alert-success mt-3">Base de données importée. <a href="configuration.php">Recharger la page</a>.</div>';
                     } else {
                         echo '<div class="alert alert-danger mt-3">Identifiants MySQL manquants. Remplissez d\'abord le formulaire plus haut.</div>';
                     }
                 }
+                end_import:
                 ?>
             </div>
         </div>

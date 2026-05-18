@@ -1,0 +1,15 @@
+{
+    "project_name": "BookFind",
+    "version": "3.4.1",
+    "type": "php",
+    "launcher": {
+        "compatible": true,
+        "connection_types": ["ftp", "sql"],
+        "notes": "Il faut mettre les informations de connexions pour la base de données dans database.php",
+        "requires_sql": true,
+        "sql_schema_path": "actions/bookfind.sql",
+        "ignore": [
+            "actions/bookfind.sql"
+        ]
+    }
+}
