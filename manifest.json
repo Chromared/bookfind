@@ -5,7 +5,7 @@
     "launcher": {
         "compatible": true,
         "connection_types": ["ftp", "sql"],
-        "notes": "Infos utiles pour le déploiement",
+        "notes": "Il faut mettre les informations de connexions pour la base de données dans database.php",
         "requires_sql": true,
         "sql_schema_path": "actions/bookfind.sql",
         "ignore": [
