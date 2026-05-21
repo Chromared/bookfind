@@ -45,7 +45,9 @@
                         <li class="list-group-item">Grade : <?php Grade($users['grade']); ?></li>
                     </ul>
                     <div class="btn-group" role="group">
-                      <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn-primary">Modifier</a>
+                      <?php if($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2'){ ?>
+                        <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn-primary">Modifier</a>
+                      <?php } ?>
                       <a href="../profil.php?id=<?= $users['id'] ?>" class="btn btn-secondary">Voir</a>
                       <a href="user-emprunts.php?id=<?= htmlspecialchars($users['id']) ?>" class="btn btn-success">Emprunts</a>
                     </div>

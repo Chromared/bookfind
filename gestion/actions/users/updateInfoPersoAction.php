@@ -10,29 +10,32 @@
 
 <?php
 if (isset($_POST['validateInfoPerso'])) {
-        if (isset($_POST['name']) AND isset($_POST['firstname'])) {
-        if (!empty($_POST['name']) AND !empty($_POST['firstname'])) {
-            $name = $_POST['name'];
-            $firstname = $_POST['firstname'];
-            $id = $_GET['id'];
+    if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') {
+        if (isset($_POST['name']) and isset($_POST['firstname'])) {
+            if (!empty($_POST['name']) and !empty($_POST['firstname'])) {
+                $name = $_POST['name'];
+                $firstname = $_POST['firstname'];
+                $id = $_GET['id'];
 
-            $updateInfoPerso = $bdd->prepare('UPDATE users SET nom = ?, prenom = ? WHERE id = ?');
-            $updateInfoPerso->execute(array($name, $firstname, $id));
+                $updateInfoPerso = $bdd->prepare('UPDATE users SET nom = ?, prenom = ? WHERE id = ?');
+                $updateInfoPerso->execute(array($name, $firstname, $id));
 
-            if($name != $usersInfos['nom'] AND $firstname == $usersInfos['prenom']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> passant de ' . $usersInfos['nom'] . ' à ' . $name . '.');
-            }elseif($name == $usersInfos['nom'] AND $firstname != $usersInfos['prenom']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de prénom de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> passant de ' . $usersInfos['prenom'] . ' à ' . $firstname . '.');
-            }elseif($name != $usersInfos['nom'] AND $firstname != $usersInfos['prenom']){
-                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a>. Son ancien prénom était ' . $usersInfos['prenom'] . ' et est maintenant ' . $firstname . '. Quant à son nom, il passe de ' . $usersInfos['nom'] . ' à ' . $name . '.');
+                if ($name != $usersInfos['nom'] and $firstname == $usersInfos['prenom']) {
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> passant de ' . $usersInfos['nom'] . ' à ' . $name . '.');
+                } elseif ($name == $usersInfos['nom'] and $firstname != $usersInfos['prenom']) {
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du nom de prénom de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> passant de ' . $usersInfos['prenom'] . ' à ' . $firstname . '.');
+                } elseif ($name != $usersInfos['nom'] and $firstname != $usersInfos['prenom']) {
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de compte', 'Modification du prénom et du nom de famille de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a>. Son ancien prénom était ' . $usersInfos['prenom'] . ' et est maintenant ' . $firstname . '. Quant à son nom, il passe de ' . $usersInfos['nom'] . ' à ' . $name . '.');
+                }
+
+                header('Location: update-user.php?id=' . $id . '&msg1=true');
+            } else {
+                $errorMsg1 = 'Veuillez remplir tous les champs.';
             }
-
-            header('Location: update-user.php?id=' . $id .'&msg1=true');
-
-    }else {
-        $errorMsg1 = 'Veuillez remplir tous les champs.';
+        } else {
+            $errorMsg1 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
+        }
+    } else {
+        $errorMsg1 = 'Vous n\'avez pas les droits pour effectuer cette action.';
     }
-}else{
-    $errorMsg1 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
-}
 }
