@@ -72,7 +72,7 @@ require_once 'actions/database.php';
         <?php } else { echo '<div class="alert alert-success">Étape 1 validée.</div>'; $step1 = true; } ?>
 
         <!-- Etape 2 : Importer la base de données -->
-        <?php if (file_exists('actions/bookfind.sql')) { ?>
+        <?php if (empty($dbname)) { ?>
         <div class="card mb-4">
             <div class="card-header">
                 2. Importer la base de données
@@ -171,10 +171,6 @@ require_once 'actions/database.php';
                                         }
                                     }
                                 }
-<<<<<<< HEAD
-=======
-                                unlink($sqlFilePath);
->>>>>>> 8e0ce3382a6bf73ca3af4398bfb7d361a3ea60fd
                                 echo '<div class="alert alert-success mt-3">Tables importées. <a href="configuration.php">Recharger la page</a>.</div>';
                             } else {
                                 echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
@@ -217,10 +213,6 @@ require_once 'actions/database.php';
                                     }
                                 }
                             }
-<<<<<<< HEAD
-=======
-                            unlink($sqlFilePath);
->>>>>>> 8e0ce3382a6bf73ca3af4398bfb7d361a3ea60fd
                             echo '<div class="alert alert-success mt-3">Base de données importée. <a href="configuration.php">Recharger la page</a>.</div>';
                         } else {
                             echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
