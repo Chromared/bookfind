@@ -115,16 +115,12 @@ require_once 'actions/database.php';
                             return '$dbname = ' . var_export($dbname, true) . ';';
                         }, $fileContent);
                         file_put_contents($filePath, $fileContent);
-<<<<<<< HEAD
                         try {
                             $bdd = new PDO('mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
                             $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                         } catch (PDOException $e) {
                             echo 'Connexion failed : ' . $e->getMessage();
                         }
-=======
-                        include 'actions/database.php';
->>>>>>> 8e0ce3382a6bf73ca3af4398bfb7d361a3ea60fd
                         $sqlFilePath = 'actions/bookfind.sql';
                         if (file_exists($sqlFilePath)) {
                             $sql = file_get_contents($sqlFilePath);
@@ -139,10 +135,6 @@ require_once 'actions/database.php';
                                     }
                                 }
                             }
-<<<<<<< HEAD
-=======
-                            unlink($sqlFilePath);
->>>>>>> 8e0ce3382a6bf73ca3af4398bfb7d361a3ea60fd
                             echo '<div class="alert alert-success mt-3">Tables importées. <a href="configuration.php">Recharger la page</a>.</div>';
                         } else {
                             echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
