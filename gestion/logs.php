@@ -87,35 +87,37 @@
     </div>
 
     <script>
+      document.addEventListener('DOMContentLoaded', function() {
         function load_logs() {
-            $('#log').load('actions/others/loadLogs.php');
+          $('#log').load('actions/others/loadLogs.php');
         }
 
         let intervalID;
 
         function startAutoRefresh() {
-            if (!intervalID) {
-                intervalID = setInterval(load_logs, 1000);
-            }
+          if (!intervalID) {
+            intervalID = setInterval(load_logs, 5000);
+          }
         }
 
         function stopAutoRefresh() {
-            clearInterval(intervalID);
-            intervalID = null;
-            load_logs(); // Charge une dernière fois les logs avant d'arrêter
+          clearInterval(intervalID);
+          intervalID = null;
+          load_logs(); // Charge une dernière fois les logs avant d'arrêter
         }
 
         // Gestion de la case à cocher
         $('#toggleAutoRefresh').on('change', function () {
-            if (this.checked) {
-                startAutoRefresh();
-            } else {
-                stopAutoRefresh();
-            }
+          if (this.checked) {
+            startAutoRefresh();
+          } else {
+            stopAutoRefresh();
+          }
         });
 
         // Lancer l'actualisation automatique au chargement de la page
         startAutoRefresh();
+      });
     </script>
 </body>
 </html>

@@ -123,7 +123,7 @@ require 'actions/users/securityAdminAction.php';
         </div>
     </div>
 
-    <script>
+    <script defer>
     function updateCounters() {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'actions/others/count_data.php', true);
@@ -146,7 +146,7 @@ require 'actions/users/securityAdminAction.php';
     }
 
     updateCounters();
-    setInterval(updateCounters, 1000);
+    setInterval(updateCounters, 10000);
     </script>
 <br />
 </body>
