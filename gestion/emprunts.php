@@ -39,16 +39,16 @@
   <div class="d-flex justify-content-center mt-4">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link <?php if($nbRetards > 0){ echo 'active'; } ?>" id="retard-tab" data-bs-toggle="tab" data-bs-target="#retard" type="button" role="tab" aria-controls="retard" aria-selected="<?php if($nbRetards > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbRetards == 0){ echo 'disabled'; } ?>>En retard</button>
+        <button class="nav-link <?php if($nbRetards > 0){ echo 'active'; } ?>" id="retard-tab" data-bs-toggle="tab" data-bs-target="#retard" type="button" role="tab" aria-controls="retard" aria-selected="<?php if($nbRetards > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbRetards == 0){ echo 'disabled'; } ?>>En retard <span class="badge text-bg-danger"><?= $nbRetards ?></span></button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui > 0){ echo 'active'; } ?>" id="aujourdhui-tab" data-bs-toggle="tab" data-bs-target="#aujourdhui" type="button" role="tab" aria-controls="aujourdhui" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbAujourdhui == 0){ echo 'disabled'; } ?>>À rendre aujourd'hui</button>
+        <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui > 0){ echo 'active'; } ?>" id="aujourdhui-tab" data-bs-toggle="tab" data-bs-target="#aujourdhui" type="button" role="tab" aria-controls="aujourdhui" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbAujourdhui == 0){ echo 'disabled'; } ?>>À rendre aujourd'hui <span class="badge text-bg-warning"><?= $nbAujourdhui ?></span></button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours > 0){ echo 'active'; } ?>" id="encours-tab" data-bs-toggle="tab" data-bs-target="#encours" type="button" role="tab" aria-controls="encours" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbEnCours == 0){ echo 'disabled'; } ?>>En cours</button>
+        <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours > 0){ echo 'active'; } ?>" id="encours-tab" data-bs-toggle="tab" data-bs-target="#encours" type="button" role="tab" aria-controls="encours" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbEnCours == 0){ echo 'disabled'; } ?>>En cours <span class="badge text-bg-info"><?= $nbEnCours ?></span></button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'active'; } ?>" id="retournes-tab" data-bs-toggle="tab" data-bs-target="#retournes" type="button" role="tab" aria-controls="retournes" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbRetournes == 0){ echo 'disabled'; } ?>>Retournés</button>
+        <button class="nav-link <?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'active'; } ?>" id="retournes-tab" data-bs-toggle="tab" data-bs-target="#retournes" type="button" role="tab" aria-controls="retournes" aria-selected="<?php if($nbRetards == 0 AND $nbAujourdhui == 0 AND $nbEnCours == 0 AND $nbRetournes > 0){ echo 'true'; }else{ echo 'false'; } ?>" <?php if($nbRetournes == 0){ echo 'disabled'; } ?>>Retournés <span class="badge text-bg-success"><?= $nbRetournes ?></span></button>
       </li>
     </ul>
   </div>
