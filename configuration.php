@@ -262,8 +262,8 @@ require_once 'actions/database.php';
                 }
 
                 if (!empty($host) && !empty($dbname) && !empty($username)) {
-                    $checkIfTwoClassesExists = $bdd->query('SELECT name FROM classes');
-                    if ($checkIfTwoClassesExists->rowCount() >= 2) {
+                    $checkIfClasseExists = $bdd->query('SELECT name FROM classes');
+                    if ($checkIfClasseExists->rowCount() > 0) {
                         echo '<div class="alert alert-success">Étape 3 validée.</div>';
                         $step3 = true;
                     }
