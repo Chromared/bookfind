@@ -9,7 +9,7 @@
 <?php session_start(); ?>
 <?php require 'actions/database.php';
     require 'actions/functions/logFunction.php';
-    require 'actions/functions/generateUsernameAction.php';
+    require 'actions/functions/generateUsernameFunction.php';
     require 'actions/users/signupAction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">

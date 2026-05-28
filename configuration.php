@@ -295,7 +295,6 @@ require_once 'actions/database.php';
         </div>
         <?php if (isset($_POST['delete'])) {
             unlink('configuration.php');
-            unlink('actions/bookfind.sql');
             echo '<div class="alert alert-success mt-3">Fichier supprimé avec succès. Vous pouvez maintenant accéder au <a href="index.php">site</a>.</div>';
         } } ?>
     </div>

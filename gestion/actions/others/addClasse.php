@@ -21,7 +21,7 @@
 
     SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Ajout d\'une classe', 'La classe "' . htmlspecialchars($newClasse) . '" à été ajoutée.');
 
-    header('Location: bookfind.php');
+    header('Location: bookfind.php?tab=classes');
 
     }else{ $msgC1 = 'Cette classe existe déjà.'; }
 }

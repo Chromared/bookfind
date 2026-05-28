@@ -38,8 +38,15 @@
           <a class="nav-link <?php if($pageActuelle == 'users.php'){ echo 'active'; } ?>" href="users.php">Utilisateurs</a>
         </li>
         <?php if($_SESSION['grade'] == 1){ ?>
-        <li class="nav-item">
-          <a class="nav-link <?php if($pageActuelle == 'bookfind.php'){ echo 'active'; } ?>" href="bookfind.php">BookFind</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <?php if($pageActuelle == 'bookfind.php'){ echo 'active'; } ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            BookFind
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'database')){ echo 'active'; } ?>" href="bookfind.php?tab=database">Base de données</a></li>
+            <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'classes')){ echo 'active'; } ?>" href="bookfind.php?tab=classes">Classes</a></li>
+            <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'users')){ echo 'active'; } ?>" href="bookfind.php?tab=users">Utilisateurs</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link <?php if($pageActuelle == 'logs.php'){ echo 'active'; } ?>" href="logs.php">Logs</a>
@@ -58,5 +65,4 @@
 </nav>
 <br />
 <br />
-
 <br />

@@ -24,7 +24,7 @@
 
     SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression d\'une classe', 'La classe "' . htmlspecialchars($existingClasse) . '" à été supprimé. Les utilisateurs de cette classe ont été déplacé dans la classe "Aucune".');
 
-    header('Location: bookfind.php');
+    header('Location: bookfind.php?tab=classes');
 
     }else{ $msgC3 = 'Cette classe existe déjà.'; }
 }

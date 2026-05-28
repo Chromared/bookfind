@@ -14,11 +14,14 @@
     $username = 'root';
     $password = '';
 
+    $db_error_message = null;
+
     if(!empty($host) AND !empty($username)){
     
     try {
         $bdd = new PDO('mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
-        echo 'Connexion failed : ' . $e->getMessage();
+        $bdd = null;
+        $db_error_message = 'Connexion impossible à la base de données.';
     }}
