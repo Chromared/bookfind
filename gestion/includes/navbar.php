@@ -46,10 +46,9 @@
             <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'database')){ echo 'active'; } ?>" href="bookfind.php?tab=database">Base de données</a></li>
             <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'classes')){ echo 'active'; } ?>" href="bookfind.php?tab=classes">Classes</a></li>
             <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'users')){ echo 'active'; } ?>" href="bookfind.php?tab=users">Utilisateurs</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item <?php if($pageActuelle == 'logs.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'users')){ echo 'active'; } ?>" href="logs.php?tab=users">Logs</a></li>
           </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?php if($pageActuelle == 'logs.php'){ echo 'active'; } ?>" href="logs.php">Logs</a>
         </li>
         <?php } ?>
         <li class="nav-item">
