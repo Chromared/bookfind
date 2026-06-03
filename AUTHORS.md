@@ -2,7 +2,7 @@
 
 ## Contributeurs actifs
 
-- [@MythUp_](https://github.com/MythUp)  -->  Backend (PHP) + Frontend (CSS / JS)
+- [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Backend (PHP) + Frontend (CSS / JS)
 - [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub 
 - [@TagSteel](https://github.com/TagSteel)  -->  Frontend (CSS) + Gestion dépôt GitHub
 
