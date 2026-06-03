@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 6.0.0-dev+20251125.142c0cf3be
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 01, 2025 at 03:20 PM
+-- Generation Time: Jun 03, 2026 at 04:09 PM
 -- Server version: 8.4.3
--- PHP Version: 8.3.16
+-- PHP Version: 8.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,17 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `books` (
   `id` int NOT NULL,
-  `titre` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `auteur` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `titre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `auteur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `isbn` bigint NOT NULL,
-  `id_unique` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `resume` text COLLATE utf8mb4_general_ci,
-  `editeur` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `serie` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_unique` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resume` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `editeur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `serie` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tome` int DEFAULT NULL,
   `statut` int NOT NULL,
-  `genre` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `genre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -50,7 +50,7 @@ CREATE TABLE `books` (
 
 CREATE TABLE `censure` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -61,7 +61,22 @@ CREATE TABLE `censure` (
 
 CREATE TABLE `classes` (
   `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cookies`
+--
+
+CREATE TABLE `cookies` (
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `user_ip` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `token` text COLLATE utf8mb4_general_ci NOT NULL,
+  `creation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_used` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -73,12 +88,12 @@ CREATE TABLE `classes` (
 CREATE TABLE `emprunts` (
   `id` int NOT NULL,
   `id_book` int NOT NULL,
-  `titre_book` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `titre_book` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `date_emprunt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_futur_retour` date NOT NULL,
   `date_retour` datetime DEFAULT NULL,
   `id_emprunteur` int NOT NULL,
-  `firstname_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `firstname_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `statut` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -90,13 +105,13 @@ CREATE TABLE `emprunts` (
 
 CREATE TABLE `logs` (
   `id` int NOT NULL,
-  `page` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `page` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_id` int NOT NULL,
   `user_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `user_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `comment` text COLLATE utf8mb4_general_ci NOT NULL,
+  `username` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -109,10 +124,10 @@ CREATE TABLE `logs` (
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `username` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `classe` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `nom` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `prenom` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `mdp` text COLLATE utf8mb4_general_ci NOT NULL,
+  `classe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `prenom` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `mdp` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `grade` int NOT NULL DEFAULT '0',
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `regles` int NOT NULL,
@@ -144,6 +159,12 @@ ALTER TABLE `censure`
 ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `cookies`
+--
+ALTER TABLE `cookies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `emprunts`
@@ -184,6 +205,12 @@ ALTER TABLE `censure`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cookies`
+--
+ALTER TABLE `cookies`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
