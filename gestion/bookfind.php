@@ -8,7 +8,7 @@
 
 <?php
 require '../actions/database.php';
-require 'actions/users/securityAction.php';
+require '../actions/users/securityAction.php';
 require 'actions/users/securityAdminAction.php';
 require '../actions/functions/logFunction.php';
 require '../actions/functions/generateUsernameFunction.php';

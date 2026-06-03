@@ -7,7 +7,7 @@
 ?>
 
 <?php require '../actions/database.php';
-    require 'actions/users/securityAction.php';
+    require '../actions/users/securityAction.php';
     require '../actions/functions/conversionDate.php';
     require '../actions/functions/conversionDateHour.php';
     require '../actions/functions/colorDateEmpruntFunction.php';
