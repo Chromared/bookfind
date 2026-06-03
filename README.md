@@ -94,6 +94,18 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 - **Aucune** : Il n'y a pour l'instant pas de dépendances nécessaires au fonctionnement de BookFind.
 
+## Liste des contributeurs
+
+### Contributeurs actifs
+
+- [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Backend (PHP) + Frontend (CSS / JS)
+- [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub 
+- [@TagSteel](https://github.com/TagSteel)  -->  Frontend (CSS) + Gestion dépôt GitHub
+
+### Contributeurs passifs
+
+- [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = action/fonction/title.js)
+
 ## Licence
 
 Ce projet est distribué selon les termes de la license [MIT]. 2025 Chromared.
