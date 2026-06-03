@@ -9,6 +9,7 @@
 <?php require '../actions/database.php';
 require '../actions/users/securityAction.php';
 require 'actions/users/securityAdminAction.php';
+require '../actions/functions/logFunction.php';
 require '../actions/books/showEmprunts.php';
 require '../actions/functions/conversionDateHour.php';
 require '../actions/functions/conversionDate.php';
