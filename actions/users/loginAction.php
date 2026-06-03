@@ -39,7 +39,11 @@
 
                 SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Connexion', 'Aucun commentaire.');
 
+                if(isset($_POST['redirect']) AND !empty($_POST['redirect'])){
+                    header('Location: ' . htmlspecialchars($_POST['redirect']));
+                }else{
                 header('Location: index.php');
+                }
                 
 
     }else{

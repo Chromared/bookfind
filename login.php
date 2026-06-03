@@ -42,6 +42,9 @@
               <label for="password" class="form-label text-start d-block">Mot de passe</label>
               <input type="password" name="password" id="password" class="form-control" required/>
             </div>
+            <?php if(isset($_GET['redirect']) AND !empty($_GET['redirect'])){ ?>
+              <input type="hidden" name="redirect" value="<?= htmlspecialchars($_GET['redirect']); ?>" />
+            <?php } ?>
             <div class="mb-3">
               <input type="submit" name="validate" class="btn btn-primary" value="Connexion" />
             </div>
