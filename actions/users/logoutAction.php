@@ -9,11 +9,22 @@
 
 
 <?php require '../database.php';
-    require '../functions/logFunction.php';
+require '../functions/logFunction.php';
 session_start();
 
-    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
+SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
 
 $_SESSION = [];
 session_destroy();
+setcookie(
+    "auth_token",
+    "",
+    [
+        "expires" => time() - 3600, // date passée → suppression
+        "path" => "/",
+        "secure" => true,
+        "httponly" => true,
+        "samesite" => "Strict"
+    ]
+);
 header('Location: ../../login.php');
