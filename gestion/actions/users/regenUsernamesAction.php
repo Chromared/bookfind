@@ -11,5 +11,7 @@
         $i += 1;
     }
 
+    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Régénération des noms d\'utilisateur', 'Le nom d\'utilisateur de ' . $i . ' utilisateurs a été régénéré.');
+
     $msgRegenUsernames = 'Le nom d\'utilisateur de ' . $i . ' utilisateurs a été régénéré.';
 }
