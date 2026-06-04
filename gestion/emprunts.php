@@ -14,16 +14,15 @@
     require '../actions/functions/conversionDate.php';
     require '../actions/functions/colorDateEmpruntFunction.php'; ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprunts</title>
     <?php include '../includes/header.php'; ?>
     <style>
-    /* Correction pour la navbar sticky */
     h3 {
-        scroll-margin-top: 50px; /* Ajuster selon la hauteur réelle de la navbar */
+        scroll-margin-top: 50px;
     }
 </style>
 </head>

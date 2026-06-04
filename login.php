@@ -11,7 +11,7 @@
 require 'actions/functions/logFunction.php';
 require 'actions/users/loginAction.php'; ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">

@@ -30,7 +30,7 @@ if ($_SESSION['grade'] != '1') {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
