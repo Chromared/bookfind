@@ -11,7 +11,7 @@
     require 'actions/functions/logFunction.php';
     if (isset($_GET['id']) AND !empty($_GET['id'])) { 
       require 'actions/users/showOneUserProfilAction.php'; 
-    }else{ die('La variable URL contenant l\'ID de l\'utilisateur est absente ou vide.'); }
+    }else{ header('Location: profil.php?id=' . $_SESSION['id']); }
     require 'actions/functions/transfoGradeIntVersText.php';
     require 'actions/functions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
