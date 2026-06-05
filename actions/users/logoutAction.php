@@ -12,7 +12,8 @@
 require '../functions/logFunction.php';
 session_start();
 
-SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
+$deleteCookies = $bdd->prepare('DELETE FROM cookies WHERE user_id = ?');
+$deleteCookies->execute(array($_SESSION['id']));
 
 $_SESSION = [];
 session_destroy();
@@ -20,11 +21,14 @@ setcookie(
     "auth_token",
     "",
     [
-        "expires" => time() - 3600, // date passée → suppression
+        "expires" => time() - 3600,
         "path" => "/",
         "secure" => true,
         "httponly" => true,
         "samesite" => "Strict"
     ]
 );
+
+SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
+
 header('Location: ../../login.php');
