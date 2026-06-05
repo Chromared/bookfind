@@ -14,7 +14,7 @@ function ColorDateEmprunt($Date) {
 
     switch (true) {
         case ($Date > $Now):
-            echo '<span style="color: black;">' . NoEchoConversionDate($Date) . '</span>';
+            echo '<span class="text-body">' . NoEchoConversionDate($Date) . '</span>';
             break;
         case ($Date == $Now):
             echo '<span style="color: green;">' . NoEchoConversionDate($Date) . '</span>';
