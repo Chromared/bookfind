@@ -99,8 +99,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 ### Contributeurs actifs
 
 - [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Backend (PHP) + Frontend (CSS / JS)
-- [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub 
-- [@TagSteel](https://github.com/TagSteel)  -->  Gestion dépôt GitHub
+- [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub
 
 ### Contributeurs passifs
 
