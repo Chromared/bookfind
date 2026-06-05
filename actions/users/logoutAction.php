@@ -15,6 +15,8 @@ session_start();
 $deleteCookies = $bdd->prepare('DELETE FROM cookies WHERE user_id = ?');
 $deleteCookies->execute(array($_SESSION['id']));
 
+SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
+
 $_SESSION = [];
 session_destroy();
 setcookie(
@@ -28,7 +30,5 @@ setcookie(
         "samesite" => "Strict"
     ]
 );
-
-SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
 
 header('Location: ../../login.php');
