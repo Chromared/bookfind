@@ -27,6 +27,11 @@
 
       <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
         <li class="ms-3">
+          <a class="text-body-secondary" href="mailto:chromared@outlook.fr" aria-label="Email">
+            <i class="bi bi-envelope fs-5"></i>
+          </a>
+        </li>
+        <li class="ms-3">
           <a class="text-body-secondary" href="https://github.com/Chromared" aria-label="GitHub">
             <i class="bi bi-github fs-5"></i>
           </a>
