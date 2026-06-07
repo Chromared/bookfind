@@ -6,33 +6,37 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php require '../actions/database.php'; 
-    require '../actions/users/securityAction.php';
-    require 'actions/users/securityAdminAction.php';
-    require '../actions/functions/logFunction.php';
-    require 'actions/others/exportLogs.php'; ?>
+<?php require '../actions/database.php';
+require '../actions/users/securityAction.php';
+require 'actions/users/securityAdminAction.php';
+require '../actions/functions/logFunction.php';
+require 'actions/others/exportLogs.php'; ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logs</title>
-    <?php include '../includes/header.php'; ?>
-</head>
-<body>
-<?php include 'includes/navbar.php'; ?>
-<br />
-<?php if($_SESSION['grade'] !== 1){ die('Vous n\'avez pas les permissions d\'administrateur et elles sont nécessaire pour accéder à cette page.'); } ?>
 
-<div class="container mt-3">
-  <div class="d-flex justify-content-center mt-4">
-    <div class="card text-center mb-3" style="width: 50rem;">
-      <div class="card-body">
-        <h5 class="card-title">Logs</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">Paramètres</h6>
-        <p class="card-text">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logs</title>
+  <?php include '../includes/header.php'; ?>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <?php include 'includes/navbar.php'; ?>
+  <br />
+  <?php if ($_SESSION['grade'] !== 1) {
+    die('Vous n\'avez pas les permissions d\'administrateur et elles sont nécessaire pour accéder à cette page.');
+  } ?>
+
+  <div class="container mt-3">
+    <div class="d-flex justify-content-center mt-4">
+      <div class="card text-center mb-3" style="width: 50rem;">
+        <div class="card-body">
+          <h5 class="card-title">Logs</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">Paramètres</h6>
+          <p class="card-text">
           <div class="mb-3">
-            <div class="form-check form-switch d-flex justify-content-center">
+            <div class="form-check form-switch d-flex justify-content-center align-items-center gap-1">
               <input type="checkbox" class="form-check-input" role="switch" id="toggleAutoRefresh" checked>
               <label class="form-check-label" for="toggleAutoRefresh">
                 Actualisation automatique
@@ -43,15 +47,15 @@
             Exporter les logs
           </button>
           <div class="modal fade" id="exportModal" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-dialog">
+              <div class="modal-content">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5">Charte RGPD</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-start">
-                  En exportant ces logs, je reconnais qu’ils peuvent contenir des données personnelles.  
-                  Je m’engage à respecter la réglementation RGPD, notamment :  
+                  En exportant ces logs, je reconnais qu’ils peuvent contenir des données personnelles.
+                  Je m’engage à respecter la réglementation RGPD, notamment :
                   <ul class="text-start mt-2">
                     <li>à ne pas diffuser les données sans autorisation,</li>
                     <li>à les sécuriser et les conserver de manière temporaire,</li>
@@ -61,18 +65,18 @@
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                   <form method="post">
-                    <input type="submit" class="btn btn-primary" name="export" value="Exporter au format .csv"/>
+                    <input type="submit" class="btn btn-primary" name="export" value="Exporter au format .csv" />
                   </form>
                 </div>
               </div>
             </div>
           </div>
-        </p>
+          </p>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="log">
+  <div id="log">
     <div class="container mt-3">
       <div class="d-flex justify-content-center mt-4">
         <div class="card text-center mb-3" style="width: 50rem;">
@@ -107,7 +111,7 @@
         }
 
         // Gestion de la case à cocher
-        $('#toggleAutoRefresh').on('change', function () {
+        $('#toggleAutoRefresh').on('change', function() {
           if (this.checked) {
             startAutoRefresh();
           } else {
@@ -119,5 +123,8 @@
         startAutoRefresh();
       });
     </script>
+  </div>
+  <?php include '../includes/footer.php'; ?>
 </body>
+
 </html>

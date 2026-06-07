@@ -9,30 +9,34 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    <?php include 'includes/header.php'; ?>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil</title>
+  <?php include 'includes/header.php'; ?>
 </head>
-<body>
+
+<body class="d-flex flex-column min-vh-100">
   <?php include 'includes/navbar.php'; ?>
   <div class="container text-center mt-5">
     <img src="assets/iconesite.png" class="img-fluid w-25 display-4" />
     <h1 class="mt-3">Bienvenue sur BookFind !</h1>
   </div>
   <div class="container mt-3">
-      <form method="GET" action="books.php">
-          <div class="input-group mb-3">
-            <input type="text" name="s" class="form-control" value="<?php if(isset($_GET['s']) AND !empty($_GET['s'])){echo htmlspecialchars($_GET['s']);} ?>" placeholder="Rechercher un livre" />
-            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-              <i class="bi bi-search"></i>
-              Rechercher
-            </button>
-          </div>
-      </form>
+    <form method="GET" action="books.php">
+      <div class="input-group mb-3">
+        <input type="text" name="s" class="form-control" value="<?php if (isset($_GET['s']) and !empty($_GET['s'])) {
+                                                                  echo htmlspecialchars($_GET['s']);
+                                                                } ?>" placeholder="Rechercher un livre" />
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+          <i class="bi bi-search"></i>
+          Rechercher
+        </button>
+      </div>
+    </form>
   </div>
-  <?php if(isset($_GET['signup']) and isset($_SESSION['auth'])){ ?>
+  <?php if (isset($_GET['signup']) and isset($_SESSION['auth'])) { ?>
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -50,15 +54,17 @@
       </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var successModal = document.getElementById('successModal');
-            var myModal = new bootstrap.Modal(successModal, {
-                backdrop: 'static',
-                keyboard: false
-            });
-            myModal.show();
+      document.addEventListener("DOMContentLoaded", function() {
+        var successModal = document.getElementById('successModal');
+        var myModal = new bootstrap.Modal(successModal, {
+          backdrop: 'static',
+          keyboard: false
         });
+        myModal.show();
+      });
     </script>
   <?php } ?>
+  <?php include 'includes/footer.php'; ?>
 </body>
+
 </html>

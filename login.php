@@ -20,7 +20,7 @@ require 'actions/users/loginAction.php'; ?>
   <?php include 'includes/header.php'; ?>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
   <?php include 'includes/navbar.php'; ?>
   <form method="POST">
     <div class="container mt-3">
@@ -59,6 +59,7 @@ require 'actions/users/loginAction.php'; ?>
       </div>
     </div>
   </form>
+  <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>

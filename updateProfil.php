@@ -28,7 +28,7 @@
       <?php include 'includes/header.php' ?>
     </head>
 
-    <body>
+    <body class="d-flex flex-column min-vh-100">
       <?php include 'includes/navbar.php' ?>
       <form method="post">
         <div class="container mt-3">

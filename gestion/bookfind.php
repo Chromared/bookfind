@@ -39,7 +39,7 @@ if ($_SESSION['grade'] != '1') {
     <?php include '../includes/header.php'; ?>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <?php include 'includes/navbar.php'; ?>
     <?php if (isset($_GET['tab']) and $_GET['tab'] == 'database') { ?>
         <!-- Connexion base de données -->
@@ -503,6 +503,7 @@ if ($_SESSION['grade'] != '1') {
             </div>
         </form>
     <?php } ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 
 </html>
