@@ -6,6 +6,8 @@
 //Copyright (C) 2025 Chromared
 ?>
 
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 <head>

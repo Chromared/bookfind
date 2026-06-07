@@ -12,6 +12,6 @@
     $selectUsers = $bdd->prepare('SELECT * FROM users');
     $selectUsers->execute();
     while($user = $selectUsers->fetch()){
-      echo '<option value="' . $user['id'] . '">' . htmlspecialchars($user['prenom'] . ' ' . $user['nom']) . ' (' . $user['username'] . ')</option>';
+      echo '<option value="' . $user['id'] . '">' . htmlspecialchars($user['prenom'] . ' ' . $user['nom']) . ' (' . $user['classe'] . ')</option>';
     }
 ?>

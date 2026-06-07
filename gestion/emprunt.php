@@ -48,8 +48,8 @@
                 <div class="mb-3">
                   <label for="user_id" class="form-label">Emprunteur :</label>
                   <select id="user_id" name="user_id" class="form-select" style="width:100%;">
-                    <option value=""></option>
-                    <?php include 'actions/users/list-usersWithUsername.php'; ?>
+                    <option value="">--- Sélectionner un utilisateur ---</option>
+                    <?php include 'actions/users/list-usersWithClasse.php'; ?>
                   </select>
                 </div>
                 <div class="mb-3">
