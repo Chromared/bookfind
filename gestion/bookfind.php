@@ -101,7 +101,7 @@ if ($_SESSION['grade'] != '1') {
     <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'classes') { ?>
 
         <!-- Ajouter une classe -->
-        <form method="POST" autocomplete="off">
+        <form method="POST" autocomplete="off" id="addClasse">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
                     <div class="card text-center mb-3" style="width: 50rem;">
@@ -133,7 +133,7 @@ if ($_SESSION['grade'] != '1') {
         </form>
 
         <!-- Modifier une classe -->
-        <form method="POST" autocomplete="off">
+        <form method="POST" autocomplete="off" id="updateClasse">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
                     <div class="card text-center mb-3" style="width: 50rem;">
@@ -172,7 +172,7 @@ if ($_SESSION['grade'] != '1') {
         </form>
 
         <!-- Supprimer une classe -->
-        <form method="POST" autocomplete="off">
+        <form method="POST" autocomplete="off" id="deleteClasse">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
                     <div class="card text-center mb-5" style="width: 50rem;">
