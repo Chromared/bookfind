@@ -10,5 +10,5 @@
 
 <?php
 if($_SESSION['grade'] == '0'){
-    header('Location: ../index.php');
+    http_response_code(403);
 }

@@ -4,3 +4,6 @@ RewriteEngine On
 
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+ErrorDocument 403 /errors/403.php
+ErrorDocument 404 /errors/404.php

@@ -26,9 +26,7 @@
   <div class="container mt-3">
     <form method="GET" action="books.php">
       <div class="input-group mb-3">
-        <input type="text" name="s" class="form-control" value="<?php if (isset($_GET['s']) and !empty($_GET['s'])) {
-                                                                  echo htmlspecialchars($_GET['s']);
-                                                                } ?>" placeholder="Rechercher un livre" />
+        <input type="text" name="s" class="form-control" placeholder="Rechercher un livre" />
         <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
           <i class="bi bi-search"></i>
           Rechercher
