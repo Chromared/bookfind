@@ -6,11 +6,11 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php if (isset($_GET['id']) and !empty($_GET['id'])) {
-  if ($_GET['id'] == $_SESSION['id']) { ?>
-    <?php require 'actions/database.php';
-    require 'actions/functions/logFunction.php';
-    require 'actions/users/securityAction.php';
+<?php if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
+  <?php require 'actions/database.php';
+  require 'actions/functions/logFunction.php';
+  require 'actions/users/securityAction.php';
+  if ($_GET['id'] == $_SESSION['id']) {
     require 'actions/users/showOneUserProfilAction.php';
     require 'actions/functions/selected.php';
     require 'actions/users/updateInfoPersoAction.php';
