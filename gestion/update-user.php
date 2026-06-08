@@ -14,7 +14,7 @@
   require '../actions/users/showOneUserProfilAction.php';
   if (($_SESSION['grade'] != '1' and $usersInfos['grade'] == '1') or ($_SESSION['grade'] != '1' and $_SESSION['grade'] != '2' and $usersInfos['grade'] == '2') or $_SESSION['grade'] == '3') {
     http_response_code(403);
-    require $_SERVER['DOCUMENT_ROOT'] . '/errors/403.php';
+    require '../errors/403.php';
     exit;
   } else {
     require '../actions/functions/selected.php';
@@ -243,6 +243,6 @@
     </html>
   <?php } else {
   http_response_code(403);
-  require $_SERVER['DOCUMENT_ROOT'] . '/errors/403.php';
+  require '../errors/403.php';
   exit;
 } ?>

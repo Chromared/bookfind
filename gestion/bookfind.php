@@ -25,12 +25,12 @@ if (isset($_GET['tab']) && $_GET['tab'] == 'database') {
 
 if ($_SESSION['grade'] != '1') {
     http_response_code(403);
-    require $_SERVER['DOCUMENT_ROOT'] . '/errors/403.php';
+    require '../errors/403.php';
     exit;
 }
 if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'users'])) {
     http_response_code(404);
-    require $_SERVER['DOCUMENT_ROOT'] . '/errors/404.php';
+    require '../errors/404.php';
     exit;
 }
 ?>

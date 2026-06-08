@@ -41,8 +41,10 @@
 
         if (isset($_GET['redirect']) and !empty($_GET['redirect'])) {
             header('Location: ' . htmlspecialchars($_GET['redirect']));
+            exit;
         } else {
             header('Location: index.php');
+            exit;
         }
     }
 } elseif (isset($_POST['validate'])) {
@@ -108,8 +110,10 @@
 
                     if (isset($_POST['redirect']) and !empty($_POST['redirect'])) {
                         header('Location: ' . htmlspecialchars($_POST['redirect']));
+                        exit;
                     } else {
                         header('Location: index.php');
+                        exit;
                     }
                 } else {
                     $errorMsg = '<div class="msg"><div class="msg-alerte">Mot de passe est incorrect.</div></div>';

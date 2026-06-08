@@ -8,10 +8,10 @@
 
 
 
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/actions/database.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/actions/users/securityAction.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/gestion/actions/users/securityAdminAction.php';
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/actions/functions/conversionDateHour.php';
+<?php require_once '../../../actions/database.php';
+    require_once '../../../actions/users/securityAction.php';
+    require_once '../../actions/users/securityAdminAction.php';
+    require_once '../../../actions/functions/conversionDateHour.php';
 
     $twoYearsAgo = (new DateTime())->modify('-730 days')->format('Y-m-d H:i:s');
 
