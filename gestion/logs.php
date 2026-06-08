@@ -25,7 +25,8 @@ require 'actions/others/exportLogs.php'; ?>
   <?php include 'includes/navbar.php'; ?>
   <br />
   <?php if ($_SESSION['grade'] !== 1) {
-    die('Vous n\'avez pas les permissions d\'administrateur et elles sont nécessaire pour accéder à cette page.');
+    http_response_code(403);
+    exit();
   } ?>
 
   <div class="container mt-3">

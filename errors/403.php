@@ -6,7 +6,9 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start(); ?>
+<?php if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+} ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
@@ -22,7 +24,7 @@
     <h1 class="mt-3">Erreur 403</h1>
     <img src="../assets/iconesite.png" class="img-fluid w-25 display-4" />
     <h3 class="mt-3">Vous n'avez pas les autorisations nécessaires pour accéder à cette page.</h3>
-    <?php if(!isset($_SESSION['auth'])) { ?>
+    <?php if (!isset($_SESSION['auth'])) { ?>
       <a href="/login.php" class="btn btn-primary mt-3">Se connecter</a>
     <?php } ?>
   </div>

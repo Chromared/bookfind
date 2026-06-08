@@ -8,17 +8,15 @@
 
 
 
-<?php require_once '../../../actions/database.php';
-    require_once '../../../actions/functions/conversionDateHour.php';
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/actions/database.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/actions/users/securityAction.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/gestion/actions/users/securityAdminAction.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/actions/functions/conversionDateHour.php';
 
-    $sevenDaysAgo = (new DateTime())->modify('-365 days')->format('Y-m-d H:i:s');
-    $thirtyDaysAgo = (new DateTime())->modify('-730 days')->format('Y-m-d H:i:s');
-
-    $query = $bdd->prepare("DELETE FROM logs WHERE (type = ? OR type = ? OR type = ?) AND datetime <= ?");
-    $query->execute(['Connexion', 'Inscription', 'Déconnexion', $sevenDaysAgo]);
+    $twoYearsAgo = (new DateTime())->modify('-730 days')->format('Y-m-d H:i:s');
 
     $query = $bdd->prepare("DELETE FROM logs WHERE datetime <= ?");
-    $query->execute([$thirtyDaysAgo]);
+    $query->execute([$twoYearsAgo]);
 
     $logs = $bdd->query('SELECT * FROM logs ORDER BY datetime DESC');
 

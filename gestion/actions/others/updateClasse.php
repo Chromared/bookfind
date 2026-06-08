@@ -25,7 +25,7 @@
 
     SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification d\'une classe', 'La classe "' . htmlspecialchars($existingClasse) . '" à été renommé en ' . htmlspecialchars($newClasse) . '.');
 
-    header('Location: bookfind.php?tab=classes#updateClasse');
+    header('Location: bookfind.php?tab=classes&successUpdateClasse#updateClasse');
 
     }else{ $msgC2 = 'La classe que vous souhaitez modifier n\'existe pas.'; }
 }

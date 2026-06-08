@@ -6,7 +6,9 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start(); ?>
+<?php if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+} ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 

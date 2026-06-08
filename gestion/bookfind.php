@@ -24,7 +24,13 @@ if (isset($_GET['tab']) && $_GET['tab'] == 'database') {
 }
 
 if ($_SESSION['grade'] != '1') {
-    header('Location: index.php');
+    http_response_code(403);
+    require $_SERVER['DOCUMENT_ROOT'] . '/errors/403.php';
+    exit;
+}
+if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'users'])) {
+    http_response_code(404);
+    require $_SERVER['DOCUMENT_ROOT'] . '/errors/404.php';
     exit;
 }
 ?>
@@ -118,6 +124,13 @@ if ($_SESSION['grade'] != '1') {
                                     <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                                     <div><?= $msgC1; ?></div>
                                 </div>
+                            <?php } elseif (isset($_GET['successAddClasse'])) { ?>
+                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
+                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                                    <div>
+                                        Classe ajoutée avec succès
+                                    </div>
+                                </div>
                             <?php } ?>
                             <div class="mb-3">
                                 <label for="newClasse" class="form-label text-start d-block">Nouvelle classe*</label>
@@ -149,6 +162,13 @@ if ($_SESSION['grade'] != '1') {
                                 <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                                     <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                                     <div><?= $msgC2; ?></div>
+                                </div>
+                            <?php } elseif (isset($_GET['successUpdateClasse'])) { ?>
+                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
+                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                                    <div>
+                                        Classe modifiée avec succès
+                                    </div>
                                 </div>
                             <?php } ?>
                             <div class="mb-3">
@@ -188,6 +208,13 @@ if ($_SESSION['grade'] != '1') {
                                 <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
                                     <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
                                     <div><?= $msgC3; ?></div>
+                                </div>
+                            <?php } elseif (isset($_GET['successDeleteClasse'])) { ?>
+                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
+                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
+                                    <div>
+                                        Classe supprimée avec succès
+                                    </div>
                                 </div>
                             <?php } ?>
                             <div class="mb-3">

@@ -12,30 +12,31 @@
   require 'actions/users/securityAdminAction.php';
   require '../actions/functions/logFunction.php';
   require '../actions/users/showOneUserProfilAction.php';
-  require '../actions/functions/selected.php';
-  require '../actions/functions/transfoGradeIntVersText.php';
-  require 'actions/users/updateInfoPersoAction.php';
-  require 'actions/users/updateInfoScoAction.php';
-  require 'actions/users/updateGradeAction.php';
-  require 'actions/users/updateMdpAction.php';
-  require 'actions/users/deleteAccountAction1.php';
-  require 'actions/users/deleteAccountAction2.php'; ?>
-  <!DOCTYPE html>
-  <html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+  if (($_SESSION['grade'] != '1' and $usersInfos['grade'] == '1') or ($_SESSION['grade'] != '1' and $_SESSION['grade'] != '2' and $usersInfos['grade'] == '2') or $_SESSION['grade'] == '3') {
+    http_response_code(403);
+    require $_SERVER['DOCUMENT_ROOT'] . '/errors/403.php';
+    exit;
+  } else {
+    require '../actions/functions/selected.php';
+    require '../actions/functions/transfoGradeIntVersText.php';
+    require 'actions/users/updateInfoPersoAction.php';
+    require 'actions/users/updateInfoScoAction.php';
+    require 'actions/users/updateGradeAction.php';
+    require 'actions/users/updateMdpAction.php';
+    require 'actions/users/deleteAccountAction1.php';
+    require 'actions/users/deleteAccountAction2.php'; ?>
+    <!DOCTYPE html>
+    <html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mise à jour d'un compte utilisateur</title>
-    <?php include '../includes/header.php' ?>
-  </head>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Mise à jour d'un compte utilisateur</title>
+      <?php include '../includes/header.php' ?>
+    </head>
 
-  <body class="d-flex flex-column min-vh-100">
-    <?php include 'includes/navbar.php' ?>
-
-    <?php if (($_SESSION['grade'] != '1' and $usersInfos['grade'] == '1') or ($_SESSION['grade'] != '1' and $_SESSION['grade'] != '2' and $usersInfos['grade'] == '2') or $_SESSION['grade'] == '3' or $_SESSION['grade'] == '0') {
-      echo '<p>Vous n\'avez pas le droit de modifier cet utilisateur.</p>';
-    } else { ?>
+    <body class="d-flex flex-column min-vh-100">
+      <?php include 'includes/navbar.php' ?>
 
       <form method="post">
         <div class="container mt-3">
@@ -237,7 +238,11 @@
     <?php }
     } ?>
     <?php include '../includes/footer.php'; ?>
-  </body>
+    </body>
 
-  </html>
-<?php } ?>
+    </html>
+  <?php } else {
+  http_response_code(403);
+  require $_SERVER['DOCUMENT_ROOT'] . '/errors/403.php';
+  exit;
+} ?>

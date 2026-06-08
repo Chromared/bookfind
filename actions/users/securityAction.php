@@ -12,4 +12,5 @@
 session_start();
 if(!isset($_SESSION['auth'])){
     header('Location: ../login.php?redirect=' . urlencode($_SERVER['REQUEST_URI']));
+    exit();
 }
