@@ -20,17 +20,6 @@ require 'actions/users/securityAdminAction.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil de la gestion</title>
     <?php include '../includes/header.php'; ?>
-    <style>
-        .card-widget i {
-            font-size: 2rem;
-        }
-
-        .card-widget .card-body {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
