@@ -25,6 +25,11 @@
                                 echo 'active';
                               } ?>" aria-current="page" href="index.php">Accueil</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if ($pageActuelle == 'books.php') {
+                                echo 'active';
+                              } ?>" aria-current="page" href="books.php">Rechercher</a>
+        </li>
         <?php if (file_exists('configuration.php')) { ?>
           <li class="nav-item">
             <a class="nav-link <?php if ($pageActuelle == 'configuration.php') {
