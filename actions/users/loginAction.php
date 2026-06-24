@@ -47,7 +47,8 @@
             exit;
         }
     }
-} elseif (isset($_POST['validate'])) {
+} 
+if (isset($_POST['validate'])) {
     if (isset($_POST['username']) and isset($_POST['password'])) {
         if (!empty($_POST['username']) and !empty($_POST['password'])) {
 
