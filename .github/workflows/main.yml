@@ -93,8 +93,4 @@ jobs:
           **/.github/**
           configuration.php
           actions/database.php
-          README.md
-          LICENSE
-          CODE_OF_CONDUCT.md
-          CONTRIBUTING.md
-          AUTHORS.md
+          **.md
