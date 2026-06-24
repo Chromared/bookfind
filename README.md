@@ -30,7 +30,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 ## Fonctionnalités
 
 - **Page d'accueil** : Présentation de l'application et formulaire de recherche de livres.
-- **Recherche de livres** : Interface permettant aux utilisateurs de trouver des livres en fonction de leur titre
+- **Recherche de livres** : Interface permettant aux utilisateurs de trouver des livres en fonction de leur titre.
 - **Gestion des emprunts** : Permet de voir les livres empruntés et l'historique d'emprunt.
 - **Connexion et profil utilisateur** : Authentification avec mot de passe crypté, accès aux fonctionnalités réservées, ainsi qu'un espace pour gérer son profil ou modifier le profil d'un utilisateur si on est gradé. Les parties modifiables varient en fonction du niveau de permission.
 

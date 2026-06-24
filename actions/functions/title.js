@@ -1,6 +1,6 @@
-//This file belongs to the Bookfind project.
+//This file belongs to the BookFind project.
 //
-//Bookfind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the MIT software license.
 //
 //Copyright (C) 2025 Chromared
 
