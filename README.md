@@ -62,11 +62,11 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 3. **Déplacer le projet** :
     - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP et uWAMP).
 
-## Configuration de la base de donnée
+## Configurer BookFind
 
 1. Dans votre navigateur, rendez-vous sur le fichier `configuration.php`.
 2. Suivez les actions **dans l'ordre** pour configurer la base de donnée, les classes de votre établissement...
-3. Quand vous avez fini, cliquez sur le bouton qui est apparu permettant de supprimer le fichier `configuration.php` car il ne sera plus d'aucune utilité et que, sachant qu'aucune restriction n'est appliquée, il serait dangereux de le laisser.
+3. Quand vous avez fini, cliquez sur le bouton qui est apparu permettant de supprimer le fichier `configuration.php`. Cette action est nécessaire pour des raisons de sécurité. Le fichier ne doit pas rester accessible après la configuration.
 
 ## Utilisation
 
@@ -98,19 +98,17 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 ### Contributeurs actifs
 
-- [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Backend (PHP) + Frontend (CSS / JS)
+- [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Full Stack
 - [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub
 
 ### Contributeurs passifs
 
-- [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = action/fonction/title.js)
+- [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = [action/fonction/title.js](https://github.com/Chromared/bookfind/blob/main/actions/functions/title.js))
 
 ## Licence
 
-Ce projet est distribué selon les termes de la license [MIT]. 2025 Chromared.
+Ce projet est distribué selon les termes de la license [MIT]. 2026 Chromared.
 
 ---
 
 [MIT]: https://opensource.org/licenses/MIT
-
-
