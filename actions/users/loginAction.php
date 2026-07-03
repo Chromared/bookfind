@@ -66,6 +66,8 @@ if (isset($_POST['validate'])) {
 
                     if(isset($_POST['rememberMe']) and !empty($_POST['rememberMe'])) {
 
+                        $rememberMe = true;
+
                         while($isTokenUnique = false) {
                             $token = bin2hex(random_bytes(32));
 
@@ -107,7 +109,12 @@ if (isset($_POST['validate'])) {
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Connexion', 'Connexion manuelle.');
+                    if($rememberMe) {
+                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Connexion', 'Connexion manuelle avec création d\'un cookie.');
+                    } else {
+                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Connexion', 'Connexion manuelle.');
+                    }
+
 
                     if (isset($_POST['redirect']) and !empty($_POST['redirect'])) {
                         header('Location: ' . htmlspecialchars($_POST['redirect']));
