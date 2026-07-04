@@ -54,6 +54,8 @@
                 $addBook = $bdd->prepare('UPDATE books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ? WHERE id = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, $id));
 
+                SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de livre', 'Le livre ' . htmlspecialchars($title) . ' a été modifié avec succès.');
+
                 $successMsg = 'Livre modifié avec succès';
 
             }else{ $errorMsg = 'Identifiant unique déjà attribué à un autre livre'; }
