@@ -100,6 +100,7 @@ Cette application offre une solution efficace pour le personnel du CDI et leurs 
 
 - [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Full Stack
 - [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub
+- [@DawnFolk](https://github.com/DawnFolk)  -->  Pentest
 
 ### Contributeurs passifs
 
