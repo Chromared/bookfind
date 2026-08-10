@@ -8,7 +8,7 @@
 
 <?php
 
-// Empêche l'accès direct au dossier
+// Prevent direct access to the directory
 header('HTTP/1.0 403 Forbidden');
 exit('Accès interdit');
 

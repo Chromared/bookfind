@@ -7,12 +7,12 @@
 ?>
 
 <?php function sanitize_log_comment($html){
-    // Autoriser uniquement les balises <a> avec href sécurisé (http(s) ou chemin relatif)
+    // Allow only <a> tags with a secure href (http(s) or relative path)
     if (empty($html)) return '';
 
     $doc = new DOMDocument();
     libxml_use_internal_errors(true);
-    // charger en fragment HTML
+    // load as an HTML fragment
     $doc->loadHTML('<?xml encoding="utf-8" ?><div>' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
     libxml_clear_errors();
 
@@ -20,7 +20,7 @@
     $div = $doc->getElementsByTagName('div')->item(0);
     if (!$div) return htmlspecialchars($html, ENT_QUOTES);
 
-    // Parcourir récursivement et reconstruire un fragment sûr
+    // Iterate recursively and reconstruct a safe fragment
     $safeFragments = [];
 
     foreach ($div->childNodes as $node) {
@@ -46,7 +46,7 @@
                     $valid = false;
                 } else {
                     if (!isset($parts['scheme'])) {
-                        // chemin relatif -> autorisé
+                        // relative path -> allowed
                         $valid = true;
                     } else {
                         $scheme = strtolower($parts['scheme']);
@@ -60,11 +60,11 @@
                 $safeText = htmlspecialchars($text, ENT_QUOTES);
                 $safeFragments[] = '<a href="' . $safeHref . '" rel="noopener noreferrer">' . $safeText . '</a>';
             } else {
-                // si href non valide, n'afficher que le texte
+                // if href is invalid, display only the text
                 $safeFragments[] = htmlspecialchars($text, ENT_QUOTES);
             }
         } else {
-            // pour tout autre élément, récupérer proprement le texte
+            // for any other element, safely extract the text
             $safeFragments[] = htmlspecialchars($node->textContent ?? '', ENT_QUOTES);
         }
     }
@@ -79,7 +79,7 @@ function SaveLog($bdd, $page, $type, $comment){
     $username = $_SESSION['username'] ?? '';
     $name = ($_SESSION['firstname'] ?? '') . ' ' . ($_SESSION['lastname'] ?? '');
 
-    // Nettoyer le commentaire pour autoriser uniquement des liens sûrs
+    // Sanitize the comment to allow only safe links
     $safe_comment = sanitize_log_comment($comment ?? '');
     $safe_page = htmlspecialchars($page ?? '', ENT_QUOTES);
     $safe_type = htmlspecialchars($type ?? '', ENT_QUOTES);

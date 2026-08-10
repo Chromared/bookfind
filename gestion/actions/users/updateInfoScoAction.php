@@ -27,7 +27,7 @@ if (isset($_POST['validateInfoSco'])) {
                         $updateInfoSco = $bdd->prepare('UPDATE users SET classe = ? WHERE id = ?');
                         $updateInfoSco->execute(array($classe, $id));
 
-                        // Récupérer infos avant changement
+                        // Retrieve info before change
                         $getUser = $bdd->prepare('SELECT id, prenom, nom, classe FROM users WHERE id = ?');
                         $getUser->execute(array($id));
                         $usersInfos = $getUser->fetch();

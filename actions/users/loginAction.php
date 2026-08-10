@@ -51,10 +51,10 @@
 require_once __DIR__ . '/../functions/csrfFunction.php';
 
 if (isset($_POST['validate'])) {
-    // Vérifier le jeton CSRF
+    // Verify CSRF token
     csrf_verify();
 
-    // Protections anti-brute-force (par IP, session)
+    // Anti-brute-force protections (by IP and session)
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     if (!isset($_SESSION['login_attempts'])) {
         $_SESSION['login_attempts'] = [];
@@ -74,7 +74,7 @@ if (isset($_POST['validate'])) {
         $attempts = ['count' => 0, 'first' => time()];
     }
 
-    // initialisations
+    // initializations
     $rememberMe = false;
 
     if (isset($_POST['username']) and isset($_POST['password'])) {
@@ -96,7 +96,7 @@ if (isset($_POST['validate'])) {
 
                         $rememberMe = true;
 
-                        // génère un token unique
+                        // generate a unique token
                         do {
                             $token = bin2hex(random_bytes(32));
                             $checkIfTokenAlreadyExists = $bdd->prepare('SELECT id FROM cookies WHERE token = ?');
@@ -131,10 +131,10 @@ if (isset($_POST['validate'])) {
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
 
-                    // Regénérer l'ID de session pour éviter fixation
+                    // Regenerate session ID to prevent fixation
                     session_regenerate_id(true);
 
-                    // reset attempts on succès
+                    // reset attempts on success
                     $attempts = ['count' => 0, 'first' => time()];
 
                     if($rememberMe) {
@@ -152,12 +152,12 @@ if (isset($_POST['validate'])) {
                         exit;
                     }
                 } else {
-                    // échec : incrémenter compteur et message générique
+                    // failure: increment counter and set generic message
                     $attempts['count']++;
                     $errorMsg = '<div class="msg"><div class="msg-alerte">Identifiants incorrects.</div></div>';
                 }
             } else {
-                // échec : incrémenter compteur et message générique
+                // failure: increment counter and set generic message
                 $attempts['count']++;
                 $errorMsg = '<div class="msg"><div class="msg-alerte">Identifiants incorrects.</div></div>';
             }

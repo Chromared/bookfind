@@ -120,21 +120,21 @@ require 'actions/books/addBooksAction.php'; ?>
   <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
     document.getElementById('isbn').addEventListener('keydown', function(event) {
       if (event.key === 'Enter' || event.key === 'Tab') {
-        // Empêche l'envoi du formulaire
+        // Prevent form submission
         event.preventDefault();
 
-        // Récupère l'ISBN
+        // Get the ISBN
         const isbn = document.getElementById('isbn').value;
 
-        // Vérifie que l'ISBN est valide
-        if (isbn.length === 10 || isbn.length === 13) { // ISBN-10 ou ISBN-13
+        // Check that the ISBN is valid
+        if (isbn.length === 10 || isbn.length === 13) { // ISBN-10 or ISBN-13
           fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
             .then(response => response.json())
             .then(data => {
               if (data.items && data.items.length > 0) {
                 const book = data.items[0].volumeInfo;
 
-                // Vérifie si les informations sont disponibles. On laisse vide si on ne peut pas récupérer les informations associées.
+                // Check if information is available. Leave empty if unable to retrieve associated info.
                 const title = book.title || '';
                 const author = book.authors ? book.authors.join(', ') : '';
                 const publisher = book.publisher || '';
@@ -142,7 +142,7 @@ require 'actions/books/addBooksAction.php'; ?>
                 const genre = book.categories ? book.categories.join(', ') : '';
                 const series = book.series ? book.series.join(', ') : '';
 
-                // Complète les champs du formulaire avec les données récupérées
+                // Fill form fields with retrieved data
                 document.getElementById('title').value = title;
                 document.getElementById('author').value = author;
                 document.getElementById('editeur').value = publisher;

@@ -1,9 +1,9 @@
 <?php
 //This file belongs to the BookFind project.
-//
-//BookFind is distributed under the terms of the MIT software license.
-//
-//Copyright (C) 2025 Chromared
+/*
+ * Automatic cleanup script for temporary CSV files
+ * Removes files older than 24 hours
+ */
 ?>
 
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
@@ -13,23 +13,23 @@
  * Supprime les fichiers de plus de 24 heures
  */
 
-// Définir le dossier temporaire
-$tempDir = __DIR__ . '/../temp';
+// Define temporary directory
+ $tempDir = __DIR__ . '/../temp';
 
 if (!is_dir($tempDir)) {
     exit('Dossier temporaire introuvable.');
 }
 
-// Durée de rétention : 24 heures (en secondes)
-$maxAge = 24 * 60 * 60;
+// Retention duration: 24 hours (in seconds)
+ $maxAge = 24 * 60 * 60;
 $now = time();
 $deletedCount = 0;
 
-// Parcourir les fichiers du dossier temporaire
-$files = glob($tempDir . '/csv_import_*.csv');
+// Iterate files in temporary directory
+ $files = glob($tempDir . '/csv_import_*.csv');
 
 foreach ($files as $file) {
-    // Vérifier l'âge du fichier
+    // Check file age
     if (is_file($file)) {
         $fileAge = $now - filemtime($file);
 

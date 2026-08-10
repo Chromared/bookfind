@@ -35,7 +35,7 @@ require 'actions/users/securityAdminAction.php';
 
         <div class="row g-4">
 
-            <!-- Utilisateurs -->
+            <!-- Users -->
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-primary card-widget">
                     <div class="card-body">
@@ -50,7 +50,7 @@ require 'actions/users/securityAdminAction.php';
                 </div>
             </div>
 
-            <!-- Livres -->
+            <!-- Books -->
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-success card-widget">
                     <div class="card-body">
@@ -65,7 +65,7 @@ require 'actions/users/securityAdminAction.php';
                 </div>
             </div>
 
-            <!-- Emprunts en cours -->
+            <!-- Ongoing loans -->
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-warning card-widget">
                     <div class="card-body">
@@ -80,7 +80,7 @@ require 'actions/users/securityAdminAction.php';
                 </div>
             </div>
 
-            <!-- Emprunts retournés -->
+            <!-- Returned loans -->
             <div class="col-md-6 col-lg-4">
                 <div class="card text-white bg-info card-widget">
                     <div class="card-body">
@@ -95,7 +95,7 @@ require 'actions/users/securityAdminAction.php';
                 </div>
             </div>
 
-            <!-- Logs (admin uniquement) -->
+            <!-- Logs (admin only) -->
             <?php if ($_SESSION['grade'] == 1) { ?>
                 <div class="col-md-6 col-lg-4">
                     <div class="card text-white bg-secondary card-widget">

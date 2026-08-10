@@ -10,22 +10,22 @@
 
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
 require '../../../actions/database.php';
-// Garde d'accès : vérifier la session et l'autorisation admin
-// Pour les endpoints AJAX, ne pas inclure les handlers qui redirigent vers une page HTML.
-// Vérifier la session et les droits ici et renvoyer JSON + code HTTP si non autorisé.
+// Access guard: verify session and admin authorization
+// For AJAX endpoints, do not include handlers that redirect to an HTML page.
+// Check session and rights here and return JSON + HTTP status code if unauthorized.
 if (empty($_SESSION['auth'])) {
     http_response_code(401);
     echo json_encode(['error' => 'Unauthenticated']);
     exit();
 }
-// Vérification rôle admin (grade '1' attendu). Utiliser une comparaison permissive
+// Check admin role (grade '1' expected). Use permissive comparison
 if (!isset($_SESSION['grade']) || $_SESSION['grade'] != '1') {
     http_response_code(403);
     echo json_encode(['error' => 'Forbidden']);
     exit();
 }
 
-// Récupération du nombre total d'utilisateurs
+// Retrieve total number of users
 $requete_users = $bdd->query('SELECT COUNT(*) AS total_utilisateurs FROM users');
 $resultat_users = $requete_users->fetch();
 $nbCount1 = $resultat_users['total_utilisateurs'];

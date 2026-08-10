@@ -73,7 +73,7 @@
             if ($testOk) {
                 $fileContent = file_get_contents($filePath);
 
-                // Utiliser preg_replace_callback + var_export pour écrire des valeurs PHP correctement échappées
+                // Use preg_replace_callback + var_export to write properly escaped PHP values
                 $fileContent = preg_replace_callback('/\\$host\s*=\s*\'[^\']*\';/', function($m) use ($newHost) {
                     return '$host = ' . var_export($newHost, true) . ';';
                 }, $fileContent);

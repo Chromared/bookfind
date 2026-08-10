@@ -74,7 +74,7 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
     <?php } elseif (($booksInfos['statut'] ?? null) == 1) {
     if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
 
-      <!-- Modifier la date de retour -->
+      <!-- Edit return date -->
       <form method="post">
         <?= csrf_field(); ?>
         <div class="container mt-3">
@@ -105,7 +105,7 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
         </div>
       </form>
 
-      <!-- Retourner l'emprunt -->
+      <!-- Return the loan -->
       <form method="post">
         <?= csrf_field(); ?>
         <div class="container mt-3">

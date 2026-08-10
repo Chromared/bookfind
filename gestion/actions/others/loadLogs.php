@@ -10,7 +10,7 @@
 
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
   require_once '../../../actions/database.php';
-  // Pour les requêtes AJAX, retourner 401/403 plutôt qu'une page HTML
+    // For AJAX requests, return 401/403 rather than an HTML page
   if (empty($_SESSION['auth'])) {
       http_response_code(401);
       exit();
@@ -21,20 +21,20 @@
   }
     require_once '../../../actions/functions/conversionDateHour.php';
 
-    // Suppression des logs anciens : exécuter rarement (approx. 1% des requêtes)
+    // Purge old logs: run rarely (approx. 1% of requests)
     if (mt_rand(1, 100) === 1) {
         $twoYearsAgo = (new DateTime())->modify('-730 days')->format('Y-m-d H:i:s');
         $query = $bdd->prepare("DELETE FROM logs WHERE datetime <= ?");
         $query->execute([$twoYearsAgo]);
     }
 
-    // Paramètres de pagination / recherche
+    // Pagination/search parameters
     $page = max(1, (int)($_GET['page'] ?? 1));
     $perPage = isset($_GET['per_page']) ? max(1, min(200, (int)$_GET['per_page'])) : 50; // cap 200
     $showAll = isset($_GET['show_all']) && ($_GET['show_all'] === '1' || $_GET['show_all'] === 'true');
     $q = trim((string)($_GET['q'] ?? ''));
 
-    // Construire la clause WHERE pour la recherche (si fournie)
+    // Build WHERE clause for search (if provided)
     $where = '';
     $params = [];
     if ($q !== '') {
@@ -43,13 +43,13 @@
         $params = [$like, $like, $like, $like, $like];
     }
 
-    // Calculer total pour pagination
+    // Calculate total for pagination
     $countSql = 'SELECT COUNT(*) AS total FROM logs ' . $where;
     $countStmt = $bdd->prepare($countSql);
     $countStmt->execute($params);
     $total = (int) ($countStmt->fetchColumn() ?? 0);
 
-    // Limite raisonnable si 'show_all' demandé
+    // Reasonable limit if 'show_all' requested
     if ($showAll) {
         $perPage = max(100, min(1000, $total));
         $page = 1;
@@ -57,11 +57,11 @@
 
     $offset = ($page - 1) * $perPage;
 
-    // Récupérer uniquement les champs nécessaires
+    // Retrieve only necessary fields
     $sql = 'SELECT type, user_name, comment, datetime, user_ip, page, user_id FROM logs ' . $where . ' ORDER BY datetime DESC';
     if (!$showAll) {
-        // MySQL ne supporte pas toujours des placeholders pour LIMIT/OFFSET selon la configuration.
-        // Les valeurs sont castées en int ci‑dessous pour éviter toute injection.
+        // MySQL does not always support placeholders for LIMIT/OFFSET depending on configuration.
+        // Values are cast to int below to prevent injection.
         $sql .= ' LIMIT ' . ((int)$perPage) . ' OFFSET ' . ((int)$offset);
         $stmt = $bdd->prepare($sql);
         $stmt->execute($params);
@@ -71,13 +71,13 @@
     }
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Construire la sortie en mémoire pour réduire les appels echo
+    // Build output in memory to reduce echo calls
     $out = '';
     foreach ($rows as $log) {
         $dateFormattee = date("d/m/Y à H:i:s", strtotime($log['datetime'] ?? ''));
         $type = htmlspecialchars($log['type'] ?? '', ENT_QUOTES);
         $user_name = htmlspecialchars($log['user_name'] ?? '', ENT_QUOTES);
-        // Le champ comment a été nettoyé à l'insertion via SaveLog(), il contient uniquement des fragments sûrs (texte + <a>).
+        // The comment field was sanitized on insertion via SaveLog(); it contains only safe fragments (text + <a>).
         $comment = $log['comment'] ?? '';
         $user_ip = htmlspecialchars($log['user_ip'] ?? '', ENT_QUOTES);
         $log_page = htmlspecialchars($log['page'] ?? '', ENT_QUOTES);
@@ -98,7 +98,7 @@
             . '</ul></div></div></div></div>';
     }
 
-    // Pagination HTML (numérotée, fenêtre condensée)
+    // Pagination HTML (numbered, condensed window)
     $totalPages = $perPage > 0 ? (int) ceil($total / $perPage) : 1;
     $out .= '<div class="container mt-2"><div class="d-flex justify-content-center align-items-center flex-wrap gap-1">';
 
@@ -108,17 +108,17 @@
     }
 
     if (!$showAll) {
-        $maxButtons = 7; // nombre maximal de boutons numériques affichés
+        $maxButtons = 7; // maximum number of numeric buttons displayed
         if ($totalPages <= $maxButtons) {
             for ($p = 1; $p <= $totalPages; $p++) {
                 $cls = $p == $page ? 'btn-primary' : 'btn-outline-secondary';
                 $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="' . $p . '">' . $p . '</button>';
             }
         } else {
-            $side = (int) floor(($maxButtons - 3) / 2); // espace autour de la page courante
+            $side = (int) floor(($maxButtons - 3) / 2); // space around current page
             $start = max(2, $page - $side);
             $end = min($totalPages - 1, $page + $side);
-            // ajuster si proche des bords
+            // adjust if close to edges
             if ($start <= 2) {
                 $start = 2;
                 $end = $start + ($maxButtons - 3);
@@ -128,7 +128,7 @@
                 $start = $end - ($maxButtons - 3);
             }
 
-            // premier
+            // first
             $cls = 1 == $page ? 'btn-primary' : 'btn-outline-secondary';
             $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="1">1</button>';
             if ($start > 2) $out .= '<span class="mx-1">…</span>';
@@ -143,7 +143,7 @@
             $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="' . $totalPages . '">' . $totalPages . '</button>';
         }
     } else {
-        // quand show_all activé, on ne propose pas la pagination numérotée
+        // when show_all enabled, do not offer numbered pagination
         $out .= '<span class="text-muted">Affichage complet (' . $total . ' entrées)</span>';
     }
 
@@ -152,7 +152,7 @@
         $out .= '<button class="btn btn-outline-secondary ms-2 log-page-btn" data-page="' . ($page + 1) . '">Suivant</button>';
     }
 
-    // Bouton tout afficher / revenir
+    // Show all / revert button
     if (!$showAll) {
         $out .= '<button class="btn btn-outline-primary ms-3 log-showall-btn" data-showall="1">Tout afficher</button>';
     } else {

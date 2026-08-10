@@ -17,7 +17,7 @@ if(isset($_POST['validateAdd'])){
 
         $book = $_GET['id'];
 
-        // Si $booksInfos n'est pas défini (appel direct possible), le récupérer
+        // If $booksInfos is not defined (possible direct call), retrieve it
         if (!isset($booksInfos) && isset($book)) {
             $selectInfosFromBooks= $bdd->prepare('SELECT * FROM books WHERE id = ?');
             $selectInfosFromBooks->execute(array($book));

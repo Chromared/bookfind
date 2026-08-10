@@ -9,32 +9,32 @@
 
 
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if (isset($_POST['export'])) {
-    // Nettoyer la sortie pour éviter les sauts de ligne inutiles
+    // Clean output buffer to avoid unwanted newlines
     if (ob_get_length()) ob_clean();
 
-    // Récupérer les logs
+    // Retrieve logs
     $req = $bdd->query("SELECT user_id, user_ip, user_card, user_name, type, comment, page, datetime FROM logs");
     $logs = $req->fetchAll(PDO::FETCH_ASSOC);
 
-    // Vérifier si des logs existent
+    // Check if logs exist
     if (empty($logs)) {
         die("Aucun log trouvé.");
     }
 
-    // Définir le type de contenu en CSV
+    // Set content type to CSV
     header('Content-Type: text/csv; charset=UTF-8');
     header('Content-Disposition: attachment; filename="logs_bookfind_' . time() . '.csv"');
 
-    // Ouvrir la sortie en tant que flux
+    // Open output as stream
     $output = fopen('php://output', 'w');
 
-    // Ajouter le BOM pour éviter les problèmes d'encodage avec Excel
+    // Add BOM to avoid encoding issues with Excel
     fwrite($output, "\xEF\xBB\xBF");
 
-    // Écrire l'en-tête CSV
+    // Write CSV header
     fputcsv($output, array_keys($logs[0]));
 
-    // Écrire les lignes de logs
+    // Write log rows
     foreach ($logs as $log) {
         fputcsv($output, $log);
     }

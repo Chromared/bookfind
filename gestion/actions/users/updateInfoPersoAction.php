@@ -21,7 +21,7 @@ if (isset($_POST['validateInfoPerso'])) {
                 $updateInfoPerso = $bdd->prepare('UPDATE users SET nom = ?, prenom = ? WHERE id = ?');
                 $updateInfoPerso->execute(array($name, $firstname, $id));
 
-                // Récupérer informations utilisateur avant le changement pour le log
+                // Retrieve user information before change for logging
                 $getUser = $bdd->prepare('SELECT id, prenom, nom FROM users WHERE id = ?');
                 $getUser->execute(array($id));
                 $usersInfos = $getUser->fetch();

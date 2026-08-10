@@ -10,14 +10,15 @@
 
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; // Importation des utilisateurs via CSV
 
-// Initialisation des variables
+// Initialize variables
 $msgImport = "";
 $alertImportType = "warning";
 
-// Récupération de la connexion à la base de données (utilisée globalement)
+// Retrieve database connection (used globally)
 global $bdd;
 
-// Nettoyage automatique des fichiers temporaires de plus de 24 heures
+$maxAge = 24 * 60 * 60; // 24 heures
+// Automatic cleanup of temporary files older than 24 hours
 $tempDir = __DIR__ . '/../../../temp';
 if (is_dir($tempDir)) {
     $files = glob($tempDir . '/csv_import_*.csv');
@@ -31,7 +32,7 @@ if (is_dir($tempDir)) {
     }
 }
 
-// Étape 1: Upload et analyse du CSV
+// Step 1: Upload and analyze CSV
 if(isset($_POST['csvUpload'])) {
     if(!isset($_FILES['csvFile']) || $_FILES['csvFile']['error'] !== UPLOAD_ERR_OK) {
         $msgImport = "Erreur lors du téléchargement du fichier. Veuillez réessayer.";
@@ -40,28 +41,28 @@ if(isset($_POST['csvUpload'])) {
         $hasHeaders = isset($_POST['csvHasHeaders']) ? (int)$_POST['csvHasHeaders'] : 1;
         $_SESSION['csv_has_headers'] = $hasHeaders;
 
-        // Correction pour la tabulation
+        // Fix for tab separator
         if ($separator === '\t') {
             $separator = "\t";
         }
 
         $csvFile = $_FILES['csvFile']['tmp_name'];
 
-        // Vérification de l'existence du fichier
+        // Check file existence
         if (!file_exists($csvFile)) {
             $msgImport = "Le fichier téléchargé est introuvable. Veuillez réessayer.";
         } else {
-            // Vérification du format CSV
+            // Check CSV format
             $fileType = mime_content_type($csvFile);
             if ($fileType !== 'text/csv' && $fileType !== 'text/plain') {
                 $msgImport = "Le fichier doit être au format CSV.";
             } else {
-                // Lecture du fichier CSV
+                // Read CSV file
                 $csvData = [];
                 $headers = [];
 
                 if (($handle = @fopen($csvFile, "r")) !== FALSE) {
-                    // Lire la première ligne
+                    // Read the first line
                     $firstLine = fgetcsv($handle, 0, $separator, '"', "\\");
 
                     if (!$firstLine) {
@@ -69,26 +70,26 @@ if(isset($_POST['csvUpload'])) {
                         fclose($handle);
                     } else {
                         if ($hasHeaders) {
-                            // Utiliser la première ligne comme en-têtes
+                            // Use first line as headers
                             $headers = $firstLine;
                         } else {
-                            // Créer des en-têtes génériques avec aperçu de la première ligne
+                            // Create generic headers with preview of the first line
                             $headers = array_map(function($i, $value) {
                                 return "Colonne $i : " . (isset($value) ? substr($value, 0, 15) . (strlen($value) > 15 ? '...' : '') : '');
                             }, array_keys($firstLine), $firstLine);
 
-                            // Traiter la première ligne comme des données
+                            // Treat first line as data
                             $csvData[] = $firstLine;
                         }
 
-                        // Lire les données (max 5 lignes pour aperçu)
+                        // Read data (max 5 rows for preview)
                         $previewRows = count($csvData); // 0 ou 1 selon si on a déjà ajouté la première ligne
                         while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE && $previewRows < 5) {
                             $csvData[] = $data;
                             $previewRows++;
                         }
 
-                        // Continuer à lire le reste des données sans stockage (juste pour compter)
+                        // Continue reading the rest of the data without storing (just to count)
                         $totalRows = $previewRows;
                         while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
                             $totalRows++;
@@ -96,18 +97,18 @@ if(isset($_POST['csvUpload'])) {
 
                         fclose($handle);
 
-                        // Créer un dossier temporaire dédié si nécessaire
+                        // Create dedicated temporary folder if needed
                         $tempDir = __DIR__ . '/../../../temp';
                         if (!is_dir($tempDir)) {
                             @mkdir($tempDir, 0755, true);
                         }
 
-                        // Générer un nom de fichier unique avec timestamp
+                        // Generate unique filename with timestamp
                         $uniqueId = uniqid('csv_import_', true);
                         $tempFile = $tempDir . '/' . $uniqueId . '.csv';
 
                         if (@copy($csvFile, $tempFile)) {
-                            // Stocker uniquement les métadonnées dans la session (pas les données)
+                            // Store only metadata in session (not data)
                             $_SESSION['csv_headers'] = $headers;
                             $_SESSION['csv_separator'] = $separator;
                             $_SESSION['csv_file'] = $tempFile;
@@ -128,7 +129,7 @@ if(isset($_POST['csvUpload'])) {
     }
 }
 
-// Annulation de l'importation
+// Cancel import
 if(isset($_POST['csvCancel'])) {
     if (isset($_SESSION['csv_file']) && file_exists($_SESSION['csv_file'])) {
         @unlink($_SESSION['csv_file']);
@@ -144,20 +145,20 @@ if(isset($_POST['csvCancel'])) {
     $msgImport = "Importation annulée.";
 }
 
-// Étape 2: Importation des données
+// Step 2: Import data
 if(isset($_POST['csvImport'])) {
     if(!isset($_SESSION['csv_file']) || !file_exists($_SESSION['csv_file']) || !isset($_SESSION['csv_headers']) || !isset($_SESSION['csv_separator'])) {
         $msgImport = "Aucun fichier CSV en attente d'importation.";
     } else {
         $db_mapping = $_POST['db_mapping'] ?? [];
 
-        // Vérifier le mappage du nom d'utilisateur
+        // Verify username mapping
         if (!isset($db_mapping['username']) ||
             (isset($db_mapping['username']) && $db_mapping['username'] === 'autre' && empty($_POST['custom_username'])) &&
             $db_mapping['username'] !== 'algorithm') {
             $msgImport = "La correspondance de colonnes est incorrecte. Le champ 'username' est obligatoire.";
         } else {
-            // Récupérer les valeurs personnalisées
+            // Retrieve custom values
             $custom_username = isset($_POST['custom_username']) ? trim($_POST['custom_username']) : null;
             $custom_nom = isset($_POST['custom_nom']) ? trim($_POST['custom_nom']) : null;
             $custom_prenom = isset($_POST['custom_prenom']) ? trim($_POST['custom_prenom']) : null;
@@ -166,7 +167,7 @@ if(isset($_POST['csvImport'])) {
             $custom_nb_emprunt_max = isset($_POST['custom_nb_emprunt_max']) && is_numeric($_POST['custom_nb_emprunt_max']) ? (int)$_POST['custom_nb_emprunt_max'] : null;
 
             try {
-                // On utilise la connexion $bdd déjà établie dans database.php
+                // We use the $bdd connection already established in database.php
 
                 $csvFile = $_SESSION['csv_file'];
                 $separator = $_SESSION['csv_separator'];
@@ -178,16 +179,16 @@ if(isset($_POST['csvImport'])) {
                 $errors = [];
 
                 if (($handle = @fopen($csvFile, "r")) !== FALSE) {
-                    // Sauter la première ligne si ce sont des en-têtes
+                    // Skip first line if it's headers
                     if ($hasHeaders) {
                         fgetcsv($handle, 0, $separator, '"', "\\");
                     }
 
-                    // Compteur de lignes pour le suivi des erreurs
+                    // Line counter for error tracking
                     $lineNumber = $hasHeaders ? 2 : 1;
 
                     while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
-                        // Gérer les lignes avec un nombre de colonnes incorrect
+                        // Handle rows with incorrect column count
                         if (count($data) !== count($headers)) {
                             $errors[] = "Ligne $lineNumber: Nombre de colonnes incorrect";
                             $errorCount++;
@@ -204,7 +205,7 @@ if(isset($_POST['csvImport'])) {
                             }
                         }
 
-                        // Traitement du nom et prénom
+                        // Process last name and first name
                         if (isset($db_mapping['nom']) && $db_mapping['nom'] === 'autre') {
                             $userData['nom'] = $custom_nom;
                         } else if (!isset($userData['nom'])) {
@@ -217,22 +218,22 @@ if(isset($_POST['csvImport'])) {
                             $userData['prenom'] = '';
                         }
 
-                        // Traitement du nom d'utilisateur
+                        // Handle username processing
                         if (isset($db_mapping['username']) && $db_mapping['username'] === 'autre') {
                             $userData['username'] = $custom_username;
                         } elseif (isset($db_mapping['username']) && $db_mapping['username'] === 'algorithm') {
-                            // Algorithme de génération : première lettre prénom + 7 premières lettres nom
+                            // Generation algorithm: first letter of first name + first 7 letters of last name
                             if (!empty($userData['prenom']) && !empty($userData['nom'])) {
                                 $userData['username'] = strtolower(substr($userData['prenom'], 0, 1) . substr($userData['nom'], 0, 7));
                             } else {
-                                $errors[] = "Ligne $lineNumber: Impossible de générer le nom d'utilisateur (nom ou prénom manquant)";
+                                $errors[] = "Ligne $lineNumber: Unable to generate username (missing last name or first name)";
                                 $errorCount++;
                                 $lineNumber++;
                                 continue;
                             }
                         }
 
-                        // Vérifier que l'username n'est pas vide
+                        // Ensure username is not empty
                         if (empty($userData['username'])) {
                             $errors[] = "Ligne $lineNumber: Nom d'utilisateur vide";
                             $errorCount++;
@@ -240,14 +241,14 @@ if(isset($_POST['csvImport'])) {
                             continue;
                         }
 
-                        // Traitement de la classe
+                        // Process class
                         if (isset($db_mapping['classe']) && $db_mapping['classe'] === 'autre') {
                             $userData['classe'] = $custom_classe;
                         } else if (!isset($userData['classe'])) {
                             $userData['classe'] = '';
                         }
 
-                        // Traitement du mot de passe
+                        // Handle password processing
                         if (isset($db_mapping['mdp']) && $db_mapping['mdp'] === 'autre') {
                             $userData['mdp'] = password_hash($custom_mdp, PASSWORD_DEFAULT);
                         } elseif (!isset($userData['mdp']) || empty($userData['mdp'])) {
@@ -256,8 +257,8 @@ if(isset($_POST['csvImport'])) {
                             $userData['mdp'] = password_hash($userData['mdp'], PASSWORD_DEFAULT);
                         }
 
-                        // Traitement des valeurs numériques
-                        // Grade avec options prédéfinies
+                        // Process numeric values
+                        // Grade with predefined options
                         if (isset($db_mapping['grade']) && is_numeric($db_mapping['grade'])) {
                             $userData['grade'] = (int)$data[(int)$db_mapping['grade']];
                         } else if (isset($db_mapping['grade']) && $db_mapping['grade'] === 'autre' && isset($_POST['custom_grade'])) {
@@ -268,28 +269,28 @@ if(isset($_POST['csvImport'])) {
                             $userData['grade'] = 0;
                         }
 
-                        // Règles et PDC à 0 par défaut
+                        // Rules and PDC default to 0
                         $userData['regles'] = isset($userData['regles']) ? (int)$userData['regles'] : 0;
                         $userData['pdc'] = isset($userData['pdc']) ? (int)$userData['pdc'] : 0;
 
-                        // Nombre d'emprunts max
+                        // Max borrow count
                         if (isset($db_mapping['nb_emprunt_max']) && $db_mapping['nb_emprunt_max'] === 'autre') {
                             $userData['nb_emprunt_max'] = $custom_nb_emprunt_max;
                         } elseif (!isset($userData['nb_emprunt_max']) || empty($userData['nb_emprunt_max'])) {
                             $userData['nb_emprunt_max'] = 5;
                         }
 
-                        // Valeurs par défaut additionnelles
+                        // Additional default values
                         $userData['nb_emprunt'] = 0;
                         $userData['theme'] = 0;
 
                         try {
-                            // Vérifier si l'utilisateur existe déjà
+                            // Check if user already exists
                             $checkUser = $bdd->prepare('SELECT id FROM users WHERE username = ?');
                             $checkUser->execute([$userData['username']]);
 
                             if($checkUser->rowCount() > 0) {
-                                // Mise à jour de l'utilisateur existant
+                                    // Update existing user
                                 $sql = 'UPDATE users SET ';
                                 $params = [];
                                 $updates = [];
@@ -308,7 +309,7 @@ if(isset($_POST['csvImport'])) {
                                 $stmt = $bdd->prepare($sql);
                                 $stmt->execute($params);
                             } else {
-                                // Insertion d'un nouvel utilisateur
+                                // Insert a new user
                                 $columns = implode(', ', array_keys($userData));
                                 $placeholders = implode(', ', array_fill(0, count($userData), '?'));
 
@@ -329,12 +330,12 @@ if(isset($_POST['csvImport'])) {
 
                     fclose($handle);
 
-                    // Supprimer le fichier temporaire
+                    // Delete temporary file
                     if (file_exists($_SESSION['csv_file'])) {
                         @unlink($_SESSION['csv_file']);
                     }
 
-                    // Nettoyer la session
+                    // Clean up session
                     unset($_SESSION['csv_headers']);
                     unset($_SESSION['csv_separator']);
                     unset($_SESSION['csv_file']);

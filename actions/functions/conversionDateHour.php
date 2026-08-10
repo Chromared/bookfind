@@ -9,14 +9,13 @@
 
 
 <?php function ConversionDateHour($datehour) {
-    // On tente de convertir la date avec heure
+    // Attempt to convert the date/time
     $timestamp = strtotime($datehour);
-
-    // Si strtotime échoue, le format est invalide
+    // If strtotime fails, the format is invalid
     if (!$timestamp) {
         echo "Format de date invalide";
     } else {
-        // Affichage au format français avec heure
+        // Display in French format with time
         echo date("d/m/Y à H\hi", $timestamp);
     }
 }

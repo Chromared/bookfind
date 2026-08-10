@@ -23,7 +23,7 @@ if (isset($_POST['validateMdp'])) {
                     $updateMdp = $bdd->prepare('UPDATE users SET mdp = ? WHERE id = ?');
                     $updateMdp->execute(array($newPassword, $id));
 
-                    // Récupérer informations utilisateur pour le log
+                    // Retrieve user information for logging
                     $getUser = $bdd->prepare('SELECT id, prenom, nom FROM users WHERE id = ?');
                     $getUser->execute(array($id));
                     $usersInfos = $getUser->fetch();

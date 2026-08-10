@@ -9,26 +9,24 @@
 
 
 <?php function ConversionDate($date) {
-    // On tente de convertir la date
+    // Attempt to convert the date
     $timestamp = strtotime($date);
-
-    // Si strtotime échoue, le format est invalide
+    // If strtotime fails, the format is invalid
     if (!$timestamp) {
         echo "Format de date invalide";
     }
 
-    // On retourne au format français (d/m/Y)
+    // Output in French format (d/m/Y)
     echo date("d/m/Y", $timestamp);
 }
 function NoEchoConversionDate($date) {
-    // On tente de convertir la date
+    // Attempt to convert the date
     $timestamp = strtotime($date);
-
-    // Si strtotime échoue, le format est invalide
+    // If strtotime fails, the format is invalid
     if (!$timestamp) {
         return "Format de date invalide";
     }
 
-    // On retourne au format français (d/m/Y)
+    // Return in French format (d/m/Y)
     return date("d/m/Y", $timestamp);
 }

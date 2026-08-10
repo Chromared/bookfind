@@ -10,7 +10,7 @@
 require '../actions/database.php';
 require '../actions/users/securityAction.php';
 
-// Vérification d'accès centralisée avant de charger les actions sensibles
+// Centralized access check before loading sensitive actions
 if (!isset($_SESSION['grade']) || $_SESSION['grade'] != '1') {
     http_response_code(403);
     require '../errors/403.php';
@@ -57,7 +57,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 <body class="d-flex flex-column min-vh-100">
     <?php include 'includes/navbar.php'; ?>
     <?php if (isset($_GET['tab']) and $_GET['tab'] == 'database') { ?>
-        <!-- Connexion base de données -->
+        <!-- Database connection -->
         <form method="POST" autocomplete="off">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center mt-4">
@@ -114,7 +114,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
         </form>
     <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'classes') { ?>
 
-        <!-- Ajouter une classe -->
+        <!-- Add a class -->
         <form method="POST" autocomplete="off" id="addClasse">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
@@ -153,7 +153,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </div>
         </form>
 
-        <!-- Modifier une classe -->
+        <!-- Edit a class -->
         <form method="POST" autocomplete="off" id="updateClasse">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
@@ -199,7 +199,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </div>
         </form>
 
-        <!-- Supprimer une classe -->
+        <!-- Delete a class -->
         <form method="POST" autocomplete="off" id="deleteClasse">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
@@ -241,7 +241,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </div>
         </form>
     <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'users') { ?>
-        <!-- Import des utilisateurs via CSV -->
+        <!-- Import users via CSV -->
         <form method="POST" enctype="multipart/form-data" autocomplete="off" action="bookfind.php?tab=users">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center">
@@ -263,7 +263,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                             <?php } ?>
 
                             <?php if (!isset($_SESSION['csv_preview'])): ?>
-                                <!-- Formulaire d'upload du CSV -->
+                                <!-- CSV upload form -->
                                 <div class="mb-3">
                                     <label for="csvFile" class="form-label text-start d-block">Fichier CSV</label>
                                     <input type="file" name="csvFile" id="csvFile" class="form-control" accept=".csv" required />
@@ -296,7 +296,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                                     <h6>Correspondance des colonnes</h6>
                                     <p class="small">Pour chaque champ de la base de données, sélectionnez la colonne correspondante dans votre CSV.</p>
 
-                                    <!-- Bouton pour changer de CSV -->
+                                    <!-- Button to switch CSV -->
                                     <div class="text-end mb-3">
                                         <input type="submit" name="csvCancel" class="btn btn-outline-secondary" value="Changer de fichier CSV" />
                                     </div>
@@ -514,7 +514,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             }
         </script>
 
-        <!-- Régénérer les noms d'utilisateurs -->
+        <!-- Regenerate usernames -->
         <form method="POST">
             <div class="container mt-3">
                 <div class="d-flex justify-content-center mt-4">

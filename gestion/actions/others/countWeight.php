@@ -52,25 +52,25 @@ function getProjectSizes($startDir) {
         $relative = ltrim(str_replace($root, '', $path), '/');
         $size = $file->getSize();
 
-        // 🧠 GIT
+        // GIT
         if (str_starts_with($relative, '.git/')) {
             $sizes['git'] += $size;
             continue;
         }
 
-        // 🧪 TEMP
+        // TEMP
         if (str_starts_with($relative, 'temp/')) {
             $sizes['temp'] += $size;
             continue;
         }
 
-        // 💾 BACKUPS
+        // BACKUPS
         if (str_starts_with($relative, 'backups/')) {
             $sizes['backups'] += $size;
             continue;
         }
 
-        // 🖼 ASSETS + CODE FILE TYPES INCLUDED IN CODE
+        // ASSETS + CODE FILE TYPES INCLUDED IN CODE
         if (
             str_starts_with($relative, 'assets/') ||
             preg_match('/\.(png|jpg|jpeg|gif|webp|ico|svg|css|js)$/i', $relative)
@@ -79,11 +79,11 @@ function getProjectSizes($startDir) {
             continue;
         }
 
-        // 📦 CODE
+        // CODE
         $sizes['code'] += $size;
     }
 
-    // 💽 DISK (déplacé dans other)
+    // DISK (moved to other)
     $sizes['other'] = disk_total_space($rootDir) - disk_free_space($rootDir);
 
     return [

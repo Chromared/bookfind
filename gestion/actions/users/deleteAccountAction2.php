@@ -13,7 +13,7 @@
             
         $id = $_GET['id'];
 
-        // Récupérer les informations utilisateur avant suppression pour le log
+        // Retrieve user information before deletion for logging
         $getUser = $bdd->prepare('SELECT id, prenom, nom FROM users WHERE id = ?');
         $getUser->execute(array($id));
         $usersInfos = $getUser->fetch();

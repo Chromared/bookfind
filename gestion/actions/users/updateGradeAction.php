@@ -23,7 +23,7 @@ if (isset($_POST['validateGrade'])) {
                     $updateInfoSco = $bdd->prepare('UPDATE users SET grade = ? WHERE id = ?');
                     $updateInfoSco->execute(array($newGrade, $id));
 
-                    // Récupérer infos utilisateur pour le log
+                    // Retrieve user info for logging
                     $getUser = $bdd->prepare('SELECT id, prenom, nom, grade FROM users WHERE id = ?');
                     $getUser->execute(array($id));
                     $usersInfos = $getUser->fetch();

@@ -31,7 +31,7 @@ require_once 'actions/database.php';
             Suivez bien les étapes dans l'ordre. Certaines disparaîtront quand elles seront terminées.
         </div>
 
-        <!-- Etape 1 : Accès à la base de données -->
+        <!-- Step 1: Database access -->
         <?php if (empty($host) && empty($dbname) && empty($username)) { ?>
             <div class="card mb-4">
                 <div class="card-header">
@@ -64,7 +64,7 @@ require_once 'actions/database.php';
                         $filePath = 'actions/database.php';
                         $fileContent = file_get_contents($filePath);
 
-                        // Écrire des valeurs PHP sûres en utilisant var_export via callback
+                        // Write safe PHP values using var_export via callback
                         $fileContent = preg_replace_callback('/\\$host\s*=\s*\'[^\']*\';/', function($m) use ($host) {
                             return '$host = ' . var_export($host, true) . ';';
                         }, $fileContent);
@@ -86,7 +86,7 @@ require_once 'actions/database.php';
             $step1 = true;
         } ?>
 
-        <!-- Etape 2 : Importer la base de données -->
+        <!-- Step 2: Import database -->
         <?php if (empty($dbname)) { ?>
             <div class="card mb-4">
                 <div class="card-header">
@@ -161,7 +161,7 @@ require_once 'actions/database.php';
 
                     if (isset($_POST['import'])) {
                         if (!empty($host) && !empty($username)) {
-                            // Si l'utilisateur demande d'importer uniquement les tables
+                            // If the user requests to import only tables
                             if (!empty($_POST['onlyTables'])) {
                                 $dbnameInput = !empty($_POST['dbname_import']) ? trim($_POST['dbname_import']) : 'bookfind';
                                 $filePath = 'actions/database.php';
@@ -170,7 +170,7 @@ require_once 'actions/database.php';
                                     return '$dbname = ' . var_export($dbnameInput, true) . ';';
                                 }, $fileContent);
                                 file_put_contents($filePath, $fileContent);
-                                // Reconnecter sur la base fournie
+                                // Reconnect to the provided database
                                 include 'actions/database.php';
                                 $sqlFilePath = 'actions/bookfind.sql';
                                 if (file_exists($sqlFilePath)) {
@@ -190,7 +190,7 @@ require_once 'actions/database.php';
                                 } else {
                                     echo '<div class="alert alert-warning mt-3">Fichier SQL introuvable.</div>';
                                 }
-                                // Fin du flux d'import uniquement des tables
+                                // End of import-only-tables flow
                                 goto end_import;
                             }
 
@@ -203,7 +203,7 @@ require_once 'actions/database.php';
                             $sqlFilePath = 'actions/bookfind.sql';
                             if (file_exists($sqlFilePath)) {
                                 $sql = file_get_contents($sqlFilePath);
-                                // Créer la base sans se connecter à une base inexistante
+                                // Create the database without connecting to a non-existent database
                                 try {
                                     $tmpDsn = 'mysql:host=' . $host . ';charset=utf8';
                                     $tmpPdo = new PDO($tmpDsn, $username, $password);
@@ -211,12 +211,12 @@ require_once 'actions/database.php';
                                     $tmpPdo->exec('CREATE DATABASE IF NOT EXISTS `bookfind` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci');
                                 } catch (Exception $e) {
                                     echo '<div class="alert alert-danger mt-3">Impossible de créer la base : ' . htmlspecialchars($e->getMessage()) . '</div>';
-                                    // On arrête ici
+                                    // Stop here
                                     goto end_import;
                                 }
-                                // Recharger la config pour se connecter sur la nouvelle base
+                                // Reload config to connect to the new database
                                 include 'actions/database.php';
-                                // Retirer les éventuelles lignes CREATE DATABASE / USE du dump avant exécution
+                                // Remove any CREATE DATABASE / USE lines from the dump before execution
                                 $cleanSql = preg_replace('/CREATE DATABASE\\s+IF NOT EXISTS.*?;|CREATE DATABASE.*?;|USE `.*?`;/is', '', $sql);
                                 $queries = array_filter(array_map('trim', explode(';', $cleanSql)));
                                 foreach ($queries as $query) {
@@ -245,7 +245,7 @@ require_once 'actions/database.php';
             $step2 = true;
         } ?>
 
-        <!-- Etape 3 : Ajout des classes -->
+        <!-- Step 3: Create classes -->
         <div class="card mb-4">
             <div class="card-header">
                 3. Créer des classes
@@ -290,7 +290,7 @@ require_once 'actions/database.php';
             </div>
         </div>
 
-        <!-- Etape 4 : Compte administrateur -->
+        <!-- Step 4: Administrator account -->
         <?php $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
         if ($checkIfOneUserExist->rowCount() == 0) { ?>
             <div class="alert alert-info">
@@ -301,7 +301,7 @@ require_once 'actions/database.php';
             $step4 = true;
         } ?>
 
-        <!-- Suppression du fichier de configuration -->
+        <!-- Remove configuration file -->
         <?php if (isset($step1, $step2, $step3, $step4) && $step1 && $step2 && $step3 && $step4) { ?>
             <div class="card mt-5">
                 <div class="card-body text-center">
