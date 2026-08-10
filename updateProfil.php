@@ -31,6 +31,7 @@
     <body class="d-flex flex-column min-vh-100">
       <?php include 'includes/navbar.php' ?>
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -75,6 +76,7 @@
       </form>
 
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -113,6 +115,7 @@
       </form>
 
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -156,6 +159,7 @@
       </form>
 
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">

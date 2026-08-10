@@ -8,11 +8,21 @@
 
 
 
-<?php if(isset($_POST['validateAdd'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+require_once __DIR__ . '/../../../actions/users/securityAction.php';
+require_once __DIR__ . '/../../../actions/users/securityAdminAction.php';
+if(isset($_POST['validateAdd'])){
     if(isset($_POST['user_id']) AND isset($_POST['date'])){
     if(!empty($_POST['user_id']) AND !empty($_POST['date'])){
 
         $book = $_GET['id'];
+
+        // Si $booksInfos n'est pas défini (appel direct possible), le récupérer
+        if (!isset($booksInfos) && isset($book)) {
+            $selectInfosFromBooks= $bdd->prepare('SELECT * FROM books WHERE id = ?');
+            $selectInfosFromBooks->execute(array($book));
+            $booksInfos = $selectInfosFromBooks->fetch();
+        }
         $user_id = $_POST['user_id'];
         $date = $_POST['date'];
 

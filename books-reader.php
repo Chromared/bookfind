@@ -6,7 +6,7 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start();
+<?php require 'actions/functions/sessionInit.php';
 require 'actions/database.php';
 require 'actions/books/showOneBookAction.php';
 require 'actions/books/showOneEmprunt.php';

@@ -8,15 +8,20 @@
 
 
 
-<?php if (isset($_POST['validateDelete2'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if (isset($_POST['validateDelete2'])){
         if($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2){
             
         $id = $_GET['id'];
 
+        // Récupérer les informations utilisateur avant suppression pour le log
+        $getUser = $bdd->prepare('SELECT id, prenom, nom FROM users WHERE id = ?');
+        $getUser->execute(array($id));
+        $usersInfos = $getUser->fetch();
+
         $DeleteUserAccount = $bdd->prepare('DELETE FROM users WHERE id = ?');
         $DeleteUserAccount->execute(array($id));
 
-        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Le compte de ' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . ' a été supprimé.');
+        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Le compte de ' . htmlspecialchars($usersInfos['prenom'] ?? '') . ' ' . htmlspecialchars($usersInfos['nom'] ?? '') . ' a été supprimé.');
 
         header('Location: users.php');
         

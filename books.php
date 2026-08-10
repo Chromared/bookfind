@@ -6,13 +6,12 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start();
+<?php require 'actions/functions/sessionInit.php';
 require 'actions/database.php';
 require 'actions/functions/conversionDate.php';
 require 'actions/functions/conversionDateHour.php';
 require 'actions/functions/colorDateEmpruntFunction.php'; ?>
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">

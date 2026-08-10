@@ -8,7 +8,9 @@
 
 
 
-<?php if(isset($_POST['databaseValidate'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['databaseValidate'])){
+    require_once __DIR__ . '/../../../actions/functions/csrfFunction.php';
+    csrf_verify();
         $newHost = trim($_POST['host'] ?? '');
         $newDbname = trim($_POST['dbname'] ?? '');
         $newUsername = trim($_POST['user'] ?? '');
@@ -70,10 +72,23 @@
 
             if ($testOk) {
                 $fileContent = file_get_contents($filePath);
-                $fileContent = preg_replace('/\\$host\s*=\s*\'[^\']*\';/', "\$host = '$newHost';", $fileContent);
-                $fileContent = preg_replace('/\\$username\s*=\s*\'[^\']*\';/', "\$username = '$newUsername';", $fileContent);
-                $fileContent = preg_replace('/\\$password\s*=\s*\'[^\']*\';/', "\$password = '$newPassword';", $fileContent);
-                $fileContent = preg_replace('/\\$dbname\s*=\s*\'[^\']*\';/', "\$dbname = '$newDbname';", $fileContent);
+
+                // Utiliser preg_replace_callback + var_export pour écrire des valeurs PHP correctement échappées
+                $fileContent = preg_replace_callback('/\\$host\s*=\s*\'[^\']*\';/', function($m) use ($newHost) {
+                    return '$host = ' . var_export($newHost, true) . ';';
+                }, $fileContent);
+
+                $fileContent = preg_replace_callback('/\\$username\s*=\s*\'[^\']*\';/', function($m) use ($newUsername) {
+                    return '$username = ' . var_export($newUsername, true) . ';';
+                }, $fileContent);
+
+                $fileContent = preg_replace_callback('/\\$password\s*=\s*\'[^\']*\';/', function($m) use ($newPassword) {
+                    return '$password = ' . var_export($newPassword, true) . ';';
+                }, $fileContent);
+
+                $fileContent = preg_replace_callback('/\\$dbname\s*=\s*\'[^\']*\';/', function($m) use ($newDbname) {
+                    return '$dbname = ' . var_export($newDbname, true) . ';';
+                }, $fileContent);
 
                 file_put_contents($filePath, $fileContent);
 

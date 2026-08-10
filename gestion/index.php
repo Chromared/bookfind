@@ -115,7 +115,7 @@ require 'actions/users/securityAdminAction.php';
         </div>
     </div>
 
-    <script defer>
+    <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>" defer>
         function updateCounters() {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'actions/others/count_data.php', true);

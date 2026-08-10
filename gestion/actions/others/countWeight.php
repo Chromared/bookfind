@@ -1,4 +1,5 @@
 <?php require_once '../../../actions/database.php';
+require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
 
 function findProjectRoot($dir) {
     $dir = realpath($dir);

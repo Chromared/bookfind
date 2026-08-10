@@ -24,6 +24,7 @@ require 'actions/books/addBooksAction.php'; ?>
 <body class="d-flex flex-column min-vh-100">
   <?php include 'includes/navbar.php'; ?>
   <form method="POST" autocomplete="off">
+    <?= csrf_field(); ?>
     <div class="container mt-3">
       <div class="d-flex justify-content-center mt-4">
         <div class="card text-center mb-3" style="width: 50rem;">
@@ -116,7 +117,7 @@ require 'actions/books/addBooksAction.php'; ?>
       </div>
     </div>
   </form>
-  <script>
+  <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
     document.getElementById('isbn').addEventListener('keydown', function(event) {
       if (event.key === 'Enter' || event.key === 'Tab') {
         // Empêche l'envoi du formulaire

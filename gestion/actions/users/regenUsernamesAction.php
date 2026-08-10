@@ -1,4 +1,4 @@
-<?php if (isset($_POST["regenUsernames"])) {
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if (isset($_POST["regenUsernames"])) {
     $selectNames = $bdd->query('SELECT id, nom, prenom FROM users');
     $i = 0;
 

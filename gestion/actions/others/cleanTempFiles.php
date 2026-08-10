@@ -6,7 +6,7 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
 
 /**
  * Script de nettoyage automatique des fichiers temporaires CSV

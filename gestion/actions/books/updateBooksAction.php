@@ -8,7 +8,9 @@
 
 
 
-<?php if(isset($_POST['validate'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+$id = $_GET['id'] ?? null;
+if(isset($_POST['validate'])){
     if(isset($_GET['id']) AND isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['isbn']) AND isset($_POST['editeur']) AND isset($_POST['type'])){
         if(!empty($_GET['id']) AND !empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['isbn']) AND !empty($_POST['editeur']) AND !empty($_POST['type'])){
 
@@ -49,7 +51,7 @@
                 $tome = $_POST['tome'];
             }else{$serie = false; $tome = false;}
 
-            if($id_u = true){
+            if($id_u === true){
 
                 $addBook = $bdd->prepare('UPDATE books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ? WHERE id = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, $id));
@@ -61,5 +63,5 @@
             }else{ $errorMsg = 'Identifiant unique déjà attribué à un autre livre'; }
 
         }else{ $errorMsg = 'Tout les champs ne sont pas remplis.'; }
-    }else{ $errorMsg = 'Tout les champs n\'existent pas. Veuillez <a href="update-book.php?id=' . $id . '">recharger</a> la page.'; }
+    }else{ $errorMsg = 'Tout les champs n\'existent pas. Veuillez <a href="update-book.php?id=' . ($id ?? '') . '">recharger</a> la page.'; }
 }

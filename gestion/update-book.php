@@ -25,6 +25,7 @@ require '../actions/books/showOneBookAction.php'; ?>
 <body class="d-flex flex-column min-vh-100">
   <?php include 'includes/navbar.php'; ?>
   <form method="POST" autocomplete="off">
+    <?= csrf_field(); ?>
     <div class="container mt-3">
       <div class="d-flex justify-content-center mt-4">
         <div class="card text-center mb-3" style="width: 50rem;">
@@ -52,44 +53,44 @@ require '../actions/books/showOneBookAction.php'; ?>
             <?php } ?>
             <div class="mb-3">
               <label for="isbn" class="form-label text-start d-block">ISBN*</label>
-              <input type="number" name="isbn" id="isbn" class="form-control" value="<?= htmlspecialchars($booksInfos['isbn']); ?>" min="1000000000" max="9999999999999" autofocus required />
+              <input type="number" name="isbn" id="isbn" class="form-control" value="<?= htmlspecialchars($booksInfos['isbn'] ?? ''); ?>" min="1000000000" max="9999999999999" autofocus required />
             </div>
             <div class="mb-3">
               <label for="title" class="form-label text-start d-block">Titre*</label>
-              <input type="text" name="title" id="title" class="form-control" value="<?= htmlspecialchars($booksInfos['titre']); ?>" required />
+              <input type="text" name="title" id="title" class="form-control" value="<?= htmlspecialchars($booksInfos['titre'] ?? ''); ?>" required />
             </div>
             <div class="mb-3">
               <label for="author" class="form-label text-start d-block">Auteur*</label>
-              <input type="text" name="author" id="author" class="form-control" value="<?= htmlspecialchars($booksInfos['auteur']); ?>" required />
+              <input type="text" name="author" id="author" class="form-control" value="<?= htmlspecialchars($booksInfos['auteur'] ?? ''); ?>" required />
             </div>
             <div class="mb-3">
               <label for="type" class="form-label text-start d-block">Type*</label>
-              <input type="text" name="type" id="type" class="form-control" value="<?= htmlspecialchars($booksInfos['type']); ?>" required />
+              <input type="text" name="type" id="type" class="form-control" value="<?= htmlspecialchars($booksInfos['type'] ?? ''); ?>" required />
             </div>
             <div class="mb-3">
               <label for="editeur" class="form-label text-start d-block">Editeur*</label>
-              <input type="text" name="editeur" id="editeur" class="form-control" value="<?= htmlspecialchars($booksInfos['editeur']); ?>" required />
+              <input type="text" name="editeur" id="editeur" class="form-control" value="<?= htmlspecialchars($booksInfos['editeur'] ?? ''); ?>" required />
             </div>
             <div class="mb-3">
               <label for="resume" class="form-label text-start d-block">Résumé</label>
-              <textarea name="resume" id="resume" class="form-control" rows="1"><?= htmlspecialchars($booksInfos['resume']); ?></textarea>
+              <textarea name="resume" id="resume" class="form-control" rows="1"><?= htmlspecialchars($booksInfos['resume'] ?? ''); ?></textarea>
             </div>
             <div class="mb-3">
               <label for="id_unique" class="form-label text-start d-block">Identifiant unique</label>
-              <input type="text" name="id_unique" id="id_unique" class="form-control" value="<?= htmlspecialchars($booksInfos['id_unique']); ?>" />
+              <input type="text" name="id_unique" id="id_unique" class="form-control" value="<?= htmlspecialchars($booksInfos['id_unique'] ?? ''); ?>" />
             </div>
             <div class="mb-3">
               <label for="genre" class="form-label text-start d-block">Genre</label>
-              <input type="text" name="genre" id="genre" class="form-control" value="<?= htmlspecialchars($booksInfos['genre']); ?>" />
+              <input type="text" name="genre" id="genre" class="form-control" value="<?= htmlspecialchars($booksInfos['genre'] ?? ''); ?>" />
             </div>
             <div class="mb-3">
               <label for="serie" class="form-label text-start d-block">Série</label>
-              <input type="text" name="serie" id="serie" class="form-control" value="<?= htmlspecialchars($booksInfos['serie']); ?>" />
+              <input type="text" name="serie" id="serie" class="form-control" value="<?= htmlspecialchars($booksInfos['serie'] ?? ''); ?>" />
             </div>
             <div class="mb-3">
               <label for="tome" class="form-label text-start d-block">Tome n°</label>
-              <input type="number" name="tome" id="tome" class="form-control" value="<?php if (!empty($booksInfos['serie'])) {
-                                                                                        echo htmlspecialchars($booksInfos['tome']);
+              <input type="number" name="tome" id="tome" class="form-control" value="<?php if (!empty($booksInfos['serie'] ?? '')) {
+                                                                                        echo htmlspecialchars($booksInfos['tome'] ?? '');
                                                                                       } ?>" />
             </div>
             <div class="mb-3">

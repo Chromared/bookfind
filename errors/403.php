@@ -7,7 +7,7 @@
 ?>
 
 <?php if (session_status() === PHP_SESSION_NONE) {
-  session_start();
+  require '../actions/functions/sessionInit.php';
 } ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">

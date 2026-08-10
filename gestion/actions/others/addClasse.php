@@ -8,7 +8,7 @@
 
 
 
-<?php if(isset($_POST['classeAddValidate'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['classeAddValidate'])){
     $newClasse = $_POST['newClasse'];
 
     $checkIfClasseAlreadyExists = $bdd->prepare('SELECT name FROM classes WHERE name = ?');

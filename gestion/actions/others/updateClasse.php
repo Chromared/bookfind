@@ -8,7 +8,7 @@
 
 
 
-<?php if(isset($_POST['classeUpdateValidate'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['classeUpdateValidate'])){
     $existingClasse = $_POST['existingClasse'];
     $newClasse = $_POST['newClasseName'];
 

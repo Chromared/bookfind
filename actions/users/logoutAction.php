@@ -10,7 +10,7 @@
 
 <?php require '../database.php';
 require '../functions/logFunction.php';
-session_start();
+require_once __DIR__ . '/../functions/sessionInit.php';
 
 $deleteCookies = $bdd->prepare('DELETE FROM cookies WHERE user_id = ?');
 $deleteCookies->execute(array($_SESSION['id']));

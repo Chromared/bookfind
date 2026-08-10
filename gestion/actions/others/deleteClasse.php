@@ -8,7 +8,7 @@
 
 
 
-<?php if(isset($_POST['classeDeleteValidate'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['classeDeleteValidate'])){
     $existingClasse = $_POST['existingClasse2'];
 
     $checkIfClasseAlreadyExists = $bdd->prepare('SELECT name FROM classes WHERE name = ?');

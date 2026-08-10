@@ -6,9 +6,10 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start(); ?>
+<?php require 'actions/functions/sessionInit.php'; ?>
 <?php require 'actions/database.php';
 require 'actions/functions/logFunction.php';
+require 'actions/functions/csrfFunction.php';
 require 'actions/users/loginAction.php'; ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
@@ -48,6 +49,7 @@ require 'actions/users/loginAction.php'; ?>
               <input type="checkbox" name="rememberMe" id="rememberMe" class="form-check-input" />
               <label for="rememberMe" class="form-check-label">Se souvenir de moi</label>
             </div>
+            <?= csrf_field(); ?>
             <?php if (isset($_GET['redirect']) and !empty($_GET['redirect'])) { ?>
               <input type="hidden" name="redirect" value="<?= htmlspecialchars($_GET['redirect']); ?>" />
             <?php } ?>

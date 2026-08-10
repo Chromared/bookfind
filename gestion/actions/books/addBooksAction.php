@@ -8,7 +8,7 @@
 
 
 
-<?php if(isset($_POST['validate'])){
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['validate'])){
     if(isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['isbn']) AND isset($_POST['editeur']) AND isset($_POST['type'])){
         if(!empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['isbn']) AND !empty($_POST['editeur']) AND !empty($_POST['type'])){
 
@@ -46,7 +46,7 @@
                 $tome = $_POST['tome'];
             }else{$serie = false; $tome = null;}
 
-            if($id_u = true){
+            if($id_u === true){
 
                 $addBook = $bdd->prepare('INSERT INTO books SET titre = ?, auteur = ?, isbn = ?, id_unique = ?, editeur = ?, type = ?, resume = ?, genre = ?, serie = ?, tome = ?, statut = ?');
                 $addBook->execute(array($title, $author, $isbn, $id_unique, $editeur, $type, $resume, $genre, $serie, $tome, 0));

@@ -8,7 +8,7 @@
 
 
 
-<?php if (isset($_POST['export'])) {
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if (isset($_POST['export'])) {
     // Nettoyer la sortie pour éviter les sauts de ligne inutiles
     if (ob_get_length()) ob_clean();
 

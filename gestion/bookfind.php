@@ -9,9 +9,18 @@
 <?php
 require '../actions/database.php';
 require '../actions/users/securityAction.php';
+
+// Vérification d'accès centralisée avant de charger les actions sensibles
+if (!isset($_SESSION['grade']) || $_SESSION['grade'] != '1') {
+    http_response_code(403);
+    require '../errors/403.php';
+    exit;
+}
+
 require 'actions/users/securityAdminAction.php';
 require '../actions/functions/logFunction.php';
 require '../actions/functions/generateUsernameFunction.php';
+require '../actions/functions/csrfFunction.php';
 if (isset($_GET['tab']) && $_GET['tab'] == 'database') {
     require 'actions/others/updateDatabase.php';
 } elseif (isset($_GET['tab']) && $_GET['tab'] == 'classes') {
@@ -92,11 +101,10 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label text-start d-block">Mot de passe</label>
-                                <input type="password" name="password" id="password" class="form-control" value="<?php if (isset($password)) {
-                                                                                                                        echo $password;
-                                                                                                                    } ?>" />
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Laisser vide pour conserver le mot de passe actuel" autocomplete="new-password" />
                             </div>
                             <div class="mb-3">
+                                <?= csrf_field(); ?>
                                 <input type="submit" name="databaseValidate" class="btn btn-primary" value="Enregistrer" />
                             </div>
                         </div>
@@ -491,7 +499,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                 </div>
             </div>
         </form>
-        <script>
+        <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
             function toggleCustomField(field) {
                 const selectElement = document.getElementById(`map_${field}`);
                 const customDiv = document.getElementById(`custom_${field}_div`);

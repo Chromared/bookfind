@@ -6,7 +6,7 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start(); ?>
+<?php require 'actions/functions/sessionInit.php'; ?>
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 
@@ -51,7 +51,7 @@
         </div>
       </div>
     </div>
-    <script>
+    <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
       document.addEventListener("DOMContentLoaded", function() {
         var successModal = document.getElementById('successModal');
         var myModal = new bootstrap.Modal(successModal, {

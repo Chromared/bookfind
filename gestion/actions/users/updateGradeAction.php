@@ -8,7 +8,9 @@
 
 
 
-<?php if (isset($_POST['validateGrade'])) {
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+$id = $_GET['id'] ?? null;
+if (isset($_POST['validateGrade'])) {
     if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') {
         if (isset($_POST['grade'])) {
             if (!empty($_POST['grade']) or $_POST['grade'] == 0) {
@@ -21,9 +23,14 @@
                     $updateInfoSco = $bdd->prepare('UPDATE users SET grade = ? WHERE id = ?');
                     $updateInfoSco->execute(array($newGrade, $id));
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de <a href="../profil.php?id=' . $usersInfos['id'] . '">' . $usersInfos['prenom'] . ' ' . $usersInfos['nom'] . '</a> à été changé de ' . NoEchoGrade($usersInfos['grade']) . ' vers ' . NoEchoGrade($newGrade) . '.');
+                    // Récupérer infos utilisateur pour le log
+                    $getUser = $bdd->prepare('SELECT id, prenom, nom, grade FROM users WHERE id = ?');
+                    $getUser->execute(array($id));
+                    $usersInfos = $getUser->fetch();
 
-                    header('Location: update-user.php?id=' . $id . '&msg5=true');
+                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de <a href="../profil.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['prenom'] ?? '') . ' ' . htmlspecialchars($usersInfos['nom'] ?? '') . '</a> à été changé de ' . NoEchoGrade($usersInfos['grade'] ?? '') . ' vers ' . NoEchoGrade($newGrade) . '.');
+
+                    header('Location: update-user.php?id=' . ($id ?? '') . '&msg5=true');
                 } else {
                     $errorMsg5 = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
                 }

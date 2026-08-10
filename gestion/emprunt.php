@@ -14,7 +14,7 @@ require 'actions/users/securityAdminAction.php';
 require '../actions/books/showOneBookAction.php';
 require '../actions/functions/logFunction.php';
 require 'actions/books/updateEmprunt.php';
-if ($booksInfos['statut'] == 1) {
+if (($booksInfos['statut'] ?? null) == 1) {
   require 'actions/books/showOneEmprunt.php';
 }
 require 'actions/books/addEmpruntAction.php';
@@ -34,8 +34,9 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
 <body class="d-flex flex-column min-vh-100">
   <?php include 'includes/navbar.php'; ?>
   <br>
-  <?php if ($booksInfos['statut'] == 0 or $booksInfos['statut'] == 2) { ?>
+  <?php if ((($booksInfos['statut'] ?? null) == 0) or (($booksInfos['statut'] ?? null) == 2)) { ?>
     <form method="post">
+      <?= csrf_field(); ?>
       <div class="container mt-3">
         <div class="d-flex justify-content-center mt-4">
           <div class="card text-center mb-3" style="width: 50rem;">
@@ -70,11 +71,12 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
       </div>
     </form>
 
-    <?php } elseif ($booksInfos['statut'] == 1) {
+    <?php } elseif (($booksInfos['statut'] ?? null) == 1) {
     if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
 
       <!-- Modifier la date de retour -->
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -90,7 +92,7 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
                 <?php } ?>
                 <div class="mb-3">
                   <label for="updateDate" class="form-label">Nouvelle date de retour</label>
-                  <input type="date" class="form-control" id="updateDate" name="date" value="<?= $empruntInfos['date_futur_retour'] ?>" required />
+                  <input type="date" class="form-control" id="updateDate" name="date" value="<?= htmlspecialchars($empruntInfos['date_futur_retour'] ?? '') ?>" required />
                 </div>
                 <div class="mb-3">
                   <input type="submit" name="validateUpdate" value="Enregistrer" class="btn btn-primary" />
@@ -105,6 +107,7 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
 
       <!-- Retourner l'emprunt -->
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -126,7 +129,7 @@ $dateDans30Jours = date('Y-m-d', strtotime('+30 days')); ?>
     }
   } ?>
 
-  <script>
+  <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
     $(document).ready(function() {
       $('#user_id').select2({
         placeholder: "Rechercher un utilisateur...",

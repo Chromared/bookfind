@@ -8,7 +8,9 @@
 
 
 
-<?php include '../actions/functions/transfoGradeIntVersText.php';
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+require_once __DIR__ . '/../../../actions/users/securityAction.php';
+include '../actions/functions/transfoGradeIntVersText.php';
 
     if(isset($_GET['s']) AND !empty($_GET['s'])) {
 

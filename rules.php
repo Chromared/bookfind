@@ -6,7 +6,7 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start(); ?>
+<?php require 'actions/functions/sessionInit.php'; ?>
 
 <!DOCTYPE html>
 <html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">

@@ -8,7 +8,7 @@
 
 
 
-<?php // Importation des utilisateurs via CSV
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; // Importation des utilisateurs via CSV
 
 // Initialisation des variables
 $msgImport = "";

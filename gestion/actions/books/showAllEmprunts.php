@@ -1,4 +1,5 @@
-<?php
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+require_once __DIR__ . '/../../../actions/users/securityAction.php';
 //This file belongs to the BookFind project.
 //
 //BookFind is distributed under the terms of the MIT software license.

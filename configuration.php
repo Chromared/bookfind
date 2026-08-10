@@ -7,7 +7,7 @@
 ?>
 
 <?php
-session_start();
+require 'actions/functions/sessionInit.php';
 require_once 'actions/database.php';
 ?>
 <!DOCTYPE html>
@@ -39,6 +39,7 @@ require_once 'actions/database.php';
                 </div>
                 <div class="card-body">
                     <form method="post">
+                        <?= csrf_field(); ?>
                         <div class="mb-3">
                             <label for="host" class="form-label">Hôte</label>
                             <input type="text" class="form-control" id="host" name="host" required>
@@ -57,14 +58,23 @@ require_once 'actions/database.php';
                     </form>
                     <?php
                     if (isset($_POST['host'], $_POST['username'], $_POST['password']) && !empty($_POST['host']) && !empty($_POST['username'])) {
-                        $host = $_POST['host'];
-                        $username = $_POST['username'];
+                        $host = trim($_POST['host']);
+                        $username = trim($_POST['username']);
                         $password = $_POST['password'];
                         $filePath = 'actions/database.php';
                         $fileContent = file_get_contents($filePath);
-                        $fileContent = preg_replace("/\\\$host = '';/", "\$host = '$host';", $fileContent);
-                        $fileContent = preg_replace("/\\\$username = '';/", "\$username = '$username';", $fileContent);
-                        $fileContent = preg_replace("/\\\$password = '';/", "\$password = '$password';", $fileContent);
+
+                        // Écrire des valeurs PHP sûres en utilisant var_export via callback
+                        $fileContent = preg_replace_callback('/\\$host\s*=\s*\'[^\']*\';/', function($m) use ($host) {
+                            return '$host = ' . var_export($host, true) . ';';
+                        }, $fileContent);
+                        $fileContent = preg_replace_callback('/\\$username\s*=\s*\'[^\']*\';/', function($m) use ($username) {
+                            return '$username = ' . var_export($username, true) . ';';
+                        }, $fileContent);
+                        $fileContent = preg_replace_callback('/\\$password\s*=\s*\'[^\']*\';/', function($m) use ($password) {
+                            return '$password = ' . var_export($password, true) . ';';
+                        }, $fileContent);
+
                         file_put_contents($filePath, $fileContent);
                         echo '<div class="alert alert-success mt-3">Enregistré avec succès ! <a href="configuration.php">Recharger la page</a>.</div>';
                     }

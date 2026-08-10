@@ -12,7 +12,7 @@
   require 'actions/users/securityAdminAction.php';
   require '../actions/functions/logFunction.php';
   require '../actions/users/showOneUserProfilAction.php';
-  if (($_SESSION['grade'] != '1' and $usersInfos['grade'] == '1') or ($_SESSION['grade'] != '1' and $_SESSION['grade'] != '2' and $usersInfos['grade'] == '2') or $_SESSION['grade'] == '3') {
+  if (($_SESSION['grade'] != '1' and ($usersInfos['grade'] ?? null) == '1') or ($_SESSION['grade'] != '1' and $_SESSION['grade'] != '2' and ($usersInfos['grade'] ?? null) == '2') or $_SESSION['grade'] == '3') {
     http_response_code(403);
     require '../errors/403.php';
     exit;
@@ -39,6 +39,7 @@
       <?php include 'includes/navbar.php' ?>
 
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -62,15 +63,15 @@
                 <?php } ?>
                 <div class="mb-3">
                   <label for="firstname" class="form-label text-start d-block">Prénom</label>
-                  <input type="text" name="firstname" id="firstname" class="form-control" placeholder="John" value="<?= htmlspecialchars($usersInfos['prenom']); ?>" required />
+                  <input type="text" name="firstname" id="firstname" class="form-control" placeholder="John" value="<?= htmlspecialchars($usersInfos['prenom'] ?? ''); ?>" required />
                 </div>
                 <div class="mb-3">
                   <label for="name" class="form-label text-start d-block">Nom de famille</label>
-                  <input type="text" name="name" id="name" class="form-control" placeholder="Doe" value="<?= htmlspecialchars($usersInfos['nom']); ?>" required />
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Doe" value="<?= htmlspecialchars($usersInfos['nom'] ?? ''); ?>" required />
                 </div>
                 <div class="mb-3">
                   <label for="username" class="form-label text-start d-block">Nom d'utilisateur</label>
-                  <input type="text" name="username" id="username" class="form-control" value="<?= htmlspecialchars($usersInfos['username']); ?>" readonly />
+                  <input type="text" name="username" id="username" class="form-control" value="<?= htmlspecialchars($usersInfos['username'] ?? ''); ?>" readonly />
                 </div>
                 <div class="mb-3">
                   <input type="submit" name="validateInfoPerso" class="btn btn-primary" value="Enregistrer" />
@@ -83,6 +84,7 @@
       </form>
 
       <form method="post">
+        <?= csrf_field(); ?>
         <div class="container mt-3">
           <div class="d-flex justify-content-center mt-4">
             <div class="card text-center mb-3" style="width: 50rem;">
@@ -123,6 +125,7 @@
       <?php if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') { ?>
 
         <form method="post">
+          <?= csrf_field(); ?>
           <div class="container mt-3">
             <div class="d-flex justify-content-center mt-4">
               <div class="card text-center mb-3" style="width: 50rem;">
@@ -145,11 +148,11 @@
                     </div>
                   <?php } ?>
                   <div class="mb-3">
-                    <label for="grade" class="form-label text-start d-block">Grade actuel : <?= Grade($usersInfos['grade']); ?></label>
+                    <label for="grade" class="form-label text-start d-block">Grade actuel : <?php if (isset($usersInfos['grade'])) { Grade($usersInfos['grade']); } ?></label>
                     <select class="form-control" name="grade" id="grade">
-                      <option value="0" <?php Selected('0', $usersInfos['grade']); ?>>Aucun</option>
-                      <option value="3" <?php Selected('3', $usersInfos['grade']); ?>>Assistant</option>
-                      <option value="2" <?php Selected('2', $usersInfos['grade']); ?>>Gérant</option><?php if ($_SESSION['grade'] == '1') { ?><option value="1" <?php Selected('1', $usersInfos['grade']); ?>>Administrateur</option><?php } ?>
+                      <option value="0" <?php Selected('0', $usersInfos['grade'] ?? ''); ?>>Aucun</option>
+                      <option value="3" <?php Selected('3', $usersInfos['grade'] ?? ''); ?>>Assistant</option>
+                      <option value="2" <?php Selected('2', $usersInfos['grade'] ?? ''); ?>>Gérant</option><?php if ($_SESSION['grade'] == '1') { ?><option value="1" <?php Selected('1', $usersInfos['grade'] ?? ''); ?>>Administrateur</option><?php } ?>
                     </select>
                   </div>
                   <div class="mb-3">
@@ -163,6 +166,7 @@
         </form>
 
         <form method="post">
+          <?= csrf_field(); ?>
           <div class="container mt-3">
             <div class="d-flex justify-content-center mt-4">
               <div class="card text-center mb-3" style="width: 50rem;">
@@ -202,6 +206,7 @@
         </form>
 
         <form method="post">
+          <?= csrf_field(); ?>
           <div class="container mt-3">
             <div class="d-flex justify-content-center mt-4">
               <div class="card text-center mb-3" style="width: 50rem;">

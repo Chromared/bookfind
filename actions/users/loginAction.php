@@ -48,7 +48,35 @@
         }
     }
 } 
+require_once __DIR__ . '/../functions/csrfFunction.php';
+
 if (isset($_POST['validate'])) {
+    // Vérifier le jeton CSRF
+    csrf_verify();
+
+    // Protections anti-brute-force (par IP, session)
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    if (!isset($_SESSION['login_attempts'])) {
+        $_SESSION['login_attempts'] = [];
+    }
+    $key = 'ip_' . $ip;
+    if (!isset($_SESSION['login_attempts'][$key])) {
+        $_SESSION['login_attempts'][$key] = ['count' => 0, 'first' => time()];
+    }
+    $attempts = &$_SESSION['login_attempts'][$key];
+    // window 15 minutes, max 5
+    if ($attempts['count'] >= 5 && (time() - $attempts['first']) < 900) {
+        $errorMsg = '<div class="msg"><div class="msg-alerte">Trop de tentatives. Réessayez plus tard.</div></div>';
+    }
+
+    // reset window if expired
+    if ((time() - $attempts['first']) >= 900) {
+        $attempts = ['count' => 0, 'first' => time()];
+    }
+
+    // initialisations
+    $rememberMe = false;
+
     if (isset($_POST['username']) and isset($_POST['password'])) {
         if (!empty($_POST['username']) and !empty($_POST['password'])) {
 
@@ -68,18 +96,12 @@ if (isset($_POST['validate'])) {
 
                         $rememberMe = true;
 
-                        while($isTokenUnique = false) {
+                        // génère un token unique
+                        do {
                             $token = bin2hex(random_bytes(32));
-
                             $checkIfTokenAlreadyExists = $bdd->prepare('SELECT id FROM cookies WHERE token = ?');
                             $checkIfTokenAlreadyExists->execute(array($token));
-
-                            if ($checkIfTokenAlreadyExists->rowCount() > 0) {
-                                $isTokenUnique = false;
-                            }
-                        }
-
-                        $token = bin2hex(random_bytes(32));
+                        } while ($checkIfTokenAlreadyExists->rowCount() > 0);
                         $ip = $_SERVER['REMOTE_ADDR'];
                         $userID = $usersInfos['id'];
 
@@ -109,6 +131,12 @@ if (isset($_POST['validate'])) {
                     $_SESSION['grade'] = $usersInfos['grade'];
                     $_SESSION['theme'] = $usersInfos['theme'];
 
+                    // Regénérer l'ID de session pour éviter fixation
+                    session_regenerate_id(true);
+
+                    // reset attempts on succès
+                    $attempts = ['count' => 0, 'first' => time()];
+
                     if($rememberMe) {
                         SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Connexion', 'Connexion manuelle avec création d\'un cookie.');
                     } else {
@@ -124,10 +152,14 @@ if (isset($_POST['validate'])) {
                         exit;
                     }
                 } else {
-                    $errorMsg = '<div class="msg"><div class="msg-alerte">Mot de passe est incorrect.</div></div>';
+                    // échec : incrémenter compteur et message générique
+                    $attempts['count']++;
+                    $errorMsg = '<div class="msg"><div class="msg-alerte">Identifiants incorrects.</div></div>';
                 }
             } else {
-                $errorMsg = '<div class="msg"><div class="msg-alerte">Aucun compte n\'est associé à ce nom d\'utilisateur. Créer mon compte <a href="signup.php">ici</a>.</div></div>';
+                // échec : incrémenter compteur et message générique
+                $attempts['count']++;
+                $errorMsg = '<div class="msg"><div class="msg-alerte">Identifiants incorrects.</div></div>';
             }
         } else {
             $errorMsg = '<div class="msg"><div class="msg-alerte">Tous les champs ne sont pas rempli.</div></div>';

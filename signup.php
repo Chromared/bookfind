@@ -6,8 +6,8 @@
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php session_start(); ?>
-<?php require 'actions/database.php';
+<?php require 'actions/functions/sessionInit.php';
+require 'actions/database.php';
 require 'actions/functions/logFunction.php';
 require 'actions/functions/generateUsernameFunction.php';
 require 'actions/users/signupAction.php'; ?>
@@ -67,6 +67,7 @@ require 'actions/users/signupAction.php'; ?>
               </label>
             </div>
             <div class="mb-3">
+              <?= csrf_field(); ?>
               <input type="submit" name="validate" class="btn btn-primary" value="Inscription" />
             </div>
           </div>

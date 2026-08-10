@@ -35,6 +35,7 @@ require 'actions/users/securityAdminAction.php';
     </p>
     <p>Entrez votre login et votre mot de passe pour le crypter.</p>
     <form method="post">
+        <?= csrf_field(); ?>
         <p>
             Login : <input type="text" name="login"><br />
             Mot de passe : <input type="text" name="pass"><br /><br />
