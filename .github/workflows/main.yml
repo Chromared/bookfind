@@ -71,7 +71,7 @@ jobs:
   web-deploy:
     name: Deploy
     needs: ci-php-quality
-    if: ${{ github.event_name != 'pull_request' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     concurrency:
       group: deploy-${{ github.ref }}
