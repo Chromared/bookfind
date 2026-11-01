@@ -1,115 +1,112 @@
 # BookFind
 
-**BookFind** est une application web destinée aux utilisateurs d'un Centre de Documentation et d'Information (CDI). Elle permet la recherche et l'emprunt de livres via une interface intuitive et une gestion sécurisée des utilisateurs.
+**BookFind** is a web application for users of a Documentation and Information Center (CDI). It allows searching for and borrowing books through an intuitive interface with secure user management.
 
 ---
 
-## Table des matières
+## Table of contents
 
-1. [Aperçu du Projet](#aperçu-du-projet)
-2. [Fonctionnalités](#fonctionnalités)
-3. [Structure du Projet](#structure-du-projet)
+1. [Project overview](#project-overview)
+2. [Features](#features)
+3. [Project structure](#project-structure)
 4. [Installation](#installation)
-5. [Configuration de la base de données](#configuration-de-la-base-de-donnée)
-6. [Utilisation](#utilisation)
-7. [Dépendances](#dépendances)
-8. [Licence](#licence)
+5. [Database configuration](#database-configuration)
+6. [Usage](#usage)
+7. [Dependencies](#dependencies)
+8. [License](#license)
 
 ---
 
-## Aperçu du Projet
+## Project overview
 
-Le projet **BookFind** est conçu pour simplifier la gestion des emprunts de livres au sein d’un CDI. L’application permet aux utilisateurs :
-- De rechercher des ouvrages disponibles
-- D'emprunter des livres
-- De consulter leurs emprunts en cours
-- D'accéder aux fonctionnalités protégées àils sont gradés
+The **BookFind** project is designed to simplify the management of book loans within a CDI. The application allows users to:
+- Search for available books
+- Borrow books
+- View their current loans
+- Access protected features if they are graded
 
-Cette application offre une solution efficace pour le personnel du CDI et leurs utilisateurs.
+This application offers an efficient solution for the CDI staff and their users.
 
-## Fonctionnalités
+## Features
 
-- **Page d'accueil** : Présentation de l'application et formulaire de recherche de livres.
-- **Recherche de livres** : Interface permettant aux utilisateurs de trouver des livres en fonction de leur titre.
-- **Gestion des emprunts** : Permet de voir les livres empruntés et l'historique d'emprunt.
-- **Connexion et profil utilisateur** : Authentification avec mot de passe crypté, accès aux fonctionnalités réservées, ainsi qu'un espace pour gérer son profil ou modifier le profil d'un utilisateur si on est gradé. Les parties modifiables varient en fonction du niveau de permission.
+- **Home page**: Presentation of the application and a book search form.
+- **Book search**: Interface allowing users to find books by their title.
+- **Loan management**: View borrowed books and loan history.
+- **Login and user profile**: Authentication with hashed passwords, access to restricted features, as well as a space to manage your own profile or edit another user's profile if you are graded. The editable parts vary depending on the permission level.
 
-## Structure du Projet
+## Project structure
 
-- `index.php` : Page principale de l'application, introduisant le service de recherche de livres.
-- `login.php` : Page de connexion pour authentifier les utilisateurs.
-- `books.php` : Page de recherche de livres avec un formulaire pour entrer des critères de recherche.
-- `profil.php` : Interface permettant aux utilisateurs de consulter et de modifier leurs informations personnelles.
-- `emprunts.php` : Page où l'utilisateur peut voir les livres qu'il a empruntés.
-- `pdc.php` : Page affichant les politiques de confidentialité et les conditions d'utilisation.
-- `rules.php` : Page affichant le règlement.
+- `index.php`: Main page of the application, introducing the book search service.
+- `login.php`: Login page to authenticate users.
+- `books.php`: Book search page with a form to enter search criteria.
+- `profile.php`: Interface allowing users to view and edit their personal information.
+- `loans.php`: Page where the user can see the books they have borrowed.
+- `privacy.php`: Page displaying the privacy policy and terms of use.
+- `rules.php`: Page displaying the rules.
 
-### Répertoires
+### Directories
 
-- `actions/` : Contient les scripts PHP et JavaScript pour les actions, comme la connexion à la base de données, l´enregistrement d'un livre et le fonctionnement du site en général.
-- `includes/` : Composants inclus dans les différentes pages, comme le `header.php`, la `navbar.php` et le `footer.php` pour un affichage cohérent. Ce dossier sert à centraliser des bouts de code qui n'auront pas à être répétés et où le changement impacteront toutes les pages.
-- `assets/` : Ressources telles que les fichiers CSS, images et icones.
-- `temp/` : Contient les fichiers temporaires.
+- `actions/`: Contains the PHP and JavaScript scripts for actions, such as the database connection, registering a book and the general operation of the site.
+- `includes/`: Components included in the various pages, such as `header.php`, `navbar.php` and `footer.php`, for consistent display. This folder centralizes pieces of code that do not need to be repeated and where changes impact every page.
+- `assets/`: Resources such as CSS files, images and icons.
+- `temp/`: Contains temporary files.
 
 ## Installation
 
-1. **Cloner le dépôt ou télécharger le ZIP** :
+1. **Clone the repository or download the ZIP**:
     ```bash
     git clone https://github.com/chromared/bookfind.git
     ```
-2. **Configuration du serveur local** :
-    - Utilisez XAMPP, WAMP, ou un autre serveur avec PHP et MySQL.
-3. **Déplacer le projet** :
-    - Placez le dossier extrait dans le répertoire racine de votre serveur web (en général `htdocs` sur les serveurs web et XAMPP ou `www` pour WAMP et uWAMP).
+2. **Local server setup**:
+    - Use XAMPP, WAMP, or another server with PHP and MySQL.
+3. **Move the project**:
+    - Place the extracted folder in the root directory of your web server (usually `htdocs` on web servers and XAMPP, or `www` for WAMP and uWAMP).
 
-## Configurer BookFind
+## Configure BookFind
 
-1. Dans votre navigateur, rendez-vous sur le fichier `configuration.php`.
-2. Suivez les actions **dans l'ordre** pour configurer la base de donnée, les classes de votre établissement...
-3. Quand vous avez fini, cliquez sur le bouton qui est apparu permettant de supprimer le fichier `configuration.php`. Cette action est nécessaire pour des raisons de sécurité. Le fichier ne doit pas rester accessible après la configuration.
+1. In your browser, go to the `configuration.php` file.
+2. Follow the actions **in order** to configure the database and the classes of your institution...
+3. When you are done, click the button that appears to delete the `configuration.php` file. This action is required for security reasons. The file must not remain accessible after configuration.
 
-## Utilisation
+## Usage
 
-### Étapes d'utilisation de l'application
+### Steps for using the application
 
-1. **Accéder à la Page d'accueil** : Rendez-vous sur `index.php` pour une vue d'ensemble et un accès rapide à la recherche de livres.
-2. **Créer un compte et se connecter** :
-    - Allez sur `signup.php` ou `login.php` pour créer un compte ou vous connecter.
-3. **Rechercher des livres** :
-    - Utilisez `books.php` pour explorer les livres disponibles.
-4. **Voir et gérer le profil** :
-    - Consultez et modifiez vos informations personnelles sur `profil.php`.
-5. **Suivre les emprunts** :
-    - Rendez-vous sur `emprunts.php` pour consulter vos livres empruntés et leur statut.
-6. **Gestion** :
-    - Pour les gradés, un lien "Gestion" apparaît dans la barre de navigation. En fonction de vos permissions, ce lien vous permettera d'accéder à certaines options de configuration du site ou du C.D.I.
+1. **Access the home page**: Go to `index.php` for an overview and quick access to the book search.
+2. **Create an account and sign in**:
+    - Go to `signup.php` or `login.php` to create an account or sign in.
+3. **Search for books**:
+    - Use `books.php` to browse the available books.
+4. **View and manage the profile**:
+    - View and edit your personal information on `profile.php`.
+5. **Track loans**:
+    - Go to `loans.php` to view your borrowed books and their status.
+6. **Management**:
+    - For graded users, a "Management" link appears in the navigation bar. Depending on your permissions, this link gives you access to certain site or CDI configuration options.
 
-## Environnement
+## Environment
 
-- **Serveur Web** : Apache.
-- **PHP** : version 8.3 ou supérieure.
-- **MySQL** : version 8.4 ou supérieure.
+- **Web server**: Apache.
+- **PHP**: version 8.3 or higher.
+- **MySQL**: version 8.4 or higher.
 
-## Dépendances
+## Dependencies
 
-- **Aucune** : Il n'y a pour l'instant pas de dépendances nécessaires au fonctionnement de BookFind.
+- **None**: BookFind currently has no dependencies required for its operation.
 
-## Liste des contributeurs
+## List of contributors
 
-### Contributeurs actifs
+### Active contributors
 
 - [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Full Stack
-- [@Jià N0w](https://github.com/JiaN0w)  -->  Gestion dépôt GitHub
+- [@Jià N0w](https://github.com/JiaN0w)  -->  GitHub repository management
 - [@DawnFolk](https://github.com/DawnFolk)  -->  Pentest
+- [@Sylvain Durif, le Grand Monarque, le Christ cosmique et le Messie lui-même](https://www.linkedin.com/in/sylvain-pierre-durif-26a92119/?locale=fr) --> Bénédiction Cosmique
 
-### Contributeurs passifs
+### Passive contributors
 
 - [Mitali Jadhavro  / Coding Artist](https://codingartistweb.com/)  -->  Frontend (JS = [action/fonction/title.js](https://github.com/Chromared/bookfind/blob/main/actions/functions/title.js))
 
-## Licence
+## License
 
-Ce projet est distribué selon les termes de la license [MIT]. 2026 Chromared.
-
----
-
-[MIT]: https://opensource.org/licenses/MIT
+This project is distributed under the terms of the [AGPL-3.0](LICENSE) license. 2026 Chromared.

@@ -1,0 +1,194 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
+"Language-Team: French\n"
+"Project-Id-Version: BookFind\n"
+"PO-Revision-Date: 2026-10-10 00:00+0000\n"
+"Last-Translator: BookFind contributors\n"
+"MIME-Version: 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Invalid CSRF token."
+msgstr "Jeton CSRF invalide."
+
+msgid "Regenerate usernames"
+msgstr "Régénérer les noms d’utilisateur"
+
+msgid "Regenerated usernames for %d users."
+msgstr "Noms d’utilisateur régénérés pour %d utilisateurs."
+
+msgid "Username regeneration failed. No usernames were changed."
+msgstr "La régénération des noms d’utilisateur a échoué. Aucun nom d’utilisateur n’a été modifié."
+
+msgid "Import users and regenerate usernames"
+msgstr "Importer des utilisateurs et régénérer les noms d’utilisateur"
+
+msgid "Import users from a CSV"
+msgstr "Importer des utilisateurs depuis un fichier CSV"
+
+msgid "Choose a CSV file containing the user data to import."
+msgstr "Choisissez un fichier CSV contenant les données utilisateur à importer."
+
+msgid "CSV file"
+msgstr "Fichier CSV"
+
+msgid "CSV separator"
+msgstr "Séparateur CSV"
+
+msgid "CSV file format"
+msgstr "Format du fichier CSV"
+
+msgid "First line = headers (do not import)"
+msgstr "Première ligne = en-têtes (ne pas importer)"
+
+msgid "First line = data (to import)"
+msgstr "Première ligne = données (à importer)"
+
+msgid "Upload and analyze"
+msgstr "Envoyer et analyser"
+
+msgid "Column mapping"
+msgstr "Correspondance des colonnes"
+
+msgid "For each database field, select the matching column in your CSV."
+msgstr "Pour chaque champ de la base de données, sélectionnez la colonne correspondante du fichier CSV."
+
+msgid "Change CSV file"
+msgstr "Changer de fichier CSV"
+
+msgid "Basic information"
+msgstr "Informations de base"
+
+msgid "CSV columns"
+msgstr "Colonnes CSV"
+
+msgid "Not imported"
+msgstr "Non importé"
+
+msgid "Other value..."
+msgstr "Autre valeur…"
+
+msgid "Last name"
+msgstr "Nom"
+
+msgid "First name"
+msgstr "Prénom"
+
+msgid "User settings"
+msgstr "Paramètres utilisateur"
+
+msgid "None (0)"
+msgstr "Aucun (0)"
+
+msgid "Administrator (1)"
+msgstr "Administrateur (1)"
+
+msgid "Manager (2)"
+msgstr "Gestionnaire (2)"
+
+msgid "Assistant (3)"
+msgstr "Assistant (3)"
+
+msgid "Use 0"
+msgstr "Utiliser 0"
+
+msgid "Use 1"
+msgstr "Utiliser 1"
+
+msgid "Authentication"
+msgstr "Authentification"
+
+msgid "Use \"ChangeMe123!\""
+msgstr "Utiliser \"ChangeMe123!\""
+
+msgid "Maximum"
+msgstr "Maximum"
+
+msgid "Preview: %1$d of %2$d rows displayed."
+msgstr "Aperçu : %1$d ligne(s) affichée(s) sur %2$d."
+
+msgid "Import users"
+msgstr "Importer les utilisateurs"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Error uploading the file. Please try again."
+msgstr "Erreur lors de l’envoi du fichier. Veuillez réessayer."
+
+msgid "The uploaded file cannot be found. Please try again."
+msgstr "Le fichier envoyé est introuvable. Veuillez réessayer."
+
+msgid "The file must be in CSV format."
+msgstr "Le fichier doit être au format CSV."
+
+msgid "Unable to read the CSV file."
+msgstr "Impossible de lire le fichier CSV."
+
+msgid "CSV file analyzed successfully. %d rows found. Please map the columns."
+msgstr "Fichier CSV analysé. %d lignes trouvées. Veuillez associer les colonnes."
+
+msgid "Error processing the file. Please try again."
+msgstr "Erreur lors du traitement du fichier. Veuillez réessayer."
+
+msgid "Unable to open the CSV file."
+msgstr "Impossible d’ouvrir le fichier CSV."
+
+msgid "Import canceled."
+msgstr "Import annulé."
+
+msgid "No CSV file awaiting import."
+msgstr "Aucun fichier CSV n’est en attente d’importation."
+
+msgid "The column mapping is incorrect. The username field is required."
+msgstr "La correspondance des colonnes est incorrecte. Le champ nom d’utilisateur est obligatoire."
+
+msgid "Use the algorithm (first letter of first name + last name)"
+msgstr "Utiliser l’algorithme (première lettre du prénom + nom)"
+
+msgid "--- Select a class ---"
+msgstr "--- Sélectionnez une classe ---"
+
+msgid "By"
+msgstr "Par"
+
+msgid "due"
+msgstr "à rendre le"
+
+msgid "No class"
+msgstr "Aucune classe"
+
+msgid "Not part of any class"
+msgstr "N’appartient à aucune classe"
+
+msgid "Line %d: Unable to generate username (missing last name or first name)."
+msgstr "Ligne %d : impossible de générer un nom d’utilisateur (nom ou prénom manquant)."
+
+msgid "Line %d: The row could not be imported."
+msgstr "Ligne %d : la ligne n’a pas pu être importée."
+
+msgid "Line %d: Incorrect number of columns."
+msgstr "Ligne %d : le nombre de colonnes est incorrect."
+
+msgid "Line %d: Empty username."
+msgstr "Ligne %d : le nom d’utilisateur est vide."
+
+msgid "Line %d: Password is required."
+msgstr "Ligne %d : un mot de passe est obligatoire."
+
+msgid "Line %d: Maximum loans must be at least 1."
+msgstr "Ligne %d : le nombre maximal d’emprunts doit être d’au moins 1."
+
+msgid "The column mapping is invalid. Please map the CSV columns again."
+msgstr "Le mappage des colonnes est invalide. Veuillez refaire le mappage du fichier CSV."
+
+msgid "Import completed: %1$d users imported, %2$d errors."
+msgstr "Import terminé : %1$d utilisateurs importés, %2$d erreurs."
+
+msgid "%d more errors."
+msgstr "%d erreurs supplémentaires."
+
+msgid "Database connection error. Please check the server logs."
+msgstr "Erreur de connexion à la base de données. Veuillez consulter les journaux du serveur."

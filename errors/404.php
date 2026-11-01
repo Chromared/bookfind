@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -10,32 +10,41 @@
   require '../actions/functions/sessionInit.php';
 } ?>
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erreur 404</title>
+  <title>BookFind — Page not found</title>
   <?php include '../includes/header.php'; ?>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
-  <div class="container text-center mt-5">
-    <h1 class="mt-3">Erreur 404</h1>
-    <img src="../assets/iconesite.png" class="img-fluid w-25 display-4" />
-    <h3 class="mt-3">La page que vous recherchez n'existe pas.</h3>
-  </div>
-  <div class="container mt-3">
-    <form method="GET" action="books.php">
-      <div class="input-group mb-3">
-        <input type="text" name="s" class="form-control" placeholder="Rechercher un livre" />
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-          <i class="bi bi-search"></i>
-          Rechercher
-        </button>
-      </div>
-    </form>
-  </div>
+<body>
+  <main class="page">
+    <div class="container">
+      <section class="error">
+        <div class="error__code" aria-hidden="true">404</div>
+        <div class="error__icon">
+          <svg class="icon"><use href="#i-alert"/></svg>
+        </div>
+        <h1 class="error__title">Page not found</h1>
+        <p class="error__text">The page you are looking for does not exist or may have been moved.</p>
+        <div class="btn-group">
+          <a href="/index.php" class="btn btn--primary btn--lg">Back to home</a>
+          <a href="/books.php" class="btn btn--secondary btn--lg">Browse the catalog</a>
+        </div>
+        <form method="GET" action="/books.php" class="error__search">
+          <div class="input-group">
+            <input type="text" name="s" class="input" placeholder="Search for a book…" aria-label="Search for a book"/>
+            <button class="btn btn--outline" type="submit">
+              <svg class="icon"><use href="#i-search"/></svg>
+              Search
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
   <?php include '../includes/footer.php'; ?>
 </body>
 

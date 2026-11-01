@@ -2,7 +2,10 @@ DirectoryIndex index.php
 
 RewriteEngine On
 
+# Force HTTPS en production, mais pas en local (localhost / LAN privé)
 RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$
+RewriteCond %{REMOTE_ADDR} !^(127\.0\.0\.1|::1|10\.|192\.168\.|172\.(1[6-9]|2[0-9]|3[01])\.)
 RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
 ErrorDocument 403 /errors/403.php

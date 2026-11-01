@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -10,8 +10,8 @@
 
 <?php
 if (isset($_POST['validate'])) {
-    if (isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['password']) and isset($_POST['confirm_password']) and isset($_POST['classe'])) {
-        if (!empty($_POST['lastname']) and !empty($_POST['firstname']) and !empty($_POST['password']) and !empty($_POST['confirm_password']) and !empty($_POST['classe'])) {
+    if (isset($_POST['lastname']) and isset($_POST['firstname']) and isset($_POST['password']) and isset($_POST['confirm_password']) and isset($_POST['class_name'])) {
+        if (!empty($_POST['lastname']) and !empty($_POST['firstname']) and !empty($_POST['password']) and !empty($_POST['confirm_password']) and !empty($_POST['class_name'])) {
 
             if ($_POST['password'] == $_POST['confirm_password']) {
 
@@ -19,14 +19,14 @@ if (isset($_POST['validate'])) {
 
                     $lastname = $_POST['lastname'];
                     $firstname = $_POST['firstname'];
-                    $mdp = password_hash($_POST['password'], PASSWORD_DEFAULT);
-                    $classe = $_POST['classe'];
+                    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    $class_name = $_POST['class_name'];
 
                     // Generate the username
                     $username = username($firstname, $lastname);
 
                     // Check if this username already exists in the database
-                    $stmt = $bdd->prepare("SELECT COUNT(*) FROM users WHERE username LIKE ?");
+                    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE username LIKE ?");
                     $stmt->execute([$username . '%']);
                     $count = $stmt->fetchColumn();
 
@@ -35,12 +35,12 @@ if (isset($_POST['validate'])) {
                         $username .= ($count + 1);  // The number is based on the number of people already having this username
                     }
 
-                    $checkIfClasseAlreadyExists = $bdd->prepare('SELECT name FROM classes WHERE name = ?');
-                    $checkIfClasseAlreadyExists->execute(array($classe));
+                    $checkIfClassAlreadyExists = $db->prepare('SELECT name FROM classes WHERE name = ?');
+                    $checkIfClassAlreadyExists->execute(array($class_name));
 
-                    if ($checkIfClasseAlreadyExists->rowCount() > 0) {
+                    if ($checkIfClassAlreadyExists->rowCount() > 0) {
 
-                        $checkIfOneUserExist = $bdd->query('SELECT id FROM users');
+                        $checkIfOneUserExist = $db->query('SELECT id FROM users');
 
                         if ($checkIfOneUserExist->rowCount() == 0) {
                             $grade = 1;
@@ -48,39 +48,39 @@ if (isset($_POST['validate'])) {
                             $grade = 0;
                         }
 
-                        $insertUserOnWebsite = $bdd->prepare('INSERT INTO users SET username = ?, classe = ?, nom = ?, prenom = ?, mdp = ?, regles = ?, pdc = ?, grade = ?');
-                        $insertUserOnWebsite->execute(array($username, $classe, $lastname, $firstname, $mdp, true, true, $grade));
+                        $insertUserOnWebsite = $db->prepare('INSERT INTO users SET username = ?, class_name = ?, last_name = ?, first_name = ?, password = ?, rules_accepted = ?, privacy_accepted = ?, grade = ?');
+                        $insertUserOnWebsite->execute(array($username, $class_name, $lastname, $firstname, $password, true, true, $grade));
 
-                        $getInfosOfThisUserReq = $bdd->prepare('SELECT * FROM users WHERE username = ?');
+                        $getInfosOfThisUserReq = $db->prepare('SELECT * FROM users WHERE username = ?');
                         $getInfosOfThisUserReq->execute(array($username));
 
                         $usersInfos = $getInfosOfThisUserReq->fetch();
 
                         $_SESSION['auth'] = true;
                         $_SESSION['id'] = $usersInfos['id'];
-                        $_SESSION['lastname'] = $usersInfos['nom'];
-                        $_SESSION['firstname'] = $usersInfos['prenom'];
+                        $_SESSION['lastname'] = $usersInfos['last_name'];
+                        $_SESSION['firstname'] = $usersInfos['first_name'];
                         $_SESSION['username'] = $usersInfos['username'];
-                        $_SESSION['classe'] = $usersInfos['classe'];
+                        $_SESSION['class_name'] = $usersInfos['class_name'];
                         $_SESSION['grade'] = $usersInfos['grade'];
                         $_SESSION['theme'] = $usersInfos['theme'];
 
-                        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Inscription', 'Aucun commentaire.');
+                        SaveLog($db, $_SERVER['REQUEST_URI'], 'Sign up', 'No comment.');
 
                         header('Location: index.php?signup');
                     } else {
-                        $errorMsg = 'La classe sélectionnée n\'existe pas.';
+                        $errorMsg = 'The selected class does not exist.';
                     }
                 } else {
-                    $errorMsg = 'Les conditions d\'utilisation et les règles doivent être acceptées.';
+                    $errorMsg = 'The terms of use and the rules must be accepted.';
                 }
             } else {
-                $errorMsg = 'Les deux mot de passe ne sont pas identique.';
+                $errorMsg = 'The two passwords are not identical.';
             }
         } else {
-            $errorMsg = 'Veuillez remplir tous les champs.';
+            $errorMsg = 'Please fill in all fields.';
         }
     } else {
-        $errorMsg = 'Tous les champs n\'existe pas. Veuillez <a href="signup.php">recharger</a> la page.';
+        $errorMsg = 'Not all fields exist. Please <a href="signup.php">reload</a> the page.';
     }
 }

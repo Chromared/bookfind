@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../../../actions/users/securityAction.php';
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php $selectISBNs= $bdd->query('SELECT DISTINCT isbn FROM books');
+<?php $selectISBNs= $db->query('SELECT DISTINCT isbn FROM books');
 
     //if(isset($['isbn'])){
         //while($isbns = $selectISBNs->fetch()){

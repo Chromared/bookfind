@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -13,10 +13,10 @@
     $timestamp = strtotime($date);
     // If strtotime fails, the format is invalid
     if (!$timestamp) {
-        echo "Format de date invalide";
+        echo "Invalid date format";
     }
 
-    // Output in French format (d/m/Y)
+    // Output in d/m/Y format
     echo date("d/m/Y", $timestamp);
 }
 function NoEchoConversionDate($date) {
@@ -24,9 +24,9 @@ function NoEchoConversionDate($date) {
     $timestamp = strtotime($date);
     // If strtotime fails, the format is invalid
     if (!$timestamp) {
-        return "Format de date invalide";
+        return "Invalid date format";
     }
 
-    // Return in French format (d/m/Y)
+    // Return in d/m/Y format
     return date("d/m/Y", $timestamp);
 }

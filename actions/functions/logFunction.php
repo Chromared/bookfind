@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -36,7 +36,7 @@
                 if ($c->nodeType === XML_TEXT_NODE) $text .= $c->nodeValue;
             }
 
-            // Valider le href
+            // Validate the href
             $valid = false;
             if ($href === '') {
                 $valid = false;
@@ -72,7 +72,7 @@
     return implode('', $safeFragments);
 }
 
-function SaveLog($bdd, $page, $type, $comment){
+function SaveLog($db, $page, $type, $comment){
 
     $user_id = $_SESSION['id'] ?? null;
     $user_ip = $_SERVER['REMOTE_ADDR'] ?? '';
@@ -86,7 +86,7 @@ function SaveLog($bdd, $page, $type, $comment){
     $safe_username = htmlspecialchars($username ?? '', ENT_QUOTES);
     $safe_name = htmlspecialchars($name ?? '', ENT_QUOTES);
 
-    $insertLog = $bdd->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_ip = ?, username = ?, user_name = ?, type = ?, comment = ?');
+    $insertLog = $db->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_ip = ?, username = ?, user_name = ?, type = ?, comment = ?');
     $insertLog->execute(array($safe_page, $user_id, $user_ip, $safe_username, $safe_name, $safe_type, $safe_comment));
 
 }

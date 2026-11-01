@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -14,18 +14,18 @@
         $id = $_GET['id'];
 
         // Retrieve user information before deletion for logging
-        $getUser = $bdd->prepare('SELECT id, prenom, nom FROM users WHERE id = ?');
+        $getUser = $db->prepare('SELECT id, first_name, last_name FROM users WHERE id = ?');
         $getUser->execute(array($id));
         $usersInfos = $getUser->fetch();
 
-        $DeleteUserAccount = $bdd->prepare('DELETE FROM users WHERE id = ?');
+        $DeleteUserAccount = $db->prepare('DELETE FROM users WHERE id = ?');
         $DeleteUserAccount->execute(array($id));
 
-        SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Suppression de compte', 'Le compte de ' . htmlspecialchars($usersInfos['prenom'] ?? '') . ' ' . htmlspecialchars($usersInfos['nom'] ?? '') . ' a été supprimé.');
+        SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'The account of ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' was deleted.');
 
         header('Location: users.php');
         
     }else{
-        $msg = 'Vous n\'avez pas de permissions suffisentes pour supprimer cet utilisateur.';
+        $msg = 'You do not have sufficient permissions to delete this user.';
     }
 }

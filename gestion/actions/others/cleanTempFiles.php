@@ -9,15 +9,15 @@
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
 
 /**
- * Script de nettoyage automatique des fichiers temporaires CSV
- * Supprime les fichiers de plus de 24 heures
+ * Automatic cleanup script for temporary CSV files
+ * Deletes files older than 24 hours
  */
 
 // Define temporary directory
  $tempDir = __DIR__ . '/../temp';
 
 if (!is_dir($tempDir)) {
-    exit('Dossier temporaire introuvable.');
+    exit('Temporary directory not found.');
 }
 
 // Retention duration: 24 hours (in seconds)
@@ -41,10 +41,10 @@ foreach ($files as $file) {
     }
 }
 
-// Journalisation optionnelle
+// Optional logging
 if ($deletedCount > 0) {
-    error_log("Nettoyage automatique : $deletedCount fichier(s) CSV temporaire(s) supprimé(s)");
+    error_log("Automatic cleanup: $deletedCount temporary CSV file(s) deleted");
 }
 
-exit("Nettoyage terminé : $deletedCount fichier(s) supprimé(s).");
+exit("Cleanup complete: $deletedCount file(s) deleted.");
 

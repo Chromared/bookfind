@@ -2,19 +2,19 @@
 require_once __DIR__ . '/../../../actions/users/securityAction.php';
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php $selectAuthors= $bdd->query('SELECT DISTINCT auteur FROM books');
+<?php $selectAuthors= $db->query('SELECT DISTINCT author FROM books');
 
-    //if(isset($['auteur'])){
+    //if(isset($['author'])){
         //while($authors = $selectAuthors->fetch()){
-            //echo '<option value="' . $authors['auteur'] . '" ' . SelectedWithoutEcho($authors['auteur'], $['auteur']) . '>' . $authors['auteur'] . '</option>';
+            //echo '<option value="' . $authors['author'] . '" ' . SelectedWithoutEcho($authors['author'], $['author']) . '>' . $authors['author'] . '</option>';
         //}
     //}else{
 
     while($authors = $selectAuthors->fetch()){
-        echo '<option value="' . $authors['auteur'] . '">' . $authors['auteur'] . '</option>';
+        echo '<option value="' . $authors['author'] . '">' . $authors['author'] . '</option>';
     }//}

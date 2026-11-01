@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -12,16 +12,16 @@
 
         $id = $_GET['id'];
 
-        $checkPassword = $bdd->prepare('SELECT nb_emprunt FROM users WHERE id = ?');
+        $checkPassword = $db->prepare('SELECT loans_count FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
 
         $InfoDelete = $checkPassword->fetch();
 
-        if($InfoDelete['nb_emprunt'] == '0'){
+        if($InfoDelete['loans_count'] == '0'){
 
             $deleteAccount = true;
 
     }else{
-        $errorMsg4 = 'Vous devez avoir rendu tous vos emprunts pour supprimer votre compte. Il vous reste actuellement ' . $InfoDelete['nb_emprunt'] . ' livre(s) emprunté(s).';
+        $errorMsg4 = 'You must return all your loans before deleting your account. You currently have ' . $InfoDelete['loans_count'] . ' book(s) on loan.';
     }
 }

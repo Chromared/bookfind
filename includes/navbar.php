@@ -1,85 +1,43 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
-
-
-<?php $pageActuelle = basename($_SERVER['SCRIPT_NAME']); ?>
-<nav class="navbar fixed-top navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">
-      <img src="assets/iconesite.png" alt="BookFind logo" width="40" height="30" class="d-inline-block align-text-top img-fluid">
-      BookFind
+<?php $currentPage = basename($_SERVER['SCRIPT_NAME']);
+// Landing page: minimal navbar (logo + sign in/sign up only)
+// $isLanding = ($currentPage == 'index.php'); ?>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a class="navbar__brand" href="index.php">
+      <img src="/assets/logo.svg" alt="BookFind" class="navbar__logo">
+      <span>BookFind</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar__toggle" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Open menu">
+      <svg class="icon"><use href="#i-menu"/></svg>
     </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link <?php if ($pageActuelle == 'index.php') {
-                                echo 'active';
-                              } ?>" aria-current="page" href="index.php">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?php if ($pageActuelle == 'books.php') {
-                                echo 'active';
-                              } ?>" aria-current="page" href="books.php">Rechercher</a>
-        </li>
+    <div class="navbar__nav" id="navbarNav">
+      <?php // if (!$isLanding) { ?>
+        <a class="navbar__link <?php if ($currentPage == 'books.php') { echo 'is-active'; } ?>" href="books.php">Search</a>
         <?php if (file_exists('configuration.php')) { ?>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'configuration.php') {
-                                  echo 'active';
-                                } ?>" href="configuration.php">Configurer BookFind</a>
-          </li>
+          <a class="navbar__link <?php if ($currentPage == 'configuration.php') { echo 'is-active'; } ?>" href="configuration.php">Configure</a>
         <?php } ?>
-        <?php if (!isset($_SESSION['auth'])) { ?>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'login.php') {
-                                  echo 'active';
-                                } ?>" href="login.php">Se connecter</a>
-          </li>
-          <?php if (file_exists('actions/users/signupAction.php') && file_exists('signup.php')) { ?>
-            <li class="nav-item">
-              <a class="nav-link <?php if ($pageActuelle == 'signup.php') {
-                                    echo 'active';
-                                  } ?>" href="signup.php">S'inscrire</a>
-            </li>
-          <?php } ?>
-        <?php } else { ?>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'profil.php') {
-                                  echo 'active';
-                                } ?>" href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Profil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'settings.php') {
-                                  echo 'active';
-                                } ?>" href="settings.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Paramètres</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'emprunts.php') {
-                                  echo 'active';
-                                } ?>" href="emprunts.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Emprunts</a>
-          </li>
-        <?php }
-        if (isset($_SESSION['auth']) and $_SESSION['grade'] != 0) { ?>
-          <li class="nav-item">
-            <a class="nav-link" href="gestion/index.php">Gestion</a>
-          </li>
+      <?php // } ?>
+      <?php if (!isset($_SESSION['auth'])) { ?>
+        <a class="navbar__link navbar__link--auth <?php if ($currentPage == 'login.php') { echo 'is-active'; } ?>" href="login.php">Sign in</a>
+        <?php if (file_exists('actions/users/signupAction.php') && file_exists('signup.php')) { ?>
+          <a class="navbar__link navbar__link--cta navbar__link--auth <?php if ($currentPage == 'signup.php') { echo 'is-active'; } ?>" href="signup.php">Sign up</a>
         <?php } ?>
-      </ul>
-      <form method="get" action="books.php" class="d-flex" role="search">
-        <input name="s" class="form-control me-2" type="search" placeholder="Rechercher un livre" aria-label="Rechercher un livre">
-        <button class="btn btn-outline-light" type="submit">Rechercher</button>
-      </form>
+      <?php } elseif (isset($_SESSION['auth'])) { ?>
+        <a class="navbar__link <?php if ($currentPage == 'profile.php') { echo 'is-active'; } ?>" href="profile.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Profile</a>
+        <a class="navbar__link <?php if ($currentPage == 'settings.php') { echo 'is-active'; } ?>" href="settings.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Settings</a>
+        <a class="navbar__link <?php if ($currentPage == 'loans.php') { echo 'is-active'; } ?>" href="loans.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Loans</a>
+      <?php }
+      if (isset($_SESSION['auth']) && $_SESSION['grade'] != 0) { ?>
+        <a class="navbar__link" href="gestion/index.php">Management</a>
+      <?php } ?>
     </div>
   </div>
 </nav>
-<br />
-<br />
-<br />

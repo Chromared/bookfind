@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -18,44 +18,54 @@ if (empty($_SESSION['auth'])) {
     echo json_encode(['error' => 'Unauthenticated']);
     exit();
 }
-// Check admin role (grade '1' expected). Use permissive comparison
-if (!isset($_SESSION['grade']) || $_SESSION['grade'] != '1') {
+// Check graded role (grade '1' or '2', same as securityAdminAction.php)
+if (!isset($_SESSION['grade']) || $_SESSION['grade'] == '0') {
     http_response_code(403);
     echo json_encode(['error' => 'Forbidden']);
     exit();
 }
 
 // Retrieve total number of users
-$requete_users = $bdd->query('SELECT COUNT(*) AS total_utilisateurs FROM users');
-$resultat_users = $requete_users->fetch();
-$nbCount1 = $resultat_users['total_utilisateurs'];
+$usersQuery = $db->query('SELECT COUNT(*) AS total_users FROM users');
+$usersResult = $usersQuery->fetch();
+$totalUsers = $usersResult['total_users'];
 
-$requete_books = $bdd->query('SELECT COUNT(*) AS total_livres FROM books');
-$resultat_books = $requete_books->fetch();
-$nbCount2 = $resultat_books['total_livres'];
+$booksQuery = $db->query('SELECT COUNT(*) AS total_books FROM books');
+$booksResult = $booksQuery->fetch();
+$totalBooks = $booksResult['total_books'];
 
-$requete_emprunts = $bdd->query('SELECT COUNT(*) AS total_emprunts FROM emprunts WHERE statut = 1');
-$resultat_emprunts = $requete_emprunts->fetch();
-$nbCount3 = $resultat_emprunts['total_emprunts'];
+$loansQuery = $db->query('SELECT COUNT(*) AS total_loans FROM loans WHERE status = 1');
+$loansResult = $loansQuery->fetch();
+$totalLoans = $loansResult['total_loans'];
 
-$requete_emprunts_retournes = $bdd->query('SELECT COUNT(*) AS total_emprunts_retournes FROM emprunts WHERE statut = 2');
-$resultat_emprunts_retournes = $requete_emprunts_retournes->fetch();
-$nbCount4 = $resultat_emprunts_retournes['total_emprunts_retournes'];
+$returnedLoansQuery = $db->query('SELECT COUNT(*) AS total_returned_loans FROM loans WHERE status = 2');
+$returnedLoansResult = $returnedLoansQuery->fetch();
+$totalReturnedLoans = $returnedLoansResult['total_returned_loans'];
 
-$requete_logs = $bdd->query('SELECT COUNT(*) AS total_logs FROM logs');
-$resultat_logs = $requete_logs->fetch();
-$nbCount5 = $resultat_logs['total_logs'];
+$availableBooksQuery = $db->query('SELECT COUNT(*) AS total_available_books FROM books WHERE status = 0');
+$availableBooksResult = $availableBooksQuery->fetch();
+$totalAvailableBooks = $availableBooksResult['total_available_books'];
 
-if (!$resultat_users || !$resultat_books || !$resultat_emprunts || !$resultat_emprunts_retournes || !$resultat_logs) {
-    echo json_encode(['error' => 'Erreur dans la récupération des données']);
+$overdueLoansQuery = $db->query('SELECT COUNT(*) AS total_overdue_loans FROM loans WHERE status = 1 AND due_date < CURDATE()');
+$overdueLoansResult = $overdueLoansQuery->fetch();
+$totalOverdueLoans = $overdueLoansResult['total_overdue_loans'];
+
+$logsQuery = $db->query('SELECT COUNT(*) AS total_logs FROM logs');
+$logsResult = $logsQuery->fetch();
+$totalLogs = $logsResult['total_logs'];
+
+if (!$usersResult || !$booksResult || !$loansResult || !$returnedLoansResult || !$availableBooksResult || !$overdueLoansResult || !$logsResult) {
+    echo json_encode(['error' => 'Error retrieving data']);
     exit();
 }
 
 echo json_encode([
-    'total_utilisateurs' => $nbCount1,
-    'total_livres' => $nbCount2,
-    'total_emprunts' => $nbCount3,
-    'total_emprunts_retournes' => $nbCount4,
-    'total_logs' => $nbCount5,
+    'total_users' => $totalUsers,
+    'total_books' => $totalBooks,
+    'total_loans' => $totalLoans,
+    'total_returned_loans' => $totalReturnedLoans,
+    'total_available_books' => $totalAvailableBooks,
+    'total_overdue_loans' => $totalOverdueLoans,
+    'total_logs' => $totalLogs,
 ]);
 ?>

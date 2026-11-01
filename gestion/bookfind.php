@@ -1,13 +1,14 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
 <?php
 require '../actions/database.php';
+require_once '../actions/functions/gettextFunction.php';
 require '../actions/users/securityAction.php';
 
 // Centralized access check before loading sensitive actions
@@ -24,9 +25,9 @@ require '../actions/functions/csrfFunction.php';
 if (isset($_GET['tab']) && $_GET['tab'] == 'database') {
     require 'actions/others/updateDatabase.php';
 } elseif (isset($_GET['tab']) && $_GET['tab'] == 'classes') {
-    require 'actions/others/addClasse.php';
-    require 'actions/others/updateClasse.php';
-    require 'actions/others/deleteClasse.php';
+    require 'actions/others/addClass.php';
+    require 'actions/others/updateClass.php';
+    require 'actions/others/deleteClass.php';
 } elseif (isset($_GET['tab']) && $_GET['tab'] == 'users') {
     require 'actions/users/importUsers.php';
     require 'actions/users/regenUsernamesAction.php';
@@ -45,499 +46,471 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 ?>
 
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gérer BookFind</title>
+    <title>BookFind — Administration</title>
     <?php include '../includes/header.php'; ?>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="admin">
     <?php include 'includes/navbar.php'; ?>
-    <?php if (isset($_GET['tab']) and $_GET['tab'] == 'database') { ?>
-        <!-- Database connection -->
-        <form method="POST" autocomplete="off">
-            <div class="container mt-3">
-                <div class="d-flex justify-content-center mt-4">
-                    <div class="card text-center mb-3" style="width: 50rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Connexion à la base de données</h5>
-                            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
-                                <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-                                <div>
-                                    Les champs marqués d'une * doivent être remplis.
-                                </div>
+    <main class="page">
+      <div class="container">
+        <div class="narrow stack">
+        <?php if (isset($_GET['tab']) and $_GET['tab'] == 'database') { ?>
+            <!-- Database connection -->
+            <form method="POST" autocomplete="off">
+                <div class="card">
+                    <div class="card__body">
+                        <h1 class="card__title">Database connection</h1>
+                        <div class="alert alert--info" role="alert">
+                            <svg class="icon"><use href="#i-info"/></svg>
+                            <div>Fields marked with * are required.</div>
+                        </div>
+                        <?php if (isset($db_update_msg)) {
+                            $type = $db_update_type ?? 'info';
+                            $iconClass = '#i-info';
+                            if ($type === 'success') $iconClass = '#i-check';
+                            elseif ($type === 'danger' || $type === 'warning') $iconClass = '#i-alert';
+                        ?>
+                            <div class="alert alert--<?php echo $type ?>" role="alert">
+                                <svg class="icon"><use href="<?php echo $iconClass ?>"/></svg>
+                                <div><?php echo $db_update_msg; ?></div>
                             </div>
-                            <?php if (isset($db_update_msg)) {
-                                $type = $db_update_type ?? 'info';
-                                $iconClass = 'bi-info-circle-fill';
-                                if ($type === 'success') $iconClass = 'bi-check-circle-fill';
-                                elseif ($type === 'danger' || $type === 'warning') $iconClass = 'bi-exclamation-triangle-fill';
-                            ?>
-                                <div class="alert alert-<?php echo $type ?> d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi <?php echo $iconClass ?> flex-shrink-0 me-2"></i>
-                                    <div><?php echo $db_update_msg; ?></div>
-                                </div>
-                            <?php } ?>
-                            <div class="mb-3">
-                                <label for="host" class="form-label text-start d-block">Hôte*</label>
-                                <input type="text" name="host" id="host" class="form-control" value="<?php if (isset($host)) {
-                                                                                                            echo $host;
-                                                                                                        } ?>" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="dbname" class="form-label text-start d-block">Nom de la base de données*</label>
-                                <input type="text" name="dbname" id="dbname" class="form-control" value="<?php if (isset($dbname)) {
-                                                                                                                echo $dbname;
-                                                                                                            } ?>" placeholder="bookfind" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="user" class="form-label text-start d-block">Nom d'utilisateur*</label>
-                                <input type="text" name="user" id="user" class="form-control" value="<?php if (isset($username)) {
-                                                                                                            echo $username;
-                                                                                                        } ?>" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label text-start d-block">Mot de passe</label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Laisser vide pour conserver le mot de passe actuel" autocomplete="new-password" />
-                            </div>
-                            <div class="mb-3">
-                                <?= csrf_field(); ?>
-                                <input type="submit" name="databaseValidate" class="btn btn-primary" value="Enregistrer" />
-                            </div>
+                        <?php } ?>
+                        <div class="field">
+                            <label for="host" class="label">Host*</label>
+                            <input type="text" name="host" id="host" class="input" value="<?php if (isset($host)) {
+                                                                                                    echo $host;
+                                                                                                } ?>" required />
+                        </div>
+                        <div class="field">
+                            <label for="dbname" class="label">Database name*</label>
+                            <input type="text" name="dbname" id="dbname" class="input" value="<?php if (isset($dbname)) {
+                                                                                                        echo $dbname;
+                                                                                                    } ?>" placeholder="bookfind" required />
+                        </div>
+                        <div class="field">
+                            <label for="user" class="label">Username*</label>
+                            <input type="text" name="user" id="user" class="input" value="<?php if (isset($username)) {
+                                                                                                    echo $username;
+                                                                                                } ?>" required />
+                        </div>
+                        <div class="field">
+                            <label for="password" class="label">Password</label>
+                            <input type="password" name="password" id="password" class="input" placeholder="Leave empty to keep the current password" autocomplete="new-password" />
+                        </div>
+                        <div class="field">
+                            <?= csrf_field(); ?>
+                            <input type="submit" name="databaseValidate" class="btn btn--primary" value="Save" />
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'classes') { ?>
+            </form>
+        <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'classes') { ?>
 
-        <!-- Add a class -->
-        <form method="POST" autocomplete="off" id="addClasse">
-            <div class="container mt-3">
-                <div class="d-flex justify-content-center">
-                    <div class="card text-center mb-3" style="width: 50rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Ajouter une classe</h5>
-                            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
-                                <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-                                <div>
-                                    Les champs marqués d'une * doivent être remplis.
-                                </div>
+            <!-- Add a class -->
+            <form method="POST" autocomplete="off" id="addClass">
+                <?= csrf_field(); ?>
+                <div class="card">
+                    <div class="card__body">
+                        <h1 class="card__title">Add a class</h1>
+                        <div class="alert alert--info" role="alert">
+                            <svg class="icon"><use href="#i-info"/></svg>
+                            <div>Fields marked with * are required.</div>
+                        </div>
+                        <?php if (isset($msgC1)) { ?>
+                            <div class="alert alert--warning" role="alert">
+                                <svg class="icon"><use href="#i-alert"/></svg>
+                                <div><?= $msgC1; ?></div>
                             </div>
-                            <?php if (isset($msgC1)) { ?>
-                                <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
-                                    <div><?= $msgC1; ?></div>
-                                </div>
-                            <?php } elseif (isset($_GET['successAddClasse'])) { ?>
-                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
-                                    <div>
-                                        Classe ajoutée avec succès
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="mb-3">
-                                <label for="newClasse" class="form-label text-start d-block">Nouvelle classe*</label>
-                                <input type="text" name="newClasse" id="newClasse" class="form-control" required />
+                        <?php } elseif (isset($_GET['successAddClass'])) { ?>
+                            <div class="alert alert--success" role="alert">
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div>Class added successfully</div>
                             </div>
-                            <div class="mb-3">
-                                <input type="submit" name="classeAddValidate" class="btn btn-success" value="Ajouter" />
-                            </div>
+                        <?php } ?>
+                        <div class="field">
+                            <label for="newClass" class="label">New class*</label>
+                            <input type="text" name="newClass" id="newClass" class="input" required />
+                        </div>
+                        <div class="field">
+                            <input type="submit" name="classAddValidate" class="btn btn--success" value="Add" />
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
 
-        <!-- Edit a class -->
-        <form method="POST" autocomplete="off" id="updateClasse">
-            <div class="container mt-3">
-                <div class="d-flex justify-content-center">
-                    <div class="card text-center mb-3" style="width: 50rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Modifier une classe</h5>
-                            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
-                                <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-                                <div>
-                                    Les champs marqués d'une * doivent être remplis.
-                                </div>
+            <!-- Edit a class -->
+            <form method="POST" autocomplete="off" id="updateClass">
+                <?= csrf_field(); ?>
+                <div class="card">
+                    <div class="card__body">
+                        <h2 class="card__title">Edit a class</h2>
+                        <div class="alert alert--info" role="alert">
+                            <svg class="icon"><use href="#i-info"/></svg>
+                            <div>Fields marked with * are required.</div>
+                        </div>
+                        <?php if (isset($msgC2)) { ?>
+                            <div class="alert alert--warning" role="alert">
+                                <svg class="icon"><use href="#i-alert"/></svg>
+                                <div><?= $msgC2; ?></div>
                             </div>
-                            <?php if (isset($msgC2)) { ?>
-                                <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
-                                    <div><?= $msgC2; ?></div>
-                                </div>
-                            <?php } elseif (isset($_GET['successUpdateClasse'])) { ?>
-                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
-                                    <div>
-                                        Classe modifiée avec succès
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="mb-3">
-                                <label for="existingClasse" class="form-label text-start d-block">Classe existante*</label>
-                                <select name="existingClasse" id="existingClasse" class="form-select" required>
-                                    <option value="">--- Sélectionner une classe ---</option>
-                                    <?php include '../actions/functions/recupClassesAndOptions.php'; ?>
+                        <?php } elseif (isset($_GET['successUpdateClass'])) { ?>
+                            <div class="alert alert--success" role="alert">
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div>Class modified successfully</div>
+                            </div>
+                        <?php } ?>
+                        <div class="field">
+                            <label for="existingClass" class="label">Existing class*</label>
+                            <select name="existingClass" id="existingClass" class="select" required>
+                                <option value=""><?php echo _('--- Select a class ---'); ?></option>
+                                <?php include '../actions/functions/getClassesAndOptions.php'; ?>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="newClassName" class="label">New class name*</label>
+                            <input type="text" name="newClassName" id="newClassName" class="input" required />
+                        </div>
+                        <div class="field">
+                            <input type="submit" name="classUpdateValidate" class="btn btn--primary" value="Edit" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Delete a class -->
+            <form method="POST" autocomplete="off" id="deleteClass">
+                <?= csrf_field(); ?>
+                <div class="card">
+                    <div class="card__body">
+                        <h2 class="card__title">Delete a class</h2>
+                        <div class="alert alert--info" role="alert">
+                            <svg class="icon"><use href="#i-info"/></svg>
+                            <div>Fields marked with * are required.</div>
+                        </div>
+                        <?php if (isset($msgC3)) { ?>
+                            <div class="alert alert--warning" role="alert">
+                                <svg class="icon"><use href="#i-alert"/></svg>
+                                <div><?= $msgC3; ?></div>
+                            </div>
+                        <?php } elseif (isset($_GET['successDeleteClass'])) { ?>
+                            <div class="alert alert--success" role="alert">
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div>Class deleted successfully</div>
+                            </div>
+                        <?php } ?>
+                        <div class="field">
+                            <label for="existingClass2" class="label">Class to delete*</label>
+                            <select name="existingClass2" id="existingClass2" class="select" required>
+                                <option value=""><?php echo _('--- Select a class ---'); ?></option>
+                                <?php include '../actions/functions/getClassesAndOptions.php'; ?>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <input type="submit" name="classDeleteValidate" class="btn btn--danger" value="Delete" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'users') { ?>
+            <!-- Import users via CSV -->
+            <form method="POST" enctype="multipart/form-data" autocomplete="off" action="bookfind.php?tab=users">
+                <?= csrf_field(); ?>
+                <div class="card">
+                    <div class="card__body">
+                        <h1 class="card__title"><?php echo _('Import users from a CSV'); ?></h1>
+                        <div class="alert alert--info" role="alert">
+                            <svg class="icon"><use href="#i-info"/></svg>
+                            <div><?php echo _('Choose a CSV file containing the user data to import.'); ?></div>
+                        </div>
+
+                        <?php if (isset($msgImport) and !empty($msgImport)) { ?>
+                            <div class="alert alert--<?= htmlspecialchars($alertImportType ?? 'warning', ENT_QUOTES, 'UTF-8') ?>" role="alert">
+                                <svg class="icon"><use href="#i-alert"/></svg>
+                                <div><?= $msgImport; ?></div>
+                            </div>
+                        <?php } ?>
+
+                        <?php if (!isset($_SESSION['csv_preview'])): ?>
+                            <!-- CSV upload form -->
+                            <div class="field">
+                                <label for="csvFile" class="label"><?php echo _('CSV file'); ?></label>
+                                <input type="file" name="csvFile" id="csvFile" class="input" accept=".csv" required />
+                            </div>
+                            <div class="field">
+                                <label for="csvSeparator" class="label"><?php echo _('CSV separator'); ?></label>
+                                <select name="csvSeparator" id="csvSeparator" class="select">
+                                    <option value=",">Comma (,)</option>
+                                    <option value=";">Semicolon (;)</option>
+                                    <option value="\t">Tab</option>
+                                    <option value="|">Vertical bar (|)</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="newClasseName" class="form-label text-start d-block">Nouveau nom de la classe*</label>
-                                <input type="text" name="newClasseName" id="newClasseName" class="form-control" required />
+                            <div class="field">
+                                <span class="label"><?php echo _('CSV file format'); ?></span>
+                                <label class="check">
+                                    <input type="radio" name="csvHasHeaders" id="csvHasHeaders1" value="1" checked>
+                                    <?php echo _('First line = headers (do not import)'); ?>
+                                </label>
+                                <label class="check mt-1">
+                                    <input type="radio" name="csvHasHeaders" id="csvHasHeaders0" value="0">
+                                    <?php echo _('First line = data (to import)'); ?>
+                                </label>
                             </div>
-                            <div class="mb-3">
-                                <input type="submit" name="classeUpdateValidate" class="btn btn-primary" value="Modifier" />
+                            <div class="field">
+                                <input type="submit" name="csvUpload" class="btn btn--primary" value="<?php echo _('Upload and analyze'); ?>" />
                             </div>
-                        </div>
+                        <?php else: ?>
+                            <div class="field">
+                                <h2 class="card__title" style="font-size:16px;"><?php echo _('Column mapping'); ?></h2>
+                                <p class="hint"><?php echo _('For each database field, select the matching column in your CSV.'); ?></p>
+
+                                <!-- Button to switch CSV -->
+                                <div class="mb-3" style="text-align:right;">
+                                    <input type="submit" name="csvCancel" class="btn btn--outline" value="<?php echo _('Change CSV file'); ?>" />
+                                </div>
+
+                                <div class="table-wrap">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><?php echo _('Basic information'); ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="label">Username</span></td>
+                                                <td>
+                                                    <select name="db_mapping[username]" id="map_username" class="select" onchange="toggleCustomField('username')" required>
+                                                        <option value="algorithm"><?php echo _('Use the algorithm (first letter of first name + last name)'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label">Last name</span></td>
+                                                <td>
+                                                    <select name="db_mapping[last_name]" id="map_last_name" class="select" onchange="toggleCustomField('last_name')">
+                                                        <option value=""><?php echo _('Not imported'); ?></option>
+                                                        <option value="other"><?php echo _('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                    <div id="custom_last_name_div" class="mt-2" style="display: none;">
+                                                        <input type="text" name="custom_last_name" id="custom_last_name" class="input" placeholder="<?php echo _('Last name'); ?>">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label">First name</span></td>
+                                                <td>
+                                                    <select name="db_mapping[first_name]" id="map_first_name" class="select" onchange="toggleCustomField('first_name')">
+                                                        <option value=""><?php echo _('Not imported'); ?></option>
+                                                        <option value="other"><?php echo _('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                    <div id="custom_first_name_div" class="mt-2" style="display: none;">
+                                                        <input type="text" name="custom_first_name" id="custom_first_name" class="input" placeholder="<?php echo _('First name'); ?>">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><?php echo _('Class'); ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="label">Class</span></td>
+                                                <td>
+                                                    <select name="db_mapping[class_name]" id="map_class_name" class="select" onchange="toggleCustomField('class_name')">
+                                                        <option value=""><?php echo _('Not imported'); ?></option>
+                                                        <option value="other"><?php echo _('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                    <div id="custom_class_name_div" class="mt-2" style="display: none;">
+                                                        <select name="custom_class_name" id="custom_class_name" class="select">
+                                                            <option value=""><?php echo _('--- Select a class ---'); ?></option>
+                                                            <?php
+                                                            $selectClasses = $db->query('SELECT name FROM classes');
+                                                            while ($classes = $selectClasses->fetch()) {
+                                                                echo '<option value="' . htmlspecialchars($classes['name']) . '">' . htmlspecialchars($classes['name']) . '</option>';
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><?php echo _('User settings'); ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="label">Grade</span></td>
+                                                <td>
+                                                    <select name="db_mapping[grade]" id="map_grade" class="select">
+                                                        <option value="fixed:0"><?php echo _('None (0)'); ?></option>
+                                                        <option value="fixed:1"><?php echo _('Administrator (1)'); ?></option>
+                                                        <option value="fixed:2"><?php echo _('Manager (2)'); ?></option>
+                                                        <option value="fixed:3"><?php echo _('Assistant (3)'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label">Rules</span></td>
+                                                <td>
+                                                    <select name="db_mapping[rules_accepted]" id="map_rules" class="select">
+                                                        <option value="fixed:0"><?php echo _('Use 0'); ?></option>
+                                                        <option value="fixed:1"><?php echo _('Use 1'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label">Privacy</span></td>
+                                                <td>
+                                                    <select name="db_mapping[privacy_accepted]" id="map_privacy_accepted" class="select">
+                                                        <option value="fixed:0"><?php echo _('Use 0'); ?></option>
+                                                        <option value="fixed:1"><?php echo _('Use 1'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="label">Max loans</span></td>
+                                                <td>
+                                                    <select name="db_mapping[max_loans]" id="map_max_loans" class="select" onchange="toggleCustomField('max_loans')">
+                                                        <option value="">Use 5</option>
+                                                        <option value="other"><?php echo _('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                    <div id="custom_max_loans_div" class="mt-2" style="display: none;">
+                                                        <input type="number" name="custom_max_loans" id="custom_max_loans" class="input" min="1" placeholder="<?php echo _('Maximum'); ?>">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2"><?php echo _('Authentication'); ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="label">Password</span></td>
+                                                <td>
+                                                    <select name="db_mapping[password]" id="map_password" class="select" onchange="toggleCustomField('password')">
+                                                        <option value="fixed:default"><?php echo _('Use "ChangeMe123!"'); ?></option>
+                                                        <option value="other"><?php echo _('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                            <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
+                                                                <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
+                                                            <?php endforeach; ?>
+                                                        </optgroup>
+                                                    </select>
+                                                    <div id="custom_password_div" class="mt-2" style="display: none;">
+                                                        <input type="password" name="custom_password" id="custom_password" class="input" placeholder="<?php echo _('Password'); ?>" autocomplete="new-password">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="alert alert--info mt-3">
+                                    <svg class="icon"><use href="#i-info"/></svg>
+                                    <div><small><?= sprintf(_('Preview: %1$d of %2$d rows displayed.'), count($_SESSION['csv_preview']), $_SESSION['total_rows']); ?></small></div>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <input type="submit" name="csvImport" class="btn btn--success" value="<?php echo _('Import users'); ?>" />
+                                <input type="submit" name="csvCancel" class="btn btn--secondary" value="<?php echo _('Cancel'); ?>" />
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+            <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
+                function toggleCustomField(field) {
+                    const selectElement = document.getElementById(`map_${field}`);
+                    const customDiv = document.getElementById(`custom_${field}_div`);
 
-        <!-- Delete a class -->
-        <form method="POST" autocomplete="off" id="deleteClasse">
-            <div class="container mt-3">
-                <div class="d-flex justify-content-center">
-                    <div class="card text-center mb-5" style="width: 50rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Supprimer une classe</h5>
-                            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
-                                <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-                                <div>
-                                    Les champs marqués d'une * doivent être remplis.
-                                </div>
-                            </div>
-                            <?php if (isset($msgC3)) { ?>
-                                <div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
-                                    <div><?= $msgC3; ?></div>
-                                </div>
-                            <?php } elseif (isset($_GET['successDeleteClasse'])) { ?>
-                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
-                                    <div>
-                                        Classe supprimée avec succès
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="mb-3">
-                                <label for="existingClasse2" class="form-label text-start d-block">Classe à supprimer*</label>
-                                <select name="existingClasse2" id="existingClasse2" class="form-select" required>
-                                    <option value="">--- Sélectionner une classe ---</option>
-                                    <?php include '../actions/functions/recupClassesAndOptions.php'; ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <input type="submit" name="classeDeleteValidate" class="btn btn-danger" value="Supprimer" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'users') { ?>
-        <!-- Import users via CSV -->
-        <form method="POST" enctype="multipart/form-data" autocomplete="off" action="bookfind.php?tab=users">
-            <div class="container mt-3">
-                <div class="d-flex justify-content-center">
-                    <div class="card text-center mb-5" style="width: 50rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Importer des utilisateurs depuis un CSV</h5>
-                            <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert">
-                                <i class="bi bi-info-circle-fill flex-shrink-0 me-2"></i>
-                                <div>
-                                    Choisissez un fichier CSV contenant les données utilisateurs à importer.
-                                </div>
-                            </div>
-
-                            <?php if (isset($msgImport) and !empty($msgImport)) { ?>
-                                <div class="alert alert-<?= $alertImportType ?? 'warning' ?> d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2"></i>
-                                    <div><?= $msgImport; ?></div>
-                                </div>
-                            <?php } ?>
-
-                            <?php if (!isset($_SESSION['csv_preview'])): ?>
-                                <!-- CSV upload form -->
-                                <div class="mb-3">
-                                    <label for="csvFile" class="form-label text-start d-block">Fichier CSV</label>
-                                    <input type="file" name="csvFile" id="csvFile" class="form-control" accept=".csv" required />
-                                </div>
-                                <div class="mb-3">
-                                    <label for="csvSeparator" class="form-label text-start d-block">Séparateur CSV</label>
-                                    <select name="csvSeparator" id="csvSeparator" class="form-select">
-                                        <option value=",">Virgule (,)</option>
-                                        <option value=";">Point-virgule (;)</option>
-                                        <option value="\t">Tabulation</option>
-                                        <option value="|">Barre verticale (|)</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label text-start d-block">Format du fichier CSV</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="csvHasHeaders" id="csvHasHeaders1" value="1" checked>
-                                        <label class="form-check-label" for="csvHasHeaders1">Première ligne = en-têtes (à ne pas importer)</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="csvHasHeaders" id="csvHasHeaders0" value="0">
-                                        <label class="form-check-label" for="csvHasHeaders0">Première ligne = données (à importer)</label>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="submit" name="csvUpload" class="btn btn-primary" value="Télécharger et analyser" />
-                                </div>
-                            <?php else: ?>
-                                <div class="mb-3">
-                                    <h6>Correspondance des colonnes</h6>
-                                    <p class="small">Pour chaque champ de la base de données, sélectionnez la colonne correspondante dans votre CSV.</p>
-
-                                    <!-- Button to switch CSV -->
-                                    <div class="text-end mb-3">
-                                        <input type="submit" name="csvCancel" class="btn btn-outline-secondary" value="Changer de fichier CSV" />
-                                    </div>
-
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2" class="bg-light">Informations de base</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><label for="map_username">Nom d'utilisateur</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[username]" id="map_username" class="form-select" onchange="toggleCustomField('username')" required>
-                                                            <option value="algorithm">Utiliser l'algorithme (première lettre prénom + nom)</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><label for="map_nom">Nom</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[nom]" id="map_nom" class="form-select" onchange="toggleCustomField('nom')">
-                                                            <option value="">Non importé</option>
-                                                            <option value="autre">Autre valeur...</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                        <div id="custom_nom_div" class="mt-2" style="display: none;">
-                                                            <input type="text" name="custom_nom" id="custom_nom" class="form-control" placeholder="Nom">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><label for="map_prenom">Prénom</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[prenom]" id="map_prenom" class="form-select" onchange="toggleCustomField('prenom')">
-                                                            <option value="">Non importé</option>
-                                                            <option value="autre">Autre valeur...</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                        <div id="custom_prenom_div" class="mt-2" style="display: none;">
-                                                            <input type="text" name="custom_prenom" id="custom_prenom" class="form-control" placeholder="Prénom">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2" class="bg-light">Classe</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><label for="map_classe">Classe</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[classe]" id="map_classe" class="form-select" onchange="toggleCustomField('classe')">
-                                                            <option value="">Non importé</option>
-                                                            <option value="autre">Autre valeur...</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                        <div id="custom_classe_div" class="mt-2" style="display: none;">
-                                                            <select name="custom_classe" id="custom_classe" class="form-select">
-                                                                <option value="">--- Sélectionner une classe ---</option>
-                                                                <?php
-                                                                $selectClasses = $bdd->query('SELECT name FROM classes');
-                                                                while ($classes = $selectClasses->fetch()) {
-                                                                    echo '<option value="' . htmlspecialchars($classes['name']) . '">' . htmlspecialchars($classes['name']) . '</option>';
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2" class="bg-light">Paramètres utilisateur</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><label for="map_grade">Grade</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[grade]" id="map_grade" class="form-select">
-                                                            <option value="0">Aucun (0)</option>
-                                                            <option value="1">Administrateur (1)</option>
-                                                            <option value="2">Gérant (2)</option>
-                                                            <option value="3">Assistant (3)</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><label for="map_regles">Règles</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[regles]" id="map_regles" class="form-select">
-                                                            <option value="0">Utiliser 0</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><label for="map_pdc">PDC</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[pdc]" id="map_pdc" class="form-select">
-                                                            <option value="0">Utiliser 0</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><label for="map_nb_emprunt_max">Nombre d'emprunts max</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[nb_emprunt_max]" id="map_nb_emprunt_max" class="form-select" onchange="toggleCustomField('nb_emprunt_max')">
-                                                            <option value="">Utiliser 5</option>
-                                                            <option value="autre">Autre valeur...</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                        <div id="custom_nb_emprunt_max_div" class="mt-2" style="display: none;">
-                                                            <input type="number" name="custom_nb_emprunt_max" id="custom_nb_emprunt_max" class="form-control" min="1" placeholder="Nombre d'emprunts maximum">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2" class="bg-light">Authentification</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><label for="map_mdp">Mot de passe</label></td>
-                                                    <td>
-                                                        <select name="db_mapping[mdp]" id="map_mdp" class="form-select" onchange="toggleCustomField('mdp')">
-                                                            <option value="">Utiliser "ChangeMe123!"</option>
-                                                            <option value="autre">Autre valeur...</option>
-                                                            <optgroup label="Colonnes CSV">
-                                                                <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
-                                                                    <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
-                                                                <?php endforeach; ?>
-                                                            </optgroup>
-                                                        </select>
-                                                        <div id="custom_mdp_div" class="mt-2" style="display: none;">
-                                                            <input type="text" name="custom_mdp" id="custom_mdp" class="form-control" placeholder="Mot de passe">
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="alert alert-info mt-3">
-                                        <small>Aperçu : <?= count($_SESSION['csv_preview']) ?> lignes sur <?= $_SESSION['total_rows'] ?> affichées.</small>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="submit" name="csvImport" class="btn btn-success" value="Importer les utilisateurs" />
-                                    <input type="submit" name="csvCancel" class="btn btn-secondary ms-2" value="Annuler" />
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
-            function toggleCustomField(field) {
-                const selectElement = document.getElementById(`map_${field}`);
-                const customDiv = document.getElementById(`custom_${field}_div`);
-
-                if (selectElement && customDiv) {
-                    if (selectElement.value === 'autre') {
-                        customDiv.style.display = 'block';
-                    } else {
-                        customDiv.style.display = 'none';
+                    if (selectElement && customDiv) {
+                        if (selectElement.value === 'other') {
+                            customDiv.style.display = 'block';
+                        } else {
+                            customDiv.style.display = 'none';
+                        }
                     }
                 }
-            }
-        </script>
+            </script>
 
-        <!-- Regenerate usernames -->
-        <form method="POST">
-            <div class="container mt-3">
-                <div class="d-flex justify-content-center mt-4">
-                    <div class="card text-center mb-3" style="width: 50rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Régénérer les noms d'utilisateurs</h5>
-                            <?php if (isset($msgRegenUsernames)) { ?>
-                                <div class="alert alert-success d-flex align-items-center justify-content-center" role="alert">
-                                    <i class="bi bi-check-circle-fill flex-shrink-0 me-2"></i>
-                                    <div>
-                                        <?php echo $msgRegenUsernames; ?>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <div class="mb-3">
-                                <button type="submit" name="regenUsernames" class="btn btn-primary">Régénérer les noms d'utilisateurs</button>
+            <!-- Regenerate usernames -->
+            <form method="POST">
+                <?= csrf_field(); ?>
+                <div class="card">
+                    <div class="card__body">
+                        <h2 class="card__title"><?php echo _('Regenerate usernames'); ?></h2>
+                        <?php if (isset($msgRegenUsernames)) { ?>
+                            <div class="alert alert--<?= ($regenUsernamesSuccess ?? true) ? 'success' : 'danger' ?>" role="alert">
+                                <svg class="icon"><use href="<?= ($regenUsernamesSuccess ?? true) ? '#i-check' : '#i-alert' ?>"/></svg>
+                                <div><?= htmlspecialchars($msgRegenUsernames, ENT_QUOTES, 'UTF-8'); ?></div>
                             </div>
+                        <?php } ?>
+                        <div class="field">
+                            <button type="submit" name="regenUsernames" class="btn btn--primary"><?php echo _('Regenerate usernames'); ?></button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    <?php } ?>
+            </form>
+        <?php } ?>
+        </div>
+      </div>
+    </main>
     <?php include '../includes/footer.php'; ?>
 </body>
 

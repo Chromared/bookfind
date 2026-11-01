@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -13,9 +13,9 @@
     $timestamp = strtotime($datehour);
     // If strtotime fails, the format is invalid
     if (!$timestamp) {
-        echo "Format de date invalide";
+        echo "Invalid date format";
     } else {
-        // Display in French format with time
-        echo date("d/m/Y à H\hi", $timestamp);
+        // Display in d/m/Y format with time
+        echo date("d/m/Y at H\hi", $timestamp);
     }
 }

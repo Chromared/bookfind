@@ -1,28 +1,30 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; // Importation des utilisateurs via CSV
+<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; // Import users via CSV
+
+$otherValueOption = 'other';
 
 // Initialize variables
 $msgImport = "";
 $alertImportType = "warning";
 
 // Retrieve database connection (used globally)
-global $bdd;
+global $db;
 
-$maxAge = 24 * 60 * 60; // 24 heures
+$maxAge = 24 * 60 * 60; // 24 hours
 // Automatic cleanup of temporary files older than 24 hours
 $tempDir = __DIR__ . '/../../../temp';
 if (is_dir($tempDir)) {
     $files = glob($tempDir . '/csv_import_*.csv');
-    $maxAge = 24 * 60 * 60; // 24 heures
+    $maxAge = 24 * 60 * 60; // 24 hours
     $now = time();
 
     foreach ($files as $file) {
@@ -35,27 +37,28 @@ if (is_dir($tempDir)) {
 // Step 1: Upload and analyze CSV
 if(isset($_POST['csvUpload'])) {
     if(!isset($_FILES['csvFile']) || $_FILES['csvFile']['error'] !== UPLOAD_ERR_OK) {
-        $msgImport = "Erreur lors du téléchargement du fichier. Veuillez réessayer.";
+        $msgImport = _('Error uploading the file. Please try again.');
     } else {
         $separator = $_POST['csvSeparator'] ?? ',';
-        $hasHeaders = isset($_POST['csvHasHeaders']) ? (int)$_POST['csvHasHeaders'] : 1;
-        $_SESSION['csv_has_headers'] = $hasHeaders;
-
-        // Fix for tab separator
-        if ($separator === '\t') {
+        if ($separator === '\\t') {
             $separator = "\t";
         }
+        if (!in_array($separator, [',', ';', "\t", '|'], true)) {
+            $separator = ',';
+        }
+        $hasHeaders = isset($_POST['csvHasHeaders']) && (string)$_POST['csvHasHeaders'] === '0' ? 0 : 1;
+        $_SESSION['csv_has_headers'] = $hasHeaders;
 
         $csvFile = $_FILES['csvFile']['tmp_name'];
 
         // Check file existence
         if (!file_exists($csvFile)) {
-            $msgImport = "Le fichier téléchargé est introuvable. Veuillez réessayer.";
+            $msgImport = _('The uploaded file cannot be found. Please try again.');
         } else {
             // Check CSV format
             $fileType = mime_content_type($csvFile);
             if ($fileType !== 'text/csv' && $fileType !== 'text/plain') {
-                $msgImport = "Le fichier doit être au format CSV.";
+                $msgImport = _('The file must be in CSV format.');
             } else {
                 // Read CSV file
                 $csvData = [];
@@ -66,16 +69,19 @@ if(isset($_POST['csvUpload'])) {
                     $firstLine = fgetcsv($handle, 0, $separator, '"', "\\");
 
                     if (!$firstLine) {
-                        $msgImport = "Impossible de lire le fichier CSV.";
+                        $msgImport = _('Unable to read the CSV file.');
                         fclose($handle);
                     } else {
                         if ($hasHeaders) {
                             // Use first line as headers
                             $headers = $firstLine;
+                            if (isset($headers[0])) {
+                                $headers[0] = preg_replace('/^\xEF\xBB\xBF/', '', $headers[0]);
+                            }
                         } else {
                             // Create generic headers with preview of the first line
                             $headers = array_map(function($i, $value) {
-                                return "Colonne $i : " . (isset($value) ? substr($value, 0, 15) . (strlen($value) > 15 ? '...' : '') : '');
+                                return "Column $i: " . (isset($value) ? substr($value, 0, 15) . (strlen($value) > 15 ? '...' : '') : '');
                             }, array_keys($firstLine), $firstLine);
 
                             // Treat first line as data
@@ -83,8 +89,8 @@ if(isset($_POST['csvUpload'])) {
                         }
 
                         // Read data (max 5 rows for preview)
-                        $previewRows = count($csvData); // 0 ou 1 selon si on a déjà ajouté la première ligne
-                        while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE && $previewRows < 5) {
+                        $previewRows = count($csvData); // 0 or 1 depending on whether the first line was already added
+                        while ($previewRows < 5 && ($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
                             $csvData[] = $data;
                             $previewRows++;
                         }
@@ -113,16 +119,16 @@ if(isset($_POST['csvUpload'])) {
                             $_SESSION['csv_separator'] = $separator;
                             $_SESSION['csv_file'] = $tempFile;
                             $_SESSION['total_rows'] = $totalRows;
-                            $_SESSION['csv_preview'] = $csvData; // Seulement 5 lignes pour l'aperçu
+                            $_SESSION['csv_preview'] = $csvData; // Only 5 rows for preview
 
-                            $msgImport = "Fichier CSV analysé avec succès. $totalRows lignes trouvées. Veuillez associer les colonnes.";
+                            $msgImport = sprintf(_('CSV file analyzed successfully. %d rows found. Please map the columns.'), $totalRows);
                             $alertImportType = "success";
                         } else {
-                            $msgImport = "Erreur lors du traitement du fichier. Veuillez réessayer.";
+                            $msgImport = _('Error processing the file. Please try again.');
                         }
                     }
                 } else {
-                    $msgImport = "Impossible d'ouvrir le fichier CSV.";
+                    $msgImport = _('Unable to open the CSV file.');
                 }
             }
         }
@@ -142,32 +148,65 @@ if(isset($_POST['csvCancel'])) {
     unset($_SESSION['csv_has_headers']);
     unset($_SESSION['csv_preview']);
 
-    $msgImport = "Importation annulée.";
+    $msgImport = _('Import canceled.');
 }
 
 // Step 2: Import data
 if(isset($_POST['csvImport'])) {
     if(!isset($_SESSION['csv_file']) || !file_exists($_SESSION['csv_file']) || !isset($_SESSION['csv_headers']) || !isset($_SESSION['csv_separator'])) {
-        $msgImport = "Aucun fichier CSV en attente d'importation.";
+        $msgImport = _('No CSV file awaiting import.');
     } else {
         $db_mapping = $_POST['db_mapping'] ?? [];
+        $allowedColumns = ['username', 'last_name', 'first_name', 'class_name', 'grade', 'rules_accepted', 'privacy_accepted', 'max_loans', 'password'];
+        $mappingIsValid = is_array($db_mapping);
+        if ($mappingIsValid) {
+            foreach ($db_mapping as $column => $csvIndex) {
+                if (!in_array($column, $allowedColumns, true) || !is_scalar($csvIndex)) {
+                    $mappingIsValid = false;
+                    break;
+                }
+
+                $csvIndex = (string)$csvIndex;
+                $db_mapping[$column] = $csvIndex;
+                if (ctype_digit($csvIndex) && (int)$csvIndex < count($_SESSION['csv_headers'])) {
+                    continue;
+                }
+
+                $allowedOptions = match ($column) {
+                    'username' => ['algorithm'],
+                    'grade' => ['fixed:0', 'fixed:1', 'fixed:2', 'fixed:3'],
+                    'rules_accepted', 'privacy_accepted' => ['fixed:0', 'fixed:1'],
+                    'password' => ['', $otherValueOption, 'fixed:default'],
+                    default => ['', $otherValueOption],
+                };
+                if ($column === 'username') {
+                    $allowedOptions[] = $otherValueOption;
+                }
+                if (!in_array($csvIndex, $allowedOptions, true)) {
+                    $mappingIsValid = false;
+                    break;
+                }
+            }
+        }
 
         // Verify username mapping
-        if (!isset($db_mapping['username']) ||
-            (isset($db_mapping['username']) && $db_mapping['username'] === 'autre' && empty($_POST['custom_username'])) &&
-            $db_mapping['username'] !== 'algorithm') {
-            $msgImport = "La correspondance de colonnes est incorrecte. Le champ 'username' est obligatoire.";
+        if (!$mappingIsValid) {
+            $msgImport = _('The column mapping is invalid. Please map the CSV columns again.');
+        } elseif (!isset($db_mapping['username']) ||
+            ($db_mapping['username'] === $otherValueOption && empty($_POST['custom_username'])) ||
+            (!is_numeric($db_mapping['username']) && !in_array($db_mapping['username'], [$otherValueOption, 'algorithm'], true))) {
+            $msgImport = _('The column mapping is incorrect. The username field is required.');
         } else {
             // Retrieve custom values
             $custom_username = isset($_POST['custom_username']) ? trim($_POST['custom_username']) : null;
-            $custom_nom = isset($_POST['custom_nom']) ? trim($_POST['custom_nom']) : null;
-            $custom_prenom = isset($_POST['custom_prenom']) ? trim($_POST['custom_prenom']) : null;
-            $custom_classe = isset($_POST['custom_classe']) ? trim($_POST['custom_classe']) : null;
-            $custom_mdp = isset($_POST['custom_mdp']) ? trim($_POST['custom_mdp']) : null;
-            $custom_nb_emprunt_max = isset($_POST['custom_nb_emprunt_max']) && is_numeric($_POST['custom_nb_emprunt_max']) ? (int)$_POST['custom_nb_emprunt_max'] : null;
+            $custom_last_name = isset($_POST['custom_last_name']) ? trim($_POST['custom_last_name']) : null;
+            $custom_first_name = isset($_POST['custom_first_name']) ? trim($_POST['custom_first_name']) : null;
+            $custom_class_name = isset($_POST['custom_class_name']) ? trim($_POST['custom_class_name']) : null;
+            $custom_password = isset($_POST['custom_password']) ? (string)$_POST['custom_password'] : null;
+            $custom_max_loans = isset($_POST['custom_max_loans']) && is_numeric($_POST['custom_max_loans']) ? (int)$_POST['custom_max_loans'] : null;
 
             try {
-                // We use the $bdd connection already established in database.php
+                // We use the $db connection already established in database.php
 
                 $csvFile = $_SESSION['csv_file'];
                 $separator = $_SESSION['csv_separator'];
@@ -190,7 +229,7 @@ if(isset($_POST['csvImport'])) {
                     while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
                         // Handle rows with incorrect column count
                         if (count($data) !== count($headers)) {
-                            $errors[] = "Ligne $lineNumber: Nombre de colonnes incorrect";
+                            $errors[] = sprintf(_('Line %d: Incorrect number of columns.'), $lineNumber);
                             $errorCount++;
                             $lineNumber++;
                             continue;
@@ -198,95 +237,122 @@ if(isset($_POST['csvImport'])) {
 
                         $userData = [];
 
-                        // Associer les colonnes selon le mapping
+                        // Map columns according to the mapping
                         foreach ($db_mapping as $dbColumn => $csvIndex) {
-                            if ($csvIndex !== '' && $csvIndex !== 'autre' && $csvIndex !== 'algorithm' && is_numeric($csvIndex)) {
-                                $userData[$dbColumn] = $data[(int)$csvIndex];
+                            if (ctype_digit((string)$csvIndex)) {
+                                $columnIndex = (int)$csvIndex;
+                                if (array_key_exists($columnIndex, $data)) {
+                                    $userData[$dbColumn] = $data[$columnIndex];
+                                }
                             }
                         }
 
                         // Process last name and first name
-                        if (isset($db_mapping['nom']) && $db_mapping['nom'] === 'autre') {
-                            $userData['nom'] = $custom_nom;
-                        } else if (!isset($userData['nom'])) {
-                            $userData['nom'] = '';
+                        if (isset($db_mapping['last_name']) && $db_mapping['last_name'] === $otherValueOption) {
+                            $userData['last_name'] = $custom_last_name;
+                        } else if (!isset($userData['last_name'])) {
+                            $userData['last_name'] = '';
                         }
 
-                        if (isset($db_mapping['prenom']) && $db_mapping['prenom'] === 'autre') {
-                            $userData['prenom'] = $custom_prenom;
-                        } else if (!isset($userData['prenom'])) {
-                            $userData['prenom'] = '';
+                        if (isset($db_mapping['first_name']) && $db_mapping['first_name'] === $otherValueOption) {
+                            $userData['first_name'] = $custom_first_name;
+                        } else if (!isset($userData['first_name'])) {
+                            $userData['first_name'] = '';
                         }
 
                         // Handle username processing
-                        if (isset($db_mapping['username']) && $db_mapping['username'] === 'autre') {
+                        if (isset($db_mapping['username']) && $db_mapping['username'] === $otherValueOption) {
                             $userData['username'] = $custom_username;
                         } elseif (isset($db_mapping['username']) && $db_mapping['username'] === 'algorithm') {
                             // Generation algorithm: first letter of first name + first 7 letters of last name
-                            if (!empty($userData['prenom']) && !empty($userData['nom'])) {
-                                $userData['username'] = strtolower(substr($userData['prenom'], 0, 1) . substr($userData['nom'], 0, 7));
+                            if (!empty($userData['first_name']) && !empty($userData['last_name'])) {
+                                $userData['username'] = strtolower(substr($userData['first_name'], 0, 1) . substr($userData['last_name'], 0, 7));
                             } else {
-                                $errors[] = "Ligne $lineNumber: Unable to generate username (missing last name or first name)";
+                                $errors[] = sprintf(_('Line %d: Unable to generate username (missing last name or first name).'), $lineNumber);
                                 $errorCount++;
                                 $lineNumber++;
                                 continue;
                             }
                         }
 
-                        // Ensure username is not empty
+                        // Ensure username is not empty and fits the database column.
+                        if (isset($userData['username'])) {
+                            $userData['username'] = mb_substr(trim((string)$userData['username']), 0, 10, 'UTF-8');
+                        }
                         if (empty($userData['username'])) {
-                            $errors[] = "Ligne $lineNumber: Nom d'utilisateur vide";
+                            $errors[] = sprintf(_('Line %d: Empty username.'), $lineNumber);
                             $errorCount++;
                             $lineNumber++;
                             continue;
                         }
 
                         // Process class
-                        if (isset($db_mapping['classe']) && $db_mapping['classe'] === 'autre') {
-                            $userData['classe'] = $custom_classe;
-                        } else if (!isset($userData['classe'])) {
-                            $userData['classe'] = '';
+                        if (isset($db_mapping['class_name']) && $db_mapping['class_name'] === $otherValueOption) {
+                            $userData['class_name'] = $custom_class_name;
+                            if ($userData['class_name'] === null || $userData['class_name'] === '') {
+                                $errors[] = sprintf(_('Line %d: Class is required.'), $lineNumber);
+                                $errorCount++;
+                                $lineNumber++;
+                                continue;
+                            }
+                        } else if (!isset($userData['class_name'])) {
+                            $userData['class_name'] = '';
                         }
 
                         // Handle password processing
-                        if (isset($db_mapping['mdp']) && $db_mapping['mdp'] === 'autre') {
-                            $userData['mdp'] = password_hash($custom_mdp, PASSWORD_DEFAULT);
-                        } elseif (!isset($userData['mdp']) || empty($userData['mdp'])) {
-                            $userData['mdp'] = password_hash('ChangeMe123!', PASSWORD_DEFAULT);
+                        if (isset($db_mapping['password']) && $db_mapping['password'] === $otherValueOption) {
+                            if ($custom_password === null || $custom_password === '') {
+                                $errors[] = sprintf(_('Line %d: Password is required.'), $lineNumber);
+                                $errorCount++;
+                                $lineNumber++;
+                                continue;
+                            }
+                            $userData['password'] = password_hash($custom_password, PASSWORD_DEFAULT);
+                        } elseif (($db_mapping['password'] ?? '') === 'fixed:default' || !isset($userData['password']) || empty($userData['password'])) {
+                            $userData['password'] = password_hash('ChangeMe123!', PASSWORD_DEFAULT);
                         } else {
-                            $userData['mdp'] = password_hash($userData['mdp'], PASSWORD_DEFAULT);
+                            $userData['password'] = password_hash($userData['password'], PASSWORD_DEFAULT);
                         }
 
                         // Process numeric values
                         // Grade with predefined options
-                        if (isset($db_mapping['grade']) && is_numeric($db_mapping['grade'])) {
-                            $userData['grade'] = (int)$data[(int)$db_mapping['grade']];
-                        } else if (isset($db_mapping['grade']) && $db_mapping['grade'] === 'autre' && isset($_POST['custom_grade'])) {
-                            $userData['grade'] = (int)$_POST['custom_grade'];
-                        } else if (isset($userData['grade'])) {
+                        if (isset($db_mapping['grade']) && str_starts_with((string)$db_mapping['grade'], 'fixed:')) {
+                            $userData['grade'] = (int)substr($db_mapping['grade'], 6);
+                        } elseif (isset($userData['grade'])) {
                             $userData['grade'] = (int)$userData['grade'];
                         } else {
                             $userData['grade'] = 0;
                         }
+                        $userData['grade'] = max(0, min(3, $userData['grade']));
 
-                        // Rules and PDC default to 0
-                        $userData['regles'] = isset($userData['regles']) ? (int)$userData['regles'] : 0;
-                        $userData['pdc'] = isset($userData['pdc']) ? (int)$userData['pdc'] : 0;
+                        // Apply fixed-value mapping defaults to flags as well as grades.
+                        foreach (['rules_accepted', 'privacy_accepted'] as $flagColumn) {
+                            if (isset($db_mapping[$flagColumn]) && str_starts_with((string)$db_mapping[$flagColumn], 'fixed:')) {
+                                $userData[$flagColumn] = (int)substr($db_mapping[$flagColumn], 6);
+                            }
+                            $userData[$flagColumn] = isset($userData[$flagColumn]) ? (int)$userData[$flagColumn] : 0;
+                        }
 
                         // Max borrow count
-                        if (isset($db_mapping['nb_emprunt_max']) && $db_mapping['nb_emprunt_max'] === 'autre') {
-                            $userData['nb_emprunt_max'] = $custom_nb_emprunt_max;
-                        } elseif (!isset($userData['nb_emprunt_max']) || empty($userData['nb_emprunt_max'])) {
-                            $userData['nb_emprunt_max'] = 5;
+                        if (isset($db_mapping['max_loans']) && $db_mapping['max_loans'] === $otherValueOption) {
+                            if ($custom_max_loans === null || $custom_max_loans < 1) {
+                                $errors[] = sprintf(_('Line %d: Maximum loans must be at least 1.'), $lineNumber);
+                                $errorCount++;
+                                $lineNumber++;
+                                continue;
+                            }
+                            $userData['max_loans'] = $custom_max_loans;
+                        } elseif (!isset($userData['max_loans']) || empty($userData['max_loans'])) {
+                            $userData['max_loans'] = 5;
                         }
 
                         // Additional default values
-                        $userData['nb_emprunt'] = 0;
+                        $userData['loans_count'] = 0;
                         $userData['theme'] = 0;
 
                         try {
                             // Check if user already exists
-                            $checkUser = $bdd->prepare('SELECT id FROM users WHERE username = ?');
+                            $checkUser = $db->prepare('SELECT id FROM users WHERE username = ?');
                             $checkUser->execute([$userData['username']]);
 
                             if($checkUser->rowCount() > 0) {
@@ -306,7 +372,7 @@ if(isset($_POST['csvImport'])) {
                                 $sql .= ' WHERE username = ?';
                                 $params[] = $userData['username'];
 
-                                $stmt = $bdd->prepare($sql);
+                                $stmt = $db->prepare($sql);
                                 $stmt->execute($params);
                             } else {
                                 // Insert a new user
@@ -314,14 +380,15 @@ if(isset($_POST['csvImport'])) {
                                 $placeholders = implode(', ', array_fill(0, count($userData), '?'));
 
                                 $sql = "INSERT INTO users ($columns) VALUES ($placeholders)";
-                                $stmt = $bdd->prepare($sql);
+                                $stmt = $db->prepare($sql);
                                 $stmt->execute(array_values($userData));
                             }
 
                             $importedCount++;
 
                         } catch (PDOException $e) {
-                            $errors[] = "Ligne $lineNumber: " . $e->getMessage();
+                            error_log('CSV user import failed on line ' . $lineNumber . ': ' . $e->getMessage());
+                            $errors[] = sprintf(_('Line %d: The row could not be imported.'), $lineNumber);
                             $errorCount++;
                         }
 
@@ -343,31 +410,32 @@ if(isset($_POST['csvImport'])) {
                     unset($_SESSION['csv_has_headers']);
                     unset($_SESSION['csv_preview']);
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Importation d\'utilisateurs via csv', $importedCount . ' utilisateurs importés');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Import users via CSV', $importedCount . ' users imported');
 
-                    $msgImport = "Importation terminée: $importedCount utilisateurs importés, $errorCount erreurs.";
+                    $msgImport = sprintf(_('Import completed: %1$d users imported, %2$d errors.'), $importedCount, $errorCount);
                     if (!empty($errors)) {
-                        $msgImport .= "<br><strong>Détails des erreurs:</strong><ul>";
+                        $msgImport .= "<br><strong>Error details:</strong><ul>";
                         foreach(array_slice($errors, 0, 5) as $error) {
                             $msgImport .= "<li>" . htmlspecialchars($error) . "</li>";
                         }
                         if (count($errors) > 5) {
-                            $msgImport .= "<li>..." . (count($errors) - 5) . " autres erreurs</li>";
+                            $msgImport .= "<li>" . sprintf(_('%d more errors.'), count($errors) - 5) . "</li>";
                         }
                         $msgImport .= "</ul>";
                     }
                     $alertImportType = ($errorCount > 0) ? "warning" : "success";
                 } else {
-                    $msgImport = "Impossible d'ouvrir le fichier CSV.";
+                    $msgImport = _('Unable to open the CSV file.');
                 }
-            } catch (PDOException $e) {
-                $msgImport = "Erreur de connexion à la base de données: " . htmlspecialchars($e->getMessage());
+            } catch (Throwable $e) {
+                error_log('CSV user import failed: ' . $e->getMessage());
+                $msgImport = _('Database connection error. Please check the server logs.');
             }
         }
     }
 }
 
-// Retourner au script appelant avec les messages
+// Return to the calling script with the messages
 return [
     'msgImport' => $msgImport,
     'alertImportType' => $alertImportType

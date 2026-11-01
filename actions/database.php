@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the Bookfind project.
 //
-//Bookfind is distributed under the terms of the MIT software license.
+//Bookfind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -9,9 +9,9 @@
 
 
 <?php
-    $host = '';
-    $dbname = '';
-    $username = '';
+    $host = 'localhost';
+    $dbname = 'bookfind';
+    $username = 'root';
     $password = '';
 
     $db_error_message = null;
@@ -19,9 +19,9 @@
     if(!empty($host) AND !empty($username)){
     
     try {
-        $bdd = new PDO('mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
-        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = new PDO('mysql:host=' . $host . ';dbname=' . $dbname . ';charset=utf8', $username, $password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $e) {
-        $bdd = null;
-        $db_error_message = 'Connexion impossible à la base de données.';
+        $db = null;
+        $db_error_message = 'Unable to connect to the database.';
     }}

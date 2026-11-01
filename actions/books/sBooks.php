@@ -1,79 +1,70 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
-<?php if(isset($_GET['s']) AND !empty($_GET['s'])){
+<?php if (isset($_GET['s']) AND !empty($_GET['s'])) {
 
-        $s = $_GET['s'];
-        $keywords = explode(' ', $s);
-        $searchConditions = [];
+    $s = $_GET['s'];
+    $keywords = explode(' ', $s);
+    $searchConditions = [];
 
-        foreach ($keywords as $keyword) {
-            $searchConditions[] = "(titre LIKE ? OR auteur LIKE ? OR isbn LIKE ? OR editeur LIKE ? OR genre LIKE ? OR type LIKE ? OR serie LIKE ? OR id_unique LIKE ?)";
-        }
+    foreach ($keywords as $keyword) {
+        $searchConditions[] = "(title LIKE ? OR author LIKE ? OR isbn LIKE ? OR publisher LIKE ? OR genre LIKE ? OR type LIKE ? OR series LIKE ? OR unique_id LIKE ?)";
+    }
 
-        $sql = 'SELECT * FROM books WHERE ' . implode(' AND ', $searchConditions) . ' ORDER BY titre';
-        $recupBooks = $bdd->prepare($sql);
-        $params = [];
-        foreach ($keywords as $keyword) {
-            $params = array_merge($params, array_fill(0, 8, "%$keyword%"));
-        }
-        $recupBooks->execute($params);
+    $sql = 'SELECT * FROM books WHERE ' . implode(' AND ', $searchConditions) . ' ORDER BY title';
+    $fetchedBooks = $db->prepare($sql);
+    $params = [];
+    foreach ($keywords as $keyword) {
+        $params = array_merge($params, array_fill(0, 8, "%$keyword%"));
+    }
+    $fetchedBooks->execute($params);
 
-            if($recupBooks->rowCount() == 0){ ?>
-            <div class="container mt-3">
-              <div class="d-flex justify-content-center mt-4">
-                <div class="card text-center" style="width: 50rem;">
-                  <div class="card-body">
-                    <p class="card-text">
-                      Aucun livre trouvé avec ces critères de recherche.
-                    </p>
-                  </div>
+    if ($fetchedBooks->rowCount() == 0) { ?>
+        <div class="empty">
+            <svg class="icon"><use href="#i-search"/></svg>
+            <p>No books found with these search criteria.</p>
+        </div>
+    <?php } elseif ($fetchedBooks->rowCount() > 0) { ?>
+        <div class="books-grid">
+        <?php
+        while ($books = $fetchedBooks->fetch()) {
+            $fetchedLoans = $db->prepare('SELECT * FROM loans WHERE book_id = ? AND status = 1');
+            $fetchedLoans->execute(array($books['id']));
+            $loans = $fetchedLoans->fetch(); ?>
+            <div class="book-card">
+                <div class="book-card__cover">
+                    <?php if ($books['status'] == 1) { ?>
+                        <span class="book-card__status"><span class="badge badge--warning">Borrowed</span></span>
+                    <?php } ?>
+                    <svg class="icon"><use href="#i-book"/></svg>
                 </div>
-              </div>
-            </div>
-            <?php }elseif($recupBooks->rowCount() > 0){
-
-            while($books = $recupBooks->fetch()){ 
-            
-            $recupEmprunts = $bdd->prepare('SELECT * FROM emprunts WHERE id_book = ? AND statut = 1');
-            $recupEmprunts->execute(array($books['id']));
-            $emprunts = $recupEmprunts->fetch(); ?>
-              <div class="container mt-3">
-                <div class="d-flex justify-content-center mt-4">
-                  <div class="card text-center" style="width: 50rem;">
-                    <div class="card-body">
-                      <h5 class="card-title"><?= htmlspecialchars($books['titre']); ?></h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($books['auteur']); ?></h6>
-                      <p class="card-text"><?= htmlspecialchars($books['resume']); ?></p>
-                      <?php if(!empty($books['serie'])){ ?><p class="card-text">Tome <?= htmlspecialchars($books['tome']); ?> de la série <?= htmlspecialchars($books['serie']); ?></p><?php } ?>
-                      <?php if($books['statut'] == 1){ ?>
-                        <ul class="list-group list-group-flush">
-                          <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>   
-                            <li class="list-group-item">Emprunté par <a href="../profil.php?id=<?= htmlspecialchars($emprunts['id_emprunteur']); ?>"><?= htmlspecialchars($emprunts['firstname_name']); ?></a></li>
-                            <li class="list-group-item">Retour prévu le <?php ColorDateEmprunt($emprunts['date_futur_retour']); ?></li>
-                          <?php }else{ ?>
-                            <li class="list-group-item">Cet ouvrage est actuellement emprunté</li>
-                          <?php } ?>
-                        </ul>
-                      <?php } ?>
-                      <div class="btn-group" role="group">
-                        <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
-                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>update-book.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-primary">Modifier</a>
-                        <?php } ?>
-                        <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn-secondary">Voir</a>
-                        <?php if(isset($_SESSION['auth']) AND $_SESSION['grade'] != 0){ ?>
-                          <a href="<?php if(!isset($gestion)){ ?>gestion/<?php } ?>emprunt.php?id=<?= htmlspecialchars($books['id']); ?><?php if($books['statut'] == 1){ echo '&user_id=' . htmlspecialchars($emprunts['id_emprunteur']); } ?>" class="btn btn-success">Emprunt</a>
-                        <?php } ?>
-                      </div>
+                <div class="book-card__body">
+                    <div class="book-card__title"><?= htmlspecialchars($books['title']); ?></div>
+                    <div class="book-card__author"><?= htmlspecialchars($books['author']); ?></div>
+                    <div class="book-card__meta">
+                        <?php if (!empty($books['type'])) { ?><span class="chip"><?= htmlspecialchars($books['type']); ?></span><?php } ?>
+                        <?php if (!empty($books['genre'])) { ?><span class="chip"><?= htmlspecialchars($books['genre']); ?></span><?php } ?>
+                        <?php if (!empty($books['series'])) { ?><span class="chip">Volume <?= htmlspecialchars($books['volume']); ?></span><?php } ?>
                     </div>
-                  </div>
+                    <?php if ($books['status'] == 1 && isset($_SESSION['auth']) AND $_SESSION['grade'] != 0) { ?>
+                        <div class="book-card__author mt-2">
+                            <?= _('By'); ?> <a href="../profile.php?id=<?= htmlspecialchars($loans['borrower_id']); ?>"><?= htmlspecialchars($loans['borrower_name']); ?></a> — <?= _('due'); ?> <?php ColorLoanDate($loans['due_date']); ?>
+                        </div>
+                    <?php } ?>
+                    <div class="book-card__foot">
+                        <a href="books-reader.php?id=<?= htmlspecialchars($books['id']); ?>" class="btn btn--secondary">View</a>
+                        <?php if (isset($_SESSION['auth']) AND $_SESSION['grade'] != 0) { ?>
+                            <a href="<?php if (!isset($gestion)) { ?>gestion/<?php } ?>loan.php?id=<?= htmlspecialchars($books['id']); ?><?php if ($books['status'] == 1) { echo '&user_id=' . htmlspecialchars($loans['borrower_id']); } ?>" class="btn btn--success">Loan</a>
+                        <?php } ?>
+                    </div>
                 </div>
-              </div>
-            <br />
-            
-<?php }}}
+            </div>
+        <?php } ?>
+        </div>
+    <?php }
+}

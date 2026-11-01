@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -9,52 +9,52 @@
 <?php require 'actions/functions/sessionInit.php'; ?>
 
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="en" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Règlement</title>
+    <title>BookFind — Rules</title>
     <?php include 'includes/header.php'; ?>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body>
     <?php include 'includes/navbar.php'; ?>
-    <main class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <h1 class="mb-4">Règlement BookFind</h1>
-                <p class="lead">Ce règlement définit les règles d'utilisation de BookFind afin de garantir un environnement sûr, respectueux et utile pour tous les utilisateurs.</p>
-                <p>Les listes d'exemples présentes sur cette page sont fournies à titre indicatif et ne sont pas exhaustives.
+    <main class="page">
+        <div class="container">
+            <div class="narrow prose">
+                <h1>BookFind rules</h1>
+                <p class="lead">These rules define how BookFind should be used to ensure a safe, respectful and useful environment for all users.</p>
+                <p class="text-subtle">The example lists on this page are provided for informational purposes and are not exhaustive.</p>
 
-                <section class="mb-4">
-                    <h2 class="h4">1. Respect des utilisateurs</h2>
-                    <p>Chaque utilisateur doit adopter un comportement respectueux envers les autres membres du service. Les propos injurieux, discriminatoires, agressifs ou diffamatoires sont interdits.</p>
-                </section>
-
-                <section class="mb-4">
-                    <h2 class="h4">2. Utilisation du compte</h2>
-                    <p>Le compte utilisateur est personnel. L'utilisateur est responsable de l'ensemble des actions réalisées avec ses identifiants et doit conserver ses informations de connexion confidentielles.</p>
-                </section>
-
-                <section class="mb-4">
-                    <h2 class="h4">3. Données et contenu</h2>
-                    <p>Les informations saisies dans BookFind doivent être exactes, pertinentes et conformes à l'usage prévu de la plateforme. Toute tentative de fraude, de contournement des règles ou de modification non autorisée du contenu est interdite.</p>
-                </section>
-
-                <section class="mb-4">
-                    <h2 class="h4">4. Disponibilité du service</h2>
-                    <p>BookFind peut être temporairement interrompu pour des raisons de maintenance, de mise à jour ou de sécurité. L'équipe se réserve le droit de faire évoluer le service à tout moment.</p>
-                </section>
-
-                <section class="mb-4">
-                    <h2 class="h4">5. Sanctions</h2>
-                    <p>En cas de non-respect de ce règlement, l'équipe BookFind peut restreindre l'accès au service, suspendre un compte ou supprimer des contenus concernés.</p>
+                <section>
+                    <h2>1. Respect for users</h2>
+                    <p>Every user must behave respectfully toward other members of the service. Insulting, discriminatory, aggressive or defamatory remarks are prohibited.</p>
                 </section>
 
                 <section>
-                    <h2 class="h4">6. Contact</h2>
-                    <p>Pour toute question concernant ce règlement, contactez l'équipe d'administration de BookFind via les canaux prévus par votre établissement.</p>
+                    <h2>2. Account use</h2>
+                    <p>The user account is personal. The user is responsible for all actions performed with their credentials and must keep their login information confidential.</p>
+                </section>
+
+                <section>
+                    <h2>3. Data and content</h2>
+                    <p>Information entered in BookFind must be accurate, relevant and consistent with the platform's intended use. Any attempt at fraud, circumventing the rules or unauthorized modification of content is prohibited.</p>
+                </section>
+
+                <section>
+                    <h2>4. Service availability</h2>
+                    <p>BookFind may be temporarily interrupted for maintenance, update or security reasons. The team reserves the right to evolve the service at any time.</p>
+                </section>
+
+                <section>
+                    <h2>5. Sanctions</h2>
+                    <p>If these rules are not respected, the BookFind team may restrict access to the service, suspend an account or remove the relevant content.</p>
+                </section>
+
+                <section>
+                    <h2>6. Contact</h2>
+                    <p>For any question about these rules, contact the BookFind administration team through the channels provided by your institution.</p>
                 </section>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -28,7 +28,7 @@
             $testBdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $testOk = true;
         } catch (PDOException $e) {
-            $db_update_msg = 'Connexion impossible avec ces identifiants.';
+            $db_update_msg = 'Unable to connect with these credentials.';
             $db_update_type = 'danger';
         }
 
@@ -47,7 +47,7 @@
                     }
                 }
             } else {
-                $db_update_msg = 'Impossible de lire actions/bookfind.sql pour vérifier les tables.';
+                $db_update_msg = 'Unable to read actions/bookfind.sql to verify the tables.';
                 $db_update_type = 'danger';
                 $testOk = false;
             }
@@ -64,7 +64,7 @@
                 }
 
                 if (!empty($missingTables)) {
-                    $db_update_msg = 'Connexion réussie mais tables manquantes : ' . implode(', ', $missingTables) . '. Mise à jour refusée.';
+                    $db_update_msg = 'Connection successful but missing tables: ' . implode(', ', $missingTables) . '. Update refused.';
                     $db_update_type = 'danger';
                     $testOk = false;
                 }
@@ -96,19 +96,19 @@
                         include $filePath;
                     }
 
-                $appBdd = $GLOBALS['bdd'] ?? null;
+                $appBdd = $GLOBALS['db'] ?? null;
                 if ($appBdd instanceof PDO) {
                     try {
                         $check = $appBdd->prepare("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = 'logs'");
                         $check->execute();
                         if ((int) $check->fetchColumn() > 0) {
-                            SaveLog($appBdd, $_SERVER['REQUEST_URI'], 'Modification de database.php', 'Modification des informations de connexion à la base de donnée');
+                            SaveLog($appBdd, $_SERVER['REQUEST_URI'], 'database.php modified', 'Database connection details modified');
                         }
                     } catch (Exception $e) {
                     }
                 }
 
-                $db_update_msg = 'Informations enregistrées avec succès.';
+                $db_update_msg = 'Details saved successfully.';
                 $db_update_type = 'success';
 
                 header('Location: bookfind.php?tab=database');

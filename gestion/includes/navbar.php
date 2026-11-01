@@ -1,67 +1,106 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
 
+<?php
+$currentPage = basename($_SERVER['SCRIPT_NAME']);
+$tab = $_GET['tab'] ?? '';
 
+$titles = [
+    'index.php' => 'Overview',
+    'books.php' => 'Search for a book',
+    'add-book.php' => 'Add a book',
+    'update-book.php' => 'Edit a book',
+    'loans.php' => 'Loans',
+    'user-loans.php' => 'A user\'s loans',
+    'loan.php' => 'Manage a loan',
+    'books-reader.php' => 'Book details',
+    'users.php' => 'Users',
+    'update-user.php' => 'Edit a user',
+    'bookfind.php' => 'Manage BookFind',
+    'logs.php' => 'Logs',
+    'config-ht.php' => '.htaccess tools',
+];
+$topbarTitle = $titles[$currentPage] ?? 'Management';
+?>
 
-<?php $pageActuelle = basename($_SERVER['SCRIPT_NAME']); ?>
-<nav class="navbar fixed-top navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-  <a class="navbar-brand" href="index.php">
-      <img src="../assets/iconesite.png" alt="BookFind logo" width="40" height="30" class="d-inline-block align-text-top img-fluid">
-      BookFind
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar__head">
+    <a class="navbar__brand" href="index.php">
+      <img src="../assets/logo.svg" alt="BookFind" class="navbar__logo">
+      <span>BookFind</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link <?php if($pageActuelle == 'index.php'){ echo 'active'; } ?>" aria-current="page" href="index.php">Accueil</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?php if($pageActuelle == 'books.php' OR $pageActuelle == 'add-book.php' OR $pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Livres
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item <?php if($pageActuelle == 'books.php'){ echo 'active'; } ?>" href="books.php">Rechercher</a></li>
-            <li><a class="dropdown-item <?php if($pageActuelle == 'add-book.php'){ echo 'active'; } ?>" href="add-book.php">Ajouter</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item <?php if($pageActuelle == 'emprunts.php'){ echo 'active'; } ?>" href="emprunts.php">Emprunts</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?php if($pageActuelle == 'users.php'){ echo 'active'; } ?>" href="users.php">Utilisateurs</a>
-        </li>
-        <?php if($_SESSION['grade'] == 1){ ?>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle <?php if($pageActuelle == 'bookfind.php' OR $pageActuelle == 'logs.php'){ echo 'active'; } ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            BookFind
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'database')){ echo 'active'; } ?>" href="bookfind.php?tab=database">Base de données</a></li>
-            <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'classes')){ echo 'active'; } ?>" href="bookfind.php?tab=classes">Classes</a></li>
-            <li><a class="dropdown-item <?php if($pageActuelle == 'bookfind.php' AND (isset($_GET['tab']) AND $_GET['tab'] == 'users')){ echo 'active'; } ?>" href="bookfind.php?tab=users">Utilisateurs</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item <?php if($pageActuelle == 'logs.php'){ echo 'active'; } ?>" href="logs.php">Logs</a></li>
-          </ul>
-        </li>
-        <?php } ?>
-        <li class="nav-item">
-          <a class="nav-link" href="../index.php">Quitter</a>
-        </li>
-      </ul>
-      <form method="get" action="books.php" class="d-flex" role="search">
-        <input name="s" class="form-control me-2" type="search" placeholder="Rechercher un livre" aria-label="Rechercher un livre">
-        <button class="btn btn-outline-light" type="submit">Rechercher</button>
-      </form>
-    </div>
   </div>
-</nav>
-<br />
-<br />
-<br />
+
+  <nav class="sidebar__nav" aria-label="Navigation">
+    <a class="sidebar__link <?php if ($currentPage == 'index.php') { echo 'is-active'; } ?>" href="index.php">
+      <svg class="icon"><use href="#i-grid"/></svg>Overview
+    </a>
+
+    <div class="sidebar__label">Books</div>
+    <a class="sidebar__link <?php if ($currentPage == 'books.php') { echo 'is-active'; } ?>" href="books.php">
+      <svg class="icon"><use href="#i-search"/></svg>Search
+    </a>
+    <a class="sidebar__link <?php if ($currentPage == 'add-book.php') { echo 'is-active'; } ?>" href="add-book.php">
+      <svg class="icon"><use href="#i-save"/></svg>Add
+    </a>
+    <a class="sidebar__link <?php if ($currentPage == 'loans.php') { echo 'is-active'; } ?>" href="loans.php">
+      <svg class="icon"><use href="#i-arrow-up"/></svg>Loans
+    </a>
+
+    <div class="sidebar__label">Users</div>
+    <a class="sidebar__link <?php if ($currentPage == 'users.php') { echo 'is-active'; } ?>" href="users.php">
+      <svg class="icon"><use href="#i-people"/></svg>Users
+    </a>
+
+    <?php if ($_SESSION['grade'] == 1) { ?>
+      <div class="sidebar__label">Administration</div>
+      <a class="sidebar__link <?php if ($currentPage == 'bookfind.php' && $tab == 'database') { echo 'is-active'; } ?>" href="bookfind.php?tab=database">
+        <svg class="icon"><use href="#i-db"/></svg>Database
+      </a>
+      <a class="sidebar__link <?php if ($currentPage == 'bookfind.php' && $tab == 'classes') { echo 'is-active'; } ?>" href="bookfind.php?tab=classes">
+        <svg class="icon"><use href="#i-tag"/></svg>Classes
+      </a>
+      <a class="sidebar__link <?php if ($currentPage == 'bookfind.php' && $tab == 'users') { echo 'is-active'; } ?>" href="bookfind.php?tab=users">
+        <svg class="icon"><use href="#i-upload"/></svg><?php echo _('Import users and regenerate usernames'); ?>
+      </a>
+      <a class="sidebar__link <?php if ($currentPage == 'logs.php') { echo 'is-active'; } ?>" href="logs.php">
+        <svg class="icon"><use href="#i-doc"/></svg>Logs
+      </a>
+      <a class="sidebar__link <?php if ($currentPage == 'config-ht.php') { echo 'is-active'; } ?>" href="config-ht.php">
+        <svg class="icon"><use href="#i-key"/></svg>.htaccess
+      </a>
+    <?php } ?>
+  </nav>
+
+  <div class="sidebar__foot">
+    <a class="sidebar__link" href="../settings.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">
+      <svg class="icon"><use href="#i-settings"/></svg>Settings
+    </a>
+    <a class="sidebar__link" href="../index.php">
+      <svg class="icon"><use href="#i-arrow-down"/></svg>Exit management
+    </a>
+  </div>
+</aside>
+
+<div class="sidebar__backdrop" data-sidebar-close></div>
+
+<header class="topbar">
+  <button class="topbar__toggle" type="button" data-nav-toggle="sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+    <svg class="icon"><use href="#i-menu"/></svg>
+  </button>
+  <span class="topbar__title"><?= htmlspecialchars(_($topbarTitle), ENT_QUOTES, 'UTF-8'); ?></span>
+  <div class="topbar__right">
+    <span class="topbar__user">
+      <svg class="icon"><use href="#i-people"/></svg>
+      <?= htmlspecialchars($_SESSION['firstname'] ?? $_SESSION['username'] ?? ''); ?>
+    </span>
+    <a class="btn btn--ghost" href="../index.php">
+      <svg class="icon"><use href="#i-arrow-down"/></svg>Site
+    </a>
+  </div>
+</header>

@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -20,27 +20,27 @@ if (isset($_POST['validateGrade'])) {
                     $newGrade = $_POST['grade'];
                     $id = $_GET['id'];
 
-                    $updateInfoSco = $bdd->prepare('UPDATE users SET grade = ? WHERE id = ?');
-                    $updateInfoSco->execute(array($newGrade, $id));
+                    $updateSchoolInfo = $db->prepare('UPDATE users SET grade = ? WHERE id = ?');
+                    $updateSchoolInfo->execute(array($newGrade, $id));
 
                     // Retrieve user info for logging
-                    $getUser = $bdd->prepare('SELECT id, prenom, nom, grade FROM users WHERE id = ?');
+                    $getUser = $db->prepare('SELECT id, first_name, last_name, grade FROM users WHERE id = ?');
                     $getUser->execute(array($id));
                     $usersInfos = $getUser->fetch();
 
-                    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Modification de grade', 'Le grade de <a href="../profil.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['prenom'] ?? '') . ' ' . htmlspecialchars($usersInfos['nom'] ?? '') . '</a> à été changé de ' . NoEchoGrade($usersInfos['grade'] ?? '') . ' vers ' . NoEchoGrade($newGrade) . '.');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Grade changed', 'The grade of <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed from ' . NoEchoGrade($usersInfos['grade'] ?? '') . ' to ' . NoEchoGrade($newGrade) . '.');
 
                     header('Location: update-user.php?id=' . ($id ?? '') . '&msg5=true');
                 } else {
-                    $errorMsg5 = 'Vous n\'avez pas de permissions suffisentes pour appliquer ce grade.';
+                    $errorMsg5 = 'You do not have sufficient permissions to apply this grade.';
                 }
             } else {
-                $errorMsg5 = 'Veuillez remplir tous les champs.';
+                $errorMsg5 = 'Please fill in all fields.';
             }
         } else {
-            $errorMsg5 = 'Tous les champs n\'existent pas. Veuillez <a href="update-user.php?id=' . $id . '">recharger</a> la page.';
+            $errorMsg5 = 'Not all fields exist. Please <a href="update-user.php?id=' . $id . '">reload</a> the page.';
         }
     } else {
-        $errorMsg5 = 'Vous n\'avez pas les droits pour effectuer cette action.';
+        $errorMsg5 = 'You do not have permission to perform this action.';
     }
 }

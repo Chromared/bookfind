@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -15,29 +15,29 @@
         $password = $_POST['password'];
         $id = $_SESSION['id'];
 
-        $checkPassword = $bdd->prepare('SELECT mdp, nb_emprunt FROM users WHERE id = ?');
+        $checkPassword = $db->prepare('SELECT password, loans_count FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
 
         $InfoDelete = $checkPassword->fetch();
 
-        if($InfoDelete['nb_emprunt'] == '0'){
+        if($InfoDelete['loans_count'] == '0'){
 
-        if (password_verify($password, $InfoDelete['mdp'])) {
+        if (password_verify($password, $InfoDelete['password'])) {
 
             $deleteAccount = true;
         
         }else{
-            $errorMsg4 = 'Votre mot de passe actuel n\'est pas bon.';
+            $errorMsg4 = 'Your current password is incorrect.';
         }
 
     }else{
-        $errorMsg4 = 'Vous devez avoir rendu tous vos emprunts pour supprimer votre compte. Il vous reste actuellement ' . $InfoDelete['nb_emprunt'] . ' livre(s) emprunté(s).';
+        $errorMsg4 = 'You must return all your loans before deleting your account. You currently have ' . $InfoDelete['loans_count'] . ' book(s) still on loan.';
     }
 
     }else{
-        $errorMsg4 = 'Veuillez remplir tous les champs.';
+        $errorMsg4 = 'Please fill in all fields.';
     }
 }else{
-    $errorMsg4 = 'Tous les champs n\'existent pas. Veuillez <a href="updateProfil.php?id=' . $id . '">recharger</a> la page.';
+    $errorMsg4 = 'Not all fields exist. Please <a href="updateProfile.php?id=' . $id . '">reload</a> the page.';
 }
 }

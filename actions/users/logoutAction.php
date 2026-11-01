@@ -1,7 +1,7 @@
 <?php
 //This file belongs to the BookFind project.
 //
-//BookFind is distributed under the terms of the MIT software license.
+//BookFind is distributed under the terms of the GNU Affero General Public License v3.0.
 //
 //Copyright (C) 2025 Chromared
 ?>
@@ -12,10 +12,10 @@
 require '../functions/logFunction.php';
 require_once __DIR__ . '/../functions/sessionInit.php';
 
-$deleteCookies = $bdd->prepare('DELETE FROM cookies WHERE user_id = ?');
+$deleteCookies = $db->prepare('DELETE FROM cookies WHERE user_id = ?');
 $deleteCookies->execute(array($_SESSION['id']));
 
-SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Déconnexion', 'Aucun commentaire.');
+SaveLog($db, $_SERVER['REQUEST_URI'], 'Logout', 'No comment.');
 
 $_SESSION = [];
 session_destroy();
@@ -31,4 +31,4 @@ setcookie(
     ]
 );
 
-header('Location: ../../login.php');
+header('Location: ../../index.php');
