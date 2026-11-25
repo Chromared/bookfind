@@ -26,5 +26,5 @@
 
     header('Location: bookfind.php?tab=classes&successDeleteClass#deleteClass');
 
-    }else{ $msgC3 = 'This class already exists.'; }
+    }else{ $msgC3 = bookfind_translate('This class already exists.'); }
 }

@@ -32,15 +32,15 @@ if (isset($_POST['validateGrade'])) {
 
                     header('Location: update-user.php?id=' . ($id ?? '') . '&msg5=true');
                 } else {
-                    $errorMsg5 = 'You do not have sufficient permissions to apply this grade.';
+                    $errorMsg5 = bookfind_translate('You do not have sufficient permissions to apply this grade.');
                 }
             } else {
-                $errorMsg5 = 'Please fill in all fields.';
+                $errorMsg5 = bookfind_translate('Please fill in all fields.');
             }
         } else {
-            $errorMsg5 = 'Not all fields exist. Please <a href="update-user.php?id=' . $id . '">reload</a> the page.';
+            $errorMsg5 = bookfind_translate('Not all fields exist. Please') . ' <a href="update-user.php?id=' . $id . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
         }
     } else {
-        $errorMsg5 = 'You do not have permission to perform this action.';
+        $errorMsg5 = bookfind_translate('You do not have permission to perform this action.');
     }
 }

@@ -18,12 +18,12 @@ if (!isset($_SESSION['grade']) || $_SESSION['grade'] != '1') {
 require 'actions/users/securityAdminAction.php';
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookFind — Configuration helper</title>
+    <title><?= bookfind_translate('BookFind — Configuration helper'); ?></title>
     <?php include '../includes/header.php'; ?>
 </head>
 
@@ -34,27 +34,27 @@ require 'actions/users/securityAdminAction.php';
         <div class="narrow">
           <div class="card">
             <div class="card__body">
-              <h1 class="card__title">.ht file configuration</h1>
+              <h1 class="card__title"><?= bookfind_translate('.ht file configuration'); ?></h1>
               <p class="text-subtle mono" style="font-size:13px;"><?php echo realpath('config-ht.php'); ?></p>
               <?php
               if (isset($_POST['login']) and isset($_POST['pass'])) {
                   $login = $_POST['login'];
                   $pass_crypte = crypt($_POST['pass'], PASSWORD_DEFAULT);
-                  echo '<div class="alert alert--success"><svg class="icon"><use href="#i-check"/></svg><div>Line to copy into .htpasswd:<br><span class="mono">' . $login . ':' . $pass_crypte . '</span></div></div>';
+                  echo '<div class="alert alert--success"><svg class="icon"><use href="#i-check"/></svg><div>' . bookfind_translate('Line to copy into .htpasswd:') . '<br><span class="mono">' . $login . ':' . $pass_crypte . '</span></div></div>';
               }
               ?>
-              <p class="text-subtle">Enter your login and password to encrypt it.</p>
+              <p class="text-subtle"><?= bookfind_translate('Enter your login and password to encrypt it.'); ?></p>
               <form method="post">
                   <?= csrf_field(); ?>
                   <div class="field">
-                      <label for="login" class="label">Login</label>
+                      <label for="login" class="label"><?= bookfind_translate('Login'); ?></label>
                       <input type="text" name="login" id="login" class="input">
                   </div>
                   <div class="field">
-                      <label for="pass" class="label">Password</label>
+                      <label for="pass" class="label"><?= bookfind_translate('Password'); ?></label>
                       <input type="text" name="pass" id="pass" class="input">
                   </div>
-                  <input type="submit" class="btn btn--primary" value="Encrypt!">
+                  <input type="submit" class="btn btn--primary" value="<?= bookfind_translate('Encrypt!'); ?>">
               </form>
             </div>
           </div>

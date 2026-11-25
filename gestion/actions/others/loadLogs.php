@@ -72,7 +72,7 @@
     // Build output in memory to reduce echo calls
     $out = '<div class="stack">';
     foreach ($rows as $log) {
-        $dateFormattee = date("d/m/Y at H:i:s", strtotime($log['datetime'] ?? ''));
+        $dateFormattee = date('d/m/Y', strtotime($log['datetime'] ?? '')) . ' ' . bookfind_translate('at') . ' ' . date('H:i:s', strtotime($log['datetime'] ?? ''));
         $type = htmlspecialchars($log['type'] ?? '', ENT_QUOTES);
         $user_name = htmlspecialchars($log['user_name'] ?? '', ENT_QUOTES);
         // The comment field was sanitized on insertion via SaveLog(); it contains only safe fragments (text + <a>).
@@ -87,11 +87,11 @@
             . '<p class="card__subtitle">' . $user_name . '</p>'
             . '<p class="card__text">' . $comment . '</p>'
             . '<div class="mt-3">'
-            . '<div class="kv"><span class="kv__k">Date</span><span class="kv__v">' . $dateFormattee . '</span></div>'
+            . '<div class="kv"><span class="kv__k">' . bookfind_translate('Date') . '</span><span class="kv__v">' . $dateFormattee . '</span></div>'
             . '<div class="kv"><span class="kv__k">IP</span><span class="kv__v mono">' . $user_ip . '</span></div>'
-            . '<div class="kv"><span class="kv__k">Page</span><span class="kv__v"><a href="' . $log_page . '">' . $log_page . '</a></span></div>'
+            . '<div class="kv"><span class="kv__k">' . bookfind_translate('Page') . '</span><span class="kv__v"><a href="' . $log_page . '">' . $log_page . '</a></span></div>'
             . '</div>'
-            . '<div class="btn-group mt-4"><a href="../profile.php?id=' . $user_id . '" class="btn btn--primary">View user</a></div>'
+            . '<div class="btn-group mt-4"><a href="../profile.php?id=' . $user_id . '" class="btn btn--primary">' . bookfind_translate('View user') . '</a></div>'
             . '</div></div>';
     }
     $out .= '</div>';
@@ -102,7 +102,7 @@
 
     // Prev
     if ($page > 1) {
-        $out .= '<button class="btn btn--outline log-page-btn" data-page="' . ($page - 1) . '">Previous</button>';
+        $out .= '<button class="btn btn--outline log-page-btn" data-page="' . ($page - 1) . '">' . bookfind_translate('Previous') . '</button>';
     }
 
     if (!$showAll) {
@@ -142,19 +142,19 @@
         }
     } else {
         // when show_all enabled, do not offer numbered pagination
-        $out .= '<span class="text-subtle">Full display (' . $total . ' entries)</span>';
+        $out .= '<span class="text-subtle">' . sprintf(bookfind_translate('Full display (%d entries)'), $total) . '</span>';
     }
 
     // Next
     if (!$showAll && $page < $totalPages) {
-        $out .= '<button class="btn btn--outline log-page-btn" data-page="' . ($page + 1) . '">Next</button>';
+        $out .= '<button class="btn btn--outline log-page-btn" data-page="' . ($page + 1) . '">' . bookfind_translate('Next') . '</button>';
     }
 
     // Show all / revert button
     if (!$showAll) {
-        $out .= '<button class="btn btn--outline log-showall-btn" data-showall="1">Show all</button>';
+        $out .= '<button class="btn btn--outline log-showall-btn" data-showall="1">' . bookfind_translate('Show all') . '</button>';
     } else {
-        $out .= '<button class="btn btn--outline log-showall-btn" data-showall="0">Limit display</button>';
+        $out .= '<button class="btn btn--outline log-showall-btn" data-showall="0">' . bookfind_translate('Limit display') . '</button>';
     }
 
     $out .= '</div>';

@@ -20,12 +20,12 @@ require 'actions/books/returnLoan.php';
 
 $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookFind — Edit a loan</title>
+  <title><?= bookfind_translate('BookFind — Edit a loan'); ?></title>
   <?php include '../includes/header.php'; ?>
 </head>
 
@@ -39,7 +39,7 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
             <?= csrf_field(); ?>
             <div class="card">
               <div class="card__body">
-                <h1 class="card__title">Add a loan</h1>
+                <h1 class="card__title"><?= bookfind_translate('Add a loan'); ?></h1>
                 <?php if (isset($msg1)) { ?>
                   <div class="alert alert--warning" role="alert">
                     <svg class="icon"><use href="#i-alert"/></svg>
@@ -47,21 +47,21 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
                   </div>
                 <?php } ?>
                 <div class="field">
-                  <label for="user_id" class="label">Borrower</label>
+                  <label for="user_id" class="label"><?= bookfind_translate('Borrower'); ?></label>
                   <div class="select-search">
-                    <input type="search" class="input" placeholder="Search for a user..." data-select-search />
+                    <input type="search" class="input" placeholder="<?= bookfind_translate('Search for a user...'); ?>" data-select-search />
                     <select id="user_id" name="user_id" class="select">
-                      <option value="">--- Select a user ---</option>
+                      <option value=""><?= bookfind_translate('--- Select a user ---'); ?></option>
                       <?php include 'actions/users/list-usersWithClass.php'; ?>
                     </select>
                   </div>
                 </div>
                 <div class="field">
-                  <label for="date" class="label">Return date</label>
+                  <label for="date" class="label"><?= bookfind_translate('Return date'); ?></label>
                   <input type="date" class="input" id="date" value="<?= $dateIn30Days; ?>" name="date" required />
                 </div>
                 <div class="field">
-                  <input type="submit" name="validateAdd" value="Add the loan" class="btn btn--primary" />
+                  <input type="submit" name="validateAdd" value="<?= bookfind_translate('Add the loan'); ?>" class="btn btn--primary" />
                 </div>
                 <input type="hidden" name="book_id" value="<?= htmlspecialchars($_GET['id']); ?>" />
               </div>
@@ -76,19 +76,19 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
-                  <h1 class="card__title">Edit the return date</h1>
+                  <h1 class="card__title"><?= bookfind_translate('Edit the return date'); ?></h1>
                   <?php if (isset($_GET['success'])) { ?>
                     <div class="alert alert--success" role="alert">
                       <svg class="icon"><use href="#i-check"/></svg>
-                      <div>Due date modified successfully!</div>
+                      <div><?= bookfind_translate('Due date modified successfully!'); ?></div>
                     </div>
                   <?php } ?>
                   <div class="field">
-                    <label for="updateDate" class="label">New return date</label>
+                    <label for="updateDate" class="label"><?= bookfind_translate('New return date'); ?></label>
                     <input type="date" class="input" id="updateDate" name="date" value="<?= htmlspecialchars($loanInfos['due_date'] ?? '') ?>" required />
                   </div>
                   <div class="field">
-                    <input type="submit" name="validateUpdate" value="Save" class="btn btn--primary" />
+                    <input type="submit" name="validateUpdate" value="<?= bookfind_translate('Save'); ?>" class="btn btn--primary" />
                   </div>
                   <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
                   <input type="hidden" name="user_id" value="<?= $_GET['user_id'] ?>" />
@@ -101,9 +101,9 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
-                  <h1 class="card__title">Return the loan</h1>
+                  <h1 class="card__title"><?= bookfind_translate('Return the loan'); ?></h1>
                   <div class="field">
-                    <input type="submit" name="validateReturn" value="Return the loan" class="btn btn--success" />
+                    <input type="submit" name="validateReturn" value="<?= bookfind_translate('Return the loan'); ?>" class="btn btn--success" />
                   </div>
                   <input type="hidden" name="id" value="<?= $_GET['id'] ?>" />
                   <input type="hidden" name="user_id" value="<?= $_GET['user_id'] ?>" />
@@ -112,7 +112,7 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
             </form>
 
           <?php } else {
-            echo 'Missing user ID.';
+            echo bookfind_translate('Missing user ID.');
           }
         } ?>
       </div>

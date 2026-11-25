@@ -13,7 +13,7 @@
     $timestamp = strtotime($date);
     // If strtotime fails, the format is invalid
     if (!$timestamp) {
-        echo "Invalid date format";
+        echo bookfind_translate("Invalid date format");
     }
 
     // Output in d/m/Y format

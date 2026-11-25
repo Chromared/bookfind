@@ -12,12 +12,12 @@ require 'actions/users/securityAdminAction.php';
 require '../actions/functions/logFunction.php';
 require 'actions/books/addBooksAction.php'; ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookFind — Add a book</title>
+  <title><?= bookfind_translate('BookFind — Add a book'); ?></title>
   <?php include '../includes/header.php'; ?>
 </head>
 
@@ -30,10 +30,10 @@ require 'actions/books/addBooksAction.php'; ?>
           <?= csrf_field(); ?>
           <div class="card">
             <div class="card__body">
-              <h1 class="card__title">Save a book</h1>
+              <h1 class="card__title"><?= bookfind_translate('Save a book'); ?></h1>
               <div class="alert alert--info" role="alert">
                 <svg class="icon"><use href="#i-info"/></svg>
-                <div>Fields marked with * are required.</div>
+                <div><?= bookfind_translate('Fields marked with * are required.'); ?></div>
               </div>
               <?php if (isset($errorMsg)) { ?>
                 <div class="alert alert--warning" role="alert">
@@ -43,69 +43,69 @@ require 'actions/books/addBooksAction.php'; ?>
               <?php } elseif (isset($successMsg)) { ?>
                 <div class="alert alert--success" role="alert">
                   <svg class="icon"><use href="#i-check"/></svg>
-                  <div>Book saved successfully</div>
+                  <div><?= bookfind_translate('Book saved successfully'); ?></div>
                 </div>
               <?php } ?>
               <div class="field">
-                <label for="isbn" class="label">ISBN*</label>
+                <label for="isbn" class="label"><?= bookfind_translate('ISBN*'); ?></label>
                 <input type="number" name="isbn" id="isbn" class="input" list="isbns" min="1000000000" max="9999999999999" autofocus required />
                 <datalist id="isbns">
                   <?php include 'actions/books/list-isbns.php'; ?>
                 </datalist>
               </div>
               <div class="field">
-                <label for="title" class="label">Title*</label>
+                <label for="title" class="label"><?= bookfind_translate('Title*'); ?></label>
                 <input type="text" name="title" id="title" class="input" required />
               </div>
               <div class="field">
-                <label for="author" class="label">Author*</label>
+                <label for="author" class="label"><?= bookfind_translate('Author*'); ?></label>
                 <input type="text" name="author" id="author" class="input" list="authors" required />
                 <datalist id="authors">
                   <?php include 'actions/books/list-authors.php'; ?>
                 </datalist>
               </div>
               <div class="field">
-                <label for="type" class="label">Type*</label>
+                <label for="type" class="label"><?= bookfind_translate('Type*'); ?></label>
                 <input type="text" name="type" id="type" class="input" list="types" required />
                 <datalist id="types">
                   <?php include 'actions/books/list-types.php'; ?>
                 </datalist>
               </div>
               <div class="field">
-                <label for="publisher" class="label">Publisher*</label>
+                <label for="publisher" class="label"><?= bookfind_translate('Publisher*'); ?></label>
                 <input type="text" name="publisher" id="publisher" class="input" list="publishers" required />
                 <datalist id="publishers">
                   <?php include 'actions/books/list-publishers.php'; ?>
                 </datalist>
               </div>
               <div class="field">
-                <label for="summary" class="label">Summary</label>
+                <label for="summary" class="label"><?= bookfind_translate('Summary'); ?></label>
                 <textarea name="summary" id="summary" class="textarea" rows="1"></textarea>
               </div>
               <div class="field">
-                <label for="unique_id" class="label">Unique identifier</label>
+                <label for="unique_id" class="label"><?= bookfind_translate('Unique identifier'); ?></label>
                 <input type="text" name="unique_id" id="unique_id" class="input" />
               </div>
               <div class="field">
-                <label for="genre" class="label">Genre</label>
+                <label for="genre" class="label"><?= bookfind_translate('Genre'); ?></label>
                 <input type="text" name="genre" id="genre" class="input" list="genres" />
                 <datalist id="genres">
                   <?php include 'actions/books/list-genres.php'; ?>
                 </datalist>
               </div>
               <div class="field">
-                <label for="series" class="label">Series</label>
+                <label for="series" class="label"><?= bookfind_translate('Series'); ?></label>
                 <input type="text" name="series" id="series" class="input" list="series" />
                 <datalist id="series">
                   <?php include 'actions/books/list-series.php'; ?>
                 </datalist>
               </div>
               <div class="field">
-                <label for="volume" class="label">Volume no.</label>
+                <label for="volume" class="label"><?= bookfind_translate('Volume no.'); ?></label>
                 <input type="number" name="volume" id="volume" class="input" />
               </div>
               <div class="field">
-                <input type="submit" name="validate" class="btn btn--primary" value="Save" />
+                <input type="submit" name="validate" class="btn btn--primary" value="<?= bookfind_translate('Save'); ?>" />
               </div>
             </div>
           </div>
@@ -145,17 +145,17 @@ require 'actions/books/addBooksAction.php'; ?>
                 document.getElementById('summary').value = description;
                 document.getElementById('series').value = series;
 
-                alert("Information retrieved successfully!");
+                alert(<?= json_encode(bookfind_translate('Information retrieved successfully!')); ?>);
               } else {
-                alert("No information found for this ISBN.");
+                alert(<?= json_encode(bookfind_translate('No information found for this ISBN.')); ?>);
               }
             })
             .catch(error => {
               console.error("Error while retrieving data: ", error);
-              alert("An error occurred during the search. Make sure the ISBN is valid.");
+              alert(<?= json_encode(bookfind_translate('An error occurred during the search. Make sure the ISBN is valid.')); ?>);
             });
         } else {
-          alert("Please enter a valid 10 or 13 character ISBN.");
+          alert(<?= json_encode(bookfind_translate('Please enter a valid 10 or 13 character ISBN.')); ?>);
         }
       }
     });

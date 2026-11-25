@@ -12,19 +12,19 @@ function Grade($grade)
     switch ($grade)
     {
     case 0:
-    echo '<span class="badge badge--neutral">None</span>';
+    echo '<span class="badge badge--neutral">' . bookfind_translate('None') . '</span>';
     break;
 
     case 1:
-    echo '<span class="badge badge--danger">Administrator</span>';
+    echo '<span class="badge badge--danger">' . bookfind_translate('Administrator') . '</span>';
     break;
 
     case 2:
-    echo '<span class="badge badge--primary">Manager</span>';
+    echo '<span class="badge badge--primary">' . bookfind_translate('Manager') . '</span>';
     break;
 
     case 3:
-    echo '<span class="badge badge--success">Assistant</span>';
+    echo '<span class="badge badge--success">' . bookfind_translate('Assistant') . '</span>';
     break;
 
     default:
@@ -36,16 +36,16 @@ function NoEchoGrade($grade)
     switch ($grade)
     {
     case 0:
-    return 'None';
+    return bookfind_translate('None');
 
     case 1:
-    return 'Administrator';
+    return bookfind_translate('Administrator');
 
     case 2:
-    return 'Manager';
+    return bookfind_translate('Manager');
 
     case 3:
-    return 'Assistant';
+    return bookfind_translate('Assistant');
 
     default:
     return '?';

@@ -60,13 +60,13 @@ if (isset($_POST['regenUsernames'])) {
         } catch (Throwable $logException) {
             error_log('Username regeneration succeeded, but logging failed: ' . $logException->getMessage());
         }
-        $msgRegenUsernames = sprintf(_('Regenerated usernames for %d users.'), $userCount);
+        $msgRegenUsernames = sprintf(bookfind_translate('Regenerated usernames for %d users.'), $userCount);
     } catch (Throwable $exception) {
         if ($transactionStarted && $db->inTransaction()) {
             $db->rollBack();
         }
         error_log('Username regeneration failed: ' . $exception->getMessage());
-        $msgRegenUsernames = _('Username regeneration failed. No usernames were changed.');
+        $msgRegenUsernames = bookfind_translate('Username regeneration failed. No usernames were changed.');
         $regenUsernamesSuccess = false;
     }
 }

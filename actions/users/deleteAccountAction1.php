@@ -27,17 +27,17 @@
             $deleteAccount = true;
         
         }else{
-            $errorMsg4 = 'Your current password is incorrect.';
+            $errorMsg4 = bookfind_translate('Your current password is incorrect.');
         }
 
     }else{
-        $errorMsg4 = 'You must return all your loans before deleting your account. You currently have ' . $InfoDelete['loans_count'] . ' book(s) still on loan.';
+        $errorMsg4 = sprintf(bookfind_translate('You must return all your loans before deleting your account. You currently have %d book(s) still on loan.'), $InfoDelete['loans_count']);
     }
 
     }else{
-        $errorMsg4 = 'Please fill in all fields.';
+        $errorMsg4 = bookfind_translate('Please fill in all fields.');
     }
 }else{
-    $errorMsg4 = 'Not all fields exist. Please <a href="updateProfile.php?id=' . $id . '">reload</a> the page.';
+    $errorMsg4 = bookfind_translate('Not all fields exist. Please') . ' <a href="updateProfile.php?id=' . $id . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
 }
 }

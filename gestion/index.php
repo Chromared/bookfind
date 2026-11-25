@@ -13,12 +13,12 @@ require 'actions/users/securityAdminAction.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookFind — Management</title>
+    <title><?= bookfind_translate('BookFind — Management'); ?></title>
     <?php include '../includes/header.php'; ?>
 </head>
 
@@ -29,8 +29,8 @@ require 'actions/users/securityAdminAction.php';
       <div class="container container--wide">
         <div class="page-head">
           <div>
-            <h1 class="page-head__title">Library management<?php if ($_SESSION['grade'] == '1') { ?> and BookFind<?php } ?></h1>
-            <p class="page-head__sub">Overview of library activity.</p>
+            <h1 class="page-head__title"><?= bookfind_translate('Library management'); ?><?php if ($_SESSION['grade'] == '1') { ?> <?= bookfind_translate('and BookFind'); ?><?php } ?></h1>
+            <p class="page-head__sub"><?= bookfind_translate('Overview of library activity.'); ?></p>
           </div>
         </div>
 
@@ -41,10 +41,10 @@ require 'actions/users/securityAdminAction.php';
                 <div class="card__body">
                     <div class="stat__icon"><svg class="icon"><use href="#i-people"/></svg></div>
                     <div id="total-users" class="stat__value">
-                        <span class="spinner" role="status" aria-label="Loading..."></span>
+                        <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                     </div>
                 </div>
-                <div class="card__footer">Registered users</div>
+                <div class="card__footer"><?= bookfind_translate('Registered users'); ?></div>
             </div>
 
             <!-- Books -->
@@ -52,10 +52,10 @@ require 'actions/users/securityAdminAction.php';
                 <div class="card__body">
                     <div class="stat__icon"><svg class="icon"><use href="#i-book"/></svg></div>
                     <div id="total-books" class="stat__value">
-                        <span class="spinner" role="status" aria-label="Loading..."></span>
+                        <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                     </div>
                 </div>
-                <div class="card__footer">Registered books</div>
+                <div class="card__footer"><?= bookfind_translate('Registered books'); ?></div>
             </div>
 
             <!-- Available books -->
@@ -63,10 +63,10 @@ require 'actions/users/securityAdminAction.php';
                 <div class="card__body">
                     <div class="stat__icon"><svg class="icon"><use href="#i-check"/></svg></div>
                     <div id="available-books" class="stat__value">
-                        <span class="spinner" role="status" aria-label="Loading..."></span>
+                        <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                     </div>
                 </div>
-                <div class="card__footer">Available books</div>
+                <div class="card__footer"><?= bookfind_translate('Available books'); ?></div>
             </div>
 
             <!-- Ongoing loans -->
@@ -74,10 +74,10 @@ require 'actions/users/securityAdminAction.php';
                 <div class="card__body">
                     <div class="stat__icon"><svg class="icon"><use href="#i-arrow-up"/></svg></div>
                     <div id="loans" class="stat__value">
-                        <span class="spinner" role="status" aria-label="Loading..."></span>
+                        <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                     </div>
                 </div>
-                <div class="card__footer">Ongoing loans</div>
+                <div class="card__footer"><?= bookfind_translate('Ongoing loans'); ?></div>
             </div>
 
             <!-- Late loans -->
@@ -85,10 +85,10 @@ require 'actions/users/securityAdminAction.php';
                 <div class="card__body">
                     <div class="stat__icon"><svg class="icon"><use href="#i-alert"/></svg></div>
                     <div id="overdue_loans" class="stat__value">
-                        <span class="spinner" role="status" aria-label="Loading..."></span>
+                        <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                     </div>
                 </div>
-                <div class="card__footer">Overdue loans</div>
+                <div class="card__footer"><?= bookfind_translate('Overdue loans'); ?></div>
             </div>
 
             <!-- Returned loans -->
@@ -96,10 +96,10 @@ require 'actions/users/securityAdminAction.php';
                 <div class="card__body">
                     <div class="stat__icon"><svg class="icon"><use href="#i-arrow-down"/></svg></div>
                     <div id="returned_loans" class="stat__value">
-                        <span class="spinner" role="status" aria-label="Loading..."></span>
+                        <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                     </div>
                 </div>
-                <div class="card__footer">Returned loans</div>
+                <div class="card__footer"><?= bookfind_translate('Returned loans'); ?></div>
             </div>
 
             <!-- Logs (admin only) -->
@@ -108,10 +108,10 @@ require 'actions/users/securityAdminAction.php';
                     <div class="card__body">
                         <div class="stat__icon"><svg class="icon"><use href="#i-doc"/></svg></div>
                         <div id="log" class="stat__value">
-                            <span class="spinner" role="status" aria-label="Loading..."></span>
+                            <span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span>
                         </div>
                     </div>
-                    <div class="card__footer">Logs</div>
+                    <div class="card__footer"><?= bookfind_translate('Logs'); ?></div>
                 </div>
             <?php } ?>
 
@@ -123,11 +123,11 @@ require 'actions/users/securityAdminAction.php';
             <div class="card chart">
                 <div class="card__header">
                     <svg class="icon"><use href="#i-arrow-up"/></svg>
-                    <span>Loans over the last 6 months</span>
+                    <span><?= bookfind_translate('Loans over the last 6 months'); ?></span>
                 </div>
                 <div class="card__body chart__body">
                     <div id="chart-monthly">
-                        <div class="center"><span class="spinner" role="status" aria-label="Loading..."></span></div>
+                        <div class="center"><span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span></div>
                     </div>
                 </div>
             </div>
@@ -136,11 +136,11 @@ require 'actions/users/securityAdminAction.php';
             <div class="card chart chart--center">
                 <div class="card__header">
                     <svg class="icon"><use href="#i-info"/></svg>
-                    <span>Loan distribution by status</span>
+                    <span><?= bookfind_translate('Loan distribution by status'); ?></span>
                 </div>
                 <div class="card__body chart__body">
                     <div id="chart-status" class="chart-split">
-                        <div class="center"><span class="spinner" role="status" aria-label="Loading..."></span></div>
+                        <div class="center"><span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span></div>
                     </div>
                 </div>
             </div>
@@ -149,11 +149,11 @@ require 'actions/users/securityAdminAction.php';
             <div class="card chart">
                 <div class="card__header">
                     <svg class="icon"><use href="#i-people"/></svg>
-                    <span>Top borrowers</span>
+                    <span><?= bookfind_translate('Top borrowers'); ?></span>
                 </div>
                 <div class="card__body chart__body">
                     <div id="chart-borrowers">
-                        <div class="center"><span class="spinner" role="status" aria-label="Loading..."></span></div>
+                        <div class="center"><span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span></div>
                     </div>
                 </div>
             </div>
@@ -162,11 +162,11 @@ require 'actions/users/securityAdminAction.php';
             <div class="card chart">
                 <div class="card__header">
                     <svg class="icon"><use href="#i-arrow-up"/></svg>
-                    <span>Loan evolution — 12 months</span>
+                    <span><?= bookfind_translate('Loan evolution — 12 months'); ?></span>
                 </div>
                 <div class="card__body chart__body">
                     <div id="chart-evolution">
-                        <div class="center"><span class="spinner" role="status" aria-label="Loading..."></span></div>
+                        <div class="center"><span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span></div>
                     </div>
                 </div>
             </div>
@@ -175,11 +175,11 @@ require 'actions/users/securityAdminAction.php';
             <div class="card chart">
                 <div class="card__header">
                     <svg class="icon"><use href="#i-grid"/></svg>
-                    <span>User distribution by class</span>
+                    <span><?= bookfind_translate('User distribution by class'); ?></span>
                 </div>
                 <div class="card__body chart__body">
                     <div id="chart-users-classes" class="donut-wrap">
-                        <div class="center"><span class="spinner" role="status" aria-label="Loading..."></span></div>
+                        <div class="center"><span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span></div>
                     </div>
                 </div>
             </div>
@@ -188,11 +188,11 @@ require 'actions/users/securityAdminAction.php';
             <div class="card chart">
                 <div class="card__header">
                     <svg class="icon"><use href="#i-book"/></svg>
-                    <span>Books currently on loan</span>
+                    <span><?= bookfind_translate('Books currently on loan'); ?></span>
                 </div>
                 <div class="card__body chart__body">
                     <div id="chart-occupation">
-                        <div class="center"><span class="spinner" role="status" aria-label="Loading..."></span></div>
+                        <div class="center"><span class="spinner" role="status" aria-label="<?= bookfind_translate('Loading...'); ?>"></span></div>
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@ require 'actions/users/securityAdminAction.php';
                 var d = new Date(now.getFullYear(), now.getMonth() - i, 1);
                 out.push({
                     key: d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'),
-                    label: d.toLocaleDateString('en-US', { month: 'short' })
+                    label: d.toLocaleDateString(document.documentElement.lang || 'en-US', { month: 'short' })
                 });
             }
             return out;
@@ -271,9 +271,9 @@ require 'actions/users/securityAdminAction.php';
             var items = rows.slice(0, maxSlices);
             var rest = rows.slice(maxSlices);
             var restSum = rest.reduce(function(a, b) { return a + (parseInt(b.nb, 10) || 0); }, 0);
-            if (restSum > 0) items.push({ label: 'Others', nb: restSum });
+            if (restSum > 0) items.push({ label: <?= json_encode(bookfind_translate('Others')); ?>, nb: restSum });
             var total = items.reduce(function(a, b) { return a + (parseInt(b.nb, 10) || 0); }, 0);
-            if (total === 0) { el.innerHTML = '<p class="chart-empty">No data.</p>'; return; }
+            if (total === 0) { el.innerHTML = '<p class="chart-empty">' + esc(<?= json_encode(bookfind_translate('No data.')); ?>) + '</p>'; return; }
             var acc = 0;
             var stops = items.map(function(item, i) {
                 var start = (acc / total) * 100;
@@ -294,7 +294,7 @@ require 'actions/users/securityAdminAction.php';
 
         // Horizontal bars
         function renderHBars(el, rows) {
-            if (!rows.length) { el.innerHTML = '<p class="chart-empty">No data.</p>'; return; }
+            if (!rows.length) { el.innerHTML = '<p class="chart-empty">' + esc(<?= json_encode(bookfind_translate('No data.')); ?>) + '</p>'; return; }
             var max = Math.max.apply(null, rows.map(function(r) { return parseInt(r.nb, 10) || 0; })) || 1;
             var html = '<div class="hbars">';
             rows.forEach(function(r) {
@@ -363,7 +363,7 @@ require 'actions/users/securityAdminAction.php';
             var line = pts.map(function(p) { return p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
             var area = 'M' + pts[0].x.toFixed(1) + ',' + (H - pad) + ' L' + line.replace(/ /g, ' L') + ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (H - pad) + ' Z';
             var html = '<div class="line-wrap">'
-                + '<svg class="line-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Loan evolution over 12 months">'
+                + '<svg class="line-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(<?= json_encode(bookfind_translate('Loan evolution over 12 months')); ?>) + '">'
                 + '<defs><linearGradient id="line-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--primary)" stop-opacity="0.28"/><stop offset="100%" stop-color="var(--primary)" stop-opacity="0.02"/></linearGradient></defs>'
                 + '<path d="' + area + '" fill="url(#line-fill)"/>'
                 + '<polyline points="' + line + '" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
@@ -380,9 +380,9 @@ require 'actions/users/securityAdminAction.php';
             var items = rows.slice(0, maxSlices);
             var rest = rows.slice(maxSlices);
             var restSum = rest.reduce(function(a, b) { return a + (parseInt(b.nb, 10) || 0); }, 0);
-            if (restSum > 0) items.push({ label: 'Others', nb: restSum });
+            if (restSum > 0) items.push({ label: <?= json_encode(bookfind_translate('Others')); ?>, nb: restSum });
             var total = items.reduce(function(a, b) { return a + (parseInt(b.nb, 10) || 0); }, 0);
-            if (total === 0) { el.innerHTML = '<p class="chart-empty">No data.</p>'; return; }
+            if (total === 0) { el.innerHTML = '<p class="chart-empty">' + esc(<?= json_encode(bookfind_translate('No data.')); ?>) + '</p>'; return; }
             var cx = 80, cy = 80, r = 72;
             var acc = 0;
             var slices = [];
@@ -418,7 +418,7 @@ require 'actions/users/securityAdminAction.php';
                     + '<span class="donut__pct">' + pct + '%</span>'
                     + '<b>' + item.nb + '</b></li>';
             }).join('');
-            el.innerHTML = '<div class="pie-wrap"><svg viewBox="0 0 160 160" class="pie" role="img" aria-label="Pie chart">' + paths + '</svg></div>'
+            el.innerHTML = '<div class="pie-wrap"><svg viewBox="0 0 160 160" class="pie" role="img" aria-label="' + esc(<?= json_encode(bookfind_translate('Pie chart')); ?>) + '">' + paths + '</svg></div>'
                 + '<ul class="donut__legend">' + legend + '</ul>';
             chartTip(el.querySelector('.pie-wrap'), el.querySelector('.pie-wrap svg'), slices);
         }
@@ -439,18 +439,18 @@ require 'actions/users/securityAdminAction.php';
                 return 'M' + x0.toFixed(2) + ',' + y0.toFixed(2) + ' A' + r + ',' + r + ' 0 ' + large + ' 1 ' + x1.toFixed(2) + ',' + y1.toFixed(2);
             }
             var html = '<div class="gauge-wrap">'
-                + '<svg viewBox="0 0 220 130" class="gauge" role="img" aria-label="Rate of books on loan : ' + pct + ' %">'
+                + '<svg viewBox="0 0 220 130" class="gauge" role="img" aria-label="' + esc(<?= json_encode(bookfind_translate('Rate of books on loan')); ?>) + ' : ' + pct + ' %">'
                 + '<path d="' + arcPath(Math.PI, 0) + '" fill="none" stroke="var(--surface-3)" stroke-width="14" stroke-linecap="round"/>'
                 + (sweep > 0 ? '<path d="' + arcPath(Math.PI, Math.PI + sweep) + '" fill="none" stroke="var(--primary)" stroke-width="14" stroke-linecap="round"/>' : '')
                 + '</svg>'
                 + '<div class="gauge__value">' + pct + '%</div>'
-                + '<div class="gauge__meta">' + value + ' of ' + total + ' books on loan</div>'
+                + '<div class="gauge__meta">' + value + ' ' + esc(<?= json_encode(bookfind_translate('of')); ?>) + ' ' + total + ' ' + esc(<?= json_encode(bookfind_translate('books on loan')); ?>) + '</div>'
                 + '</div>';
             el.innerHTML = html;
         }
 
         function chartError(el) {
-            el.innerHTML = '<p class="chart-empty"><svg class="icon"><use href="#i-alert"/></svg> Unable to load data.</p>';
+            el.innerHTML = '<p class="chart-empty"><svg class="icon"><use href="#i-alert"/></svg> ' + esc(<?= json_encode(bookfind_translate('Unable to load data.')); ?>) + '</p>';
         }
 
         function loadCharts() {

@@ -34,12 +34,12 @@ function shortTitle($title, $max = 16) {
     return mb_strlen($title) > $max ? mb_substr($title, 0, $max - 1) . '…' : $title;
 } ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookFind — Library of the C.D.I.</title>
+  <title><?= bookfind_translate('BookFind — Library of the C.D.I.'); ?></title>
   <?php include 'includes/header.php'; ?>
 </head>
 
@@ -50,10 +50,10 @@ function shortTitle($title, $max = 16) {
     <div class="container">
       <section class="hero">
         <div class="hero__content">
-          <h1 class="hero__title">All the C.D.I. books<br><span class="hero__accent">within reach</span> of your search.</h1>
+          <h1 class="hero__title"><?= bookfind_translate('All the C.D.I. books'); ?><br><span class="hero__accent"><?= bookfind_translate('within reach'); ?></span> <?= bookfind_translate('of your search.'); ?></h1>
           <?php if (!empty($landingStats['popular'])) { ?>
             <div class="hero__popular">
-              <span class="hero__popular-label">Popular right now</span>
+              <span class="hero__popular-label"><?= bookfind_translate('Popular right now'); ?></span>
               <span class="hero__popular-list">
                 <?php foreach ($landingStats['popular'] as $i => $book) { ?>
                   <a class="chip chip--link" href="books.php?s=<?= urlencode($book['title']); ?>"><?= htmlspecialchars(shortTitle($book['title'], 22)); ?></a>
@@ -64,41 +64,41 @@ function shortTitle($title, $max = 16) {
         </div>
       </section>
 
-      <section class="landing-stats reveal" aria-label="Library statistics">
+      <section class="landing-stats reveal" aria-label="<?= bookfind_translate('Library statistics'); ?>">
         <div class="landing-stat reveal">
           <span class="landing-stat__icon"><svg class="icon"><use href="#i-book"/></svg></span>
           <span class="landing-stat__value"><?= number_format($landingStats['books']); ?></span>
-          <span class="landing-stat__label">Books in the catalog</span>
+          <span class="landing-stat__label"><?= bookfind_translate('Books in the catalog'); ?></span>
         </div>
         <div class="landing-stat reveal">
           <span class="landing-stat__icon"><svg class="icon"><use href="#i-check"/></svg></span>
           <span class="landing-stat__value"><?= number_format($landingStats['available']); ?></span>
-          <span class="landing-stat__label">Available right now</span>
+          <span class="landing-stat__label"><?= bookfind_translate('Available right now'); ?></span>
         </div>
         <div class="landing-stat reveal">
           <span class="landing-stat__icon"><svg class="icon"><use href="#i-arrow-up"/></svg></span>
           <span class="landing-stat__value"><?= number_format($landingStats['loans']); ?></span>
-          <span class="landing-stat__label">Loans recorded</span>
+          <span class="landing-stat__label"><?= bookfind_translate('Loans recorded'); ?></span>
         </div>
         <div class="landing-stat reveal">
           <span class="landing-stat__icon"><svg class="icon"><use href="#i-people"/></svg></span>
           <span class="landing-stat__value"><?= number_format($landingStats['readers']); ?></span>
-          <span class="landing-stat__label">Active readers</span>
+          <span class="landing-stat__label"><?= bookfind_translate('Active readers'); ?></span>
         </div>
       </section>
 
       <?php if (!empty($landingStats['popular'])) { ?>
-        <section class="featured reveal" aria-label="Featured books">
+        <section class="featured reveal" aria-label="<?= bookfind_translate('Featured books'); ?>">
           <div class="section-head">
-            <h2>Featured books</h2>
-            <p>Most borrowed books in the C.D.I. right now.</p>
+            <h2><?= bookfind_translate('Featured books'); ?></h2>
+            <p><?= bookfind_translate('Most borrowed books in the C.D.I. right now.'); ?></p>
           </div>
           <div class="books-grid">
             <?php foreach ($landingStats['popular'] as $book) { ?>
               <article class="book-card">
                 <div class="book-card__cover">
                   <?php if ($book['status'] == 1) { ?>
-                    <span class="book-card__status"><span class="badge badge--warning">Borrowed</span></span>
+                    <span class="book-card__status"><span class="badge badge--warning"><?= bookfind_translate('Borrowed'); ?></span></span>
                   <?php } ?>
                   <svg class="icon"><use href="#i-book"/></svg>
                 </div>
@@ -108,10 +108,10 @@ function shortTitle($title, $max = 16) {
                   <div class="book-card__meta">
                     <?php if (!empty($book['type'])) { ?><span class="chip"><?= htmlspecialchars($book['type']); ?></span><?php } ?>
                     <?php if (!empty($book['genre'])) { ?><span class="chip"><?= htmlspecialchars($book['genre']); ?></span><?php } ?>
-                    <?php if (!empty($book['series'])) { ?><span class="chip">Volume <?= htmlspecialchars($book['volume']); ?></span><?php } ?>
+                    <?php if (!empty($book['series'])) { ?><span class="chip"><?= bookfind_translate('Volume'); ?> <?= htmlspecialchars($book['volume']); ?></span><?php } ?>
                   </div>
                   <div class="book-card__foot">
-                    <a href="books-reader.php?id=<?= (int)$book['id']; ?>" class="btn btn--secondary">View</a>
+                    <a href="books-reader.php?id=<?= (int)$book['id']; ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
                   </div>
                 </div>
               </article>
@@ -122,8 +122,8 @@ function shortTitle($title, $max = 16) {
 
       <section class="steps reveal">
         <div class="section-head">
-          <h2>How does it work?</h2>
-          <p>Three steps to get the most out of the library.</p>
+          <h2><?= bookfind_translate('How does it work?'); ?></h2>
+          <p><?= bookfind_translate('Three steps to get the most out of the library.'); ?></p>
         </div>
         <div class="grid grid--3">
           <div class="step reveal">
@@ -131,24 +131,24 @@ function shortTitle($title, $max = 16) {
               <span class="step__icon"><svg class="icon"><use href="#i-search"/></svg></span>
               <span class="step__num">1</span>
             </div>
-            <h3>Search</h3>
-            <p>Find the book you're looking for across the entire C.D.I. catalog.</p>
+            <h3><?= bookfind_translate('Search'); ?></h3>
+            <p><?= bookfind_translate("Find the book you're looking for across the entire C.D.I. catalog."); ?></p>
           </div>
           <div class="step reveal">
             <div class="step__head">
               <span class="step__icon"><svg class="icon"><use href="#i-book"/></svg></span>
               <span class="step__num">2</span>
             </div>
-            <h3>Borrow</h3>
-            <p>A manager records your loan in a few seconds.</p>
+            <h3><?= bookfind_translate('Borrow'); ?></h3>
+            <p><?= bookfind_translate('A manager records your loan in a few seconds.'); ?></p>
           </div>
           <div class="step reveal">
             <div class="step__head">
               <span class="step__icon"><svg class="icon"><use href="#i-arrow-up"/></svg></span>
               <span class="step__num">3</span>
             </div>
-            <h3>Track</h3>
-            <p>Find your due dates and returns from your profile.</p>
+            <h3><?= bookfind_translate('Track'); ?></h3>
+            <p><?= bookfind_translate('Find your due dates and returns from your profile.'); ?></p>
           </div>
         </div>
       </section>
@@ -156,11 +156,11 @@ function shortTitle($title, $max = 16) {
       <?php if (!isset($_SESSION['auth'])) { ?>
         <section class="cta reveal">
           <div class="cta__inner">
-            <h2>Ready to explore the catalog?</h2>
-            <p>Create an account to borrow and track your books.</p>
+            <h2><?= bookfind_translate('Ready to explore the catalog?'); ?></h2>
+            <p><?= bookfind_translate('Create an account to borrow and track your books.'); ?></p>
             <div class="btn-group">
-              <a href="signup.php" class="btn btn--primary btn--lg">Sign up</a>
-              <a href="login.php" class="btn btn--secondary btn--lg">Sign in</a>
+              <a href="signup.php" class="btn btn--primary btn--lg"><?= bookfind_translate('Sign up'); ?></a>
+              <a href="login.php" class="btn btn--secondary btn--lg"><?= bookfind_translate('Sign in'); ?></a>
             </div>
           </div>
         </section>
@@ -173,16 +173,16 @@ function shortTitle($title, $max = 16) {
       <div class="modal__backdrop">
         <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="successModalLabel">
           <div class="modal__header">
-            <h2 class="modal__title" id="successModalLabel">Signup successful</h2>
-            <button type="button" class="modal__close" data-modal-close aria-label="Close">
+            <h2 class="modal__title" id="successModalLabel"><?= bookfind_translate('Signup successful'); ?></h2>
+            <button type="button" class="modal__close" data-modal-close aria-label="<?= bookfind_translate('Close'); ?>">
               <svg class="icon"><use href="#i-x"/></svg>
             </button>
           </div>
           <div class="modal__body">
-            Your account has been created successfully. To sign in, you will need your username, which is the following: <strong><?= htmlspecialchars($_SESSION['username']); ?></strong>.
+            <?= bookfind_translate('Your account has been created successfully. To sign in, you will need your username, which is the following:'); ?> <strong><?= htmlspecialchars($_SESSION['username']); ?></strong>.
           </div>
           <div class="modal__footer">
-            <button type="button" class="btn btn--success" data-modal-close>OK</button>
+            <button type="button" class="btn btn--success" data-modal-close><?= bookfind_translate('OK'); ?></button>
           </div>
         </div>
       </div>

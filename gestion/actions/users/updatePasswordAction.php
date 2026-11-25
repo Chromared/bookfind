@@ -32,15 +32,15 @@ if (isset($_POST['validatePassword'])) {
 
                     header('Location: update-user.php?id=' . $id . '&msg3=true');
                 } else {
-                    $errorMsg3 = 'The two new passwords are not identical.';
+                    $errorMsg3 = bookfind_translate('The two new passwords are not identical.');
                 }
             } else {
-                $errorMsg3 = 'Please fill in all fields.';
+                $errorMsg3 = bookfind_translate('Please fill in all fields.');
             }
         } else {
-            $errorMsg3 = 'Not all fields exist. Please <a href="update-user.php?id=' . ($id ?? '') . '">reload</a> the page.';
+            $errorMsg3 = bookfind_translate('Not all fields exist. Please') . ' <a href="update-user.php?id=' . ($id ?? '') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
         }
     } else {
-        $errorMsg3 = 'You do not have permission to perform this action.';
+        $errorMsg3 = bookfind_translate('You do not have permission to perform this action.');
     }
 }

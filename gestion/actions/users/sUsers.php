@@ -32,13 +32,13 @@ if (isset($_GET['s']) AND !empty($_GET['s'])) {
     if ($sUsers->rowCount() == 0) { ?>
         <div class="empty">
             <svg class="icon"><use href="#i-people"/></svg>
-            <p>No users found with these search criteria.</p>
+            <p><?= bookfind_translate('No users found with these search criteria.'); ?></p>
         </div>
     <?php } else { ?>
         <div class="grid grid--auto">
         <?php
         while ($users = $sUsers->fetch()) { ?>
-            <?php if ($users['loans_count'] == 1) { $loans = 'loan'; } else { $loans = 'loans'; }
+            <?php $loans = $users['loans_count'] == 1 ? bookfind_translate('loan') : bookfind_translate('loans');
             $initials = strtoupper(substr($users['first_name'] ?? '', 0, 1) . substr($users['last_name'] ?? '', 0, 1)); ?>
             <div class="card">
                 <div class="card__body">
@@ -50,16 +50,16 @@ if (isset($_GET['s']) AND !empty($_GET['s'])) {
                         </div>
                     </div>
                     <div class="book-card__meta mt-3">
-                        <span class="chip"><?php if (in_array($users['class_name'], ['None', 'Aucune'], true)) { ?><?= _('No class'); ?><?php } else { ?><?= htmlspecialchars($users['class_name']); ?><?php } ?></span>
+                        <span class="chip"><?php if (in_array($users['class_name'], ['None', 'Aucune'], true)) { ?><?= bookfind_translate('No class'); ?><?php } else { ?><?= htmlspecialchars($users['class_name']); ?><?php } ?></span>
                         <?php if ($users['loans_count'] > 0) { ?><span class="chip"><?= htmlspecialchars($users['loans_count']) . ' ' . $loans; ?></span><?php } ?>
                         <?php Grade($users['grade']); ?>
                     </div>
                     <div class="book-card__foot">
                         <?php if ($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2') { ?>
-                            <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn--primary">Edit</a>
+                            <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
                         <?php } ?>
-                        <a href="../profile.php?id=<?= $users['id'] ?>" class="btn btn--secondary">View</a>
-                        <a href="user-loans.php?id=<?= htmlspecialchars($users['id']) ?>" class="btn btn--success">Loans</a>
+                        <a href="../profile.php?id=<?= $users['id'] ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                        <a href="user-loans.php?id=<?= htmlspecialchars($users['id']) ?>" class="btn btn--success"><?= bookfind_translate('Loans'); ?></a>
                     </div>
                 </div>
             </div>

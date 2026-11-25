@@ -23,5 +23,5 @@
 
     header('Location: bookfind.php?tab=classes&successAddClass#addClass');
 
-    }else{ $msgC1 = 'This class already exists.'; }
+    }else{ $msgC1 = bookfind_translate('This class already exists.'); }
 }

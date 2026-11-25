@@ -55,8 +55,7 @@
 
                 SaveLog($db, $_SERVER['REQUEST_URI'], 'Book added', 'The book ' . htmlspecialchars($title) . ' was added successfully.');
 
-            }else{ $errorMsg = 'Unique identifier already assigned to another book'; }
-
-        }else{ $errorMsg = 'Not all fields are filled in.'; }
-    }else{ $errorMsg = 'Not all fields exist. Please <a href="add-book.php">reload</a> the page.'; }
+            }else{ $errorMsg = bookfind_translate('Unique identifier already assigned to another book'); }
+        }else{ $errorMsg = bookfind_translate('Not all fields are filled in.'); }
+    }else{ $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="add-book.php">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.'); }
 }

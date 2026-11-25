@@ -75,7 +75,7 @@ if (isset($_POST['validate'])) {
     $attempts = &$_SESSION['login_attempts'][$key];
     // window 15 minutes, max 5
     if ($attempts['count'] >= 5 && (time() - $attempts['first']) < 900) {
-        $errorMsg = '<div class="msg"><div class="msg-alerte">Too many attempts. Try again later.</div></div>';
+        $errorMsg = '<div class="msg"><div class="msg-alerte">' . bookfind_translate('Too many attempts. Try again later.') . '</div></div>';
     }
 
     // reset window if expired
@@ -158,17 +158,17 @@ if (isset($_POST['validate'])) {
                 } else {
                     // failure: increment counter and set generic message
                     $attempts['count']++;
-                    $errorMsg = '<div class="msg"><div class="msg-alerte">Incorrect credentials.</div></div>';
+                    $errorMsg = '<div class="msg"><div class="msg-alerte">' . bookfind_translate('Incorrect credentials.') . '</div></div>';
                 }
             } else {
                 // failure: increment counter and set generic message
                 $attempts['count']++;
-                $errorMsg = '<div class="msg"><div class="msg-alerte">Incorrect credentials.</div></div>';
+                $errorMsg = '<div class="msg"><div class="msg-alerte">' . bookfind_translate('Incorrect credentials.') . '</div></div>';
             }
         } else {
-            $errorMsg = '<div class="msg"><div class="msg-alerte">Not all fields are filled in.</div></div>';
+            $errorMsg = '<div class="msg"><div class="msg-alerte">' . bookfind_translate('Not all fields are filled in.') . '</div></div>';
         }
     } else {
-        $errorMsg = '<div class="msg"><div class="msg-alerte"><p>Not all fields exist. Reload the page by clicking <a href="login.php">here</a>.</p></div></div>';
+        $errorMsg = '<div class="msg"><div class="msg-alerte"><p>' . bookfind_translate('Not all fields exist. Reload the page by clicking') . ' <a href="login.php">' . bookfind_translate('here') . '</a>.</p></div></div>';
     }
 }

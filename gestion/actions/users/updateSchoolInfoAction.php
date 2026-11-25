@@ -38,15 +38,15 @@ if (isset($_POST['validateSchoolInfo'])) {
 
                         header('Location: update-user.php?id=' . $id . '&msg2=true');
                 } else {
-                    $errorMsg2 = 'The selected class does not exist.';
+                    $errorMsg2 = bookfind_translate('The selected class does not exist.');
                 }
             } else {
-                $errorMsg2 = 'All fields must be filled in.';
+                $errorMsg2 = bookfind_translate('All fields must be filled in.');
             }
         } else {
-            $errorMsg2 = 'Not all fields exist. Reload the page <a href="update-user.php?id=' . ($id ?? '') . '">here</a>.';
+            $errorMsg2 = bookfind_translate('Not all fields exist. Reload the page') . ' <a href="update-user.php?id=' . ($id ?? '') . '">' . bookfind_translate('here') . '</a>.';
         }
     } else {
-        $errorMsg2 = 'You do not have permission to perform this action.';
+        $errorMsg2 = bookfind_translate('You do not have permission to perform this action.');
     }
 }

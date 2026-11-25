@@ -36,53 +36,53 @@ $topbarTitle = $titles[$currentPage] ?? 'Management';
     </a>
   </div>
 
-  <nav class="sidebar__nav" aria-label="Navigation">
+  <nav class="sidebar__nav" aria-label="<?= bookfind_translate('Navigation'); ?>">
     <a class="sidebar__link <?php if ($currentPage == 'index.php') { echo 'is-active'; } ?>" href="index.php">
-      <svg class="icon"><use href="#i-grid"/></svg>Overview
+      <svg class="icon"><use href="#i-grid"/></svg><?= bookfind_translate('Overview'); ?>
     </a>
 
-    <div class="sidebar__label">Books</div>
+    <div class="sidebar__label"><?= bookfind_translate('Books'); ?></div>
     <a class="sidebar__link <?php if ($currentPage == 'books.php') { echo 'is-active'; } ?>" href="books.php">
-      <svg class="icon"><use href="#i-search"/></svg>Search
+      <svg class="icon"><use href="#i-search"/></svg><?= bookfind_translate('Search'); ?>
     </a>
     <a class="sidebar__link <?php if ($currentPage == 'add-book.php') { echo 'is-active'; } ?>" href="add-book.php">
-      <svg class="icon"><use href="#i-save"/></svg>Add
+      <svg class="icon"><use href="#i-save"/></svg><?= bookfind_translate('Add'); ?>
     </a>
     <a class="sidebar__link <?php if ($currentPage == 'loans.php') { echo 'is-active'; } ?>" href="loans.php">
-      <svg class="icon"><use href="#i-arrow-up"/></svg>Loans
+      <svg class="icon"><use href="#i-arrow-up"/></svg><?= bookfind_translate('Loans'); ?>
     </a>
 
-    <div class="sidebar__label">Users</div>
+    <div class="sidebar__label"><?= bookfind_translate('Users'); ?></div>
     <a class="sidebar__link <?php if ($currentPage == 'users.php') { echo 'is-active'; } ?>" href="users.php">
-      <svg class="icon"><use href="#i-people"/></svg>Users
+      <svg class="icon"><use href="#i-people"/></svg><?= bookfind_translate('Users'); ?>
     </a>
 
     <?php if ($_SESSION['grade'] == 1) { ?>
-      <div class="sidebar__label">Administration</div>
+      <div class="sidebar__label"><?= bookfind_translate('Administration'); ?></div>
       <a class="sidebar__link <?php if ($currentPage == 'bookfind.php' && $tab == 'database') { echo 'is-active'; } ?>" href="bookfind.php?tab=database">
-        <svg class="icon"><use href="#i-db"/></svg>Database
+        <svg class="icon"><use href="#i-db"/></svg><?= bookfind_translate('Database'); ?>
       </a>
       <a class="sidebar__link <?php if ($currentPage == 'bookfind.php' && $tab == 'classes') { echo 'is-active'; } ?>" href="bookfind.php?tab=classes">
-        <svg class="icon"><use href="#i-tag"/></svg>Classes
+        <svg class="icon"><use href="#i-tag"/></svg><?= bookfind_translate('Classes'); ?>
       </a>
       <a class="sidebar__link <?php if ($currentPage == 'bookfind.php' && $tab == 'users') { echo 'is-active'; } ?>" href="bookfind.php?tab=users">
-        <svg class="icon"><use href="#i-upload"/></svg><?php echo _('Import users and regenerate usernames'); ?>
+        <svg class="icon"><use href="#i-upload"/></svg><?php echo bookfind_translate('Import users and regenerate usernames'); ?>
       </a>
       <a class="sidebar__link <?php if ($currentPage == 'logs.php') { echo 'is-active'; } ?>" href="logs.php">
-        <svg class="icon"><use href="#i-doc"/></svg>Logs
+        <svg class="icon"><use href="#i-doc"/></svg><?= bookfind_translate('Logs'); ?>
       </a>
       <a class="sidebar__link <?php if ($currentPage == 'config-ht.php') { echo 'is-active'; } ?>" href="config-ht.php">
-        <svg class="icon"><use href="#i-key"/></svg>.htaccess
+        <svg class="icon"><use href="#i-key"/></svg><?= bookfind_translate('.htaccess'); ?>
       </a>
     <?php } ?>
   </nav>
 
   <div class="sidebar__foot">
     <a class="sidebar__link" href="../settings.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">
-      <svg class="icon"><use href="#i-settings"/></svg>Settings
+      <svg class="icon"><use href="#i-settings"/></svg><?= bookfind_translate('Settings'); ?>
     </a>
     <a class="sidebar__link" href="../index.php">
-      <svg class="icon"><use href="#i-arrow-down"/></svg>Exit management
+      <svg class="icon"><use href="#i-arrow-down"/></svg><?= bookfind_translate('Exit management'); ?>
     </a>
   </div>
 </aside>
@@ -90,17 +90,17 @@ $topbarTitle = $titles[$currentPage] ?? 'Management';
 <div class="sidebar__backdrop" data-sidebar-close></div>
 
 <header class="topbar">
-  <button class="topbar__toggle" type="button" data-nav-toggle="sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">
+  <button class="topbar__toggle" type="button" data-nav-toggle="sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="<?= bookfind_translate('Open menu'); ?>">
     <svg class="icon"><use href="#i-menu"/></svg>
   </button>
-  <span class="topbar__title"><?= htmlspecialchars(_($topbarTitle), ENT_QUOTES, 'UTF-8'); ?></span>
+  <span class="topbar__title"><?= htmlspecialchars(bookfind_translate($topbarTitle), ENT_QUOTES, 'UTF-8'); ?></span>
   <div class="topbar__right">
     <span class="topbar__user">
       <svg class="icon"><use href="#i-people"/></svg>
       <?= htmlspecialchars($_SESSION['firstname'] ?? $_SESSION['username'] ?? ''); ?>
     </span>
     <a class="btn btn--ghost" href="../index.php">
-      <svg class="icon"><use href="#i-arrow-down"/></svg>Site
+      <svg class="icon"><use href="#i-arrow-down"/></svg><?= bookfind_translate('Site'); ?>
     </a>
   </div>
 </header>

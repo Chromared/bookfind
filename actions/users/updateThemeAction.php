@@ -11,6 +11,6 @@
 
         header('Location: settings.php?id=' . $id . '&msg1=success');
     }else{
-        $errorMsg1 = 'Please select a valid theme.';
+        $errorMsg1 = bookfind_translate('Please select a valid theme.');
     }
 }

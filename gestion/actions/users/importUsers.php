@@ -37,7 +37,7 @@ if (is_dir($tempDir)) {
 // Step 1: Upload and analyze CSV
 if(isset($_POST['csvUpload'])) {
     if(!isset($_FILES['csvFile']) || $_FILES['csvFile']['error'] !== UPLOAD_ERR_OK) {
-        $msgImport = _('Error uploading the file. Please try again.');
+        $msgImport = bookfind_translate('Error uploading the file. Please try again.');
     } else {
         $separator = $_POST['csvSeparator'] ?? ',';
         if ($separator === '\\t') {
@@ -53,12 +53,12 @@ if(isset($_POST['csvUpload'])) {
 
         // Check file existence
         if (!file_exists($csvFile)) {
-            $msgImport = _('The uploaded file cannot be found. Please try again.');
+            $msgImport = bookfind_translate('The uploaded file cannot be found. Please try again.');
         } else {
             // Check CSV format
             $fileType = mime_content_type($csvFile);
             if ($fileType !== 'text/csv' && $fileType !== 'text/plain') {
-                $msgImport = _('The file must be in CSV format.');
+                $msgImport = bookfind_translate('The file must be in CSV format.');
             } else {
                 // Read CSV file
                 $csvData = [];
@@ -69,7 +69,7 @@ if(isset($_POST['csvUpload'])) {
                     $firstLine = fgetcsv($handle, 0, $separator, '"', "\\");
 
                     if (!$firstLine) {
-                        $msgImport = _('Unable to read the CSV file.');
+                        $msgImport = bookfind_translate('Unable to read the CSV file.');
                         fclose($handle);
                     } else {
                         if ($hasHeaders) {
@@ -121,14 +121,14 @@ if(isset($_POST['csvUpload'])) {
                             $_SESSION['total_rows'] = $totalRows;
                             $_SESSION['csv_preview'] = $csvData; // Only 5 rows for preview
 
-                            $msgImport = sprintf(_('CSV file analyzed successfully. %d rows found. Please map the columns.'), $totalRows);
+                            $msgImport = sprintf(bookfind_translate('CSV file analyzed successfully. %d rows found. Please map the columns.'), $totalRows);
                             $alertImportType = "success";
                         } else {
-                            $msgImport = _('Error processing the file. Please try again.');
+                            $msgImport = bookfind_translate('Error processing the file. Please try again.');
                         }
                     }
                 } else {
-                    $msgImport = _('Unable to open the CSV file.');
+                    $msgImport = bookfind_translate('Unable to open the CSV file.');
                 }
             }
         }
@@ -148,13 +148,13 @@ if(isset($_POST['csvCancel'])) {
     unset($_SESSION['csv_has_headers']);
     unset($_SESSION['csv_preview']);
 
-    $msgImport = _('Import canceled.');
+    $msgImport = bookfind_translate('Import canceled.');
 }
 
 // Step 2: Import data
 if(isset($_POST['csvImport'])) {
     if(!isset($_SESSION['csv_file']) || !file_exists($_SESSION['csv_file']) || !isset($_SESSION['csv_headers']) || !isset($_SESSION['csv_separator'])) {
-        $msgImport = _('No CSV file awaiting import.');
+        $msgImport = bookfind_translate('No CSV file awaiting import.');
     } else {
         $db_mapping = $_POST['db_mapping'] ?? [];
         $allowedColumns = ['username', 'last_name', 'first_name', 'class_name', 'grade', 'rules_accepted', 'privacy_accepted', 'max_loans', 'password'];
@@ -191,11 +191,11 @@ if(isset($_POST['csvImport'])) {
 
         // Verify username mapping
         if (!$mappingIsValid) {
-            $msgImport = _('The column mapping is invalid. Please map the CSV columns again.');
+            $msgImport = bookfind_translate('The column mapping is invalid. Please map the CSV columns again.');
         } elseif (!isset($db_mapping['username']) ||
             ($db_mapping['username'] === $otherValueOption && empty($_POST['custom_username'])) ||
             (!is_numeric($db_mapping['username']) && !in_array($db_mapping['username'], [$otherValueOption, 'algorithm'], true))) {
-            $msgImport = _('The column mapping is incorrect. The username field is required.');
+            $msgImport = bookfind_translate('The column mapping is incorrect. The username field is required.');
         } else {
             // Retrieve custom values
             $custom_username = isset($_POST['custom_username']) ? trim($_POST['custom_username']) : null;
@@ -229,7 +229,7 @@ if(isset($_POST['csvImport'])) {
                     while (($data = fgetcsv($handle, 0, $separator, '"', "\\")) !== FALSE) {
                         // Handle rows with incorrect column count
                         if (count($data) !== count($headers)) {
-                            $errors[] = sprintf(_('Line %d: Incorrect number of columns.'), $lineNumber);
+                            $errors[] = sprintf(bookfind_translate('Line %d: Incorrect number of columns.'), $lineNumber);
                             $errorCount++;
                             $lineNumber++;
                             continue;
@@ -268,7 +268,7 @@ if(isset($_POST['csvImport'])) {
                             if (!empty($userData['first_name']) && !empty($userData['last_name'])) {
                                 $userData['username'] = strtolower(substr($userData['first_name'], 0, 1) . substr($userData['last_name'], 0, 7));
                             } else {
-                                $errors[] = sprintf(_('Line %d: Unable to generate username (missing last name or first name).'), $lineNumber);
+                                $errors[] = sprintf(bookfind_translate('Line %d: Unable to generate username (missing last name or first name).'), $lineNumber);
                                 $errorCount++;
                                 $lineNumber++;
                                 continue;
@@ -280,7 +280,7 @@ if(isset($_POST['csvImport'])) {
                             $userData['username'] = mb_substr(trim((string)$userData['username']), 0, 10, 'UTF-8');
                         }
                         if (empty($userData['username'])) {
-                            $errors[] = sprintf(_('Line %d: Empty username.'), $lineNumber);
+                            $errors[] = sprintf(bookfind_translate('Line %d: Empty username.'), $lineNumber);
                             $errorCount++;
                             $lineNumber++;
                             continue;
@@ -290,7 +290,7 @@ if(isset($_POST['csvImport'])) {
                         if (isset($db_mapping['class_name']) && $db_mapping['class_name'] === $otherValueOption) {
                             $userData['class_name'] = $custom_class_name;
                             if ($userData['class_name'] === null || $userData['class_name'] === '') {
-                                $errors[] = sprintf(_('Line %d: Class is required.'), $lineNumber);
+                                $errors[] = sprintf(bookfind_translate('Line %d: Class is required.'), $lineNumber);
                                 $errorCount++;
                                 $lineNumber++;
                                 continue;
@@ -302,7 +302,7 @@ if(isset($_POST['csvImport'])) {
                         // Handle password processing
                         if (isset($db_mapping['password']) && $db_mapping['password'] === $otherValueOption) {
                             if ($custom_password === null || $custom_password === '') {
-                                $errors[] = sprintf(_('Line %d: Password is required.'), $lineNumber);
+                                $errors[] = sprintf(bookfind_translate('Line %d: Password is required.'), $lineNumber);
                                 $errorCount++;
                                 $lineNumber++;
                                 continue;
@@ -336,7 +336,7 @@ if(isset($_POST['csvImport'])) {
                         // Max borrow count
                         if (isset($db_mapping['max_loans']) && $db_mapping['max_loans'] === $otherValueOption) {
                             if ($custom_max_loans === null || $custom_max_loans < 1) {
-                                $errors[] = sprintf(_('Line %d: Maximum loans must be at least 1.'), $lineNumber);
+                                $errors[] = sprintf(bookfind_translate('Line %d: Maximum loans must be at least 1.'), $lineNumber);
                                 $errorCount++;
                                 $lineNumber++;
                                 continue;
@@ -388,7 +388,7 @@ if(isset($_POST['csvImport'])) {
 
                         } catch (PDOException $e) {
                             error_log('CSV user import failed on line ' . $lineNumber . ': ' . $e->getMessage());
-                            $errors[] = sprintf(_('Line %d: The row could not be imported.'), $lineNumber);
+                            $errors[] = sprintf(bookfind_translate('Line %d: The row could not be imported.'), $lineNumber);
                             $errorCount++;
                         }
 
@@ -412,24 +412,24 @@ if(isset($_POST['csvImport'])) {
 
                     SaveLog($db, $_SERVER['REQUEST_URI'], 'Import users via CSV', $importedCount . ' users imported');
 
-                    $msgImport = sprintf(_('Import completed: %1$d users imported, %2$d errors.'), $importedCount, $errorCount);
+                    $msgImport = sprintf(bookfind_translate('Import completed: %1$d users imported, %2$d errors.'), $importedCount, $errorCount);
                     if (!empty($errors)) {
                         $msgImport .= "<br><strong>Error details:</strong><ul>";
                         foreach(array_slice($errors, 0, 5) as $error) {
                             $msgImport .= "<li>" . htmlspecialchars($error) . "</li>";
                         }
                         if (count($errors) > 5) {
-                            $msgImport .= "<li>" . sprintf(_('%d more errors.'), count($errors) - 5) . "</li>";
+                            $msgImport .= "<li>" . sprintf(bookfind_translate('%d more errors.'), count($errors) - 5) . "</li>";
                         }
                         $msgImport .= "</ul>";
                     }
                     $alertImportType = ($errorCount > 0) ? "warning" : "success";
                 } else {
-                    $msgImport = _('Unable to open the CSV file.');
+                    $msgImport = bookfind_translate('Unable to open the CSV file.');
                 }
             } catch (Throwable $e) {
                 error_log('CSV user import failed: ' . $e->getMessage());
-                $msgImport = _('Database connection error. Please check the server logs.');
+                $msgImport = bookfind_translate('Database connection error. Please check the server logs.');
             }
         }
     }

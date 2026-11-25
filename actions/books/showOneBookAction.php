@@ -16,4 +16,4 @@
 
       $booksInfos = $selectInfosFromBooks->fetch();
       
-}else{die('Variable d\'URL (GET) manquante');}
+}else{die(bookfind_translate('Missing URL (GET) variable'));}

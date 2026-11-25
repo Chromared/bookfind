@@ -26,6 +26,6 @@
         header('Location: users.php');
         
     }else{
-        $msg = 'You do not have sufficient permissions to delete this user.';
+        $msg = bookfind_translate('You do not have sufficient permissions to delete this user.');
     }
 }

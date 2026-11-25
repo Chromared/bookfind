@@ -36,12 +36,12 @@ if (isset($_POST['validatePersonalInfo'])) {
 
                 header('Location: update-user.php?id=' . $id . '&msg1=true');
             } else {
-                $errorMsg1 = 'Please fill in all fields.';
+                $errorMsg1 = bookfind_translate('Please fill in all fields.');
             }
         } else {
-            $errorMsg1 = 'Not all fields exist. Please <a href="update-user.php?id=' . ($id ?? '') . '">reload</a> the page.';
+            $errorMsg1 = bookfind_translate('Not all fields exist. Please') . ' <a href="update-user.php?id=' . ($id ?? '') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
         }
     } else {
-        $errorMsg1 = 'You do not have permission to perform this action.';
+        $errorMsg1 = bookfind_translate('You do not have permission to perform this action.');
     }
 }

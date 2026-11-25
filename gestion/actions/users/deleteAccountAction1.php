@@ -22,6 +22,6 @@
             $deleteAccount = true;
 
     }else{
-        $errorMsg4 = 'You must return all your loans before deleting your account. You currently have ' . $InfoDelete['loans_count'] . ' book(s) on loan.';
+        $errorMsg4 = sprintf(bookfind_translate('You must return all your loans before deleting your account. You currently have %d book(s) on loan.'), $InfoDelete['loans_count']);
     }
 }

@@ -9,9 +9,9 @@
 
 
 <?php
-    $host = 'localhost';
-    $dbname = 'bookfind';
-    $username = 'root';
+    $host = '';
+    $dbname = '';
+    $username = '';
     $password = '';
 
     $db_error_message = null;

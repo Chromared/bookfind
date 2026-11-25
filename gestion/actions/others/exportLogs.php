@@ -18,7 +18,7 @@
 
     // Check if logs exist
     if (empty($logs)) {
-        die("No logs found.");
+        die(bookfind_translate("No logs found."));
     }
 
     // Set content type to CSV

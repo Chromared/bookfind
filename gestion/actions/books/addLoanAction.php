@@ -50,9 +50,9 @@ if(isset($_POST['validateAdd'])){
 
             header('Location: loan.php?id=' . $book . '&user_id=' . $user_id);
 
-    }else{$msg1 = 'This user has reached their loan limit.';}
-    }else{$msg1 = 'This book is already on loan.';}
-    }else{$msg1 = 'This user does not exist.';}
-    }else{$msg1 = 'Not all fields are filled in.';}
-    }else{$msg1 = 'Not all fields exist.';}
+    }else{$msg1 = bookfind_translate('This user has reached their loan limit.');}
+    }else{$msg1 = bookfind_translate('This book is already on loan.');}
+    }else{$msg1 = bookfind_translate('This user does not exist.');}
+    }else{$msg1 = bookfind_translate('Not all fields are filled in.');}
+    }else{$msg1 = bookfind_translate('Not all fields exist.');}
 }

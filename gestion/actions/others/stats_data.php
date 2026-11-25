@@ -56,9 +56,9 @@ $statusQuery = $db->query(
 )->fetch();
 $overdueCount = (int)($statusQuery['overdue'] ?? 0);
 $data['loans_by_status'] = [
-    ['label' => 'Overdue', 'nb' => $overdueCount],
-    ['label' => 'In progress', 'nb' => (int)($statusQuery['in_progress'] ?? 0) - $overdueCount],
-    ['label' => 'Returned', 'nb' => (int)($statusQuery['returned'] ?? 0)],
+    ['label' => bookfind_translate('Overdue'), 'nb' => $overdueCount],
+    ['label' => bookfind_translate('In progress'), 'nb' => (int)($statusQuery['in_progress'] ?? 0) - $overdueCount],
+    ['label' => bookfind_translate('Returned'), 'nb' => (int)($statusQuery['returned'] ?? 0)],
 ];
 
 // Top borrowers (5 most active users)

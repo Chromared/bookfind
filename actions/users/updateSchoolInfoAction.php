@@ -31,7 +31,7 @@
 
                 header('Location: updateProfile.php?id=' . $id .'&msg2=true');
 
-            }else{ $errorMsg2 = 'The selected class does not exist.'; }   
-        }else{ $errorMsg2 = 'All fields must be filled in.'; }
-    }else{ $errorMsg2 = 'Not all fields exist. Reload the page <a href="updateProfile.php?id=' . $id . '">here</a>.'; }
+            }else{ $errorMsg2 = bookfind_translate('The selected class does not exist.'); }
+        }else{ $errorMsg2 = bookfind_translate('All fields must be filled in.'); }
+    }else{ $errorMsg2 = bookfind_translate('Not all fields exist. Reload the page') . ' <a href="updateProfile.php?id=' . $id . '">' . bookfind_translate('here') . '</a>.'; }
 }

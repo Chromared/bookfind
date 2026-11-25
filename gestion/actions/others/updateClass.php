@@ -27,5 +27,5 @@
 
     header('Location: bookfind.php?tab=classes&successUpdateClass#updateClass');
 
-    }else{ $msgC2 = 'The class you want to modify does not exist.'; }
+    }else{ $msgC2 = bookfind_translate('The class you want to modify does not exist.'); }
 }

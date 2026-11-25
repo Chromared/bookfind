@@ -60,8 +60,7 @@ if(isset($_POST['validate'])){
 
                 $successMsg = 'Book modified successfully';
 
-            }else{ $errorMsg = 'Unique identifier already assigned to another book'; }
-
-        }else{ $errorMsg = 'Not all fields are filled in.'; }
-    }else{ $errorMsg = 'Not all fields exist. Please <a href="update-book.php?id=' . ($id ?? '') . '">reload</a> the page.'; }
+            }else{ $errorMsg = bookfind_translate('Unique identifier already assigned to another book'); }
+        }else{ $errorMsg = bookfind_translate('Not all fields are filled in.'); }
+    }else{ $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="update-book.php?id=' . ($id ?? '') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.'); }
 }

@@ -46,12 +46,12 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookFind — Administration</title>
+    <title><?= bookfind_translate('BookFind — Administration'); ?></title>
     <?php include '../includes/header.php'; ?>
 </head>
 
@@ -65,10 +65,10 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             <form method="POST" autocomplete="off">
                 <div class="card">
                     <div class="card__body">
-                        <h1 class="card__title">Database connection</h1>
+                        <h1 class="card__title"><?= bookfind_translate('Database connection'); ?></h1>
                         <div class="alert alert--info" role="alert">
                             <svg class="icon"><use href="#i-info"/></svg>
-                            <div>Fields marked with * are required.</div>
+                            <div><?= bookfind_translate('Fields marked with * are required.'); ?></div>
                         </div>
                         <?php if (isset($db_update_msg)) {
                             $type = $db_update_type ?? 'info';
@@ -82,30 +82,30 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                             </div>
                         <?php } ?>
                         <div class="field">
-                            <label for="host" class="label">Host*</label>
+                            <label for="host" class="label"><?= bookfind_translate('Host*'); ?></label>
                             <input type="text" name="host" id="host" class="input" value="<?php if (isset($host)) {
                                                                                                     echo $host;
                                                                                                 } ?>" required />
                         </div>
                         <div class="field">
-                            <label for="dbname" class="label">Database name*</label>
+                            <label for="dbname" class="label"><?= bookfind_translate('Database name*'); ?></label>
                             <input type="text" name="dbname" id="dbname" class="input" value="<?php if (isset($dbname)) {
                                                                                                         echo $dbname;
                                                                                                     } ?>" placeholder="bookfind" required />
                         </div>
                         <div class="field">
-                            <label for="user" class="label">Username*</label>
+                            <label for="user" class="label"><?= bookfind_translate('Username*'); ?></label>
                             <input type="text" name="user" id="user" class="input" value="<?php if (isset($username)) {
                                                                                                     echo $username;
                                                                                                 } ?>" required />
                         </div>
                         <div class="field">
-                            <label for="password" class="label">Password</label>
-                            <input type="password" name="password" id="password" class="input" placeholder="Leave empty to keep the current password" autocomplete="new-password" />
+                            <label for="password" class="label"><?= bookfind_translate('Password'); ?></label>
+                            <input type="password" name="password" id="password" class="input" placeholder="<?= bookfind_translate('Leave empty to keep the current password'); ?>" autocomplete="new-password" />
                         </div>
                         <div class="field">
                             <?= csrf_field(); ?>
-                            <input type="submit" name="databaseValidate" class="btn btn--primary" value="Save" />
+                            <input type="submit" name="databaseValidate" class="btn btn--primary" value="<?= bookfind_translate('Save'); ?>" />
                         </div>
                     </div>
                 </div>
@@ -117,10 +117,10 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
-                        <h1 class="card__title">Add a class</h1>
+                        <h1 class="card__title"><?= bookfind_translate('Add a class'); ?></h1>
                         <div class="alert alert--info" role="alert">
                             <svg class="icon"><use href="#i-info"/></svg>
-                            <div>Fields marked with * are required.</div>
+                            <div><?= bookfind_translate('Fields marked with * are required.'); ?></div>
                         </div>
                         <?php if (isset($msgC1)) { ?>
                             <div class="alert alert--warning" role="alert">
@@ -130,15 +130,15 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                         <?php } elseif (isset($_GET['successAddClass'])) { ?>
                             <div class="alert alert--success" role="alert">
                                 <svg class="icon"><use href="#i-check"/></svg>
-                                <div>Class added successfully</div>
+                                <div><?= bookfind_translate('Class added successfully'); ?></div>
                             </div>
                         <?php } ?>
                         <div class="field">
-                            <label for="newClass" class="label">New class*</label>
+                            <label for="newClass" class="label"><?= bookfind_translate('New class*'); ?></label>
                             <input type="text" name="newClass" id="newClass" class="input" required />
                         </div>
                         <div class="field">
-                            <input type="submit" name="classAddValidate" class="btn btn--success" value="Add" />
+                            <input type="submit" name="classAddValidate" class="btn btn--success" value="<?= bookfind_translate('Add'); ?>" />
                         </div>
                     </div>
                 </div>
@@ -149,10 +149,10 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
-                        <h2 class="card__title">Edit a class</h2>
+                        <h2 class="card__title"><?= bookfind_translate('Edit a class'); ?></h2>
                         <div class="alert alert--info" role="alert">
                             <svg class="icon"><use href="#i-info"/></svg>
-                            <div>Fields marked with * are required.</div>
+                            <div><?= bookfind_translate('Fields marked with * are required.'); ?></div>
                         </div>
                         <?php if (isset($msgC2)) { ?>
                             <div class="alert alert--warning" role="alert">
@@ -162,22 +162,22 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                         <?php } elseif (isset($_GET['successUpdateClass'])) { ?>
                             <div class="alert alert--success" role="alert">
                                 <svg class="icon"><use href="#i-check"/></svg>
-                                <div>Class modified successfully</div>
+                                <div><?= bookfind_translate('Class modified successfully'); ?></div>
                             </div>
                         <?php } ?>
                         <div class="field">
-                            <label for="existingClass" class="label">Existing class*</label>
+                            <label for="existingClass" class="label"><?= bookfind_translate('Existing class*'); ?></label>
                             <select name="existingClass" id="existingClass" class="select" required>
-                                <option value=""><?php echo _('--- Select a class ---'); ?></option>
+                                <option value=""><?php echo bookfind_translate('--- Select a class ---'); ?></option>
                                 <?php include '../actions/functions/getClassesAndOptions.php'; ?>
                             </select>
                         </div>
                         <div class="field">
-                            <label for="newClassName" class="label">New class name*</label>
+                            <label for="newClassName" class="label"><?= bookfind_translate('New class name*'); ?></label>
                             <input type="text" name="newClassName" id="newClassName" class="input" required />
                         </div>
                         <div class="field">
-                            <input type="submit" name="classUpdateValidate" class="btn btn--primary" value="Edit" />
+                            <input type="submit" name="classUpdateValidate" class="btn btn--primary" value="<?= bookfind_translate('Edit'); ?>" />
                         </div>
                     </div>
                 </div>
@@ -188,10 +188,10 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
-                        <h2 class="card__title">Delete a class</h2>
+                        <h2 class="card__title"><?= bookfind_translate('Delete a class'); ?></h2>
                         <div class="alert alert--info" role="alert">
                             <svg class="icon"><use href="#i-info"/></svg>
-                            <div>Fields marked with * are required.</div>
+                            <div><?= bookfind_translate('Fields marked with * are required.'); ?></div>
                         </div>
                         <?php if (isset($msgC3)) { ?>
                             <div class="alert alert--warning" role="alert">
@@ -201,18 +201,18 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                         <?php } elseif (isset($_GET['successDeleteClass'])) { ?>
                             <div class="alert alert--success" role="alert">
                                 <svg class="icon"><use href="#i-check"/></svg>
-                                <div>Class deleted successfully</div>
+                                <div><?= bookfind_translate('Class deleted successfully'); ?></div>
                             </div>
                         <?php } ?>
                         <div class="field">
-                            <label for="existingClass2" class="label">Class to delete*</label>
+                            <label for="existingClass2" class="label"><?= bookfind_translate('Class to delete*'); ?></label>
                             <select name="existingClass2" id="existingClass2" class="select" required>
-                                <option value=""><?php echo _('--- Select a class ---'); ?></option>
+                                <option value=""><?php echo bookfind_translate('--- Select a class ---'); ?></option>
                                 <?php include '../actions/functions/getClassesAndOptions.php'; ?>
                             </select>
                         </div>
                         <div class="field">
-                            <input type="submit" name="classDeleteValidate" class="btn btn--danger" value="Delete" />
+                            <input type="submit" name="classDeleteValidate" class="btn btn--danger" value="<?= bookfind_translate('Delete'); ?>" />
                         </div>
                     </div>
                 </div>
@@ -223,10 +223,10 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
-                        <h1 class="card__title"><?php echo _('Import users from a CSV'); ?></h1>
+                        <h1 class="card__title"><?php echo bookfind_translate('Import users from a CSV'); ?></h1>
                         <div class="alert alert--info" role="alert">
                             <svg class="icon"><use href="#i-info"/></svg>
-                            <div><?php echo _('Choose a CSV file containing the user data to import.'); ?></div>
+                            <div><?php echo bookfind_translate('Choose a CSV file containing the user data to import.'); ?></div>
                         </div>
 
                         <?php if (isset($msgImport) and !empty($msgImport)) { ?>
@@ -239,56 +239,56 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                         <?php if (!isset($_SESSION['csv_preview'])): ?>
                             <!-- CSV upload form -->
                             <div class="field">
-                                <label for="csvFile" class="label"><?php echo _('CSV file'); ?></label>
+                                <label for="csvFile" class="label"><?php echo bookfind_translate('CSV file'); ?></label>
                                 <input type="file" name="csvFile" id="csvFile" class="input" accept=".csv" required />
                             </div>
                             <div class="field">
-                                <label for="csvSeparator" class="label"><?php echo _('CSV separator'); ?></label>
+                                <label for="csvSeparator" class="label"><?php echo bookfind_translate('CSV separator'); ?></label>
                                 <select name="csvSeparator" id="csvSeparator" class="select">
-                                    <option value=",">Comma (,)</option>
-                                    <option value=";">Semicolon (;)</option>
-                                    <option value="\t">Tab</option>
-                                    <option value="|">Vertical bar (|)</option>
+                                    <option value=","><?= bookfind_translate('Comma (,)'); ?></option>
+                                    <option value=";"><?= bookfind_translate('Semicolon (;)'); ?></option>
+                                    <option value="\t"><?= bookfind_translate('Tab'); ?></option>
+                                    <option value="|"><?= bookfind_translate('Vertical bar (|)'); ?></option>
                                 </select>
                             </div>
                             <div class="field">
-                                <span class="label"><?php echo _('CSV file format'); ?></span>
+                                <span class="label"><?php echo bookfind_translate('CSV file format'); ?></span>
                                 <label class="check">
                                     <input type="radio" name="csvHasHeaders" id="csvHasHeaders1" value="1" checked>
-                                    <?php echo _('First line = headers (do not import)'); ?>
+                                    <?php echo bookfind_translate('First line = headers (do not import)'); ?>
                                 </label>
                                 <label class="check mt-1">
                                     <input type="radio" name="csvHasHeaders" id="csvHasHeaders0" value="0">
-                                    <?php echo _('First line = data (to import)'); ?>
+                                    <?php echo bookfind_translate('First line = data (to import)'); ?>
                                 </label>
                             </div>
                             <div class="field">
-                                <input type="submit" name="csvUpload" class="btn btn--primary" value="<?php echo _('Upload and analyze'); ?>" />
+                                <input type="submit" name="csvUpload" class="btn btn--primary" value="<?php echo bookfind_translate('Upload and analyze'); ?>" />
                             </div>
                         <?php else: ?>
                             <div class="field">
-                                <h2 class="card__title" style="font-size:16px;"><?php echo _('Column mapping'); ?></h2>
-                                <p class="hint"><?php echo _('For each database field, select the matching column in your CSV.'); ?></p>
+                                <h2 class="card__title" style="font-size:16px;"><?php echo bookfind_translate('Column mapping'); ?></h2>
+                                <p class="hint"><?php echo bookfind_translate('For each database field, select the matching column in your CSV.'); ?></p>
 
                                 <!-- Button to switch CSV -->
                                 <div class="mb-3" style="text-align:right;">
-                                    <input type="submit" name="csvCancel" class="btn btn--outline" value="<?php echo _('Change CSV file'); ?>" />
+                                    <input type="submit" name="csvCancel" class="btn btn--outline" value="<?php echo bookfind_translate('Change CSV file'); ?>" />
                                 </div>
 
                                 <div class="table-wrap">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2"><?php echo _('Basic information'); ?></th>
+                                                <th colspan="2"><?php echo bookfind_translate('Basic information'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><span class="label">Username</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Username'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[username]" id="map_username" class="select" onchange="toggleCustomField('username')" required>
-                                                        <option value="algorithm"><?php echo _('Use the algorithm (first letter of first name + last name)'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value="algorithm"><?php echo bookfind_translate('Use the algorithm (first letter of first name + last name)'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
@@ -297,36 +297,36 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><span class="label">Last name</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Last name'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[last_name]" id="map_last_name" class="select" onchange="toggleCustomField('last_name')">
-                                                        <option value=""><?php echo _('Not imported'); ?></option>
-                                                        <option value="other"><?php echo _('Other value...'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value=""><?php echo bookfind_translate('Not imported'); ?></option>
+                                                        <option value="other"><?php echo bookfind_translate('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
                                                         </optgroup>
                                                     </select>
                                                     <div id="custom_last_name_div" class="mt-2" style="display: none;">
-                                                        <input type="text" name="custom_last_name" id="custom_last_name" class="input" placeholder="<?php echo _('Last name'); ?>">
+                                                        <input type="text" name="custom_last_name" id="custom_last_name" class="input" placeholder="<?php echo bookfind_translate('Last name'); ?>">
                                                     </div>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><span class="label">First name</span></td>
+                                                <td><span class="label"><?= bookfind_translate('First name'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[first_name]" id="map_first_name" class="select" onchange="toggleCustomField('first_name')">
-                                                        <option value=""><?php echo _('Not imported'); ?></option>
-                                                        <option value="other"><?php echo _('Other value...'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value=""><?php echo bookfind_translate('Not imported'); ?></option>
+                                                        <option value="other"><?php echo bookfind_translate('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
                                                         </optgroup>
                                                     </select>
                                                     <div id="custom_first_name_div" class="mt-2" style="display: none;">
-                                                        <input type="text" name="custom_first_name" id="custom_first_name" class="input" placeholder="<?php echo _('First name'); ?>">
+                                                        <input type="text" name="custom_first_name" id="custom_first_name" class="input" placeholder="<?php echo bookfind_translate('First name'); ?>">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -334,17 +334,17 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 
                                         <thead>
                                             <tr>
-                                                <th colspan="2"><?php echo _('Class'); ?></th>
+                                                <th colspan="2"><?php echo bookfind_translate('Class'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><span class="label">Class</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Class'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[class_name]" id="map_class_name" class="select" onchange="toggleCustomField('class_name')">
-                                                        <option value=""><?php echo _('Not imported'); ?></option>
-                                                        <option value="other"><?php echo _('Other value...'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value=""><?php echo bookfind_translate('Not imported'); ?></option>
+                                                        <option value="other"><?php echo bookfind_translate('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
@@ -352,7 +352,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                                                     </select>
                                                     <div id="custom_class_name_div" class="mt-2" style="display: none;">
                                                         <select name="custom_class_name" id="custom_class_name" class="select">
-                                                            <option value=""><?php echo _('--- Select a class ---'); ?></option>
+                                                            <option value=""><?php echo bookfind_translate('--- Select a class ---'); ?></option>
                                                             <?php
                                                             $selectClasses = $db->query('SELECT name FROM classes');
                                                             while ($classes = $selectClasses->fetch()) {
@@ -367,19 +367,19 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 
                                         <thead>
                                             <tr>
-                                                <th colspan="2"><?php echo _('User settings'); ?></th>
+                                                <th colspan="2"><?php echo bookfind_translate('User settings'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><span class="label">Grade</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Grade'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[grade]" id="map_grade" class="select">
-                                                        <option value="fixed:0"><?php echo _('None (0)'); ?></option>
-                                                        <option value="fixed:1"><?php echo _('Administrator (1)'); ?></option>
-                                                        <option value="fixed:2"><?php echo _('Manager (2)'); ?></option>
-                                                        <option value="fixed:3"><?php echo _('Assistant (3)'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value="fixed:0"><?php echo bookfind_translate('None (0)'); ?></option>
+                                                        <option value="fixed:1"><?php echo bookfind_translate('Administrator (1)'); ?></option>
+                                                        <option value="fixed:2"><?php echo bookfind_translate('Manager (2)'); ?></option>
+                                                        <option value="fixed:3"><?php echo bookfind_translate('Assistant (3)'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
@@ -388,12 +388,12 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><span class="label">Rules</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Rules'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[rules_accepted]" id="map_rules" class="select">
-                                                        <option value="fixed:0"><?php echo _('Use 0'); ?></option>
-                                                        <option value="fixed:1"><?php echo _('Use 1'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value="fixed:0"><?php echo bookfind_translate('Use 0'); ?></option>
+                                                        <option value="fixed:1"><?php echo bookfind_translate('Use 1'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
@@ -402,12 +402,12 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><span class="label">Privacy</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Privacy'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[privacy_accepted]" id="map_privacy_accepted" class="select">
-                                                        <option value="fixed:0"><?php echo _('Use 0'); ?></option>
-                                                        <option value="fixed:1"><?php echo _('Use 1'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value="fixed:0"><?php echo bookfind_translate('Use 0'); ?></option>
+                                                        <option value="fixed:1"><?php echo bookfind_translate('Use 1'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
@@ -416,19 +416,19 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><span class="label">Max loans</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Max loans'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[max_loans]" id="map_max_loans" class="select" onchange="toggleCustomField('max_loans')">
-                                                        <option value="">Use 5</option>
-                                                        <option value="other"><?php echo _('Other value...'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value=""><?= bookfind_translate('Use 5'); ?></option>
+                                                        <option value="other"><?php echo bookfind_translate('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
                                                         </optgroup>
                                                     </select>
                                                     <div id="custom_max_loans_div" class="mt-2" style="display: none;">
-                                                        <input type="number" name="custom_max_loans" id="custom_max_loans" class="input" min="1" placeholder="<?php echo _('Maximum'); ?>">
+                                                        <input type="number" name="custom_max_loans" id="custom_max_loans" class="input" min="1" placeholder="<?php echo bookfind_translate('Maximum'); ?>">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -436,24 +436,24 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 
                                         <thead>
                                             <tr>
-                                                <th colspan="2"><?php echo _('Authentication'); ?></th>
+                                                <th colspan="2"><?php echo bookfind_translate('Authentication'); ?></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><span class="label">Password</span></td>
+                                                <td><span class="label"><?= bookfind_translate('Password'); ?></span></td>
                                                 <td>
                                                     <select name="db_mapping[password]" id="map_password" class="select" onchange="toggleCustomField('password')">
-                                                        <option value="fixed:default"><?php echo _('Use "ChangeMe123!"'); ?></option>
-                                                        <option value="other"><?php echo _('Other value...'); ?></option>
-                                                        <optgroup label="<?php echo _('CSV columns'); ?>">
+                                                        <option value="fixed:default"><?php echo bookfind_translate('Use "ChangeMe123!"'); ?></option>
+                                                        <option value="other"><?php echo bookfind_translate('Other value...'); ?></option>
+                                                        <optgroup label="<?php echo bookfind_translate('CSV columns'); ?>">
                                                             <?php foreach ($_SESSION['csv_headers'] as $index => $header): ?>
                                                                 <option value="<?= $index ?>"><?= htmlspecialchars($header) ?></option>
                                                             <?php endforeach; ?>
                                                         </optgroup>
                                                     </select>
                                                     <div id="custom_password_div" class="mt-2" style="display: none;">
-                                                        <input type="password" name="custom_password" id="custom_password" class="input" placeholder="<?php echo _('Password'); ?>" autocomplete="new-password">
+                                                        <input type="password" name="custom_password" id="custom_password" class="input" placeholder="<?php echo bookfind_translate('Password'); ?>" autocomplete="new-password">
                                                     </div>
                                                 </td>
                                             </tr>
@@ -463,12 +463,12 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
 
                                 <div class="alert alert--info mt-3">
                                     <svg class="icon"><use href="#i-info"/></svg>
-                                    <div><small><?= sprintf(_('Preview: %1$d of %2$d rows displayed.'), count($_SESSION['csv_preview']), $_SESSION['total_rows']); ?></small></div>
+                                    <div><small><?= sprintf(bookfind_translate('Preview: %1$d of %2$d rows displayed.'), count($_SESSION['csv_preview']), $_SESSION['total_rows']); ?></small></div>
                                 </div>
                             </div>
                             <div class="btn-group">
-                                <input type="submit" name="csvImport" class="btn btn--success" value="<?php echo _('Import users'); ?>" />
-                                <input type="submit" name="csvCancel" class="btn btn--secondary" value="<?php echo _('Cancel'); ?>" />
+                                <input type="submit" name="csvImport" class="btn btn--success" value="<?php echo bookfind_translate('Import users'); ?>" />
+                                <input type="submit" name="csvCancel" class="btn btn--secondary" value="<?php echo bookfind_translate('Cancel'); ?>" />
                             </div>
                         <?php endif; ?>
                     </div>
@@ -494,7 +494,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
-                        <h2 class="card__title"><?php echo _('Regenerate usernames'); ?></h2>
+                        <h2 class="card__title"><?php echo bookfind_translate('Regenerate usernames'); ?></h2>
                         <?php if (isset($msgRegenUsernames)) { ?>
                             <div class="alert alert--<?= ($regenUsernamesSuccess ?? true) ? 'success' : 'danger' ?>" role="alert">
                                 <svg class="icon"><use href="<?= ($regenUsernamesSuccess ?? true) ? '#i-check' : '#i-alert' ?>"/></svg>
@@ -502,7 +502,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                             </div>
                         <?php } ?>
                         <div class="field">
-                            <button type="submit" name="regenUsernames" class="btn btn--primary"><?php echo _('Regenerate usernames'); ?></button>
+                            <button type="submit" name="regenUsernames" class="btn btn--primary"><?php echo bookfind_translate('Regenerate usernames'); ?></button>
                         </div>
                     </div>
                 </div>

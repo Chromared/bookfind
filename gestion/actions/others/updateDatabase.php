@@ -28,7 +28,7 @@
             $testBdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $testOk = true;
         } catch (PDOException $e) {
-            $db_update_msg = 'Unable to connect with these credentials.';
+            $db_update_msg = bookfind_translate('Unable to connect with these credentials.');
             $db_update_type = 'danger';
         }
 
@@ -47,7 +47,7 @@
                     }
                 }
             } else {
-                $db_update_msg = 'Unable to read actions/bookfind.sql to verify the tables.';
+                $db_update_msg = bookfind_translate('Unable to read actions/bookfind.sql to verify the tables.');
                 $db_update_type = 'danger';
                 $testOk = false;
             }
@@ -64,7 +64,7 @@
                 }
 
                 if (!empty($missingTables)) {
-                    $db_update_msg = 'Connection successful but missing tables: ' . implode(', ', $missingTables) . '. Update refused.';
+                    $db_update_msg = sprintf(bookfind_translate('Connection successful but missing tables: %s. Update refused.'), implode(', ', $missingTables));
                     $db_update_type = 'danger';
                     $testOk = false;
                 }
@@ -108,7 +108,7 @@
                     }
                 }
 
-                $db_update_msg = 'Details saved successfully.';
+                $db_update_msg = bookfind_translate('Details saved successfully.');
                 $db_update_type = 'success';
 
                 header('Location: bookfind.php?tab=database');

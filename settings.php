@@ -15,12 +15,12 @@
     require 'actions/users/updateThemeAction.php';
     ?>
     <!DOCTYPE html>
-    <html lang="en" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BookFind — Settings</title>
+        <title><?= bookfind_translate('BookFind — Settings'); ?></title>
         <?php include 'includes/header.php'; ?>
     </head>
 
@@ -33,7 +33,7 @@
                         <?= csrf_field(); ?>
                         <div class="card">
                             <div class="card__body">
-                                <h1 class="card__title">Theme <span class="badge badge--warning">Beta</span></h1>
+                                <h1 class="card__title"><?= bookfind_translate('Theme'); ?> <span class="badge badge--warning"><?= bookfind_translate('Beta'); ?></span></h1>
                                 <?php if (isset($errorMsg1)) { ?>
                                     <div class="alert alert--warning" role="alert">
                                         <svg class="icon"><use href="#i-alert"/></svg>
@@ -43,19 +43,19 @@
                                 <?php if (isset($_GET['msg1'])) { ?>
                                     <div class="alert alert--success" role="alert">
                                         <svg class="icon"><use href="#i-check"/></svg>
-                                        <div>Your changes have been saved.</div>
+                                        <div><?= bookfind_translate('Your changes have been saved.'); ?></div>
                                     </div>
                                 <?php } ?>
                                 <div class="field">
-                                    <label for="theme" class="label">Appearance</label>
+                                    <label for="theme" class="label"><?= bookfind_translate('Appearance'); ?></label>
                                     <select name="theme" id="theme" class="select" required>
-                                        <option value="0" <?php selected($usersInfos['theme'], '0'); ?>>Dark (default)</option>
-                                        <option value="1" <?php selected($usersInfos['theme'], '1'); ?>>Light</option>
+                                        <option value="0" <?php selected($usersInfos['theme'], '0'); ?>><?= bookfind_translate('Dark (default)'); ?></option>
+                                        <option value="1" <?php selected($usersInfos['theme'], '1'); ?>><?= bookfind_translate('Light'); ?></option>
                                     </select>
                                 </div>
                                 <div class="btn-group">
-                                    <input type="submit" name="validateTheme" class="btn btn--primary" value="Save" />
-                                    <input type="reset" class="btn btn--secondary" value="Reset" />
+                                    <input type="submit" name="validateTheme" class="btn btn--primary" value="<?= bookfind_translate('Save'); ?>" />
+                                    <input type="reset" class="btn btn--secondary" value="<?= bookfind_translate('Reset'); ?>" />
                                 </div>
                             </div>
                         </div>

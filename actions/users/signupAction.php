@@ -69,18 +69,18 @@ if (isset($_POST['validate'])) {
 
                         header('Location: index.php?signup');
                     } else {
-                        $errorMsg = 'The selected class does not exist.';
+                        $errorMsg = bookfind_translate('The selected class does not exist.');
                     }
                 } else {
-                    $errorMsg = 'The terms of use and the rules must be accepted.';
+                    $errorMsg = bookfind_translate('The terms of use and the rules must be accepted.');
                 }
             } else {
-                $errorMsg = 'The two passwords are not identical.';
+                $errorMsg = bookfind_translate('The two passwords are not identical.');
             }
         } else {
-            $errorMsg = 'Please fill in all fields.';
+            $errorMsg = bookfind_translate('Please fill in all fields.');
         }
     } else {
-        $errorMsg = 'Not all fields exist. Please <a href="signup.php">reload</a> the page.';
+        $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="signup.php">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
     }
 }

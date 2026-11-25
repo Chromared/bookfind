@@ -13,7 +13,7 @@
     $timestamp = strtotime($datehour);
     // If strtotime fails, the format is invalid
     if (!$timestamp) {
-        echo "Invalid date format";
+        echo bookfind_translate("Invalid date format");
     } else {
         // Display in d/m/Y format with time
         echo date("d/m/Y at H\hi", $timestamp);

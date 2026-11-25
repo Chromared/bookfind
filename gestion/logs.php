@@ -12,12 +12,12 @@ require 'actions/users/securityAdminAction.php';
 require '../actions/functions/logFunction.php';
 require 'actions/others/exportLogs.php'; ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookFind — Logs</title>
+  <title><?= bookfind_translate('BookFind — Logs'); ?></title>
   <?php include '../includes/header.php'; ?>
 </head>
 
@@ -34,8 +34,8 @@ require 'actions/others/exportLogs.php'; ?>
 
         <div class="page-head">
           <div>
-            <h1 class="page-head__title">Logs</h1>
-            <p class="page-head__sub">Application activity log.</p>
+            <h1 class="page-head__title"><?= bookfind_translate('Logs'); ?></h1>
+            <p class="page-head__sub"><?= bookfind_translate('Application activity log.'); ?></p>
           </div>
         </div>
 
@@ -43,7 +43,7 @@ require 'actions/others/exportLogs.php'; ?>
           <div class="card__body">
             <div class="row">
               <div class="col" style="flex:2;min-width:200px;">
-                <input id="logSearch" type="search" class="input" placeholder="Search the logs..." aria-label="Search logs">
+                <input id="logSearch" type="search" class="input" placeholder="<?= bookfind_translate('Search the logs...'); ?>" aria-label="<?= bookfind_translate('Search logs'); ?>">
               </div>
               <div class="col" style="flex:0 0 90px;">
                 <select id="logPerPage" class="select">
@@ -56,12 +56,12 @@ require 'actions/others/exportLogs.php'; ?>
               <div class="col" style="flex:0 0 auto;">
                 <label class="switch">
                   <input type="checkbox" role="switch" id="toggleAutoRefresh" checked>
-                  Auto
+                  <?= bookfind_translate('Auto'); ?>
                 </label>
               </div>
             </div>
             <div class="mt-4">
-              <button type="button" class="btn btn--primary" data-modal-open="exportModal">Export logs</button>
+              <button type="button" class="btn btn--primary" data-modal-open="exportModal"><?= bookfind_translate('Export logs'); ?></button>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ require 'actions/others/exportLogs.php'; ?>
           <div class="card">
             <div class="card__body center">
               <span class="spinner" aria-hidden="true"></span>
-              <span class="text-subtle">Loading...</span>
+              <span class="text-subtle"><?= bookfind_translate('Loading...'); ?></span>
             </div>
           </div>
         </div>
@@ -83,25 +83,25 @@ require 'actions/others/exportLogs.php'; ?>
     <div class="modal__backdrop">
       <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="exportModalLabel">
         <div class="modal__header">
-          <h2 class="modal__title" id="exportModalLabel">GDPR Charter</h2>
-          <button type="button" class="modal__close" data-modal-close aria-label="Close">
+          <h2 class="modal__title" id="exportModalLabel"><?= bookfind_translate('GDPR Charter'); ?></h2>
+          <button type="button" class="modal__close" data-modal-close aria-label="<?= bookfind_translate('Close'); ?>">
             <svg class="icon"><use href="#i-x"/></svg>
           </button>
         </div>
         <div class="modal__body">
-          By exporting these logs, I acknowledge that they may contain personal data.
-          I commit to comply with GDPR, in particular:
+          <?= bookfind_translate('By exporting these logs, I acknowledge that they may contain personal data.'); ?>
+          <?= bookfind_translate('I commit to comply with GDPR, in particular:'); ?>
           <ul>
-            <li>not to share the data without authorization,</li>
-            <li>to secure them and store them temporarily,</li>
-            <li>to delete them promptly if a user exercises their right to erasure.</li>
+            <li><?= bookfind_translate('not to share the data without authorization,'); ?></li>
+            <li><?= bookfind_translate('to secure them and store them temporarily,'); ?></li>
+            <li><?= bookfind_translate('to delete them promptly if a user exercises their right to erasure.'); ?></li>
           </ul>
         </div>
         <div class="modal__footer">
-          <button type="button" class="btn btn--secondary" data-modal-close>Close</button>
+          <button type="button" class="btn btn--secondary" data-modal-close><?= bookfind_translate('Close'); ?></button>
           <form method="post">
             <?= csrf_field(); ?>
-            <input type="submit" class="btn btn--primary" name="export" value="Export to .csv format" />
+            <input type="submit" class="btn btn--primary" name="export" value="<?= bookfind_translate('Export to .csv format'); ?>" />
           </form>
         </div>
       </div>
@@ -127,7 +127,7 @@ require 'actions/others/exportLogs.php'; ?>
           const res = await fetch('actions/others/loadLogs.php?' + params.toString(), { credentials: 'same-origin' });
           if (res.status === 401 || res.status === 403) {
             console.error('Access to logs denied (HTTP ' + res.status + ')');
-            document.getElementById('log').innerHTML = '<div class="alert alert--danger"><svg class="icon"><use href="#i-alert"/></svg><div>Access denied.</div></div>';
+            document.getElementById('log').innerHTML = '<div class="alert alert--danger"><svg class="icon"><use href="#i-alert"/></svg><div>' + <?= json_encode(bookfind_translate('Access denied.')); ?> + '</div></div>';
             return;
           }
           if (!res.ok) {

@@ -24,5 +24,5 @@
             }
 
       }else{
-            die('You do not have the required permissions to view this profile.');
+            die(bookfind_translate('You do not have the required permissions to view this profile.'));
       }

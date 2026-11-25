@@ -101,7 +101,6 @@ This application offers an efficient solution for the CDI staff and their users.
 - [Alban Muller / @MythUp_](https://github.com/MythUp)  -->  Full Stack
 - [@Jià N0w](https://github.com/JiaN0w)  -->  GitHub repository management
 - [@DawnFolk](https://github.com/DawnFolk)  -->  Pentest
-- [@Sylvain Durif, le Grand Monarque, le Christ cosmique et le Messie lui-même](https://www.linkedin.com/in/sylvain-pierre-durif-26a92119/?locale=fr) --> Bénédiction Cosmique
 
 ### Passive contributors
 
