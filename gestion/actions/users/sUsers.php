@@ -1,61 +1,79 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-
-
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+require_once __DIR__ . '/../../../actions/functions/gettextFunction.php';
 require_once __DIR__ . '/../../../actions/users/securityAction.php';
-include '../actions/functions/transfoGradeIntVersText.php';
+include '../actions/functions/gradeIntToText.php';
 
-    if(isset($_GET['s']) AND !empty($_GET['s'])) {
+if (isset($_GET['s']) AND !empty($_GET['s'])) {
 
-        $s = $_GET['s'];
-        $keywords = explode(' ', $s);
-        $searchConditions = [];
+    $s = $_GET['s'];
+    $keywords = explode(' ', $s);
+    $searchConditions = [];
 
-        foreach ($keywords as $keyword) {
-            $searchConditions[] = "(prenom LIKE ? OR nom LIKE ? OR username LIKE ? OR classe LIKE ? OR nb_emprunt LIKE ? OR grade LIKE ?)";
-        }
+    foreach ($keywords as $keyword) {
+        $searchConditions[] = "(first_name LIKE ? OR last_name LIKE ? OR username LIKE ? OR class_name LIKE ? OR loans_count LIKE ? OR grade LIKE ?)";
+    }
 
-        $sql = 'SELECT * FROM users WHERE ' . implode(' AND ', $searchConditions) . '';
-        $sUsers = $bdd->prepare($sql);
-        $params = [];
-        foreach ($keywords as $keyword) {
-            $params = array_merge($params, array_fill(0, 6, "%$keyword%"));
-        }
-        $sUsers->execute($params);
-        
+    $sql = 'SELECT * FROM users WHERE ' . implode(' AND ', $searchConditions) . '';
+    $sUsers = $db->prepare($sql);
+    $params = [];
+    foreach ($keywords as $keyword) {
+        $params = array_merge($params, array_fill(0, 6, "%$keyword%"));
+    }
+    $sUsers->execute($params);
+
+    if ($sUsers->rowCount() == 0) { ?>
+        <div class="empty">
+            <svg class="icon"><use href="#i-people"/></svg>
+            <p><?= bookfind_translate('No users found with these search criteria.'); ?></p>
+        </div>
+    <?php } else { ?>
+        <div class="grid grid--auto">
+        <?php
         while ($users = $sUsers->fetch()) { ?>
-            <?php if($users['nb_emprunt'] == 1){$emprunts = 'emprunt';}else{$emprunts = 'emprunts';} ?>
-            <div class="container mt-3">
-              <div class="d-flex justify-content-center mt-4">
-                <div class="card text-center mb-3" style="width: 50rem;">
-                  <div class="card-body">
-                    <h5 class="card-title"><?= htmlspecialchars($users['prenom']); ?> <?= htmlspecialchars($users['nom']); ?></h4></h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary"><?= htmlspecialchars($users['username']); ?></h6>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">ID n°<?= htmlspecialchars($users['id']); ?></li>
-                        <li class="list-group-item"><?php if($users['classe'] === 'Aucune'){ ?>Ne fait partie d'aucune classe<?php }else{ ?>En classe de <?= htmlspecialchars($users['classe']); ?><?php } ?></li>
-                        <?php if($users['nb_emprunt'] > 0){ ?>
-                          <li class="list-group-item"><?= htmlspecialchars($users['nb_emprunt']) . ' ' . $emprunts . ' en cours sur ' . htmlspecialchars($users['nb_emprunt_max']); ?></li>
-                        <?php } ?>
-                        <li class="list-group-item">Grade : <?php Grade($users['grade']); ?></li>
-                    </ul>
-                    <div class="btn-group" role="group">
-                      <?php if($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2'){ ?>
-                        <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn-primary">Modifier</a>
-                      <?php } ?>
-                      <a href="../profil.php?id=<?= $users['id'] ?>" class="btn btn-secondary">Voir</a>
-                      <a href="user-emprunts.php?id=<?= htmlspecialchars($users['id']) ?>" class="btn btn-success">Emprunts</a>
+            <?php $loans = $users['loans_count'] == 1 ? bookfind_translate('loan') : bookfind_translate('loans');
+            $initials = strtoupper(substr($users['first_name'] ?? '', 0, 1) . substr($users['last_name'] ?? '', 0, 1)); ?>
+            <div class="card">
+                <div class="card__body">
+                    <div class="profile-head">
+                        <span class="avatar" style="width:48px;height:48px;font-size:17px;"><?= htmlspecialchars($initials); ?></span>
+                        <div>
+                            <div class="book-card__title"><?= htmlspecialchars($users['first_name']); ?> <?= htmlspecialchars($users['last_name']); ?></div>
+                            <div class="book-card__author">@<?= htmlspecialchars($users['username']); ?></div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="book-card__meta mt-3">
+                        <span class="chip"><?php if (in_array($users['class_name'], ['None', 'Aucune'], true)) { ?><?= bookfind_translate('No class'); ?><?php } else { ?><?= htmlspecialchars($users['class_name']); ?><?php } ?></span>
+                        <?php if ($users['loans_count'] > 0) { ?><span class="chip"><?= htmlspecialchars($users['loans_count']) . ' ' . $loans; ?></span><?php } ?>
+                        <?php Grade($users['grade']); ?>
+                    </div>
+                    <div class="book-card__foot">
+                        <?php if ($_SESSION['grade'] == '1' OR $_SESSION['grade'] == '2') { ?>
+                            <a href="update-user.php?id=<?= $users['id'] ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
+                        <?php } ?>
+                        <a href="../profile.php?id=<?= $users['id'] ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                        <a href="user-loans.php?id=<?= htmlspecialchars($users['id']) ?>" class="btn btn--success"><?= bookfind_translate('Loans'); ?></a>
+                    </div>
                 </div>
-              </div>
             </div>
-            <br />
-<?php }}
+        <?php } ?>
+        </div>
+    <?php }
+}

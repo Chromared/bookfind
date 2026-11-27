@@ -1,9 +1,19 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
 
@@ -13,12 +23,12 @@
     if (ob_get_length()) ob_clean();
 
     // Retrieve logs
-    $req = $bdd->query("SELECT user_id, user_ip, user_card, user_name, type, comment, page, datetime FROM logs");
+    $req = $db->query("SELECT user_id, user_ip, user_card, user_name, type, comment, page, datetime FROM logs");
     $logs = $req->fetchAll(PDO::FETCH_ASSOC);
 
     // Check if logs exist
     if (empty($logs)) {
-        die("Aucun log trouvé.");
+        die(bookfind_translate("No logs found."));
     }
 
     // Set content type to CSV
@@ -41,7 +51,7 @@
 
     fclose($output);
 
-    SaveLog($bdd, $_SERVER['REQUEST_URI'], 'Export des logs', 'S\'engage à respecter la réglementation RGPD et reconnait que les logs peuvent contenir des données personnelles.');
+    SaveLog($db, $_SERVER['REQUEST_URI'], 'Logs export', 'Commits to comply with GDPR and acknowledges that logs may contain personal data.');
 
     exit();
 }

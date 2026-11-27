@@ -1,46 +1,73 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
 <?php require '../actions/database.php';
 require '../actions/users/securityAction.php';
 require '../actions/functions/conversionDate.php';
 require '../actions/functions/conversionDateHour.php';
-require '../actions/functions/colorDateEmpruntFunction.php';
+require '../actions/functions/colorLoanDateFunction.php';
 require 'actions/users/securityAdminAction.php';
 $gestion = true; ?>
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rechercher un livre</title>
+  <title><?= bookfind_translate('BookFind — Search for a book'); ?></title>
   <?php include '../includes/header.php'; ?>
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="admin">
   <?php include 'includes/navbar.php'; ?>
-  <div class="container mt-3">
-    <form method="GET">
-      <div class="input-group mb-3">
-        <input type="text" name="s" class="form-control" value="<?php if (isset($_GET['s']) and !empty($_GET['s'])) {
-                                                                  echo htmlspecialchars($_GET['s']);
-                                                                } ?>" placeholder="Rechercher un livre" <?php if (!isset($_GET['s']) or empty($_GET['s'])) {
-                                                                                                                                                                                                echo 'autofocus';
-                                                                                                                                                                                              } ?> />
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-          <i class="bi bi-search"></i>
-          Rechercher
-        </button>
+  <main class="page">
+    <div class="container container--wide">
+      <div class="page-head">
+        <div>
+          <h1 class="page-head__title"><?= bookfind_translate('Search for a book'); ?></h1>
+          <p class="page-head__sub"><?= bookfind_translate('Browse and manage the library catalog.'); ?></p>
+        </div>
+        <div class="page-head__actions">
+          <a href="add-book.php" class="btn btn--primary">
+            <svg class="icon"><use href="#i-save"/></svg><?= bookfind_translate('Add a book'); ?>
+          </a>
+        </div>
       </div>
-    </form>
-  </div>
-  <?php include '../actions/books/sBooks.php'; ?>
+
+      <div class="searchband">
+        <form method="GET">
+          <div class="input-group">
+            <input type="text" name="s" class="input" value="<?php if (isset($_GET['s']) and !empty($_GET['s'])) {
+                                                                echo htmlspecialchars($_GET['s']);
+                                                              } ?>" placeholder="<?= bookfind_translate('Title, author, ISBN, publisher, genre…'); ?>" <?php if (!isset($_GET['s']) or empty($_GET['s'])) {
+                                                                                                                                                                                                      echo 'autofocus';
+                                                                                                                                                                                                    } ?> />
+            <button class="btn btn--outline" type="submit">
+              <svg class="icon"><use href="#i-search"/></svg>
+              <?= bookfind_translate('Search'); ?>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <?php include '../actions/books/sBooks.php'; ?>
+    </div>
+  </main>
   <?php include '../includes/footer.php'; ?>
 </body>
 

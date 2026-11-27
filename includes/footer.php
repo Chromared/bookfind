@@ -1,42 +1,66 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
+<?php include __DIR__ . '/icons.php'; ?>
 
+<?php
+// Footer shown on the homepage for every visitor (root or /bookfind/ install).
+$footerScript = basename($_SERVER['SCRIPT_NAME'] ?? '');
+$showFooter = ($footerScript === 'index.php' or $footerScript === 'rules.php' or $footerScript === 'privacy.php');
+?>
 
-<footer class="mt-auto bg-body-tertiary">
-  <div class="container py-4">
+<?php if ($showFooter) { ?>
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__grid">
+        <div class="footer__col">
+          <a class="footer__logo" href="/index.php">
+            <img src="/assets/logo.svg" alt="BookFind">
+            <span>BookFind</span>
+          </a>
+          <p><?= bookfind_translate('The library of the C.D.I., simple and modern. Search, borrow and manage the books of your institution.'); ?></p>
+        </div>
 
-    <ul class="nav justify-content-center pb-2 mb-3">
-      <li class="nav-item"><a href="/index.php" class="nav-link px-2 text-body-secondary">Accueil</a></li>
-      <li class="nav-item"><a href="/pdc.php" class="nav-link px-2 text-body-secondary">Politique de confidentialité</a></li>
-      <li class="nav-item"><a href="/rules.php" class="nav-link px-2 text-body-secondary">Règlement</a></li>
-    </ul>
+        <div class="footer__col">
+          <div class="footer__title"><?= bookfind_translate('Navigation'); ?></div>
+          <a class="footer__link" href="/index.php"><?= bookfind_translate('Home'); ?></a>
+          <a class="footer__link" href="/books.php"><?= bookfind_translate('Search for a book'); ?></a>
+          <a class="footer__link" href="/rules.php"><?= bookfind_translate('Rules'); ?></a>
+          <a class="footer__link" href="/privacy.php"><?= bookfind_translate('Privacy policy'); ?></a>
+        </div>
 
-    <hr style="border-top: 4px solid #dee2e6; width: 80%; margin: auto;">
-
-    <div class="d-flex flex-wrap justify-content-between align-items-center pt-3">
-      <div class="col-md-6 d-flex align-items-center">
-        <img src="/assets/chromared.png" alt="Logo" width="40" height="40" class="me-2">
-        <span class="text-body-secondary">© 2026 BookFind par Chromared</span>
+        <div class="footer__col">
+          <div class="footer__title"><?= bookfind_translate('Account'); ?></div>
+          <a class="footer__link" href="/login.php"><?= bookfind_translate('Sign in'); ?></a>
+          <a class="footer__link" href="/signup.php"><?= bookfind_translate('Sign up'); ?></a>
+          <div class="footer__social">
+            <a href="https://github.com/Chromared/BookFind" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+              <svg class="icon">
+                <use href="#i-github" />
+              </svg>
+            </a>
+          </div>
+        </div>
       </div>
 
-      <ul class="nav col-md-6 justify-content-end list-unstyled d-flex">
-        <li class="ms-3">
-          <a class="text-body-secondary" href="mailto:chromared@outlook.fr" aria-label="Email">
-            <i class="bi bi-envelope fs-5"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-body-secondary" href="https://github.com/Chromared" aria-label="GitHub">
-            <i class="bi bi-github fs-5"></i>
-          </a>
-        </li>
-      </ul>
+      <div class="footer__bottom">
+        &copy; <?= date('Y'); ?> BookFind by <a href="https://github.com/Chromared" class="footer__credit-link" target="_blank" rel="noopener noreferrer">Chromared<img src="/assets/chromared.png" class="footer__logo" alt="Chromared"></a>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+<?php }

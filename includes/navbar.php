@@ -1,85 +1,53 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-
-
-<?php $pageActuelle = basename($_SERVER['SCRIPT_NAME']); ?>
-<nav class="navbar fixed-top navbar-expand-lg bg-primary" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">
-      <img src="assets/iconesite.png" alt="BookFind logo" width="40" height="30" class="d-inline-block align-text-top img-fluid">
-      BookFind
+<?php $currentPage = basename($_SERVER['SCRIPT_NAME']);
+// Landing page: minimal navbar (logo + sign in/sign up only)
+// $isLanding = ($currentPage == 'index.php'); ?>
+<nav class="navbar">
+  <div class="navbar__inner">
+    <a class="navbar__brand" href="index.php">
+      <img src="/assets/logo.svg" alt="BookFind" class="navbar__logo">
+      <span>BookFind</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar__toggle" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="<?= bookfind_translate('Open menu'); ?>">
+      <svg class="icon"><use href="#i-menu"/></svg>
     </button>
-    <div class="collapse navbar-collapse" id="navbarScroll">
-      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-        <li class="nav-item">
-          <a class="nav-link <?php if ($pageActuelle == 'index.php') {
-                                echo 'active';
-                              } ?>" aria-current="page" href="index.php">Accueil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?php if ($pageActuelle == 'books.php') {
-                                echo 'active';
-                              } ?>" aria-current="page" href="books.php">Rechercher</a>
-        </li>
+    <div class="navbar__nav" id="navbarNav">
+      <?php // if (!$isLanding) { ?>
+        <a class="navbar__link <?php if ($currentPage == 'books.php') { echo 'is-active'; } ?>" href="books.php"><?= bookfind_translate('Search'); ?></a>
         <?php if (file_exists('configuration.php')) { ?>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'configuration.php') {
-                                  echo 'active';
-                                } ?>" href="configuration.php">Configurer BookFind</a>
-          </li>
+          <a class="navbar__link <?php if ($currentPage == 'configuration.php') { echo 'is-active'; } ?>" href="configuration.php"><?= bookfind_translate('Configure'); ?></a>
         <?php } ?>
-        <?php if (!isset($_SESSION['auth'])) { ?>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'login.php') {
-                                  echo 'active';
-                                } ?>" href="login.php">Se connecter</a>
-          </li>
-          <?php if (file_exists('actions/users/signupAction.php') && file_exists('signup.php')) { ?>
-            <li class="nav-item">
-              <a class="nav-link <?php if ($pageActuelle == 'signup.php') {
-                                    echo 'active';
-                                  } ?>" href="signup.php">S'inscrire</a>
-            </li>
-          <?php } ?>
-        <?php } else { ?>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'profil.php') {
-                                  echo 'active';
-                                } ?>" href="profil.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Profil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'settings.php') {
-                                  echo 'active';
-                                } ?>" href="settings.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Paramètres</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?php if ($pageActuelle == 'emprunts.php') {
-                                  echo 'active';
-                                } ?>" href="emprunts.php?id=<?= htmlspecialchars($_SESSION['id']); ?>">Emprunts</a>
-          </li>
-        <?php }
-        if (isset($_SESSION['auth']) and $_SESSION['grade'] != 0) { ?>
-          <li class="nav-item">
-            <a class="nav-link" href="gestion/index.php">Gestion</a>
-          </li>
+      <?php // } ?>
+      <?php if (!isset($_SESSION['auth'])) { ?>
+        <a class="navbar__link navbar__link--auth <?php if ($currentPage == 'login.php') { echo 'is-active'; } ?>" href="login.php"><?= bookfind_translate('Sign in'); ?></a>
+        <?php if (file_exists('actions/users/signupAction.php') && file_exists('signup.php')) { ?>
+          <a class="navbar__link navbar__link--cta navbar__link--auth <?php if ($currentPage == 'signup.php') { echo 'is-active'; } ?>" href="signup.php"><?= bookfind_translate('Sign up'); ?></a>
         <?php } ?>
-      </ul>
-      <form method="get" action="books.php" class="d-flex" role="search">
-        <input name="s" class="form-control me-2" type="search" placeholder="Rechercher un livre" aria-label="Rechercher un livre">
-        <button class="btn btn-outline-light" type="submit">Rechercher</button>
-      </form>
+      <?php } elseif (isset($_SESSION['auth'])) { ?>
+        <a class="navbar__link <?php if ($currentPage == 'profile.php') { echo 'is-active'; } ?>" href="profile.php?id=<?= htmlspecialchars($_SESSION['id']); ?>"><?= bookfind_translate('Profile'); ?></a>
+        <a class="navbar__link <?php if ($currentPage == 'settings.php') { echo 'is-active'; } ?>" href="settings.php?id=<?= htmlspecialchars($_SESSION['id']); ?>"><?= bookfind_translate('Settings'); ?></a>
+        <a class="navbar__link <?php if ($currentPage == 'loans.php') { echo 'is-active'; } ?>" href="loans.php?id=<?= htmlspecialchars($_SESSION['id']); ?>"><?= bookfind_translate('Loans'); ?></a>
+      <?php }
+      if (isset($_SESSION['auth']) && $_SESSION['grade'] != 0) { ?>
+        <a class="navbar__link" href="gestion/index.php"><?= bookfind_translate('Management'); ?></a>
+      <?php } ?>
     </div>
   </div>
 </nav>
-<br />
-<br />
-<br />

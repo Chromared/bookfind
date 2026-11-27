@@ -29,26 +29,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `books` (
   `id` int NOT NULL,
-  `titre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `auteur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `isbn` bigint NOT NULL,
-  `id_unique` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `resume` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `editeur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `unique_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `summary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `publisher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `serie` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `tome` int DEFAULT NULL,
-  `statut` int NOT NULL,
+  `series` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `volume` int DEFAULT NULL,
+  `status` int NOT NULL,
   `genre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `censure`
+-- Table structure for table `blacklist`
 --
 
-CREATE TABLE `censure` (
+CREATE TABLE `blacklist` (
   `id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -82,19 +82,19 @@ CREATE TABLE `cookies` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emprunts`
+-- Table structure for table `loans`
 --
 
-CREATE TABLE `emprunts` (
+CREATE TABLE `loans` (
   `id` int NOT NULL,
-  `id_book` int NOT NULL,
-  `titre_book` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `date_emprunt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_futur_retour` date NOT NULL,
-  `date_retour` datetime DEFAULT NULL,
-  `id_emprunteur` int NOT NULL,
-  `firstname_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `statut` int NOT NULL DEFAULT '1'
+  `book_id` int NOT NULL,
+  `book_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `loan_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `due_date` date NOT NULL,
+  `return_date` datetime DEFAULT NULL,
+  `borrower_id` int NOT NULL,
+  `borrower_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -124,16 +124,16 @@ CREATE TABLE `logs` (
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `username` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `classe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `prenom` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `mdp` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `grade` int NOT NULL DEFAULT '0',
   `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `regles` int NOT NULL,
-  `pdc` int NOT NULL,
-  `nb_emprunt_max` int NOT NULL DEFAULT '5',
-  `nb_emprunt` int NOT NULL DEFAULT '0',
+  `rules_accepted` int NOT NULL,
+  `privacy_accepted` int NOT NULL,
+  `max_loans` int NOT NULL DEFAULT '5',
+  `loans_count` int NOT NULL DEFAULT '0',
   `theme` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -148,9 +148,9 @@ ALTER TABLE `books`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `censure`
+-- Indexes for table `blacklist`
 --
-ALTER TABLE `censure`
+ALTER TABLE `blacklist`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -167,9 +167,9 @@ ALTER TABLE `cookies`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `emprunts`
+-- Indexes for table `loans`
 --
-ALTER TABLE `emprunts`
+ALTER TABLE `loans`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -196,9 +196,9 @@ ALTER TABLE `books`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `censure`
+-- AUTO_INCREMENT for table `blacklist`
 --
-ALTER TABLE `censure`
+ALTER TABLE `blacklist`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -214,9 +214,9 @@ ALTER TABLE `cookies`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `emprunts`
+-- AUTO_INCREMENT for table `loans`
 --
-ALTER TABLE `emprunts`
+ALTER TABLE `loans`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --

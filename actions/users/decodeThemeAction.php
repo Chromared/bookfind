@@ -1,18 +1,6 @@
-<?php if (isset($_SESSION['auth'])) {
-    $theme = $_SESSION['theme'];
-}else{
-    $theme = "0";
-}
+<?php
+// Resolve the active theme token for the <html data-theme="..."> attribute.
+// 0 = dark (default), 1 = light.
+$theme = $_SESSION['theme'] ?? '0';
 
-switch ($theme) {
-    case "0":
-        echo "";
-        break;
-
-    case "1":
-        echo "dark";
-        break;
-
-    default:
-        echo "";
-}
+echo ($theme === '1') ? 'light' : 'dark';

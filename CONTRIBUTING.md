@@ -1,78 +1,77 @@
-# Guide de Contribution - BookFind
+# Contribution Guide - BookFind
 
-Merci de vouloir contribuer à **BookFind** ! Ce guide décrit les étapes pour contribuer efficacement au projet.
+Thank you for wanting to contribute to **BookFind**! This guide describes the steps to contribute effectively to the project.
 
-## Table des matières
+## Table of contents
 
-1. [Code de Conduite](#code-de-conduite)
-2. [Comment Contribuer](#comment-contribuer)
-3. [Configuration de l'Environnement](#configuration-de-lenvironnement)
-4. [Style de Code](#style-de-code)
-5. [Proposition de Fonctionnalités](#proposition-de-fonctionnalités)
-6. [Signalement de Problèmes](#signalement-de-problèmes)
-7. [Processus de Demande de Tirage (Pull Request)](#processus-de-demande-de-tirage-pull-request)
+1. [Code of Conduct](#code-of-conduct)
+2. [How to Contribute](#how-to-contribute)
+3. [Environment Setup](#environment-setup)
+4. [Code Style](#code-style)
+5. [Proposing Features](#proposing-features)
+6. [Reporting Issues](#reporting-issues)
+7. [Pull Request Process](#pull-request-process)
 
 ---
 
-## Code de Conduite
+## Code of Conduct
 
-Ce projet adhère à un [Code de Conduite](CODE_OF_CONDUCT.md) afin de garantir un environnement respectueux pour tous les contributeurs.
+This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md) to ensure a respectful environment for all contributors.
 
-## Comment Contribuer
+## How to Contribute
 
-### Types de Contributions
+### Types of Contributions
 
-- **Corrections de bugs** : Identifiez, corrigez et signalez des erreurs.
-- **Améliorations de fonctionnalités** : Proposez des améliorations pour les fonctionnalités existantes.
-- **Documentation** : Aidez à améliorer la documentation en ajoutant des exemples ou en clarifiant les sections.
+- **Bug fixes**: Identify, fix and report errors.
+- **Feature improvements**: Propose improvements for existing features.
+- **Documentation**: Help improve the documentation by adding examples or clarifying sections.
 
-### Processus de Contribution
+### Contribution Process
 
-1. **Fork le dépôt** et clonez-le localement.
-2. Créez une nouvelle branche avec un nom descriptif (ex : `feature`).
-3. Effectuez vos modifications sur cette branche.
-4. Testez et assurez-vous que le code est fonctionnel avant de faire une demande de tirage (pull request).
+1. **Fork the repository** and clone it locally.
+2. Create a new branch with a descriptive name (e.g. `feature`).
+3. Make your changes on this branch.
+4. Test and make sure the code works before submitting a pull request.
 
-## Configuration de l'Environnement
+## Environment Setup
 
-1. Assurez-vous d’avoir installé les versions requises de PHP et MySQL.
-2. Cloner le projet :
+1. Make sure you have the required versions of PHP and MySQL installed.
+2. Clone the project:
     ```bash
     git clone https://github.com/chromared/bookfind.git
     ```
-3. Installez les dépendances requises et configurez votre base de données locale comme décrit dans le fichier `README.md`.
-4. Vérifiez que toutes les pages fonctionnent correctement après chaque changement.
+3. Install the required dependencies and configure your local database as described in the `README.md` file.
+4. Verify that all pages work correctly after each change.
 
-## Style de Code
+## Code Style
 
-- **Indentation** : Utilisez des espaces (4 par niveau d’indentation).
-- **Nommage** : Utilisez des noms de variables et de fonctions explicites en anglais.
-- **Commentaires** : Commentez les parties complexes du code pour faciliter la compréhension des autres contributeurs.
+- **Indentation**: Use spaces (4 per indentation level).
+- **Naming**: Use explicit variable and function names in English.
+- **Comments**: Comment complex parts of the code to make them easier for other contributors to understand.
 
-## Proposition de Fonctionnalités
+## Proposing Features
 
-Si vous souhaitez proposer une nouvelle fonctionnalité :
+If you want to propose a new feature:
 
-1. **Ouvrez une issue** pour discuter de l'idée avec les mainteneurs.
-2. Fournissez une description détaillée de la fonctionnalité et des raisons de son ajout.
-3. Attendez les retours avant de commencer à travailler dessus.
+1. **Open an issue** to discuss the idea with the maintainers.
+2. Provide a detailed description of the feature and the reasons for adding it.
+3. Wait for feedback before starting to work on it.
 
-## Signalement de Problèmes
+## Reporting Issues
 
-Pour signaler un problème :
+To report a problem:
 
-1. **Ouvrez une issue** avec un titre clair et une description détaillée.
-2. Fournissez les étapes pour reproduire le problème, les résultats attendus, et les résultats obtenus.
-3. Joignez des captures d’écran si cela aide à mieux comprendre le problème.
+1. **Open an issue** with a clear title and a detailed description.
+2. Provide the steps to reproduce the problem, the expected results, and the actual results.
+3. Attach screenshots if it helps to better understand the problem.
 
-## Processus de Demande de Tirage (Pull Request)
+## Pull Request Process
 
-1. **Vérifiez que le code est testé** et respecte les directives de style.
-2. **Faites une pull request** depuis votre branche vers `main`.
-3. **Décrivez vos changements** dans la pull request et mentionnez l'issue concernée (si applicable).
-4. **Attendez la revue** d’un mainteneur qui pourra fusionner votre contribution.
+1. **Make sure the code is tested** and follows the style guidelines.
+2. **Submit a pull request** from your branch to `main`.
+3. **Describe your changes** in the pull request and mention the relevant issue (if applicable).
+4. **Wait for review** by a maintainer who can merge your contribution.
 
-Merci de suivre ces instructions ! Avec votre aide, nous pouvons améliorer **BookFind** pour tous les utilisateurs.
+Thank you for following these instructions! With your help, we can improve **BookFind** for all users.
 
 ---
-

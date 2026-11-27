@@ -1,12 +1,20 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
-
-
 
 <?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
   require_once '../../../actions/database.php';
@@ -24,7 +32,7 @@
     // Purge old logs: run rarely (approx. 1% of requests)
     if (mt_rand(1, 100) === 1) {
         $twoYearsAgo = (new DateTime())->modify('-730 days')->format('Y-m-d H:i:s');
-        $query = $bdd->prepare("DELETE FROM logs WHERE datetime <= ?");
+        $query = $db->prepare("DELETE FROM logs WHERE datetime <= ?");
         $query->execute([$twoYearsAgo]);
     }
 
@@ -45,7 +53,7 @@
 
     // Calculate total for pagination
     $countSql = 'SELECT COUNT(*) AS total FROM logs ' . $where;
-    $countStmt = $bdd->prepare($countSql);
+    $countStmt = $db->prepare($countSql);
     $countStmt->execute($params);
     $total = (int) ($countStmt->fetchColumn() ?? 0);
 
@@ -63,18 +71,18 @@
         // MySQL does not always support placeholders for LIMIT/OFFSET depending on configuration.
         // Values are cast to int below to prevent injection.
         $sql .= ' LIMIT ' . ((int)$perPage) . ' OFFSET ' . ((int)$offset);
-        $stmt = $bdd->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->execute($params);
     } else {
-        $stmt = $bdd->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->execute($params);
     }
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Build output in memory to reduce echo calls
-    $out = '';
+    $out = '<div class="stack">';
     foreach ($rows as $log) {
-        $dateFormattee = date("d/m/Y à H:i:s", strtotime($log['datetime'] ?? ''));
+        $dateFormattee = date('d/m/Y', strtotime($log['datetime'] ?? '')) . ' ' . bookfind_translate('at') . ' ' . date('H:i:s', strtotime($log['datetime'] ?? ''));
         $type = htmlspecialchars($log['type'] ?? '', ENT_QUOTES);
         $user_name = htmlspecialchars($log['user_name'] ?? '', ENT_QUOTES);
         // The comment field was sanitized on insertion via SaveLog(); it contains only safe fragments (text + <a>).
@@ -83,35 +91,35 @@
         $log_page = htmlspecialchars($log['page'] ?? '', ENT_QUOTES);
         $user_id = (int) ($log['user_id'] ?? 0);
 
-        $out .= '<div class="container mt-3">'
-            . '<div class="d-flex justify-content-center mt-4">'
-            . '<div class="card text-center mb-3" style="width: 50rem;">'
-            . '<div class="card-body">'
-            . '<h5 class="card-title">' . $type . '</h5>'
-            . '<h6 class="card-subtitle mb-2 text-body-secondary">' . $user_name . '</h6>'
-            . '<p class="card-text">' . $comment . '</p>'
-            . '<ul class="list-group list-group-flush">'
-            . '<li class="list-group-item">Le ' . $dateFormattee . '</li>'
-            . '<li class="list-group-item">' . $user_ip . '</li>'
-            . '<li class="list-group-item"><a href="' . $log_page . '" class="card-link">' . $log_page . '</a></li>'
-            . '<li class="list-group-item"><a href="../profil.php?id=' . $user_id . '" class="btn btn-primary">Voir l\'utilisateur</a></li>'
-            . '</ul></div></div></div></div>';
+        $out .= '<div class="card">'
+            . '<div class="card__body">'
+            . '<h2 class="card__title">' . $type . '</h2>'
+            . '<p class="card__subtitle">' . $user_name . '</p>'
+            . '<p class="card__text">' . $comment . '</p>'
+            . '<div class="mt-3">'
+            . '<div class="kv"><span class="kv__k">' . bookfind_translate('Date') . '</span><span class="kv__v">' . $dateFormattee . '</span></div>'
+            . '<div class="kv"><span class="kv__k">IP</span><span class="kv__v mono">' . $user_ip . '</span></div>'
+            . '<div class="kv"><span class="kv__k">' . bookfind_translate('Page') . '</span><span class="kv__v"><a href="' . $log_page . '">' . $log_page . '</a></span></div>'
+            . '</div>'
+            . '<div class="btn-group mt-4"><a href="../profile.php?id=' . $user_id . '" class="btn btn--primary">' . bookfind_translate('View user') . '</a></div>'
+            . '</div></div>';
     }
+    $out .= '</div>';
 
     // Pagination HTML (numbered, condensed window)
     $totalPages = $perPage > 0 ? (int) ceil($total / $perPage) : 1;
-    $out .= '<div class="container mt-2"><div class="d-flex justify-content-center align-items-center flex-wrap gap-1">';
+    $out .= '<div class="pagination mt-4">';
 
     // Prev
     if ($page > 1) {
-        $out .= '<button class="btn btn-outline-secondary me-2 log-page-btn" data-page="' . ($page - 1) . '">Précédent</button>';
+        $out .= '<button class="btn btn--outline log-page-btn" data-page="' . ($page - 1) . '">' . bookfind_translate('Previous') . '</button>';
     }
 
     if (!$showAll) {
         $maxButtons = 7; // maximum number of numeric buttons displayed
         if ($totalPages <= $maxButtons) {
             for ($p = 1; $p <= $totalPages; $p++) {
-                $cls = $p == $page ? 'btn-primary' : 'btn-outline-secondary';
+                $cls = $p == $page ? 'btn--primary' : 'btn--outline';
                 $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="' . $p . '">' . $p . '</button>';
             }
         } else {
@@ -129,36 +137,36 @@
             }
 
             // first
-            $cls = 1 == $page ? 'btn-primary' : 'btn-outline-secondary';
+            $cls = 1 == $page ? 'btn--primary' : 'btn--outline';
             $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="1">1</button>';
-            if ($start > 2) $out .= '<span class="mx-1">…</span>';
+            if ($start > 2) $out .= '<span class="text-subtle">…</span>';
 
             for ($p = $start; $p <= $end; $p++) {
-                $cls = $p == $page ? 'btn-primary' : 'btn-outline-secondary';
+                $cls = $p == $page ? 'btn--primary' : 'btn--outline';
                 $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="' . $p . '">' . $p . '</button>';
             }
 
-            if ($end < $totalPages - 1) $out .= '<span class="mx-1">…</span>';
-            $cls = $totalPages == $page ? 'btn-primary' : 'btn-outline-secondary';
+            if ($end < $totalPages - 1) $out .= '<span class="text-subtle">…</span>';
+            $cls = $totalPages == $page ? 'btn--primary' : 'btn--outline';
             $out .= '<button class="btn ' . $cls . ' log-page-btn" data-page="' . $totalPages . '">' . $totalPages . '</button>';
         }
     } else {
         // when show_all enabled, do not offer numbered pagination
-        $out .= '<span class="text-muted">Affichage complet (' . $total . ' entrées)</span>';
+        $out .= '<span class="text-subtle">' . sprintf(bookfind_translate('Full display (%d entries)'), $total) . '</span>';
     }
 
     // Next
     if (!$showAll && $page < $totalPages) {
-        $out .= '<button class="btn btn-outline-secondary ms-2 log-page-btn" data-page="' . ($page + 1) . '">Suivant</button>';
+        $out .= '<button class="btn btn--outline log-page-btn" data-page="' . ($page + 1) . '">' . bookfind_translate('Next') . '</button>';
     }
 
     // Show all / revert button
     if (!$showAll) {
-        $out .= '<button class="btn btn-outline-primary ms-3 log-showall-btn" data-showall="1">Tout afficher</button>';
+        $out .= '<button class="btn btn--outline log-showall-btn" data-showall="1">' . bookfind_translate('Show all') . '</button>';
     } else {
-        $out .= '<button class="btn btn-outline-primary ms-3 log-showall-btn" data-showall="0">Limiter l\'affichage</button>';
+        $out .= '<button class="btn btn--outline log-showall-btn" data-showall="0">' . bookfind_translate('Limit display') . '</button>';
     }
 
-    $out .= '</div></div>';
+    $out .= '</div>';
 
     echo $out;

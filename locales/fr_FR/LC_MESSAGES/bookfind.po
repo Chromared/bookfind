@@ -1,0 +1,2059 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BookFind\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-25 15:00+0000\n"
+"PO-Revision-Date: 2026-10-10 00:00+0000\n"
+"Last-Translator: BookFind contributors\n"
+"Language-Team: French\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: settings.php:23
+msgid "BookFind — Settings"
+msgstr "BookFind — Paramètres"
+
+#: settings.php:36
+msgid "Theme"
+msgstr "Thème"
+
+#: settings.php:36
+msgid "Beta"
+msgstr "Bêta"
+
+#: settings.php:46 gestion/update-user.php:58 gestion/update-user.php:95
+#: gestion/update-user.php:128 gestion/update-user.php:161 updateProfile.php:51
+#: updateProfile.php:88 updateProfile.php:119
+msgid "Your changes have been saved."
+msgstr "Vos modifications ont été enregistrées."
+
+#: settings.php:50
+msgid "Appearance"
+msgstr "Apparence"
+
+#: settings.php:52
+msgid "Dark (default)"
+msgstr "Sombre (par défaut)"
+
+#: settings.php:53
+msgid "Light"
+msgstr "Clair"
+
+#: settings.php:57 configuration.php:58 gestion/add-book.php:108
+#: gestion/loan.php:91 gestion/bookfind.php:108 gestion/update-user.php:74
+#: gestion/update-user.php:105 gestion/update-user.php:140
+#: gestion/update-user.php:173 gestion/update-book.php:92 updateProfile.php:67
+#: updateProfile.php:98 updateProfile.php:135
+msgid "Save"
+msgstr "Enregistrer"
+
+#: settings.php:58 gestion/update-user.php:75 gestion/update-user.php:106
+#: gestion/update-user.php:141 updateProfile.php:68 updateProfile.php:99
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: actions/books/showOneBookAction.php:19
+msgid "Missing URL (GET) variable"
+msgstr "Paramètre URL (GET) manquant"
+
+#: actions/books/sBooks.php:30
+msgid "No books found with these search criteria."
+msgstr "Aucun livre ne correspond à ces critères de recherche."
+
+#: actions/books/sBooks.php:42 index.php:101
+msgid "Borrowed"
+msgstr "Emprunté"
+
+#: actions/books/sBooks.php:52 index.php:111 books-reader.php:87
+#: gestion/books-reader.php:86
+msgid "Volume"
+msgstr "Tome"
+
+#: actions/books/sBooks.php:56
+msgid "By"
+msgstr "Par"
+
+#: actions/books/sBooks.php:56
+msgid "due"
+msgstr "à rendre le"
+
+#: actions/books/sBooks.php:60 loans.php:74 loans.php:106 loans.php:138
+#: loans.php:170 index.php:114 gestion/actions/users/sUsers.php:61
+#: gestion/loans.php:77 gestion/loans.php:113 gestion/loans.php:149
+#: gestion/loans.php:185 gestion/user-loans.php:75 gestion/user-loans.php:107
+#: gestion/user-loans.php:139 gestion/user-loans.php:171
+msgid "View"
+msgstr "Voir"
+
+#: actions/books/sBooks.php:62 loans.php:75 loans.php:107 loans.php:139
+#: books-reader.php:38 gestion/loans.php:78 gestion/loans.php:114
+#: gestion/loans.php:150 gestion/user-loans.php:76 gestion/user-loans.php:108
+#: gestion/user-loans.php:140 gestion/books-reader.php:38
+msgid "Loan"
+msgstr "Emprunter"
+
+#: actions/functions/csrfFunction.php:27
+msgid "Invalid CSRF token."
+msgstr "Jeton CSRF invalide."
+
+#: actions/functions/gradeIntToText.php:15
+#: actions/functions/gradeIntToText.php:39 gestion/update-user.php:134
+msgid "None"
+msgstr "Aucun"
+
+#: actions/functions/gradeIntToText.php:19
+#: actions/functions/gradeIntToText.php:42 gestion/update-user.php:136
+msgid "Administrator"
+msgstr "Administrateur"
+
+#: actions/functions/gradeIntToText.php:23
+#: actions/functions/gradeIntToText.php:45 gestion/update-user.php:136
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#: actions/functions/gradeIntToText.php:27
+#: actions/functions/gradeIntToText.php:48 gestion/update-user.php:135
+msgid "Assistant"
+msgstr "Assistant"
+
+#: actions/functions/conversionDate.php:16
+#: actions/functions/conversionDateHour.php:16
+msgid "Invalid date format"
+msgstr "Format de date invalide"
+
+#: actions/users/signupAction.php:72
+#: actions/users/updateSchoolInfoAction.php:34
+#: gestion/actions/users/updateSchoolInfoAction.php:41
+msgid "The selected class does not exist."
+msgstr "La classe sélectionnée n’existe pas."
+
+#: actions/users/signupAction.php:75
+msgid "The terms of use and the rules must be accepted."
+msgstr "Vous devez accepter les conditions d’utilisation et le règlement."
+
+#: actions/users/signupAction.php:78
+msgid "The two passwords are not identical."
+msgstr "Les deux mots de passe ne sont pas identiques."
+
+#: actions/users/signupAction.php:81
+#: actions/users/updatePersonalInfoAction.php:36
+#: actions/users/updatePasswordAction.php:45
+#: actions/users/deleteAccountAction1.php:38
+#: gestion/actions/users/updateGradeAction.php:38
+#: gestion/actions/users/updatePersonalInfoAction.php:39
+#: gestion/actions/users/updatePasswordAction.php:38
+msgid "Please fill in all fields."
+msgstr "Veuillez remplir tous les champs."
+
+#: actions/users/signupAction.php:84
+#: actions/users/updatePersonalInfoAction.php:39
+#: actions/users/updatePasswordAction.php:48
+#: actions/users/deleteAccountAction1.php:41
+#: gestion/actions/books/addBooksAction.php:60
+#: gestion/actions/books/updateBooksAction.php:65
+#: gestion/actions/users/updateGradeAction.php:41
+#: gestion/actions/users/updatePersonalInfoAction.php:42
+#: gestion/actions/users/updatePasswordAction.php:41
+msgid "Not all fields exist. Please"
+msgstr "Certains champs sont manquants. Veuillez"
+
+#: actions/users/signupAction.php:84
+#: actions/users/updatePersonalInfoAction.php:39
+#: actions/users/updatePasswordAction.php:48
+#: actions/users/deleteAccountAction1.php:41
+#: gestion/actions/books/addBooksAction.php:60
+#: gestion/actions/books/updateBooksAction.php:65
+#: gestion/actions/users/updateGradeAction.php:41
+#: gestion/actions/users/updatePersonalInfoAction.php:42
+#: gestion/actions/users/updatePasswordAction.php:41
+msgid "reload"
+msgstr "recharger"
+
+#: actions/users/signupAction.php:84
+#: actions/users/updatePersonalInfoAction.php:39
+#: actions/users/updatePasswordAction.php:48
+#: actions/users/deleteAccountAction1.php:41
+#: gestion/actions/books/addBooksAction.php:60
+#: gestion/actions/books/updateBooksAction.php:65
+#: gestion/actions/users/updateGradeAction.php:41
+#: gestion/actions/users/updatePersonalInfoAction.php:42
+#: gestion/actions/users/updatePasswordAction.php:41
+msgid "the page."
+msgstr "la page."
+
+#: actions/users/updateThemeAction.php:14
+msgid "Please select a valid theme."
+msgstr "Veuillez sélectionner un thème valide."
+
+#: actions/users/updateSchoolInfoAction.php:35
+#: gestion/actions/users/updateSchoolInfoAction.php:44
+msgid "All fields must be filled in."
+msgstr "Tous les champs doivent être remplis."
+
+#: actions/users/updateSchoolInfoAction.php:36
+#: gestion/actions/users/updateSchoolInfoAction.php:47
+msgid "Not all fields exist. Reload the page"
+msgstr "Certains champs sont manquants. Rechargez la page"
+
+#: actions/users/updateSchoolInfoAction.php:36
+#: actions/users/loginAction.php:172
+#: gestion/actions/users/updateSchoolInfoAction.php:47
+msgid "here"
+msgstr "ici"
+
+#: actions/users/updatePasswordAction.php:39
+#: actions/users/deleteAccountAction1.php:30
+msgid "Your current password is incorrect."
+msgstr "Votre mot de passe actuel est incorrect."
+
+#: actions/users/updatePasswordAction.php:42
+#: gestion/actions/users/updatePasswordAction.php:35
+msgid "The two new passwords are not identical."
+msgstr "Les deux nouveaux mots de passe ne sont pas identiques."
+
+#: actions/users/showOneUserProfileAction.php:27
+msgid "You do not have the required permissions to view this profile."
+msgstr "Vous n’avez pas les autorisations nécessaires pour consulter ce profil."
+
+#: actions/users/loginAction.php:78
+msgid "Too many attempts. Try again later."
+msgstr "Trop de tentatives. Veuillez réessayer plus tard."
+
+#: actions/users/loginAction.php:161 actions/users/loginAction.php:166
+msgid "Incorrect credentials."
+msgstr "Identifiants incorrects."
+
+#: actions/users/loginAction.php:169 gestion/actions/books/addLoanAction.php:56
+#: gestion/actions/books/addBooksAction.php:59
+#: gestion/actions/books/updateBooksAction.php:64
+msgid "Not all fields are filled in."
+msgstr "Tous les champs ne sont pas remplis."
+
+#: actions/users/loginAction.php:172
+msgid "Not all fields exist. Reload the page by clicking"
+msgstr "Certains champs sont manquants. Rechargez la page en cliquant"
+
+#: actions/users/deleteAccountAction1.php:34
+#, php-format
+msgid ""
+"You must return all your loans before deleting your account. You currently "
+"have %d book(s) still on loan."
+msgstr ""
+"Vous devez rendre tous vos emprunts avant de supprimer votre compte. Vous "
+"avez actuellement %d livre(s) encore emprunté(s)."
+
+#: loans.php:22 gestion/loans.php:22
+msgid "BookFind — Loans"
+msgstr "BookFind — Emprunts"
+
+#: loans.php:40
+msgid "My loans"
+msgstr "Mes emprunts"
+
+#: loans.php:41
+msgid "Track your borrowed books and returns."
+msgstr "Suivez vos emprunts et vos retours."
+
+#: loans.php:46 gestion/actions/others/stats_data.php:59 gestion/loans.php:45
+#: gestion/user-loans.php:47
+msgid "Overdue"
+msgstr "En retard"
+
+#: loans.php:47 gestion/loans.php:46 gestion/user-loans.php:48
+msgid "Due today"
+msgstr "À rendre aujourd’hui"
+
+#: loans.php:48 gestion/loans.php:47 gestion/user-loans.php:49
+msgid "Ongoing"
+msgstr "En cours"
+
+#: loans.php:49 gestion/actions/others/stats_data.php:61 gestion/loans.php:48
+#: gestion/user-loans.php:50
+msgid "Returned"
+msgstr "Rendu"
+
+#: loans.php:65 loans.php:97 loans.php:129 loans.php:161 gestion/loans.php:68
+#: gestion/loans.php:104 gestion/loans.php:140 gestion/loans.php:176
+#: gestion/user-loans.php:66 gestion/user-loans.php:98
+#: gestion/user-loans.php:130 gestion/user-loans.php:162
+msgid "Borrowed on"
+msgstr "Emprunté le"
+
+#: loans.php:69 loans.php:101 loans.php:133 books-reader.php:108
+#: gestion/loans.php:72 gestion/loans.php:108 gestion/loans.php:144
+#: gestion/user-loans.php:70 gestion/user-loans.php:102
+#: gestion/user-loans.php:134 gestion/books-reader.php:107
+msgid "Due on"
+msgstr "À rendre le"
+
+#: loans.php:165 gestion/loans.php:180 gestion/user-loans.php:166
+msgid "Returned on"
+msgstr "Rendu le"
+
+#: loans.php:184
+msgid "Missing the id number"
+msgstr "Numéro d’identifiant manquant"
+
+#: index.php:42
+msgid "BookFind — Library of the C.D.I."
+msgstr "BookFind — La bibliothèque du C.D.I."
+
+#: index.php:53
+msgid "All the C.D.I. books"
+msgstr "Tous les livres du C.D.I."
+
+#: index.php:53
+msgid "within reach"
+msgstr "à portée"
+
+#: index.php:53
+msgid "of your search."
+msgstr "de votre recherche."
+
+#: index.php:56
+msgid "Popular right now"
+msgstr "Populaires en ce moment"
+
+#: index.php:67
+msgid "Library statistics"
+msgstr "Statistiques de la bibliothèque"
+
+#: index.php:71
+msgid "Books in the catalog"
+msgstr "Livres au catalogue"
+
+#: index.php:76
+msgid "Available right now"
+msgstr "Disponibles actuellement"
+
+#: index.php:81
+msgid "Loans recorded"
+msgstr "Emprunts enregistrés"
+
+#: index.php:86
+msgid "Active readers"
+msgstr "Lecteurs actifs"
+
+#: index.php:91 index.php:93
+msgid "Featured books"
+msgstr "Livres à découvrir"
+
+#: index.php:94
+msgid "Most borrowed books in the C.D.I. right now."
+msgstr "Les livres les plus empruntés au C.D.I. en ce moment."
+
+#: index.php:125
+msgid "How does it work?"
+msgstr "Comment ça marche ?"
+
+#: index.php:126
+msgid "Three steps to get the most out of the library."
+msgstr "Trois étapes pour profiter pleinement de la bibliothèque."
+
+#: index.php:134 errors/403.php:45 errors/404.php:41
+#: gestion/includes/navbar.php:46 gestion/books.php:52 gestion/users.php:43
+#: includes/navbar.php:23 books.php:45
+msgid "Search"
+msgstr "Rechercher"
+
+#: index.php:135
+msgid "Find the book you're looking for across the entire C.D.I. catalog."
+msgstr "Trouvez le livre recherché dans tout le catalogue du C.D.I."
+
+#: index.php:142
+msgid "Borrow"
+msgstr "Emprunter"
+
+#: index.php:143
+msgid "A manager records your loan in a few seconds."
+msgstr "Un gestionnaire enregistre votre emprunt en quelques secondes."
+
+#: index.php:150
+msgid "Track"
+msgstr "Suivre"
+
+#: index.php:151
+msgid "Find your due dates and returns from your profile."
+msgstr "Retrouvez vos dates de retour et vos emprunts depuis votre profil."
+
+#: index.php:159
+msgid "Ready to explore the catalog?"
+msgstr "Prêt à explorer le catalogue ?"
+
+#: index.php:160
+msgid "Create an account to borrow and track your books."
+msgstr "Créez un compte pour emprunter et suivre vos livres."
+
+#: index.php:162 login.php:93 signup.php:55 signup.php:99
+#: includes/footer.php:40 includes/navbar.php:31
+msgid "Sign up"
+msgstr "S’inscrire"
+
+#: index.php:163 login.php:59 login.php:89 signup.php:103 errors/403.php:35
+#: includes/footer.php:39 includes/navbar.php:29
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: index.php:176
+msgid "Signup successful"
+msgstr "Inscription réussie"
+
+#: index.php:177 gestion/logs.php:87 gestion/logs.php:101
+msgid "Close"
+msgstr "Fermer"
+
+#: index.php:182
+msgid ""
+"Your account has been created successfully. To sign in, you will need your "
+"username, which is the following:"
+msgstr ""
+"Votre compte a été créé. Pour vous connecter, vous aurez besoin de votre "
+"nom d’utilisateur, qui est le suivant :"
+
+#: index.php:185
+msgid "OK"
+msgstr "OK"
+
+#: books-reader.php:22 gestion/books-reader.php:23
+msgid "BookFind — Book information"
+msgstr "BookFind — Informations sur le livre"
+
+#: books-reader.php:37 gestion/actions/users/sUsers.php:59
+#: gestion/books-reader.php:37 gestion/bookfind.php:180 profile.php:54
+#: profile.php:57
+msgid "Edit"
+msgstr "Modifier"
+
+#: books-reader.php:47 gestion/books-reader.php:46
+msgid "About the book"
+msgstr "À propos du livre"
+
+#: books-reader.php:53 gestion/books-reader.php:52
+msgid "No summary available."
+msgstr "Aucun résumé disponible."
+
+#: books-reader.php:58 gestion/books-reader.php:57
+msgid "no."
+msgstr "n°"
+
+#: books-reader.php:65 gestion/books-reader.php:64
+msgid "Publisher"
+msgstr "Éditeur"
+
+#: books-reader.php:69 gestion/books-reader.php:68
+msgid "Type"
+msgstr "Type"
+
+#: books-reader.php:74 gestion/books-reader.php:73 gestion/add-book.php:90
+#: gestion/update-book.php:78
+msgid "Genre"
+msgstr "Genre"
+
+#: books-reader.php:80 gestion/books-reader.php:79 gestion/add-book.php:86
+#: gestion/update-book.php:74
+msgid "Unique identifier"
+msgstr "Identifiant unique"
+
+#: books-reader.php:86 gestion/books-reader.php:85 gestion/add-book.php:97
+#: gestion/update-book.php:82
+msgid "Series"
+msgstr "Série"
+
+#: books-reader.php:97 gestion/books-reader.php:96
+msgid "Availability"
+msgstr "Disponibilité"
+
+#: books-reader.php:101 gestion/books-reader.php:100
+msgid "Currently on loan"
+msgstr "Actuellement emprunté"
+
+#: books-reader.php:104 gestion/loans.php:64 gestion/loans.php:100
+#: gestion/loans.php:136 gestion/loans.php:172 gestion/books-reader.php:103
+msgid "Borrowed by"
+msgstr "Emprunté par"
+
+#: books-reader.php:113 gestion/books-reader.php:112
+msgid "Available"
+msgstr "Disponible"
+
+#: books-reader.php:114 gestion/books-reader.php:113
+msgid "This book is available for loan."
+msgstr "Ce livre peut être emprunté."
+
+#: login.php:20
+msgid "BookFind — Sign in"
+msgstr "BookFind — Connexion"
+
+#: login.php:28 login.php:55
+msgid "Back"
+msgstr "Retour"
+
+#: login.php:33
+msgid "The C.D.I. library, simple and modern."
+msgstr "La bibliothèque du C.D.I., simple et moderne."
+
+#: login.php:34
+msgid "Search, borrow and track your school's books from a single place."
+msgstr "Recherchez, empruntez et suivez les livres de votre établissement depuis un seul endroit."
+
+#: login.php:38
+msgid "Instant search"
+msgstr "Recherche instantanée"
+
+#: login.php:38
+msgid "by title, author, ISBN, genre or series."
+msgstr "par titre, auteur, ISBN, genre ou série."
+
+#: login.php:42
+msgid "Tracked loans"
+msgstr "Emprunts suivis"
+
+#: login.php:42
+msgid "due dates and returns, with overdue alerts."
+msgstr "dates de retour et restitutions, avec des alertes en cas de retard."
+
+#: login.php:46
+msgid "Centralized management"
+msgstr "Gestion centralisée"
+
+#: login.php:46
+msgid "books, users and logs for managers."
+msgstr "livres, utilisateurs et journaux pour les gestionnaires."
+
+#: login.php:60
+msgid "Access your BookFind space."
+msgstr "Accédez à votre espace BookFind."
+
+#: login.php:71 configuration.php:50 gestion/bookfind.php:287
+#: gestion/update-user.php:70 updateProfile.php:63
+msgid "Username"
+msgstr "Nom d’utilisateur"
+
+#: login.php:75 configuration.php:54 signup.php:84 gestion/config-ht.php:54
+#: gestion/bookfind.php:103 gestion/bookfind.php:444 gestion/bookfind.php:456
+#: gestion/update-user.php:151 updateProfile.php:109 updateProfile.php:154
+msgid "Password"
+msgstr "Mot de passe"
+
+#: login.php:81
+msgid "Remember me"
+msgstr "Se souvenir de moi"
+
+#: login.php:93
+msgid "Don't have an account yet?"
+msgstr "Vous n’avez pas encore de compte ?"
+
+#: configuration.php:19
+msgid "BookFind — Project configuration"
+msgstr "BookFind — Configuration du projet"
+
+#: configuration.php:30
+msgid "Welcome to BookFind!"
+msgstr "Bienvenue sur BookFind !"
+
+#: configuration.php:31
+msgid "Site configuration file"
+msgstr "Fichier de configuration du site"
+
+#: configuration.php:34
+msgid "Follow the steps in order. Some will disappear once completed."
+msgstr "Suivez les étapes dans l’ordre. Certaines disparaîtront une fois terminées."
+
+#: configuration.php:41
+msgid "Configure MySQL access"
+msgstr "Configurer l’accès à MySQL"
+
+#: configuration.php:46
+msgid "Host"
+msgstr "Hôte"
+
+#: configuration.php:82
+msgid "Saved successfully!"
+msgstr "Enregistré avec succès !"
+
+#: configuration.php:82 configuration.php:151 configuration.php:201
+#: configuration.php:249
+msgid "Reload the page"
+msgstr "Recharger la page"
+
+#: configuration.php:88
+msgid "Step 1 completed."
+msgstr "Étape 1 terminée."
+
+#: configuration.php:95
+msgid "Import the database"
+msgstr "Importer la base de données"
+
+#: configuration.php:101
+msgid "Import the database (create + tables)"
+msgstr "Importer la base de données (création et tables)"
+
+#: configuration.php:106
+msgid "The database already exists — import tables only"
+msgstr "La base de données existe déjà — importer uniquement les tables"
+
+#: configuration.php:109
+msgid "Database name (optional, default 'bookfind')"
+msgstr "Nom de la base de données (facultatif, « bookfind » par défaut)"
+
+#: configuration.php:110
+msgid "Import"
+msgstr "Importer"
+
+#: configuration.php:116
+msgid "Database name"
+msgstr "Nom de la base de données"
+
+#: configuration.php:117
+msgid "I have already imported the database"
+msgstr "J’ai déjà importé la base de données"
+
+#: configuration.php:135 configuration.php:178 configuration.php:226
+msgid "Cannot connect to database"
+msgstr "Impossible de se connecter à la base de données"
+
+#: configuration.php:147 configuration.php:189 configuration.php:237
+msgid "SQL execution error:"
+msgstr "Erreur d’exécution SQL :"
+
+#: configuration.php:151 configuration.php:201
+msgid "Tables imported."
+msgstr "Tables importées."
+
+#: configuration.php:153 configuration.php:169 configuration.php:251
+msgid "SQL file not found."
+msgstr "Fichier SQL introuvable."
+
+#: configuration.php:155
+#, php-format
+msgid ""
+"Cannot connect to database \"%s\". Check your MySQL credentials and that the "
+"server is running."
+msgstr ""
+"Impossible de se connecter à la base de données « %s ». Vérifiez vos "
+"identifiants MySQL et assurez-vous que le serveur est en cours d’exécution."
+
+#: configuration.php:158 configuration.php:254 configuration.php:294
+msgid "Missing MySQL credentials. Fill in the form above first."
+msgstr "Identifiants MySQL manquants. Remplissez d’abord le formulaire ci-dessus."
+
+#: configuration.php:216
+msgid "Unable to create the database:"
+msgstr "Impossible de créer la base de données :"
+
+#: configuration.php:249
+msgid "Database imported."
+msgstr "Base de données importée."
+
+#: configuration.php:262
+msgid "Step 2 completed."
+msgstr "Étape 2 terminée."
+
+#: configuration.php:268
+msgid "Create classes"
+msgstr "Créer des classes"
+
+#: configuration.php:272
+msgid "e.g. 6B"
+msgstr "ex. : 6B"
+
+#: configuration.php:273 gestion/includes/navbar.php:49
+#: gestion/bookfind.php:141
+msgid "Add"
+msgstr "Ajouter"
+
+#: configuration.php:289
+msgid "Class added successfully."
+msgstr "Classe ajoutée avec succès."
+
+#: configuration.php:291 gestion/actions/others/deleteClass.php:29
+#: gestion/actions/others/addClass.php:26
+msgid "This class already exists."
+msgstr "Cette classe existe déjà."
+
+#: configuration.php:301
+msgid "Step 3 completed."
+msgstr "Étape 3 terminée."
+
+#: configuration.php:315
+msgid "Create the first administrator account by signing up via the"
+msgstr "Créez le premier compte administrateur en vous inscrivant sur la"
+
+#: configuration.php:315
+msgid "signup page"
+msgstr "page d’inscription"
+
+#: configuration.php:318
+msgid "Step 4 completed."
+msgstr "Étape 4 terminée."
+
+#: configuration.php:326
+msgid "Congratulations! Configuration complete."
+msgstr "Félicitations ! Configuration terminée."
+
+#: configuration.php:327
+msgid "For security reasons, please delete this file."
+msgstr "Pour des raisons de sécurité, veuillez supprimer ce fichier."
+
+#: configuration.php:331
+msgid "Delete this file"
+msgstr "Supprimer ce fichier"
+
+#: configuration.php:338
+msgid "File deleted successfully. You can now access the"
+msgstr "Fichier supprimé avec succès. Vous pouvez maintenant accéder au"
+
+#: configuration.php:338
+msgid "site"
+msgstr "site"
+
+#: signup.php:20
+msgid "BookFind — Sign up"
+msgstr "BookFind — Inscription"
+
+#: signup.php:33
+msgid "Join the C.D.I. library."
+msgstr "Rejoignez la bibliothèque du C.D.I."
+
+#: signup.php:34
+msgid "One account is all you need to browse the catalog and track your loans."
+msgstr "Un seul compte suffit pour parcourir le catalogue et suivre vos emprunts."
+
+#: signup.php:38
+msgid "Full catalog"
+msgstr "Catalogue complet"
+
+#: signup.php:38
+msgid "all the C.D.I. books, up to date."
+msgstr "tous les livres du C.D.I., à jour."
+
+#: signup.php:42
+msgid "Personal loans"
+msgstr "Emprunts personnels"
+
+#: signup.php:42
+msgid "your due dates and returns at a glance."
+msgstr "vos dates de retour et restitutions en un coup d’œil."
+
+#: signup.php:46
+msgid "Clean interface"
+msgstr "Interface épurée"
+
+#: signup.php:46
+msgid "dark by default, light on demand."
+msgstr "sombre par défaut, claire à la demande."
+
+#: signup.php:56
+msgid "Create your student or teacher account."
+msgstr "Créez votre compte élève ou enseignant."
+
+#: signup.php:68 gestion/bookfind.php:317 gestion/bookfind.php:329
+#: gestion/update-user.php:62 gestion/update-user.php:63 updateProfile.php:55
+#: updateProfile.php:56
+msgid "First name"
+msgstr "Prénom"
+
+#: signup.php:72 gestion/bookfind.php:300 gestion/bookfind.php:312
+#: gestion/update-user.php:66 gestion/update-user.php:67 updateProfile.php:59
+#: updateProfile.php:60
+msgid "Last name"
+msgstr "Nom"
+
+#: signup.php:77 gestion/bookfind.php:337 gestion/bookfind.php:342
+#: gestion/update-user.php:99 updateProfile.php:92 profile.php:75
+#: profile.php:86
+msgid "Class"
+msgstr "Classe"
+
+#: signup.php:79 gestion/bookfind.php:171 gestion/bookfind.php:210
+#: gestion/bookfind.php:355
+msgid "--- Select a class ---"
+msgstr "--- Sélectionnez une classe ---"
+
+#: signup.php:88
+msgid "Confirm password"
+msgstr "Confirmer le mot de passe"
+
+#: signup.php:94
+msgid "I have read and accept the"
+msgstr "J’ai lu et j’accepte le"
+
+#: signup.php:94
+msgid "rules"
+msgstr "règlement"
+
+#: signup.php:94
+msgid "and the"
+msgstr "et la"
+
+#: signup.php:94
+msgid "privacy policy"
+msgstr "politique de confidentialité"
+
+#: signup.php:103
+msgid "Already signed up?"
+msgstr "Vous avez déjà un compte ?"
+
+#: errors/403.php:18
+msgid "BookFind — Access denied"
+msgstr "BookFind — Accès refusé"
+
+#: errors/403.php:30
+msgid "Access denied"
+msgstr "Accès refusé"
+
+#: errors/403.php:31
+msgid "You do not have the required permissions to access this page."
+msgstr "Vous ne disposez pas des autorisations nécessaires pour accéder à cette page."
+
+#: errors/403.php:33 errors/404.php:33
+msgid "Back to home"
+msgstr "Retour à l’accueil"
+
+#: errors/403.php:37 includes/navbar.php:39
+msgid "Management"
+msgstr "Gestion"
+
+#: errors/403.php:42 errors/404.php:38
+msgid "Search for a book…"
+msgstr "Rechercher un livre…"
+
+#: errors/403.php:42 errors/404.php:38 gestion/books.php:32
+#: includes/footer.php:32 books.php:30
+msgid "Search for a book"
+msgstr "Rechercher un livre"
+
+#: errors/404.php:18
+msgid "BookFind — Page not found"
+msgstr "BookFind — Page introuvable"
+
+#: errors/404.php:30
+msgid "Page not found"
+msgstr "Page introuvable"
+
+#: errors/404.php:31
+msgid "The page you are looking for does not exist or may have been moved."
+msgstr "La page que vous recherchez n’existe pas ou a peut-être été déplacée."
+
+#: errors/404.php:34
+msgid "Browse the catalog"
+msgstr "Parcourir le catalogue"
+
+#: gestion/actions/books/addLoanAction.php:53
+msgid "This user has reached their loan limit."
+msgstr "Cet utilisateur a atteint sa limite d’emprunts."
+
+#: gestion/actions/books/addLoanAction.php:54
+msgid "This book is already on loan."
+msgstr "Ce livre est déjà emprunté."
+
+#: gestion/actions/books/addLoanAction.php:55
+msgid "This user does not exist."
+msgstr "Cet utilisateur n’existe pas."
+
+#: gestion/actions/books/addLoanAction.php:57
+msgid "Not all fields exist."
+msgstr "Certains champs sont manquants."
+
+#: gestion/actions/books/addBooksAction.php:58
+#: gestion/actions/books/updateBooksAction.php:63
+msgid "Unique identifier already assigned to another book"
+msgstr "Cet identifiant unique est déjà attribué à un autre livre."
+
+#: gestion/actions/others/updateDatabase.php:31
+msgid "Unable to connect with these credentials."
+msgstr "Impossible de se connecter avec ces identifiants."
+
+#: gestion/actions/others/updateDatabase.php:50
+msgid "Unable to read actions/bookfind.sql to verify the tables."
+msgstr "Impossible de lire actions/bookfind.sql pour vérifier les tables."
+
+#: gestion/actions/others/updateDatabase.php:67
+#, php-format
+msgid "Connection successful but missing tables: %s. Update refused."
+msgstr ""
+"Connexion réussie, mais il manque des tables : %s. Modification refusée."
+
+#: gestion/actions/others/updateDatabase.php:111
+msgid "Details saved successfully."
+msgstr "Informations enregistrées avec succès."
+
+#: gestion/actions/others/loadLogs.php:75
+msgid "at"
+msgstr "à"
+
+#: gestion/actions/others/loadLogs.php:90
+msgid "Date"
+msgstr "Date"
+
+#: gestion/actions/others/loadLogs.php:92
+msgid "Page"
+msgstr "Page"
+
+#: gestion/actions/others/loadLogs.php:94
+msgid "View user"
+msgstr "Voir l’utilisateur"
+
+#: gestion/actions/others/loadLogs.php:105
+msgid "Previous"
+msgstr "Précédent"
+
+#: gestion/actions/others/loadLogs.php:145
+#, php-format
+msgid "Full display (%d entries)"
+msgstr "Affichage complet (%d entrées)"
+
+#: gestion/actions/others/loadLogs.php:150
+msgid "Next"
+msgstr "Suivant"
+
+#: gestion/actions/others/loadLogs.php:155
+msgid "Show all"
+msgstr "Tout afficher"
+
+#: gestion/actions/others/loadLogs.php:157
+msgid "Limit display"
+msgstr "Limiter l’affichage"
+
+#: gestion/actions/others/exportLogs.php:21
+msgid "No logs found."
+msgstr "Aucun journal trouvé."
+
+#: gestion/actions/others/stats_data.php:60
+msgid "In progress"
+msgstr "En cours"
+
+#: gestion/actions/others/updateClass.php:30
+msgid "The class you want to modify does not exist."
+msgstr "La classe que vous souhaitez modifier n’existe pas."
+
+#: gestion/actions/users/importUsers.php:40
+msgid "Error uploading the file. Please try again."
+msgstr "Erreur lors de l’envoi du fichier. Veuillez réessayer."
+
+#: gestion/actions/users/importUsers.php:56
+msgid "The uploaded file cannot be found. Please try again."
+msgstr "Le fichier envoyé est introuvable. Veuillez réessayer."
+
+#: gestion/actions/users/importUsers.php:61
+msgid "The file must be in CSV format."
+msgstr "Le fichier doit être au format CSV."
+
+#: gestion/actions/users/importUsers.php:72
+msgid "Unable to read the CSV file."
+msgstr "Impossible de lire le fichier CSV."
+
+#: gestion/actions/users/importUsers.php:124
+#, php-format
+msgid "CSV file analyzed successfully. %d rows found. Please map the columns."
+msgstr ""
+"Fichier CSV analysé. %d lignes trouvées. Veuillez associer les colonnes."
+
+#: gestion/actions/users/importUsers.php:127
+msgid "Error processing the file. Please try again."
+msgstr "Erreur lors du traitement du fichier. Veuillez réessayer."
+
+#: gestion/actions/users/importUsers.php:131
+#: gestion/actions/users/importUsers.php:428
+msgid "Unable to open the CSV file."
+msgstr "Impossible d’ouvrir le fichier CSV."
+
+#: gestion/actions/users/importUsers.php:151
+msgid "Import canceled."
+msgstr "Import annulé."
+
+#: gestion/actions/users/importUsers.php:157
+msgid "No CSV file awaiting import."
+msgstr "Aucun fichier CSV n’est en attente d’importation."
+
+#: gestion/actions/users/importUsers.php:194
+msgid "The column mapping is invalid. Please map the CSV columns again."
+msgstr ""
+"Le mappage des colonnes est invalide. Veuillez refaire le mappage du fichier "
+"CSV."
+
+#: gestion/actions/users/importUsers.php:198
+msgid "The column mapping is incorrect. The username field is required."
+msgstr ""
+"La correspondance des colonnes est incorrecte. Le champ nom d’utilisateur "
+"est obligatoire."
+
+#: gestion/actions/users/importUsers.php:232
+#, php-format
+msgid "Line %d: Incorrect number of columns."
+msgstr "Ligne %d : le nombre de colonnes est incorrect."
+
+#: gestion/actions/users/importUsers.php:271
+#, php-format
+msgid "Line %d: Unable to generate username (missing last name or first name)."
+msgstr ""
+"Ligne %d : impossible de générer un nom d’utilisateur (nom ou prénom "
+"manquant)."
+
+#: gestion/actions/users/importUsers.php:283
+#, php-format
+msgid "Line %d: Empty username."
+msgstr "Ligne %d : le nom d’utilisateur est vide."
+
+#: gestion/actions/users/importUsers.php:293
+#, php-format
+msgid "Line %d: Class is required."
+msgstr "Ligne %d : la classe est obligatoire."
+
+#: gestion/actions/users/importUsers.php:305
+#, php-format
+msgid "Line %d: Password is required."
+msgstr "Ligne %d : un mot de passe est obligatoire."
+
+#: gestion/actions/users/importUsers.php:339
+#, php-format
+msgid "Line %d: Maximum loans must be at least 1."
+msgstr "Ligne %d : le nombre maximal d’emprunts doit être d’au moins 1."
+
+#: gestion/actions/users/importUsers.php:391
+#, php-format
+msgid "Line %d: The row could not be imported."
+msgstr "Ligne %d : la ligne n’a pas pu être importée."
+
+#: gestion/actions/users/importUsers.php:415
+#, php-format
+msgid "Import completed: %1$d users imported, %2$d errors."
+msgstr "Import terminé : %1$d utilisateurs importés, %2$d erreurs."
+
+#: gestion/actions/users/importUsers.php:422
+#, php-format
+msgid "%d more errors."
+msgstr "%d erreurs supplémentaires."
+
+#: gestion/actions/users/importUsers.php:432
+msgid "Database connection error. Please check the server logs."
+msgstr ""
+"Erreur de connexion à la base de données. Veuillez consulter les journaux du "
+"serveur."
+
+#: gestion/actions/users/sUsers.php:35
+msgid "No users found with these search criteria."
+msgstr "Aucun utilisateur ne correspond à ces critères de recherche."
+
+#: gestion/actions/users/sUsers.php:41
+msgid "loan"
+msgstr "emprunt"
+
+#: gestion/actions/users/sUsers.php:41
+msgid "loans"
+msgstr "emprunts"
+
+#: gestion/actions/users/sUsers.php:53 profile.php:74
+msgid "No class"
+msgstr "Aucune classe"
+
+#: gestion/actions/users/sUsers.php:62 gestion/loans.php:39
+#: gestion/includes/navbar.php:52 includes/navbar.php:36 profile.php:56
+msgid "Loans"
+msgstr "Emprunts"
+
+#: gestion/actions/users/updateSchoolInfoAction.php:50
+#: gestion/actions/users/updateGradeAction.php:44
+#: gestion/actions/users/updatePersonalInfoAction.php:45
+#: gestion/actions/users/updatePasswordAction.php:44
+msgid "You do not have permission to perform this action."
+msgstr "Vous n’avez pas l’autorisation d’effectuer cette action."
+
+#: gestion/actions/users/updateGradeAction.php:35
+msgid "You do not have sufficient permissions to apply this grade."
+msgstr "Vous ne disposez pas des autorisations suffisantes pour attribuer ce niveau."
+
+#: gestion/actions/users/deleteAccountAction2.php:29
+msgid "You do not have sufficient permissions to delete this user."
+msgstr "Vous ne disposez pas des autorisations suffisantes pour supprimer cet utilisateur."
+
+#: gestion/actions/users/regenUsernamesAction.php:63
+#, php-format
+msgid "Regenerated usernames for %d users."
+msgstr "Noms d’utilisateur régénérés pour %d utilisateurs."
+
+#: gestion/actions/users/regenUsernamesAction.php:69
+msgid "Username regeneration failed. No usernames were changed."
+msgstr ""
+"La régénération des noms d’utilisateur a échoué. Aucun nom d’utilisateur n’a "
+"été modifié."
+
+#: gestion/actions/users/deleteAccountAction1.php:25
+#, php-format
+msgid ""
+"You must return all your loans before deleting your account. You currently "
+"have %d book(s) on loan."
+msgstr ""
+"Vous devez rendre tous vos emprunts avant de supprimer votre compte. Vous "
+"avez actuellement %d livre(s) emprunté(s)."
+
+#: gestion/loans.php:40
+msgid "All library loans and their due dates."
+msgstr "Tous les emprunts de la bibliothèque et leurs dates de retour."
+
+#: gestion/user-loans.php:23
+msgid "BookFind — User loans"
+msgstr "BookFind — Emprunts de l’utilisateur"
+
+#: gestion/user-loans.php:39
+msgid "User's loans"
+msgstr "Emprunts de l’utilisateur"
+
+#: gestion/user-loans.php:40
+msgid "Loan history for this account."
+msgstr "Historique des emprunts de ce compte."
+
+#: gestion/index.php:21
+msgid "BookFind — Management"
+msgstr "BookFind — Gestion"
+
+#: gestion/index.php:32
+msgid "Library management"
+msgstr "Gestion de la bibliothèque"
+
+#: gestion/index.php:32
+msgid "and BookFind"
+msgstr "et de BookFind"
+
+#: gestion/index.php:33
+msgid "Overview of library activity."
+msgstr "Vue d’ensemble de l’activité de la bibliothèque."
+
+#: gestion/index.php:44 gestion/index.php:55 gestion/index.php:66
+#: gestion/index.php:77 gestion/index.php:88 gestion/index.php:99
+#: gestion/index.php:111 gestion/index.php:130 gestion/index.php:143
+#: gestion/index.php:156 gestion/index.php:169 gestion/index.php:182
+#: gestion/index.php:195 gestion/logs.php:73
+msgid "Loading..."
+msgstr "Chargement…"
+
+#: gestion/index.php:47
+msgid "Registered users"
+msgstr "Utilisateurs inscrits"
+
+#: gestion/index.php:58
+msgid "Registered books"
+msgstr "Livres enregistrés"
+
+#: gestion/index.php:69
+msgid "Available books"
+msgstr "Livres disponibles"
+
+#: gestion/index.php:80 profile.php:90
+msgid "Ongoing loans"
+msgstr "Emprunts en cours"
+
+#: gestion/index.php:91
+msgid "Overdue loans"
+msgstr "Emprunts en retard"
+
+#: gestion/index.php:102
+msgid "Returned loans"
+msgstr "Emprunts rendus"
+
+#: gestion/index.php:114 gestion/includes/navbar.php:72 gestion/logs.php:37
+msgid "Logs"
+msgstr "Journaux"
+
+#: gestion/index.php:126
+msgid "Loans over the last 6 months"
+msgstr "Emprunts au cours des 6 derniers mois"
+
+#: gestion/index.php:139
+msgid "Loan distribution by status"
+msgstr "Répartition des emprunts par statut"
+
+#: gestion/index.php:152
+msgid "Top borrowers"
+msgstr "Emprunteurs les plus actifs"
+
+#: gestion/index.php:165
+msgid "Loan evolution — 12 months"
+msgstr "Évolution des emprunts — 12 mois"
+
+#: gestion/index.php:178
+msgid "User distribution by class"
+msgstr "Répartition des utilisateurs par classe"
+
+#: gestion/index.php:191
+msgid "Books currently on loan"
+msgstr "Livres actuellement empruntés"
+
+#: gestion/index.php:274 gestion/index.php:383
+msgid "Others"
+msgstr "Autres"
+
+#: gestion/index.php:276 gestion/index.php:297 gestion/index.php:385
+msgid "No data."
+msgstr "Aucune donnée."
+
+#: gestion/index.php:366
+msgid "Loan evolution over 12 months"
+msgstr "Évolution des emprunts sur 12 mois"
+
+#: gestion/index.php:421
+msgid "Pie chart"
+msgstr "Diagramme circulaire"
+
+#: gestion/index.php:442
+msgid "Rate of books on loan"
+msgstr "Taux de livres empruntés"
+
+#: gestion/index.php:447
+msgid "of"
+msgstr "sur"
+
+#: gestion/index.php:447
+msgid "books on loan"
+msgstr "livres empruntés"
+
+#: gestion/index.php:453
+msgid "Unable to load data."
+msgstr "Impossible de charger les données."
+
+#: gestion/add-book.php:20
+msgid "BookFind — Add a book"
+msgstr "BookFind — Ajouter un livre"
+
+#: gestion/add-book.php:33
+msgid "Save a book"
+msgstr "Enregistrer un livre"
+
+#: gestion/add-book.php:36 gestion/bookfind.php:71 gestion/bookfind.php:123
+#: gestion/bookfind.php:155 gestion/bookfind.php:194 gestion/update-book.php:36
+msgid "Fields marked with * are required."
+msgstr "Les champs marqués d’un * sont obligatoires."
+
+#: gestion/add-book.php:46 gestion/update-book.php:46
+msgid "Book saved successfully"
+msgstr "Livre enregistré avec succès"
+
+#: gestion/add-book.php:50 gestion/update-book.php:50
+msgid "ISBN*"
+msgstr "ISBN*"
+
+#: gestion/add-book.php:57 gestion/update-book.php:54
+msgid "Title*"
+msgstr "Titre*"
+
+#: gestion/add-book.php:61 gestion/update-book.php:58
+msgid "Author*"
+msgstr "Auteur*"
+
+#: gestion/add-book.php:68 gestion/update-book.php:62
+msgid "Type*"
+msgstr "Type*"
+
+#: gestion/add-book.php:75 gestion/update-book.php:66
+msgid "Publisher*"
+msgstr "Éditeur*"
+
+#: gestion/add-book.php:82 gestion/update-book.php:70
+msgid "Summary"
+msgstr "Résumé"
+
+#: gestion/add-book.php:104 gestion/update-book.php:86
+msgid "Volume no."
+msgstr "N° de tome"
+
+#: gestion/add-book.php:148
+msgid "Information retrieved successfully!"
+msgstr "Informations récupérées avec succès !"
+
+#: gestion/add-book.php:150
+msgid "No information found for this ISBN."
+msgstr "Aucune information trouvée pour cet ISBN."
+
+#: gestion/add-book.php:155
+msgid "An error occurred during the search. Make sure the ISBN is valid."
+msgstr "Une erreur est survenue pendant la recherche. Vérifiez que l’ISBN est valide."
+
+#: gestion/add-book.php:158
+msgid "Please enter a valid 10 or 13 character ISBN."
+msgstr "Veuillez saisir un ISBN valide de 10 ou 13 caractères."
+
+#: gestion/config-ht.php:26
+msgid "BookFind — Configuration helper"
+msgstr "BookFind — Assistant de configuration"
+
+#: gestion/config-ht.php:37
+msgid ".ht file configuration"
+msgstr "Configuration du fichier .ht"
+
+#: gestion/config-ht.php:43
+msgid "Line to copy into .htpasswd:"
+msgstr "Ligne à copier dans .htpasswd :"
+
+#: gestion/config-ht.php:46
+msgid "Enter your login and password to encrypt it."
+msgstr "Saisissez votre identifiant et votre mot de passe pour les chiffrer."
+
+#: gestion/config-ht.php:50
+msgid "Login"
+msgstr "Identifiant"
+
+#: gestion/config-ht.php:57
+msgid "Encrypt!"
+msgstr "Chiffrer !"
+
+#: gestion/includes/navbar.php:39 includes/footer.php:30
+msgid "Navigation"
+msgstr "Navigation"
+
+#: gestion/includes/navbar.php:41
+msgid "Overview"
+msgstr "Vue d’ensemble"
+
+#: gestion/includes/navbar.php:44
+msgid "Books"
+msgstr "Livres"
+
+#: gestion/includes/navbar.php:55 gestion/includes/navbar.php:57
+#: gestion/users.php:28
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: gestion/includes/navbar.php:61
+msgid "Administration"
+msgstr "Administration"
+
+#: gestion/includes/navbar.php:63
+msgid "Database"
+msgstr "Base de données"
+
+#: gestion/includes/navbar.php:66
+msgid "Classes"
+msgstr "Classes"
+
+#: gestion/includes/navbar.php:69
+msgid "Import users and regenerate usernames"
+msgstr "Importer des utilisateurs et régénérer les noms d’utilisateur"
+
+#: gestion/includes/navbar.php:75
+msgid ".htaccess"
+msgstr ".htaccess"
+
+#: gestion/includes/navbar.php:82 includes/navbar.php:35
+msgid "Settings"
+msgstr "Paramètres"
+
+#: gestion/includes/navbar.php:85
+msgid "Exit management"
+msgstr "Quitter la gestion"
+
+#: gestion/includes/navbar.php:93 includes/navbar.php:18
+msgid "Open menu"
+msgstr "Ouvrir le menu"
+
+#: gestion/includes/navbar.php:103
+msgid "Site"
+msgstr "Site"
+
+#: gestion/books.php:22 books.php:20
+msgid "BookFind — Search for a book"
+msgstr "BookFind — Rechercher un livre"
+
+#: gestion/books.php:33
+msgid "Browse and manage the library catalog."
+msgstr "Parcourir et gérer le catalogue de la bibliothèque."
+
+#: gestion/books.php:37
+msgid "Add a book"
+msgstr "Ajouter un livre"
+
+#: gestion/books.php:47 books.php:40
+msgid "Title, author, ISBN, publisher, genre…"
+msgstr "Titre, auteur, ISBN, éditeur, genre…"
+
+#: gestion/loan.php:28
+msgid "BookFind — Edit a loan"
+msgstr "BookFind — Modifier un emprunt"
+
+#: gestion/loan.php:42
+msgid "Add a loan"
+msgstr "Ajouter un emprunt"
+
+#: gestion/loan.php:50
+msgid "Borrower"
+msgstr "Emprunteur"
+
+#: gestion/loan.php:52
+msgid "Search for a user..."
+msgstr "Rechercher un utilisateur..."
+
+#: gestion/loan.php:54
+msgid "--- Select a user ---"
+msgstr "--- Sélectionnez un utilisateur ---"
+
+#: gestion/loan.php:60
+msgid "Return date"
+msgstr "Date de retour"
+
+#: gestion/loan.php:64
+msgid "Add the loan"
+msgstr "Ajouter l’emprunt"
+
+#: gestion/loan.php:79
+msgid "Edit the return date"
+msgstr "Modifier la date de retour"
+
+#: gestion/loan.php:83
+msgid "Due date modified successfully!"
+msgstr "Date de retour modifiée avec succès !"
+
+#: gestion/loan.php:87
+msgid "New return date"
+msgstr "Nouvelle date de retour"
+
+#: gestion/loan.php:104 gestion/loan.php:106
+msgid "Return the loan"
+msgstr "Enregistrer le retour"
+
+#: gestion/loan.php:115
+msgid "Missing user ID."
+msgstr "Identifiant de l’utilisateur manquant."
+
+#: gestion/logs.php:20
+msgid "BookFind — Logs"
+msgstr "BookFind — Journaux"
+
+#: gestion/logs.php:38
+msgid "Application activity log."
+msgstr "Journal d’activité de l’application."
+
+#: gestion/logs.php:46
+msgid "Search the logs..."
+msgstr "Rechercher dans les journaux..."
+
+#: gestion/logs.php:46
+msgid "Search logs"
+msgstr "Rechercher dans les journaux"
+
+#: gestion/logs.php:59
+msgid "Auto"
+msgstr "Automatique"
+
+#: gestion/logs.php:64
+msgid "Export logs"
+msgstr "Exporter les journaux"
+
+#: gestion/logs.php:86
+msgid "GDPR Charter"
+msgstr "Charte RGPD"
+
+#: gestion/logs.php:92
+msgid ""
+"By exporting these logs, I acknowledge that they may contain personal data."
+msgstr ""
+"En exportant ces journaux, je reconnais qu’ils peuvent contenir des données "
+"personnelles."
+
+#: gestion/logs.php:93
+msgid "I commit to comply with GDPR, in particular:"
+msgstr "Je m’engage à respecter le RGPD, notamment à :"
+
+#: gestion/logs.php:95
+msgid "not to share the data without authorization,"
+msgstr "ne pas partager les données sans autorisation,"
+
+#: gestion/logs.php:96
+msgid "to secure them and store them temporarily,"
+msgstr "les sécuriser et les conserver temporairement,"
+
+#: gestion/logs.php:97
+msgid "to delete them promptly if a user exercises their right to erasure."
+msgstr "les supprimer rapidement si un utilisateur exerce son droit à l’effacement."
+
+#: gestion/logs.php:104
+msgid "Export to .csv format"
+msgstr "Exporter au format .csv"
+
+#: gestion/logs.php:130
+msgid "Access denied."
+msgstr "Accès refusé."
+
+#: gestion/bookfind.php:54
+msgid "BookFind — Administration"
+msgstr "BookFind — Administration"
+
+#: gestion/bookfind.php:68
+msgid "Database connection"
+msgstr "Connexion à la base de données"
+
+#: gestion/bookfind.php:85
+msgid "Host*"
+msgstr "Hôte*"
+
+#: gestion/bookfind.php:91
+msgid "Database name*"
+msgstr "Nom de la base de données*"
+
+#: gestion/bookfind.php:97
+msgid "Username*"
+msgstr "Nom d’utilisateur*"
+
+#: gestion/bookfind.php:104
+msgid "Leave empty to keep the current password"
+msgstr "Laissez vide pour conserver le mot de passe actuel"
+
+#: gestion/bookfind.php:120
+msgid "Add a class"
+msgstr "Ajouter une classe"
+
+#: gestion/bookfind.php:133
+msgid "Class added successfully"
+msgstr "Classe ajoutée avec succès"
+
+#: gestion/bookfind.php:137
+msgid "New class*"
+msgstr "Nouvelle classe*"
+
+#: gestion/bookfind.php:152
+msgid "Edit a class"
+msgstr "Modifier une classe"
+
+#: gestion/bookfind.php:165
+msgid "Class modified successfully"
+msgstr "Classe modifiée avec succès"
+
+#: gestion/bookfind.php:169
+msgid "Existing class*"
+msgstr "Classe existante*"
+
+#: gestion/bookfind.php:176
+msgid "New class name*"
+msgstr "Nouveau nom de classe*"
+
+#: gestion/bookfind.php:191
+msgid "Delete a class"
+msgstr "Supprimer une classe"
+
+#: gestion/bookfind.php:204
+msgid "Class deleted successfully"
+msgstr "Classe supprimée avec succès"
+
+#: gestion/bookfind.php:208
+msgid "Class to delete*"
+msgstr "Classe à supprimer*"
+
+#: gestion/bookfind.php:215 gestion/update-user.php:200 updateProfile.php:166
+msgid "Delete"
+msgstr "Supprimer"
+
+#: gestion/bookfind.php:226
+msgid "Import users from a CSV"
+msgstr "Importer des utilisateurs depuis un fichier CSV"
+
+#: gestion/bookfind.php:229
+msgid "Choose a CSV file containing the user data to import."
+msgstr ""
+"Choisissez un fichier CSV contenant les données utilisateur à importer."
+
+#: gestion/bookfind.php:242
+msgid "CSV file"
+msgstr "Fichier CSV"
+
+#: gestion/bookfind.php:246
+msgid "CSV separator"
+msgstr "Séparateur CSV"
+
+#: gestion/bookfind.php:248
+msgid "Comma (,)"
+msgstr "Virgule (,)"
+
+#: gestion/bookfind.php:249
+msgid "Semicolon (;)"
+msgstr "Point-virgule (;)"
+
+#: gestion/bookfind.php:250
+msgid "Tab"
+msgstr "Tabulation"
+
+#: gestion/bookfind.php:251
+msgid "Vertical bar (|)"
+msgstr "Barre verticale (|)"
+
+#: gestion/bookfind.php:255
+msgid "CSV file format"
+msgstr "Format du fichier CSV"
+
+#: gestion/bookfind.php:258
+msgid "First line = headers (do not import)"
+msgstr "Première ligne = en-têtes (ne pas importer)"
+
+#: gestion/bookfind.php:262
+msgid "First line = data (to import)"
+msgstr "Première ligne = données (à importer)"
+
+#: gestion/bookfind.php:266
+msgid "Upload and analyze"
+msgstr "Envoyer et analyser"
+
+#: gestion/bookfind.php:270
+msgid "Column mapping"
+msgstr "Correspondance des colonnes"
+
+#: gestion/bookfind.php:271
+msgid "For each database field, select the matching column in your CSV."
+msgstr ""
+"Pour chaque champ de la base de données, sélectionnez la colonne "
+"correspondante du fichier CSV."
+
+#: gestion/bookfind.php:275
+msgid "Change CSV file"
+msgstr "Changer de fichier CSV"
+
+#: gestion/bookfind.php:282
+msgid "Basic information"
+msgstr "Informations de base"
+
+#: gestion/bookfind.php:290
+msgid "Use the algorithm (first letter of first name + last name)"
+msgstr "Utiliser l’algorithme (première lettre du prénom + nom)"
+
+#: gestion/bookfind.php:291 gestion/bookfind.php:305 gestion/bookfind.php:322
+#: gestion/bookfind.php:347 gestion/bookfind.php:382 gestion/bookfind.php:396
+#: gestion/bookfind.php:410 gestion/bookfind.php:424 gestion/bookfind.php:449
+msgid "CSV columns"
+msgstr "Colonnes CSV"
+
+#: gestion/bookfind.php:303 gestion/bookfind.php:320 gestion/bookfind.php:345
+msgid "Not imported"
+msgstr "Non importé"
+
+#: gestion/bookfind.php:304 gestion/bookfind.php:321 gestion/bookfind.php:346
+#: gestion/bookfind.php:423 gestion/bookfind.php:448
+msgid "Other value..."
+msgstr "Autre valeur…"
+
+#: gestion/bookfind.php:370
+msgid "User settings"
+msgstr "Paramètres utilisateur"
+
+#: gestion/bookfind.php:375 gestion/update-user.php:118 profile.php:98
+msgid "Grade"
+msgstr "Niveau"
+
+#: gestion/bookfind.php:378
+msgid "None (0)"
+msgstr "Aucun (0)"
+
+#: gestion/bookfind.php:379
+msgid "Administrator (1)"
+msgstr "Administrateur (1)"
+
+#: gestion/bookfind.php:380
+msgid "Manager (2)"
+msgstr "Gestionnaire (2)"
+
+#: gestion/bookfind.php:381
+msgid "Assistant (3)"
+msgstr "Assistant (3)"
+
+#: gestion/bookfind.php:391 includes/footer.php:33
+msgid "Rules"
+msgstr "Règlement"
+
+#: gestion/bookfind.php:394 gestion/bookfind.php:408
+msgid "Use 0"
+msgstr "Utiliser 0"
+
+#: gestion/bookfind.php:395 gestion/bookfind.php:409
+msgid "Use 1"
+msgstr "Utiliser 1"
+
+#: gestion/bookfind.php:405
+msgid "Privacy"
+msgstr "Confidentialité"
+
+#: gestion/bookfind.php:419
+msgid "Max loans"
+msgstr "Nombre maximal d’emprunts"
+
+#: gestion/bookfind.php:422
+msgid "Use 5"
+msgstr "Utiliser 5"
+
+#: gestion/bookfind.php:431
+msgid "Maximum"
+msgstr "Maximum"
+
+#: gestion/bookfind.php:439
+msgid "Authentication"
+msgstr "Authentification"
+
+#: gestion/bookfind.php:447
+msgid "Use \"ChangeMe123!\""
+msgstr "Utiliser \"ChangeMe123!\""
+
+#: gestion/bookfind.php:466
+#, php-format
+msgid "Preview: %1$d of %2$d rows displayed."
+msgstr "Aperçu : %1$d ligne(s) affichée(s) sur %2$d."
+
+#: gestion/bookfind.php:470
+msgid "Import users"
+msgstr "Importer les utilisateurs"
+
+#: gestion/bookfind.php:471
+msgid "Cancel"
+msgstr "Annuler"
+
+#: gestion/bookfind.php:497 gestion/bookfind.php:505
+msgid "Regenerate usernames"
+msgstr "Régénérer les noms d’utilisateur"
+
+#: gestion/update-user.php:34
+msgid "BookFind — Update user account"
+msgstr "BookFind — Modifier le compte utilisateur"
+
+#: gestion/update-user.php:48 updateProfile.php:41
+msgid "Personal information"
+msgstr "Informations personnelles"
+
+#: gestion/update-user.php:85 updateProfile.php:78
+msgid "School information"
+msgstr "Informations scolaires"
+
+#: gestion/update-user.php:132
+msgid "Current grade:"
+msgstr "Niveau actuel :"
+
+#: gestion/update-user.php:165 updateProfile.php:127
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+#: gestion/update-user.php:169 updateProfile.php:131
+msgid "Confirm new password"
+msgstr "Confirmer le nouveau mot de passe"
+
+#: gestion/update-user.php:183 gestion/update-user.php:192
+#: updateProfile.php:145 updateProfile.php:158
+msgid "Delete the account"
+msgstr "Supprimer le compte"
+
+#: gestion/update-user.php:197
+msgid ""
+"I confirm that I want to delete this account. This action is irreversible."
+msgstr "Je confirme vouloir supprimer ce compte. Cette action est irréversible."
+
+#: gestion/users.php:18
+msgid "BookFind — Search users"
+msgstr "BookFind — Rechercher des utilisateurs"
+
+#: gestion/users.php:29
+msgid "Search and manage library accounts."
+msgstr "Rechercher et gérer les comptes de la bibliothèque."
+
+#: gestion/users.php:38
+msgid "First name, last name, username, class…"
+msgstr "Prénom, nom, nom d’utilisateur, classe…"
+
+#: gestion/update-book.php:21
+msgid "BookFind — Update a book"
+msgstr "BookFind — Modifier un livre"
+
+#: privacy.php:17
+msgid "BookFind — Privacy policy"
+msgstr "BookFind — Politique de confidentialité"
+
+#: privacy.php:26 includes/footer.php:34
+msgid "Privacy policy"
+msgstr "Politique de confidentialité"
+
+#: privacy.php:27
+msgid ""
+"BookFind is committed to protecting users' personal data and to limiting its "
+"processing to what is strictly necessary for the service to function."
+msgstr ""
+"BookFind s’engage à protéger les données personnelles des utilisateurs et à "
+"limiter leur traitement au strict nécessaire au fonctionnement du service."
+
+#: privacy.php:28 rules.php:28
+msgid ""
+"The example lists on this page are provided for informational purposes and "
+"are not exhaustive."
+msgstr ""
+"Les listes d’exemples présentées sur cette page sont fournies à titre "
+"indicatif et ne sont pas exhaustives."
+
+#: privacy.php:31
+msgid "Data collected"
+msgstr "Données collectées"
+
+#: privacy.php:32
+msgid ""
+"Depending on how the service is used, BookFind may process login "
+"information, profile data, school data and actions performed in the "
+"application."
+msgstr ""
+"Selon l’utilisation du service, BookFind peut traiter des informations de "
+"connexion, des données de profil et scolaires, ainsi que les actions "
+"effectuées dans l’application."
+
+#: privacy.php:36
+msgid "Purpose of processing"
+msgstr "Finalités du traitement"
+
+#: privacy.php:37
+msgid ""
+"Data is used to provide access to the service, manage accounts, administer "
+"loans, ensure security and produce the functions needed for BookFind to "
+"operate."
+msgstr ""
+"Les données servent à donner accès au service, gérer les comptes et les "
+"emprunts, assurer la sécurité et fournir les fonctionnalités nécessaires "
+"au fonctionnement de BookFind."
+
+#: privacy.php:41
+msgid "Retention"
+msgstr "Conservation"
+
+#: privacy.php:42
+msgid ""
+"Data is kept for as long as needed to use the service, to comply with the "
+"institution's obligations and to technically manage the platform."
+msgstr ""
+"Les données sont conservées aussi longtemps que nécessaire à l’utilisation "
+"du service, au respect des obligations de l’établissement et à la gestion "
+"technique de la plateforme."
+
+#: privacy.php:46
+msgid "Data sharing"
+msgstr "Partage des données"
+
+#: privacy.php:47
+msgid ""
+"BookFind does not share personal data with unauthorized third parties. "
+"Access is limited to authorized people according to their role in the "
+"application or the institution."
+msgstr ""
+"BookFind ne partage pas les données personnelles avec des tiers non "
+"autorisés. L’accès est limité aux personnes autorisées selon leur rôle dans "
+"l’application ou l’établissement."
+
+#: privacy.php:51
+msgid "Security"
+msgstr "Sécurité"
+
+#: privacy.php:52
+msgid ""
+"Technical and organizational measures are in place to limit unauthorized "
+"access, protect accounts and preserve the integrity of stored information."
+msgstr ""
+"Des mesures techniques et organisationnelles sont mises en place pour "
+"limiter les accès non autorisés, protéger les comptes et préserver "
+"l’intégrité des informations enregistrées."
+
+#: privacy.php:56 rules.php:56
+msgid "Contact"
+msgstr "Contact"
+
+#: privacy.php:57
+msgid ""
+"For any request related to your personal data, contact the BookFind team or "
+"your institution's administration according to the current procedure."
+msgstr ""
+"Pour toute demande concernant vos données personnelles, contactez l’équipe "
+"BookFind ou l’administration de votre établissement selon la procédure en "
+"vigueur."
+
+#: updateProfile.php:27
+msgid "BookFind — Update account"
+msgstr "BookFind — Modifier le compte"
+
+#: updateProfile.php:123
+msgid "Current password"
+msgstr "Mot de passe actuel"
+
+#: updateProfile.php:163
+msgid ""
+"I confirm that I want to delete my account. This action is irreversible."
+msgstr "Je confirme vouloir supprimer mon compte. Cette action est irréversible."
+
+#: includes/footer.php:26
+msgid ""
+"The library of the C.D.I., simple and modern. Search, borrow and manage the "
+"books of your institution."
+msgstr ""
+"La bibliothèque du C.D.I., simple et moderne. Recherchez, empruntez et gérez "
+"les livres de votre établissement."
+
+#: includes/footer.php:31
+msgid "Home"
+msgstr "Accueil"
+
+#: includes/footer.php:38
+msgid "Account"
+msgstr "Compte"
+
+#: includes/navbar.php:25
+msgid "Configure"
+msgstr "Configurer"
+
+#: includes/navbar.php:34
+msgid "Profile"
+msgstr "Profil"
+
+#: books.php:31
+msgid "Browse the C.D.I. catalog."
+msgstr "Parcourir le catalogue du C.D.I."
+
+#: profile.php:26
+msgid "BookFind — Profile"
+msgstr "BookFind — Profil"
+
+#: profile.php:47
+msgid "ID no."
+msgstr "N° d’identifiant"
+
+#: profile.php:53
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+#: profile.php:67
+msgid "Ongoing loan"
+msgstr "Emprunt en cours"
+
+#: profile.php:71
+msgid "Maximum loans"
+msgstr "Nombre maximal d’emprunts"
+
+#: profile.php:82
+msgid "Information"
+msgstr "Informations"
+
+#: profile.php:87
+msgid "Not part of any class"
+msgstr "N’appartient à aucune classe"
+
+#: profile.php:94
+msgid "Registered on"
+msgstr "Inscrit le"
+
+#: profile.php:107
+msgid "No user with ID"
+msgstr "Aucun utilisateur avec l’identifiant"
+
+#: profile.php:107
+msgid "was found."
+msgstr "n’a été trouvé."
+
+#: rules.php:17
+msgid "BookFind — Rules"
+msgstr "BookFind — Règlement"
+
+#: rules.php:26
+msgid "BookFind rules"
+msgstr "Règlement de BookFind"
+
+#: rules.php:27
+msgid ""
+"These rules define how BookFind should be used to ensure a safe, respectful "
+"and useful environment for all users."
+msgstr ""
+"Ce règlement définit les modalités d’utilisation de BookFind afin de "
+"garantir un environnement sûr, respectueux et utile à tous les utilisateurs."
+
+#: rules.php:31
+msgid "Respect for users"
+msgstr "Respect des utilisateurs"
+
+#: rules.php:32
+msgid ""
+"Every user must behave respectfully toward other members of the service. "
+"Insulting, discriminatory, aggressive or defamatory remarks are prohibited."
+msgstr ""
+"Chaque utilisateur doit se comporter avec respect envers les autres membres "
+"du service. Les propos insultants, discriminatoires, agressifs ou "
+"diffamatoires sont interdits."
+
+#: rules.php:36
+msgid "Account use"
+msgstr "Utilisation du compte"
+
+#: rules.php:37
+msgid ""
+"The user account is personal. The user is responsible for all actions "
+"performed with their credentials and must keep their login information "
+"confidential."
+msgstr ""
+"Le compte est personnel. L’utilisateur est responsable de toutes les "
+"actions effectuées avec ses identifiants et doit garder ses informations de "
+"connexion confidentielles."
+
+#: rules.php:41
+msgid "Data and content"
+msgstr "Données et contenu"
+
+#: rules.php:42
+msgid ""
+"Information entered in BookFind must be accurate, relevant and consistent "
+"with the platform's intended use. Any attempt at fraud, circumventing the "
+"rules or unauthorized modification of content is prohibited."
+msgstr ""
+"Les informations saisies dans BookFind doivent être exactes, pertinentes et "
+"conformes à l’utilisation prévue de la plateforme. Toute tentative de fraude, "
+"de contournement du règlement ou de modification non autorisée du contenu "
+"est interdite."
+
+#: rules.php:46
+msgid "Service availability"
+msgstr "Disponibilité du service"
+
+#: rules.php:47
+msgid ""
+"BookFind may be temporarily interrupted for maintenance, update or security "
+"reasons. The team reserves the right to evolve the service at any time."
+msgstr ""
+"BookFind peut être temporairement interrompu pour des raisons de "
+"maintenance, de mise à jour ou de sécurité. L’équipe se réserve le droit de "
+"faire évoluer le service à tout moment."
+
+#: rules.php:51
+msgid "Sanctions"
+msgstr "Sanctions"
+
+#: rules.php:52
+msgid ""
+"If these rules are not respected, the BookFind team may restrict access to "
+"the service, suspend an account or remove the relevant content."
+msgstr ""
+"En cas de non-respect du règlement, l’équipe BookFind peut restreindre "
+"l’accès au service, suspendre un compte ou supprimer le contenu concerné."
+
+#: rules.php:57
+msgid ""
+"For any question about these rules, contact the BookFind administration team "
+"through the channels provided by your institution."
+msgstr ""
+"Pour toute question concernant ce règlement, contactez l’équipe "
+"d’administration de BookFind par les moyens mis à disposition par votre "
+"établissement."
+
+#~ msgid "Class is required."
+#~ msgstr "La classe est obligatoire."
+
+#~ msgid "Edit a book"
+#~ msgstr "Modifier un livre"
+
+#~ msgid "A user's loans"
+#~ msgstr "Emprunts d’un utilisateur"
+
+#~ msgid "Manage a loan"
+#~ msgstr "Gérer un emprunt"
+
+#~ msgid "Book details"
+#~ msgstr "Détails du livre"
+
+#~ msgid "Edit a user"
+#~ msgstr "Modifier un utilisateur"
+
+#~ msgid "Manage BookFind"
+#~ msgstr "Gérer BookFind"
+
+#~ msgid ".htaccess tools"
+#~ msgstr "Outils .htaccess"

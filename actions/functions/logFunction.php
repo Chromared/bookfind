@@ -1,9 +1,19 @@
 <?php
 //This file belongs to the BookFind project.
+//Copyright (C) 2026 Chromared
 //
-//BookFind is distributed under the terms of the MIT software license.
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU Affero General Public License as
+//published by the Free Software Foundation, either version 3 of the
+//License, or (at your option) any later version.
 //
-//Copyright (C) 2025 Chromared
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU Affero General Public License for more details.
+//
+//You should have received a copy of the GNU Affero General Public License
+//along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
 <?php function sanitize_log_comment($html){
@@ -36,7 +46,7 @@
                 if ($c->nodeType === XML_TEXT_NODE) $text .= $c->nodeValue;
             }
 
-            // Valider le href
+            // Validate the href
             $valid = false;
             if ($href === '') {
                 $valid = false;
@@ -72,7 +82,7 @@
     return implode('', $safeFragments);
 }
 
-function SaveLog($bdd, $page, $type, $comment){
+function SaveLog($db, $page, $type, $comment){
 
     $user_id = $_SESSION['id'] ?? null;
     $user_ip = $_SERVER['REMOTE_ADDR'] ?? '';
@@ -86,7 +96,7 @@ function SaveLog($bdd, $page, $type, $comment){
     $safe_username = htmlspecialchars($username ?? '', ENT_QUOTES);
     $safe_name = htmlspecialchars($name ?? '', ENT_QUOTES);
 
-    $insertLog = $bdd->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_ip = ?, username = ?, user_name = ?, type = ?, comment = ?');
+    $insertLog = $db->prepare('INSERT INTO logs SET page = ?, user_id = ?, user_ip = ?, username = ?, user_name = ?, type = ?, comment = ?');
     $insertLog->execute(array($safe_page, $user_id, $user_ip, $safe_username, $safe_name, $safe_type, $safe_comment));
 
 }
