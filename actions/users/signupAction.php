@@ -77,7 +77,7 @@ if (isset($_POST['validate'])) {
 
                         SaveLog($db, $_SERVER['REQUEST_URI'], 'Sign up', 'No comment.');
 
-                        header('Location: index.php?signup');
+                        header('Location: ' . url('index.php?signup'));
                     } else {
                         $errorMsg = bookfind_translate('The selected class does not exist.');
                     }
@@ -91,6 +91,6 @@ if (isset($_POST['validate'])) {
             $errorMsg = bookfind_translate('Please fill in all fields.');
         }
     } else {
-        $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="signup.php">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+        $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('signup.php'), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
     }
 }

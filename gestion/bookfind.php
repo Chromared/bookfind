@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -17,62 +18,62 @@
 ?>
 
 <?php
-require '../actions/database.php';
-require_once '../actions/functions/gettextFunction.php';
-require '../actions/users/securityAction.php';
+require ROOT_PATH . '/actions/database.php';
+require_once ROOT_PATH . '/actions/functions/gettextFunction.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
 
 // Centralized access check before loading sensitive actions
 if (!isset($_SESSION['grade']) || $_SESSION['grade'] != '1') {
     http_response_code(403);
-    require '../errors/403.php';
+    require ROOT_PATH . '/errors/403.php';
     exit;
 }
 
-require 'actions/users/securityAdminAction.php';
-require '../actions/functions/logFunction.php';
-require '../actions/functions/generateUsernameFunction.php';
-require '../actions/functions/csrfFunction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/actions/functions/generateUsernameFunction.php';
+require ROOT_PATH . '/actions/functions/csrfFunction.php';
 if (isset($_GET['tab']) && $_GET['tab'] == 'database') {
-    require 'actions/others/updateDatabase.php';
+    require ROOT_PATH . '/gestion/actions/others/updateDatabase.php';
 } elseif (isset($_GET['tab']) && $_GET['tab'] == 'classes') {
-    require 'actions/others/addClass.php';
-    require 'actions/others/updateClass.php';
-    require 'actions/others/deleteClass.php';
+    require ROOT_PATH . '/gestion/actions/others/addClass.php';
+    require ROOT_PATH . '/gestion/actions/others/updateClass.php';
+    require ROOT_PATH . '/gestion/actions/others/deleteClass.php';
 } elseif (isset($_GET['tab']) && $_GET['tab'] == 'users') {
-    require 'actions/users/importUsers.php';
-    require 'actions/users/regenUsernamesAction.php';
+    require ROOT_PATH . '/gestion/actions/users/importUsers.php';
+    require ROOT_PATH . '/gestion/actions/users/regenUsernamesAction.php';
 }
 
 if ($_SESSION['grade'] != '1') {
     http_response_code(403);
-    require '../errors/403.php';
+    require ROOT_PATH . '/errors/403.php';
     exit;
 }
 if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'users'])) {
     http_response_code(404);
-    require '../errors/404.php';
+    require ROOT_PATH . '/errors/404.php';
     exit;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= bookfind_translate('BookFind — Administration'); ?></title>
-    <?php include '../includes/header.php'; ?>
+    <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-    <?php include 'includes/navbar.php'; ?>
+    <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
     <main class="page">
       <div class="container">
         <div class="narrow stack">
         <?php if (isset($_GET['tab']) and $_GET['tab'] == 'database') { ?>
             <!-- Database connection -->
-            <form method="POST" autocomplete="off">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST" autocomplete="off">
                 <div class="card">
                     <div class="card__body">
                         <h1 class="card__title"><?= bookfind_translate('Database connection'); ?></h1>
@@ -123,7 +124,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
         <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'classes') { ?>
 
             <!-- Add a class -->
-            <form method="POST" autocomplete="off" id="addClass">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST" autocomplete="off" id="addClass">
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
@@ -155,7 +156,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </form>
 
             <!-- Edit a class -->
-            <form method="POST" autocomplete="off" id="updateClass">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST" autocomplete="off" id="updateClass">
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
@@ -179,7 +180,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                             <label for="existingClass" class="label"><?= bookfind_translate('Existing class*'); ?></label>
                             <select name="existingClass" id="existingClass" class="select" required>
                                 <option value=""><?php echo bookfind_translate('--- Select a class ---'); ?></option>
-                                <?php include '../actions/functions/getClassesAndOptions.php'; ?>
+                                <?php include ROOT_PATH . '/actions/functions/getClassesAndOptions.php'; ?>
                             </select>
                         </div>
                         <div class="field">
@@ -194,7 +195,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </form>
 
             <!-- Delete a class -->
-            <form method="POST" autocomplete="off" id="deleteClass">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST" autocomplete="off" id="deleteClass">
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
@@ -218,7 +219,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                             <label for="existingClass2" class="label"><?= bookfind_translate('Class to delete*'); ?></label>
                             <select name="existingClass2" id="existingClass2" class="select" required>
                                 <option value=""><?php echo bookfind_translate('--- Select a class ---'); ?></option>
-                                <?php include '../actions/functions/getClassesAndOptions.php'; ?>
+                                <?php include ROOT_PATH . '/actions/functions/getClassesAndOptions.php'; ?>
                             </select>
                         </div>
                         <div class="field">
@@ -229,7 +230,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </form>
         <?php } elseif (isset($_GET['tab']) and $_GET['tab'] == 'users') { ?>
             <!-- Import users via CSV -->
-            <form method="POST" enctype="multipart/form-data" autocomplete="off" action="bookfind.php?tab=users">
+            <form method="POST" enctype="multipart/form-data" autocomplete="off" action="<?= url('gestion/bookfind.php?tab=users'); ?>">
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
@@ -500,7 +501,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
             </script>
 
             <!-- Regenerate usernames -->
-            <form method="POST">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST">
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card__body">
@@ -521,7 +522,7 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
         </div>
       </div>
     </main>
-    <?php include '../includes/footer.php'; ?>
+    <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

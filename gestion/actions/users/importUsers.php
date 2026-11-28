@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; // Import users via CSV
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; // Import users via CSV
 
 $otherValueOption = 'other';
 
@@ -31,22 +31,23 @@ global $db;
 
 $maxAge = 24 * 60 * 60; // 24 hours
 // Automatic cleanup of temporary files older than 24 hours
-$tempDir = __DIR__ . '/../../../temp';
+$tempDir = ROOT_PATH . '/temp';
 if (is_dir($tempDir)) {
     $files = glob($tempDir . '/csv_import_*.csv');
     $maxAge = 24 * 60 * 60; // 24 hours
     $now = time();
 
     foreach ($files as $file) {
-        if (is_file($file) && ($now - filemtime($file)) > $maxAge) {
+        $modifiedAt = is_file($file) ? @filemtime($file) : false;
+        if ($modifiedAt !== false && ($now - $modifiedAt) > $maxAge) {
             @unlink($file);
         }
     }
 }
 
 // Step 1: Upload and analyze CSV
-if(isset($_POST['csvUpload'])) {
-    if(!isset($_FILES['csvFile']) || $_FILES['csvFile']['error'] !== UPLOAD_ERR_OK) {
+if (isset($_POST['csvUpload'])) {
+    if (!isset($_FILES['csvFile']) || $_FILES['csvFile']['error'] !== UPLOAD_ERR_OK) {
         $msgImport = bookfind_translate('Error uploading the file. Please try again.');
     } else {
         $separator = $_POST['csvSeparator'] ?? ',';
@@ -90,7 +91,7 @@ if(isset($_POST['csvUpload'])) {
                             }
                         } else {
                             // Create generic headers with preview of the first line
-                            $headers = array_map(function($i, $value) {
+                            $headers = array_map(function ($i, $value) {
                                 return "Column $i: " . (isset($value) ? substr($value, 0, 15) . (strlen($value) > 15 ? '...' : '') : '');
                             }, array_keys($firstLine), $firstLine);
 
@@ -114,7 +115,7 @@ if(isset($_POST['csvUpload'])) {
                         fclose($handle);
 
                         // Create dedicated temporary folder if needed
-                        $tempDir = __DIR__ . '/../../../temp';
+                        $tempDir = ROOT_PATH . '/temp';
                         if (!is_dir($tempDir)) {
                             @mkdir($tempDir, 0755, true);
                         }
@@ -146,7 +147,7 @@ if(isset($_POST['csvUpload'])) {
 }
 
 // Cancel import
-if(isset($_POST['csvCancel'])) {
+if (isset($_POST['csvCancel'])) {
     if (isset($_SESSION['csv_file']) && file_exists($_SESSION['csv_file'])) {
         @unlink($_SESSION['csv_file']);
     }
@@ -162,8 +163,8 @@ if(isset($_POST['csvCancel'])) {
 }
 
 // Step 2: Import data
-if(isset($_POST['csvImport'])) {
-    if(!isset($_SESSION['csv_file']) || !file_exists($_SESSION['csv_file']) || !isset($_SESSION['csv_headers']) || !isset($_SESSION['csv_separator'])) {
+if (isset($_POST['csvImport'])) {
+    if (!isset($_SESSION['csv_file']) || !file_exists($_SESSION['csv_file']) || !isset($_SESSION['csv_headers']) || !isset($_SESSION['csv_separator'])) {
         $msgImport = bookfind_translate('No CSV file awaiting import.');
     } else {
         $db_mapping = $_POST['db_mapping'] ?? [];
@@ -202,9 +203,11 @@ if(isset($_POST['csvImport'])) {
         // Verify username mapping
         if (!$mappingIsValid) {
             $msgImport = bookfind_translate('The column mapping is invalid. Please map the CSV columns again.');
-        } elseif (!isset($db_mapping['username']) ||
+        } elseif (
+            !isset($db_mapping['username']) ||
             ($db_mapping['username'] === $otherValueOption && empty($_POST['custom_username'])) ||
-            (!is_numeric($db_mapping['username']) && !in_array($db_mapping['username'], [$otherValueOption, 'algorithm'], true))) {
+            (!is_numeric($db_mapping['username']) && !in_array($db_mapping['username'], [$otherValueOption, 'algorithm'], true))
+        ) {
             $msgImport = bookfind_translate('The column mapping is incorrect. The username field is required.');
         } else {
             // Retrieve custom values
@@ -365,8 +368,8 @@ if(isset($_POST['csvImport'])) {
                             $checkUser = $db->prepare('SELECT id FROM users WHERE username = ?');
                             $checkUser->execute([$userData['username']]);
 
-                            if($checkUser->rowCount() > 0) {
-                                    // Update existing user
+                            if ($checkUser->rowCount() > 0) {
+                                // Update existing user
                                 $sql = 'UPDATE users SET ';
                                 $params = [];
                                 $updates = [];
@@ -395,7 +398,6 @@ if(isset($_POST['csvImport'])) {
                             }
 
                             $importedCount++;
-
                         } catch (PDOException $e) {
                             error_log('CSV user import failed on line ' . $lineNumber . ': ' . $e->getMessage());
                             $errors[] = sprintf(bookfind_translate('Line %d: The row could not be imported.'), $lineNumber);
@@ -425,7 +427,7 @@ if(isset($_POST['csvImport'])) {
                     $msgImport = sprintf(bookfind_translate('Import completed: %1$d users imported, %2$d errors.'), $importedCount, $errorCount);
                     if (!empty($errors)) {
                         $msgImport .= "<br><strong>Error details:</strong><ul>";
-                        foreach(array_slice($errors, 0, 5) as $error) {
+                        foreach (array_slice($errors, 0, 5) as $error) {
                             $msgImport .= "<li>" . htmlspecialchars($error) . "</li>";
                         }
                         if (count($errors) > 5) {

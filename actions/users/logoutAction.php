@@ -18,9 +18,11 @@
 
 
 
-<?php require '../database.php';
-require '../functions/logFunction.php';
-require_once __DIR__ . '/../functions/sessionInit.php';
+<?php require_once dirname(__DIR__, 2) . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 
 $deleteCookies = $db->prepare('DELETE FROM cookies WHERE user_id = ?');
 $deleteCookies->execute(array($_SESSION['id']));
@@ -41,4 +43,4 @@ setcookie(
     ]
 );
 
-header('Location: ../../index.php');
+header('Location: ' . url('index.php'));

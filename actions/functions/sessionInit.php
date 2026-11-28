@@ -3,6 +3,8 @@
 // Sets secure cookie params, starts session, sends common security headers,
 // and enforces CSRF verification on POST requests.
 
+require_once ROOT_PATH . '/includes/paths.php';
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     // Configure secure session cookie parameters before starting the session.
     $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
@@ -36,8 +38,8 @@ if (!headers_sent()) {
 }
 
 // Load shared helpers before processing requests or rendering templates.
-require_once __DIR__ . '/gettextFunction.php';
-require_once __DIR__ . '/csrfFunction.php';
+require_once ROOT_PATH . '/actions/functions/gettextFunction.php';
+require_once ROOT_PATH . '/actions/functions/csrfFunction.php';
 
 // Verify CSRF token for all incoming POST requests.
 // Note: csrf_verify() will terminate with a 403 response on failure.

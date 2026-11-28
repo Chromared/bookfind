@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 $id = $_GET['id'] ?? null;
 if (isset($_POST['validatePersonalInfo'])) {
     if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') {
@@ -37,19 +37,19 @@ if (isset($_POST['validatePersonalInfo'])) {
                 $usersInfos = $getUser->fetch();
 
                 if ($name != ($usersInfos['last_name'] ?? '') and $firstname == ($usersInfos['first_name'] ?? '')) {
-                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'Last name changed for <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> from ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' to ' . htmlspecialchars($name) . '.');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'Last name changed for <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)($usersInfos['id'] ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> from ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' to ' . htmlspecialchars($name) . '.');
                 } elseif ($name == ($usersInfos['last_name'] ?? '') and $firstname != ($usersInfos['first_name'] ?? '')) {
-                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'First name changed for <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> from ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' to ' . htmlspecialchars($firstname) . '.');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'First name changed for <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)($usersInfos['id'] ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> from ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' to ' . htmlspecialchars($firstname) . '.');
                 } elseif ($name != ($usersInfos['last_name'] ?? '') and $firstname != ($usersInfos['first_name'] ?? '')) {
-                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'First name and last name changed for <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a>. Their previous first name was ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' and is now ' . htmlspecialchars($firstname) . '. As for their last name, it changed from ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' to ' . htmlspecialchars($name) . '.');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'First name and last name changed for <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)($usersInfos['id'] ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a>. Their previous first name was ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' and is now ' . htmlspecialchars($firstname) . '. As for their last name, it changed from ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' to ' . htmlspecialchars($name) . '.');
                 }
 
-                header('Location: update-user.php?id=' . $id . '&msg1=true');
+                header('Location: ' . url('gestion/update-user.php?id=' . rawurlencode((string)$id) . '&msg1=true'));
             } else {
                 $errorMsg1 = bookfind_translate('Please fill in all fields.');
             }
         } else {
-            $errorMsg1 = bookfind_translate('Not all fields exist. Please') . ' <a href="update-user.php?id=' . ($id ?? '') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+            $errorMsg1 = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('gestion/update-user.php?id=' . rawurlencode((string)($id ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
         }
     } else {
         $errorMsg1 = bookfind_translate('You do not have permission to perform this action.');

@@ -15,49 +15,55 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
 <?php if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
-  <?php require 'actions/database.php';
-  require 'actions/functions/logFunction.php';
-  require 'actions/users/securityAction.php';
+  <?php require ROOT_PATH . '/actions/database.php';
+  require ROOT_PATH . '/actions/functions/logFunction.php';
+  require ROOT_PATH . '/actions/users/securityAction.php';
   if ($_GET['id'] == $_SESSION['id']) {
-    require 'actions/users/showOneUserProfileAction.php';
-    require 'actions/functions/selected.php';
-    require 'actions/users/updatePersonalInfoAction.php';
-    require 'actions/users/updateSchoolInfoAction.php';
-    require 'actions/users/updatePasswordAction.php';
-    require 'actions/users/deleteAccountAction1.php';
-    require 'actions/users/deleteAccountAction2.php'; ?>
+    require ROOT_PATH . '/actions/users/showOneUserProfileAction.php';
+    require ROOT_PATH . '/actions/functions/selected.php';
+    require ROOT_PATH . '/actions/users/updatePersonalInfoAction.php';
+    require ROOT_PATH . '/actions/users/updateSchoolInfoAction.php';
+    require ROOT_PATH . '/actions/users/updatePasswordAction.php';
+    require ROOT_PATH . '/actions/users/deleteAccountAction1.php';
+    require ROOT_PATH . '/actions/users/deleteAccountAction2.php'; ?>
     <!DOCTYPE html>
-    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title><?= bookfind_translate('BookFind — Update account'); ?></title>
-      <?php include 'includes/header.php' ?>
+      <?php include ROOT_PATH . '/includes/header.php' ?>
     </head>
 
     <body>
-      <?php include 'includes/navbar.php' ?>
+      <?php include ROOT_PATH . '/includes/navbar.php' ?>
       <main class="page">
         <div class="container">
           <div class="narrow stack">
 
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
                   <h1 class="card__title"><?= bookfind_translate('Personal information'); ?></h1>
                   <?php if (isset($errorMsg1)) { ?>
                     <div class="alert alert--warning" role="alert">
-                      <svg class="icon"><use href="#i-alert"/></svg>
+                      <svg class="icon">
+                        <use href="#i-alert" />
+                      </svg>
                       <div><?= $errorMsg1; ?></div>
                     </div>
                   <?php } ?>
                   <?php if (isset($_GET['msg1'])) { ?>
                     <div class="alert alert--success" role="alert">
-                      <svg class="icon"><use href="#i-check"/></svg>
+                      <svg class="icon">
+                        <use href="#i-check" />
+                      </svg>
                       <div><?= bookfind_translate('Your changes have been saved.'); ?></div>
                     </div>
                   <?php } ?>
@@ -81,27 +87,31 @@
               </div>
             </form>
 
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
                   <h2 class="card__title"><?= bookfind_translate('School information'); ?></h2>
                   <?php if (isset($errorMsg2)) { ?>
                     <div class="alert alert--warning" role="alert">
-                      <svg class="icon"><use href="#i-alert"/></svg>
+                      <svg class="icon">
+                        <use href="#i-alert" />
+                      </svg>
                       <div><?= $errorMsg2; ?></div>
                     </div>
                   <?php } ?>
                   <?php if (isset($_GET['msg2'])) { ?>
                     <div class="alert alert--success" role="alert">
-                      <svg class="icon"><use href="#i-check"/></svg>
+                      <svg class="icon">
+                        <use href="#i-check" />
+                      </svg>
                       <div><?= bookfind_translate('Your changes have been saved.'); ?></div>
                     </div>
                   <?php } ?>
                   <div class="field">
                     <label for="class_name" class="label"><?= bookfind_translate('Class'); ?></label>
                     <select name="class_name" id="class_name" class="select" required>
-                      <?php include 'actions/functions/getClassesAndOptions.php'; ?>
+                      <?php include ROOT_PATH . '/actions/functions/getClassesAndOptions.php'; ?>
                     </select>
                   </div>
                   <div class="btn-group">
@@ -112,20 +122,24 @@
               </div>
             </form>
 
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
                   <h2 class="card__title"><?= bookfind_translate('Password'); ?></h2>
                   <?php if (isset($errorMsg3)) { ?>
                     <div class="alert alert--warning" role="alert">
-                      <svg class="icon"><use href="#i-alert"/></svg>
+                      <svg class="icon">
+                        <use href="#i-alert" />
+                      </svg>
                       <div><?= $errorMsg3; ?></div>
                     </div>
                   <?php } ?>
                   <?php if (isset($_GET['msg3'])) { ?>
                     <div class="alert alert--success" role="alert">
-                      <svg class="icon"><use href="#i-check"/></svg>
+                      <svg class="icon">
+                        <use href="#i-check" />
+                      </svg>
                       <div><?= bookfind_translate('Your changes have been saved.'); ?></div>
                     </div>
                   <?php } ?>
@@ -148,14 +162,16 @@
               </div>
             </form>
 
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
                   <h2 class="card__title"><?= bookfind_translate('Delete the account'); ?></h2>
                   <?php if (isset($errorMsg4)) { ?>
                     <div class="alert alert--warning" role="alert">
-                      <svg class="icon"><use href="#i-alert"/></svg>
+                      <svg class="icon">
+                        <use href="#i-alert" />
+                      </svg>
                       <div><?= $errorMsg4; ?></div>
                     </div>
                   <?php } ?>
@@ -169,7 +185,9 @@
                     </div>
                   <?php } elseif (isset($deleteAccount)) { ?>
                     <div class="alert alert--danger" role="alert">
-                      <svg class="icon"><use href="#i-alert"/></svg>
+                      <svg class="icon">
+                        <use href="#i-alert" />
+                      </svg>
                       <div><?= bookfind_translate('I confirm that I want to delete my account. This action is irreversible.'); ?></div>
                     </div>
                     <div class="btn-group">
@@ -183,11 +201,11 @@
           </div>
         </div>
       </main>
-      <?php include 'includes/footer.php'; ?>
+      <?php include ROOT_PATH . '/includes/footer.php'; ?>
     </body>
 
     </html>
 <?php } elseif ($_SESSION['grade'] !== 0) {
-    header('Location: gestion/update-user.php?id=' . $_GET['id']);
+    header('Location: ' . url('gestion/update-user.php?id=' . rawurlencode((string)$_GET['id'])));
   }
 } ?>

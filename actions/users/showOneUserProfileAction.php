@@ -29,7 +29,7 @@
 
             if($id != $_SESSION['id'] AND $selectInfosFromUsers->rowCount() === 1){
 
-                  SaveLog($db, $_SERVER['REQUEST_URI'], 'Profile viewed', 'The profile of <a href="../profile.php?id=' . htmlspecialchars($usersInfos['id']) . '">' . htmlspecialchars($usersInfos['first_name']) . ' ' . htmlspecialchars($usersInfos['last_name']) . '</a> was viewed.');
+                  SaveLog($db, $_SERVER['REQUEST_URI'], 'Profile viewed', 'The profile of <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)$usersInfos['id'])), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name']) . ' ' . htmlspecialchars($usersInfos['last_name']) . '</a> was viewed.');
 
             }
 

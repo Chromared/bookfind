@@ -15,24 +15,26 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/functions/sessionInit.php';
-require 'actions/database.php';
-require 'actions/functions/conversionDate.php';
-require 'actions/functions/conversionDateHour.php';
-require 'actions/functions/colorLoanDateFunction.php'; ?>
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/functions/conversionDate.php';
+require ROOT_PATH . '/actions/functions/conversionDateHour.php';
+require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Search for a book'); ?></title>
-  <?php include 'includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body>
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/includes/navbar.php'; ?>
   <main class="page">
     <div class="container container--wide">
       <div class="page-head">
@@ -43,7 +45,7 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
       </div>
 
       <div class="searchband">
-        <form method="GET">
+        <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="GET">
           <div class="input-group">
             <input type="text" name="s" class="input" value="<?php if (isset($_GET['s']) and !empty($_GET['s'])) {
                                                                 echo htmlspecialchars($_GET['s']);
@@ -58,10 +60,10 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
         </form>
       </div>
 
-      <?php include 'actions/books/sBooks.php'; ?>
+      <?php include ROOT_PATH . '/actions/books/sBooks.php'; ?>
     </div>
   </main>
-  <?php include 'includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

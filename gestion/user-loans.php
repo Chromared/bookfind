@@ -1,3 +1,5 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,32 +18,32 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require 'actions/users/securityAdminAction.php';
-require '../actions/functions/logFunction.php';
-require '../actions/books/showLoans.php';
-require '../actions/functions/conversionDateHour.php';
-require '../actions/functions/conversionDate.php';
-require '../actions/functions/colorLoanDateFunction.php'; ?>
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/actions/books/showLoans.php';
+require ROOT_PATH . '/actions/functions/conversionDateHour.php';
+require ROOT_PATH . '/actions/functions/conversionDate.php';
+require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — User loans'); ?></title>
-  <?php include '../includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
   <?php if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
 
     <?php $nbOverdue = $selectLoans1->rowCount();
     $nbDueToday = $selectLoans2->rowCount();
     $nbOngoing = $selectLoans3->rowCount();
-    $nbReturned = $selectLoans4->rowCount(); ?>    <main class="page">
+    $nbReturned = $selectLoans4->rowCount(); ?> <main class="page">
       <div class="container">
         <div class="narrow">
           <div class="page-head">
@@ -54,13 +56,31 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
 
 
             <div class="tabs" role="tablist">
-              <button class="tabs__item <?php if ($nbOverdue > 0) { echo 'is-active'; } ?>" id="retard-tab" data-tab="retard" role="tab" aria-selected="<?php echo $nbOverdue > 0 ? 'true' : 'false'; ?>" <?php if ($nbOverdue == 0) { echo 'disabled'; } ?>><?= bookfind_translate('Overdue'); ?></button>
-              <button class="tabs__item <?php if ($nbOverdue == 0 and $nbDueToday > 0) { echo 'is-active'; } ?>" id="aujourdhui-tab" data-tab="aujourdhui" role="tab" aria-selected="<?php echo ($nbOverdue == 0 and $nbDueToday > 0) ? 'true' : 'false'; ?>" <?php if ($nbDueToday == 0) { echo 'disabled'; } ?>><?= bookfind_translate('Due today'); ?></button>
-              <button class="tabs__item <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing > 0) { echo 'is-active'; } ?>" id="encours-tab" data-tab="encours" role="tab" aria-selected="<?php echo ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing > 0) ? 'true' : 'false'; ?>" <?php if ($nbOngoing == 0) { echo 'disabled'; } ?>><?= bookfind_translate('Ongoing'); ?></button>
-              <button class="tabs__item <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing == 0 and $nbReturned > 0) { echo 'is-active'; } ?>" id="returned-tab" data-tab="returned" role="tab" aria-selected="<?php echo ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing == 0 and $nbReturned > 0) ? 'true' : 'false'; ?>" <?php if ($nbReturned == 0) { echo 'disabled'; } ?>><?= bookfind_translate('Returned'); ?></button>
+              <button class="tabs__item <?php if ($nbOverdue > 0) {
+                                          echo 'is-active';
+                                        } ?>" id="retard-tab" data-tab="retard" role="tab" aria-selected="<?php echo $nbOverdue > 0 ? 'true' : 'false'; ?>" <?php if ($nbOverdue == 0) {
+                                                                                                                                                                                                            echo 'disabled';
+                                                                                                                                                                                                          } ?>><?= bookfind_translate('Overdue'); ?></button>
+              <button class="tabs__item <?php if ($nbOverdue == 0 and $nbDueToday > 0) {
+                                          echo 'is-active';
+                                        } ?>" id="aujourdhui-tab" data-tab="aujourdhui" role="tab" aria-selected="<?php echo ($nbOverdue == 0 and $nbDueToday > 0) ? 'true' : 'false'; ?>" <?php if ($nbDueToday == 0) {
+                                                                                                                                                                                                                                                                echo 'disabled';
+                                                                                                                                                                                                                                                              } ?>><?= bookfind_translate('Due today'); ?></button>
+              <button class="tabs__item <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing > 0) {
+                                          echo 'is-active';
+                                        } ?>" id="encours-tab" data-tab="encours" role="tab" aria-selected="<?php echo ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing > 0) ? 'true' : 'false'; ?>" <?php if ($nbOngoing == 0) {
+                                                                                                                                                                                                                                                                                                  echo 'disabled';
+                                                                                                                                                                                                                                                                                                } ?>><?= bookfind_translate('Ongoing'); ?></button>
+              <button class="tabs__item <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing == 0 and $nbReturned > 0) {
+                                          echo 'is-active';
+                                        } ?>" id="returned-tab" data-tab="returned" role="tab" aria-selected="<?php echo ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing == 0 and $nbReturned > 0) ? 'true' : 'false'; ?>" <?php if ($nbReturned == 0) {
+                                                                                                                                                                                                                                                                                                                                              echo 'disabled';
+                                                                                                                                                                                                                                                                                                                                            } ?>><?= bookfind_translate('Returned'); ?></button>
             </div>
 
-            <div class="tab-pane <?php if ($nbOverdue > 0) { echo 'is-active'; } ?>" id="retard" role="tabpanel">
+            <div class="tab-pane <?php if ($nbOverdue > 0) {
+                                    echo 'is-active';
+                                  } ?>" id="retard" role="tabpanel">
               <div class="stack">
                 <?php if ($selectLoans1->rowCount() > 0) {
                   while ($loanInfos1 = $selectLoans1->fetch()) {
@@ -82,8 +102,8 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
-                          <?php if ($_SESSION['grade'] == 1) { ?><a href="loan.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?><?php if ($fetchedBooks['status'] == 1) { echo '&user_id=' . htmlspecialchars($loanInfos1['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
+                          <a href="<?= url('gestion/books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                          <?php if ($_SESSION['grade'] == 1) { ?><a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$fetchedBooks['id']) . ($fetchedBooks['status'] == 1 ? '&user_id=' . rawurlencode((string)$loanInfos1['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
                         </div>
                       </div>
                     </div>
@@ -92,7 +112,9 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
               </div>
             </div>
 
-            <div class="tab-pane <?php if ($nbOverdue == 0 and $nbDueToday > 0) { echo 'is-active'; } ?>" id="aujourdhui" role="tabpanel">
+            <div class="tab-pane <?php if ($nbOverdue == 0 and $nbDueToday > 0) {
+                                    echo 'is-active';
+                                  } ?>" id="aujourdhui" role="tabpanel">
               <div class="stack">
                 <?php if ($selectLoans2->rowCount() > 0) {
                   while ($loanInfos2 = $selectLoans2->fetch()) {
@@ -114,8 +136,8 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate("View"); ?></a>
-                          <?php if ($_SESSION['grade'] == 1) { ?><a href="loan.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?><?php if ($fetchedBooks['status'] == 1) { echo '&user_id=' . htmlspecialchars($loanInfos2['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate("Loan"); ?></a><?php } ?>
+                          <a href="<?= url('gestion/books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate("View"); ?></a>
+                          <?php if ($_SESSION['grade'] == 1) { ?><a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$fetchedBooks['id']) . ($fetchedBooks['status'] == 1 ? '&user_id=' . rawurlencode((string)$loanInfos2['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate("Loan"); ?></a><?php } ?>
                         </div>
                       </div>
                     </div>
@@ -124,7 +146,9 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
               </div>
             </div>
 
-            <div class="tab-pane <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing > 0) { echo 'is-active'; } ?>" id="encours" role="tabpanel">
+            <div class="tab-pane <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing > 0) {
+                                    echo 'is-active';
+                                  } ?>" id="encours" role="tabpanel">
               <div class="stack">
                 <?php if ($selectLoans3->rowCount() > 0) {
                   while ($loanInfos3 = $selectLoans3->fetch()) {
@@ -146,8 +170,8 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate("View"); ?></a>
-                          <?php if ($_SESSION['grade'] == 1) { ?><a href="loan.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?><?php if ($fetchedBooks['status'] == 1) { echo '&user_id=' . htmlspecialchars($loanInfos3['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate("Loan"); ?></a><?php } ?>
+                          <a href="<?= url('gestion/books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate("View"); ?></a>
+                          <?php if ($_SESSION['grade'] == 1) { ?><a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$fetchedBooks['id']) . ($fetchedBooks['status'] == 1 ? '&user_id=' . rawurlencode((string)$loanInfos3['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate("Loan"); ?></a><?php } ?>
                         </div>
                       </div>
                     </div>
@@ -156,7 +180,9 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
               </div>
             </div>
 
-            <div class="tab-pane <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing == 0 and $nbReturned > 0) { echo 'is-active'; } ?>" id="returned" role="tabpanel">
+            <div class="tab-pane <?php if ($nbOverdue == 0 and $nbDueToday == 0 and $nbOngoing == 0 and $nbReturned > 0) {
+                                    echo 'is-active';
+                                  } ?>" id="returned" role="tabpanel">
               <div class="stack">
                 <?php if ($selectLoans4->rowCount() > 0) {
                   while ($loanInfos4 = $selectLoans4->fetch()) {
@@ -178,7 +204,7 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate("View"); ?></a>
+                          <a href="<?= url('gestion/books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate("View"); ?></a>
                         </div>
                       </div>
                     </div>
@@ -194,7 +220,7 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
   <?php } else {
     die('Missing the borrower ID.');
   } ?>
-  <?php include '../includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

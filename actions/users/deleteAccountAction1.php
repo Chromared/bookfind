@@ -48,6 +48,6 @@
         $errorMsg4 = bookfind_translate('Please fill in all fields.');
     }
 }else{
-    $errorMsg4 = bookfind_translate('Not all fields exist. Please') . ' <a href="updateProfile.php?id=' . $id . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+    $errorMsg4 = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('updateProfile.php?id=' . rawurlencode((string)$id)), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
 }
 }

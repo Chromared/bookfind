@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['classAddValidate'])){
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; if(isset($_POST['classAddValidate'])){
     $newClass = $_POST['newClass'];
 
     $checkIfClassAlreadyExists = $db->prepare('SELECT name FROM classes WHERE name = ?');
@@ -31,7 +31,7 @@
 
     SaveLog($db, $_SERVER['REQUEST_URI'], 'Class added', 'The class "' . htmlspecialchars($newClass) . '" was added.');
 
-    header('Location: bookfind.php?tab=classes&successAddClass#addClass');
+    header('Location: ' . url('gestion/bookfind.php?tab=classes&successAddClass#addClass'));
 
     }else{ $msgC1 = bookfind_translate('This class already exists.'); }
 }

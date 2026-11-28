@@ -1,3 +1,5 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,23 +18,23 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require 'actions/users/securityAdminAction.php';
-require '../actions/functions/logFunction.php';
-require 'actions/others/exportLogs.php'; ?>
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/gestion/actions/others/exportLogs.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Logs'); ?></title>
-  <?php include '../includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
   <?php if ($_SESSION['grade'] != '1') {
     http_response_code(403);
     exit();
@@ -95,7 +97,9 @@ require 'actions/others/exportLogs.php'; ?>
         <div class="modal__header">
           <h2 class="modal__title" id="exportModalLabel"><?= bookfind_translate('GDPR Charter'); ?></h2>
           <button type="button" class="modal__close" data-modal-close aria-label="<?= bookfind_translate('Close'); ?>">
-            <svg class="icon"><use href="#i-x"/></svg>
+            <svg class="icon">
+              <use href="#i-x" />
+            </svg>
           </button>
         </div>
         <div class="modal__body">
@@ -109,7 +113,7 @@ require 'actions/others/exportLogs.php'; ?>
         </div>
         <div class="modal__footer">
           <button type="button" class="btn btn--secondary" data-modal-close><?= bookfind_translate('Close'); ?></button>
-          <form method="post">
+          <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
             <?= csrf_field(); ?>
             <input type="submit" class="btn btn--primary" name="export" value="<?= bookfind_translate('Export to .csv format'); ?>" />
           </form>
@@ -120,6 +124,7 @@ require 'actions/others/exportLogs.php'; ?>
 
   <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>">
     document.addEventListener('DOMContentLoaded', function() {
+      const appBaseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content') || '';
       let currentPage = 1;
       let perPage = parseInt(document.getElementById('logPerPage').value, 10) || 50;
       let query = '';
@@ -134,7 +139,9 @@ require 'actions/others/exportLogs.php'; ?>
         if (query) params.set('q', query);
 
         try {
-          const res = await fetch('actions/others/loadLogs.php?' + params.toString(), { credentials: 'same-origin' });
+          const res = await fetch(appBaseUrl + '/gestion/actions/others/loadLogs.php?' + params.toString(), {
+            credentials: 'same-origin'
+          });
           if (res.status === 401 || res.status === 403) {
             console.error('Access to logs denied (HTTP ' + res.status + ')');
             document.getElementById('log').innerHTML = '<div class="alert alert--danger"><svg class="icon"><use href="#i-alert"/></svg><div>' + <?= json_encode(bookfind_translate('Access denied.')); ?> + '</div></div>';
@@ -206,7 +213,8 @@ require 'actions/others/exportLogs.php'; ?>
 
       // Auto-refresh switch
       document.getElementById('toggleAutoRefresh').addEventListener('change', function() {
-        if (this.checked) startAutoRefresh(); else stopAutoRefresh();
+        if (this.checked) startAutoRefresh();
+        else stopAutoRefresh();
       });
 
       // Initial load
@@ -214,7 +222,7 @@ require 'actions/others/exportLogs.php'; ?>
       startAutoRefresh();
     });
   </script>
-  <?php include '../includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

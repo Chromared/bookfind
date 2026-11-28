@@ -1,5 +1,5 @@
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
-require_once __DIR__ . '/../../../actions/users/securityAction.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require_once ROOT_PATH . '/actions/users/securityAction.php';
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
 //

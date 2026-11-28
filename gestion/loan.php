@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,36 +17,36 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require 'actions/users/securityAdminAction.php';
-require '../actions/books/showOneBookAction.php';
-require '../actions/functions/logFunction.php';
-require 'actions/books/updateLoan.php';
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/books/showOneBookAction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/gestion/actions/books/updateLoan.php';
 if (($booksInfos['status'] ?? null) == 1) {
-  require 'actions/books/showOneLoan.php';
+  require ROOT_PATH . '/gestion/actions/books/showOneLoan.php';
 }
-require 'actions/books/addLoanAction.php';
-require 'actions/books/returnLoan.php';
+require ROOT_PATH . '/gestion/actions/books/addLoanAction.php';
+require ROOT_PATH . '/gestion/actions/books/returnLoan.php';
 
 $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Edit a loan'); ?></title>
-  <?php include '../includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
   <main class="page">
     <div class="container">
       <div class="narrow stack">
         <?php if ((($booksInfos['status'] ?? null) == 0) or (($booksInfos['status'] ?? null) == 2)) { ?>
-          <form method="post">
+          <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
             <?= csrf_field(); ?>
             <div class="card">
               <div class="card__body">
@@ -62,7 +63,7 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
                     <input type="search" class="input" placeholder="<?= bookfind_translate('Search for a user...'); ?>" data-select-search />
                     <select id="user_id" name="user_id" class="select">
                       <option value=""><?= bookfind_translate('--- Select a user ---'); ?></option>
-                      <?php include 'actions/users/list-usersWithClass.php'; ?>
+                      <?php include ROOT_PATH . '/gestion/actions/users/list-usersWithClass.php'; ?>
                     </select>
                   </div>
                 </div>
@@ -82,7 +83,7 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
           if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
 
             <!-- Edit return date -->
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
@@ -107,7 +108,7 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
             </form>
 
             <!-- Return the loan -->
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
@@ -128,7 +129,7 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
       </div>
     </div>
   </main>
-  <?php include '../includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

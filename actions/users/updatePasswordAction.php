@@ -19,42 +19,41 @@
 
 
 <?php if (isset($_POST['validatePassword'])) {
-    if (isset($_POST['actual-password']) AND isset($_POST['new-password']) AND isset($_POST['confirm-new-password'])) {
-    if (!empty($_POST['actual-password']) AND !empty($_POST['new-password']) AND !empty($_POST['confirm-new-password'])) {
+    if (isset($_POST['actual-password']) and isset($_POST['new-password']) and isset($_POST['confirm-new-password'])) {
+        if (!empty($_POST['actual-password']) and !empty($_POST['new-password']) and !empty($_POST['confirm-new-password'])) {
 
-        if ($_POST['new-password'] == $_POST['confirm-new-password']) {
-            
-        $password = $_POST['actual-password'];
-        $newPassword = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
-        $id = $_SESSION['id'];
+            if ($_POST['new-password'] == $_POST['confirm-new-password']) {
 
-        $checkPassword = $db->prepare('SELECT password FROM users WHERE id = ?');
-        $checkPassword->execute(array($id));
+                $password = $_POST['actual-password'];
+                $newPassword = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
+                $id = $_SESSION['id'];
 
-        $Password = $checkPassword->fetch();
+                $checkPassword = $db->prepare('SELECT password FROM users WHERE id = ?');
+                $checkPassword->execute(array($id));
 
-        if (password_verify($password, $Password['password'])) {
-            
-            $checkPassword->closeCursor();
+                $Password = $checkPassword->fetch();
 
-            $updatePassword = $db->prepare('UPDATE users SET password = ? WHERE id = ?');
-            $updatePassword->execute(array($newPassword, $id));
+                if (password_verify($password, $Password['password'])) {
 
-            SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'Password changed.');
+                    $checkPassword->closeCursor();
+
+                    $updatePassword = $db->prepare('UPDATE users SET password = ? WHERE id = ?');
+                    $updatePassword->execute(array($newPassword, $id));
+
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'Password changed.');
 
 
-            header('Location: updateProfile.php?id=' . $id .'&msg3=true');
-
-    }else{
-        $errorMsg3 = bookfind_translate('Your current password is incorrect.');
-}
-}else{
-    $errorMsg3 = bookfind_translate('The two new passwords are not identical.');
-}
-}else{
-    $errorMsg3 = bookfind_translate('Please fill in all fields.');
-}
-}else{
-    $errorMsg3 = bookfind_translate('Not all fields exist. Please') . ' <a href="updateProfile.php?id=' . $id . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
-}
+                    header('Location: ' . url('updateProfile.php?id=' . rawurlencode((string)$id) . '&msg3=true'));
+                } else {
+                    $errorMsg3 = bookfind_translate('Your current password is incorrect.');
+                }
+            } else {
+                $errorMsg3 = bookfind_translate('The two new passwords are not identical.');
+            }
+        } else {
+            $errorMsg3 = bookfind_translate('Please fill in all fields.');
+        }
+    } else {
+        $errorMsg3 = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('updateProfile.php?id=' . rawurlencode((string)$id)), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/gettextFunction.php';
+require_once ROOT_PATH . '/actions/functions/gettextFunction.php';
 
 // CSRF helper for BookFind
 

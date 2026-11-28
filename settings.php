@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //Copyright (C) 2026 Chromared
 //
@@ -16,29 +17,29 @@
 ?>
 
 <?php if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
-    <?php require 'actions/database.php';
-    require 'actions/functions/logFunction.php';
-    require 'actions/users/securityAction.php';
-    require 'actions/users/showOneUserProfileAction.php';
-    require 'actions/functions/selected.php';
-    require 'actions/users/updateThemeAction.php';
+    <?php require ROOT_PATH . '/actions/database.php';
+    require ROOT_PATH . '/actions/functions/logFunction.php';
+    require ROOT_PATH . '/actions/users/securityAction.php';
+    require ROOT_PATH . '/actions/users/showOneUserProfileAction.php';
+    require ROOT_PATH . '/actions/functions/selected.php';
+    require ROOT_PATH . '/actions/users/updateThemeAction.php';
     ?>
     <!DOCTYPE html>
-    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= bookfind_translate('BookFind — Settings'); ?></title>
-        <?php include 'includes/header.php'; ?>
+        <?php include ROOT_PATH . '/includes/header.php'; ?>
     </head>
 
     <body>
-        <?php include 'includes/navbar.php'; ?>
+        <?php include ROOT_PATH . '/includes/navbar.php'; ?>
         <main class="page">
             <div class="container">
                 <div class="narrow">
-                    <form method="post">
+                    <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
                         <?= csrf_field(); ?>
                         <div class="card">
                             <div class="card__body">
@@ -72,11 +73,11 @@
                 </div>
             </div>
         </main>
-        <?php include 'includes/footer.php'; ?>
+        <?php include ROOT_PATH . '/includes/footer.php'; ?>
     </body>
 
     </html>
 <?php } else {
-    require 'actions/functions/sessionInit.php';
-    header('Location: settings.php?id=' . $_SESSION['id']);
+    require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+    header('Location: ' . url('settings.php?id=' . rawurlencode((string)$_SESSION['id'])));
 } ?>

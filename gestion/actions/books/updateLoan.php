@@ -1,5 +1,5 @@
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
-require_once __DIR__ . '/../../../actions/users/securityAction.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require_once ROOT_PATH . '/actions/users/securityAction.php';
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
 //
@@ -29,6 +29,6 @@ require_once __DIR__ . '/../../../actions/users/securityAction.php';
         $updateLoan = $db->prepare('UPDATE loans SET due_date = ? WHERE book_id = ? AND borrower_id = ? AND status = 1');
         $updateLoan->execute(array($date, $book, $user));
 
-        header('Location: loan.php?id=' . $book . '&user_id=' . $user . '&success');
+        header('Location: ' . url('gestion/loan.php?id=' . rawurlencode((string)$book) . '&user_id=' . rawurlencode((string)$user) . '&success'));
 
 }}

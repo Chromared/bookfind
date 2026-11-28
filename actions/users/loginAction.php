@@ -21,15 +21,19 @@
 <?php
 // Redirect after login: to the requested page if it is local,
 // otherwise to the page matching the grade (management for graded users, home otherwise).
-function loginRedirectTarget($url) {
+function loginRedirectTarget($url)
+{
     if (is_string($url) && $url !== '') {
         $url = html_entity_decode($url, ENT_QUOTES, 'UTF-8');
         // Only allow local redirects (avoids open redirects)
         if (!preg_match('#^(https?:)?//#i', $url)) {
-            return $url;
+            if (BASE_URL !== '' && strpos($url, BASE_URL . '/') === 0) {
+                return $url;
+            }
+            return url($url);
         }
     }
-    return (!empty($_SESSION['grade']) && $_SESSION['grade'] != '0') ? 'gestion/index.php' : 'index.php';
+    return url((!empty($_SESSION['grade']) && $_SESSION['grade'] != '0') ? 'gestion/index.php' : 'index.php');
 }
 
 if (isset($_COOKIE['auth_token']) and !empty($_COOKIE['auth_token'])) {
@@ -52,7 +56,6 @@ if (isset($_COOKIE['auth_token']) and !empty($_COOKIE['auth_token'])) {
         $usersInfos = $checkIfUserAlreadyExists->fetch();
 
         $_SESSION['auth'] = true;
-        $_SESSION['admin'] = false;
         $_SESSION['id'] = $usersInfos['id'];
         $_SESSION['lastname'] = $usersInfos['last_name'];
         $_SESSION['firstname'] = $usersInfos['first_name'];
@@ -66,8 +69,8 @@ if (isset($_COOKIE['auth_token']) and !empty($_COOKIE['auth_token'])) {
         header('Location: ' . loginRedirectTarget($_GET['redirect'] ?? ''));
         exit;
     }
-} 
-require_once __DIR__ . '/../functions/csrfFunction.php';
+}
+require_once ROOT_PATH . '/actions/functions/csrfFunction.php';
 
 if (isset($_POST['validate'])) {
     // Verify CSRF token
@@ -111,7 +114,7 @@ if (isset($_POST['validate'])) {
 
                 if (password_verify($password, $usersInfos['password'])) {
 
-                    if(isset($_POST['rememberMe']) and !empty($_POST['rememberMe'])) {
+                    if (isset($_POST['rememberMe']) and !empty($_POST['rememberMe'])) {
 
                         $rememberMe = true;
 
@@ -141,7 +144,6 @@ if (isset($_POST['validate'])) {
                     }
 
                     $_SESSION['auth'] = true;
-                    $_SESSION['admin'] = false;
                     $_SESSION['id'] = $usersInfos['id'];
                     $_SESSION['lastname'] = $usersInfos['last_name'];
                     $_SESSION['firstname'] = $usersInfos['first_name'];
@@ -156,7 +158,7 @@ if (isset($_POST['validate'])) {
                     // reset attempts on success
                     $attempts = ['count' => 0, 'first' => time()];
 
-                    if($rememberMe) {
+                    if ($rememberMe) {
                         SaveLog($db, $_SERVER['REQUEST_URI'], 'Login', 'Manual login with cookie creation.');
                     } else {
                         SaveLog($db, $_SERVER['REQUEST_URI'], 'Login', 'Manual login.');
@@ -179,6 +181,6 @@ if (isset($_POST['validate'])) {
             $errorMsg = '<div class="msg"><div class="msg-alerte">' . bookfind_translate('Not all fields are filled in.') . '</div></div>';
         }
     } else {
-        $errorMsg = '<div class="msg"><div class="msg-alerte"><p>' . bookfind_translate('Not all fields exist. Reload the page by clicking') . ' <a href="login.php">' . bookfind_translate('here') . '</a>.</p></div></div>';
+        $errorMsg = '<div class="msg"><div class="msg-alerte"><p>' . bookfind_translate('Not all fields exist. Reload the page by clicking') . ' <a href="' . htmlspecialchars(url('login.php'), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('here') . '</a>.</p></div></div>';
     }
 }

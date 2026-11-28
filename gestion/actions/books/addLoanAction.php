@@ -18,9 +18,9 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
-require_once __DIR__ . '/../../../actions/users/securityAction.php';
-require_once __DIR__ . '/../../actions/users/securityAdminAction.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require_once ROOT_PATH . '/actions/users/securityAction.php';
+require_once ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
 if(isset($_POST['validateAdd'])){
     if(isset($_POST['user_id']) AND isset($_POST['date'])){
     if(!empty($_POST['user_id']) AND !empty($_POST['date'])){
@@ -58,7 +58,7 @@ if(isset($_POST['validateAdd'])){
 
             SaveLog($db, $_SERVER['REQUEST_URI'], 'Book loan', 'The book ' . htmlspecialchars($booksInfos['title']) . ' was loaned.');
 
-            header('Location: loan.php?id=' . $book . '&user_id=' . $user_id);
+            header('Location: ' . url('gestion/loan.php?id=' . rawurlencode((string)$book) . '&user_id=' . rawurlencode((string)$user_id)));
 
     }else{$msg1 = bookfind_translate('This user has reached their loan limit.');}
     }else{$msg1 = bookfind_translate('This book is already on loan.');}

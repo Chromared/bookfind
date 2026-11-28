@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
   $selectUsers = $db->prepare('SELECT * FROM users');
     $selectUsers->execute();
     while($user = $selectUsers->fetch()){

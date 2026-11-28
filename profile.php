@@ -15,30 +15,32 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/database.php';
-require 'actions/users/securityAction.php';
-require_once 'actions/functions/gettextFunction.php';
-require 'actions/functions/logFunction.php';
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require_once ROOT_PATH . '/actions/functions/gettextFunction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
 if (isset($_GET['id']) and !empty($_GET['id'])) {
-  require 'actions/users/showOneUserProfileAction.php';
+  require ROOT_PATH . '/actions/users/showOneUserProfileAction.php';
 } else {
-  header('Location: profile.php?id=' . $_SESSION['id']);
+  header('Location: ' . url('profile.php?id=' . rawurlencode((string)$_SESSION['id'])));
 }
-require 'actions/functions/gradeIntToText.php';
-require 'actions/functions/conversionDateHour.php'; ?>
+require ROOT_PATH . '/actions/functions/gradeIntToText.php';
+require ROOT_PATH . '/actions/functions/conversionDateHour.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Profile'); ?></title>
-  <?php include 'includes/header.php' ?>
+  <?php include ROOT_PATH . '/includes/header.php' ?>
 </head>
 
 <body>
-  <?php include 'includes/navbar.php' ?>
+  <?php include ROOT_PATH . '/includes/navbar.php' ?>
   <main class="page">
     <div class="container">
       <?php if ($selectInfosFromUsers->rowCount() === 1) { ?>
@@ -60,11 +62,11 @@ require 'actions/functions/conversionDateHour.php'; ?>
                 </div>
                 <div class="btn-group" style="margin-left:auto;">
                   <?php if ($usersInfos['id'] == $_SESSION['id']) { ?>
-                    <a href="actions/users/logoutAction.php" class="btn btn--secondary"><?= bookfind_translate('Sign out'); ?></a>
-                    <a href="updateProfile.php?id=<?= htmlspecialchars($_SESSION['id']); ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
+                    <a href="<?= url('actions/users/logoutAction.php'); ?>" class="btn btn--secondary"><?= bookfind_translate('Sign out'); ?></a>
+                    <a href="<?= url('updateProfile.php?id=' . rawurlencode((string)$_SESSION['id'])); ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
                   <?php } elseif ($_SESSION['grade'] != 0) { ?>
-                    <a href="gestion/user-loans.php?id=<?= htmlspecialchars($usersInfos['username']) ?>" class="btn btn--success"><?= bookfind_translate('Loans'); ?></a>
-                    <a href="gestion/update-user.php?id=<?= htmlspecialchars($usersInfos['id']) ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
+                    <a href="<?= url('gestion/user-loans.php?id=' . rawurlencode((string)$usersInfos['username'])); ?>" class="btn btn--success"><?= bookfind_translate('Loans'); ?></a>
+                    <a href="<?= url('gestion/update-user.php?id=' . rawurlencode((string)$usersInfos['id'])); ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
                   <?php } ?>
                 </div>
               </div>
@@ -119,7 +121,7 @@ require 'actions/functions/conversionDateHour.php'; ?>
       <?php } ?>
     </div>
   </main>
-  <?php include 'includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

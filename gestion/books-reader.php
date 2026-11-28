@@ -1,3 +1,5 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,26 +18,26 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require 'actions/users/securityAdminAction.php';
-require '../actions/books/showOneBookAction.php';
-require '../actions/books/showOneLoan.php';
-require '../actions/functions/conversionDate.php';
-require '../actions/functions/conversionDateHour.php';
-require '../actions/functions/colorLoanDateFunction.php'; ?>
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/books/showOneBookAction.php';
+require ROOT_PATH . '/actions/books/showOneLoan.php';
+require ROOT_PATH . '/actions/functions/conversionDate.php';
+require ROOT_PATH . '/actions/functions/conversionDateHour.php';
+require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Book information'); ?></title>
-  <?php include '../includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
   <main class="page">
     <div class="container">
       <div class="page-head">
@@ -44,15 +46,17 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
           <p class="page-head__sub"><?= htmlspecialchars($booksInfos['author']); ?></p>
         </div>
         <div class="page-head__actions">
-          <a href="update-book.php?id=<?= htmlspecialchars($booksInfos['id']); ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
-          <a href="loan.php?id=<?= htmlspecialchars($booksInfos['id']); ?><?php if ($booksInfos['status'] == 1) { echo '&user_id=' . htmlspecialchars($loan['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a>
+          <a href="<?= url('gestion/update-book.php?id=' . rawurlencode((string)$booksInfos['id'])); ?>" class="btn btn--primary"><?= bookfind_translate('Edit'); ?></a>
+          <a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$booksInfos['id']) . ($booksInfos['status'] == 1 ? '&user_id=' . rawurlencode((string)$loan['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a>
         </div>
       </div>
 
       <div class="split">
         <div class="card">
           <div class="card__header">
-            <svg class="icon"><use href="#i-book"/></svg>
+            <svg class="icon">
+              <use href="#i-book" />
+            </svg>
             <?= bookfind_translate('About the book'); ?>
           </div>
           <div class="card__body">
@@ -102,7 +106,9 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
 
         <div class="card">
           <div class="card__header">
-            <svg class="icon"><use href="#i-arrow-up"/></svg>
+            <svg class="icon">
+              <use href="#i-arrow-up" />
+            </svg>
             <?= bookfind_translate('Availability'); ?>
           </div>
           <div class="card__body">
@@ -111,7 +117,7 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
               <div class="mt-2">
                 <div class="kv">
                   <span class="kv__k"><?= bookfind_translate('Borrowed by'); ?></span>
-                  <span class="kv__v"><a href="../profile.php?id=<?= htmlspecialchars($loan['borrower_id']); ?>"><?= htmlspecialchars($loan['borrower_name']); ?></a></span>
+                  <span class="kv__v"><a href="<?= url('profile.php?id=' . rawurlencode((string)$loan['borrower_id'])); ?>"><?= htmlspecialchars($loan['borrower_name']); ?></a></span>
                 </div>
                 <div class="kv">
                   <span class="kv__k"><?= bookfind_translate('Due on'); ?></span>
@@ -127,7 +133,7 @@ require '../actions/functions/colorLoanDateFunction.php'; ?>
       </div>
     </div>
   </main>
-  <?php include '../includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

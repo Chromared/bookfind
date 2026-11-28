@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,25 +17,25 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require '../actions/functions/conversionDate.php';
-require '../actions/functions/conversionDateHour.php';
-require '../actions/functions/colorLoanDateFunction.php';
-require 'actions/users/securityAdminAction.php';
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/actions/functions/conversionDate.php';
+require ROOT_PATH . '/actions/functions/conversionDateHour.php';
+require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
 $gestion = true; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Search for a book'); ?></title>
-  <?php include '../includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
   <main class="page">
     <div class="container container--wide">
       <div class="page-head">
@@ -43,14 +44,14 @@ $gestion = true; ?>
           <p class="page-head__sub"><?= bookfind_translate('Browse and manage the library catalog.'); ?></p>
         </div>
         <div class="page-head__actions">
-          <a href="add-book.php" class="btn btn--primary">
+          <a href="<?= url('gestion/add-book.php'); ?>" class="btn btn--primary">
             <svg class="icon"><use href="#i-save"/></svg><?= bookfind_translate('Add a book'); ?>
           </a>
         </div>
       </div>
 
       <div class="searchband">
-        <form method="GET">
+        <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="GET">
           <div class="input-group">
             <input type="text" name="s" class="input" value="<?php if (isset($_GET['s']) and !empty($_GET['s'])) {
                                                                 echo htmlspecialchars($_GET['s']);
@@ -65,10 +66,10 @@ $gestion = true; ?>
         </form>
       </div>
 
-      <?php include '../actions/books/sBooks.php'; ?>
+      <?php include ROOT_PATH . '/actions/books/sBooks.php'; ?>
     </div>
   </main>
-  <?php include '../includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

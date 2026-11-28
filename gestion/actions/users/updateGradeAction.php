@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 $id = $_GET['id'] ?? null;
 if (isset($_POST['validateGrade'])) {
     if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') {
@@ -38,9 +38,9 @@ if (isset($_POST['validateGrade'])) {
                     $getUser->execute(array($id));
                     $usersInfos = $getUser->fetch();
 
-                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Grade changed', 'The grade of <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed from ' . NoEchoGrade($usersInfos['grade'] ?? '') . ' to ' . NoEchoGrade($newGrade) . '.');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Grade changed', 'The grade of <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)($usersInfos['id'] ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed from ' . NoEchoGrade($usersInfos['grade'] ?? '') . ' to ' . NoEchoGrade($newGrade) . '.');
 
-                    header('Location: update-user.php?id=' . ($id ?? '') . '&msg5=true');
+                    header('Location: ' . url('gestion/update-user.php?id=' . rawurlencode((string)($id ?? '')) . '&msg5=true'));
                 } else {
                     $errorMsg5 = bookfind_translate('You do not have sufficient permissions to apply this grade.');
                 }
@@ -48,7 +48,7 @@ if (isset($_POST['validateGrade'])) {
                 $errorMsg5 = bookfind_translate('Please fill in all fields.');
             }
         } else {
-            $errorMsg5 = bookfind_translate('Not all fields exist. Please') . ' <a href="update-user.php?id=' . $id . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+            $errorMsg5 = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('gestion/update-user.php?id=' . rawurlencode((string)$id)), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
         }
     } else {
         $errorMsg5 = bookfind_translate('You do not have permission to perform this action.');

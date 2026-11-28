@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['validateDelete1'])){
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; if(isset($_POST['validateDelete1'])){
 
         $id = $_GET['id'];
 

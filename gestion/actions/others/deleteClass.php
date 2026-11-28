@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['classDeleteValidate'])){
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; if(isset($_POST['classDeleteValidate'])){
     $existingClass = $_POST['existingClass2'];
 
     $checkIfClassAlreadyExists = $db->prepare('SELECT name FROM classes WHERE name = ?');
@@ -34,7 +34,7 @@
 
     SaveLog($db, $_SERVER['REQUEST_URI'], 'Class deleted', 'The class "' . htmlspecialchars($existingClass) . '" was deleted. Users in this class were moved to the class "None".');
 
-    header('Location: bookfind.php?tab=classes&successDeleteClass#deleteClass');
+    header('Location: ' . url('gestion/bookfind.php?tab=classes&successDeleteClass#deleteClass'));
 
     }else{ $msgC3 = bookfind_translate('This class already exists.'); }
 }

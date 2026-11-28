@@ -18,12 +18,12 @@
 
 
 
-<?php if (isset($_POST['validateDelete2'])){
+<?php if (isset($_POST['validateDelete2'])) {
 
         $checkPassword = $db->prepare('DELETE FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
 
         SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'No comment.');
-        
-        header('Location: actions/users/logoutAction.php');
+
+        header('Location: ' . url('actions/users/logoutAction.php'));
 }

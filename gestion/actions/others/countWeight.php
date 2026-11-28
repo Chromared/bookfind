@@ -1,7 +1,9 @@
-<?php require_once '../../../actions/database.php';
-require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once dirname(__DIR__, 3) . '/includes/paths.php'; ?>
+<?php require_once ROOT_PATH . '/actions/database.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 
-function findProjectRoot($dir) {
+function findProjectRoot($dir)
+{
     $dir = realpath($dir);
 
     while ($dir && $dir !== dirname($dir)) {
@@ -19,7 +21,8 @@ function findProjectRoot($dir) {
     return $dir;
 }
 
-function getProjectSizes($startDir) {
+function getProjectSizes($startDir)
+{
 
     $rootDir = findProjectRoot($startDir);
 
@@ -100,4 +103,4 @@ function getProjectSizes($startDir) {
 
 header('Content-Type: application/json');
 
-echo json_encode(getProjectSizes(__DIR__), JSON_PRETTY_PRINT);
+echo json_encode(getProjectSizes(ROOT_PATH), JSON_PRETTY_PRINT);

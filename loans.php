@@ -15,26 +15,28 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/database.php';
-require 'actions/users/securityAction.php';
-require 'actions/functions/logFunction.php';
-require 'actions/books/showLoans.php';
-require 'actions/functions/conversionDateHour.php';
-require 'actions/functions/conversionDate.php';
-require 'actions/functions/colorLoanDateFunction.php'; ?>
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/actions/books/showLoans.php';
+require ROOT_PATH . '/actions/functions/conversionDateHour.php';
+require ROOT_PATH . '/actions/functions/conversionDate.php';
+require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Loans'); ?></title>
-  <?php include 'includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body>
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/includes/navbar.php'; ?>
   <?php if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
 
     <?php $nbOverdue = $selectLoans1->rowCount();
@@ -81,8 +83,8 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
-                          <?php if ($_SESSION['grade'] == 1) { ?><a href="gestion/loan.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?><?php if ($fetchedBooks['status'] == 1) { echo '&user_id=' . htmlspecialchars($loanInfos1['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
+                          <a href="<?= url('books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                          <?php if ($_SESSION['grade'] == 1) { ?><a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$fetchedBooks['id']) . ($fetchedBooks['status'] == 1 ? '&user_id=' . rawurlencode((string)$loanInfos1['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
                         </div>
                       </div>
                     </div>
@@ -113,8 +115,8 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
-                          <?php if ($_SESSION['grade'] == 1) { ?><a href="gestion/loan.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?><?php if ($fetchedBooks['status'] == 1) { echo '&user_id=' . htmlspecialchars($loanInfos2['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
+                          <a href="<?= url('books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                          <?php if ($_SESSION['grade'] == 1) { ?><a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$fetchedBooks['id']) . ($fetchedBooks['status'] == 1 ? '&user_id=' . rawurlencode((string)$loanInfos2['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
                         </div>
                       </div>
                     </div>
@@ -145,8 +147,8 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
-                          <?php if ($_SESSION['grade'] == 1) { ?><a href="gestion/loan.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?><?php if ($fetchedBooks['status'] == 1) { echo '&user_id=' . htmlspecialchars($loanInfos3['borrower_id']); } ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
+                          <a href="<?= url('books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                          <?php if ($_SESSION['grade'] == 1) { ?><a href="<?= url('gestion/loan.php?id=' . rawurlencode((string)$fetchedBooks['id']) . ($fetchedBooks['status'] == 1 ? '&user_id=' . rawurlencode((string)$loanInfos3['borrower_id']) : '')); ?>" class="btn btn--success"><?= bookfind_translate('Loan'); ?></a><?php } ?>
                         </div>
                       </div>
                     </div>
@@ -177,7 +179,7 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
                           </div>
                         </div>
                         <div class="btn-group mt-4">
-                          <a href="books-reader.php?id=<?= htmlspecialchars($fetchedBooks['id']); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                          <a href="<?= url('books-reader.php?id=' . rawurlencode((string)$fetchedBooks['id'])); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
                         </div>
                       </div>
                     </div>
@@ -193,7 +195,7 @@ require 'actions/functions/colorLoanDateFunction.php'; ?>
   <?php } else {
     die(bookfind_translate('Missing the id number'));
   } ?>
-  <?php include 'includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

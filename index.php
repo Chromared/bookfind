@@ -15,13 +15,15 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 
 // Landing page statistics (live data, graceful fallback if the database is unavailable)
 $landingStats = ['books' => 0, 'available' => 0, 'loans' => 0, 'readers' => 0, 'popular' => []];
 try {
-    require 'actions/database.php';
+    require ROOT_PATH . '/actions/database.php';
 
     $landingStats['books'] = (int)$db->query('SELECT COUNT(*) FROM books')->fetchColumn();
     $landingStats['available'] = (int)$db->query('SELECT COUNT(*) FROM books WHERE status = 0')->fetchColumn();
@@ -44,18 +46,18 @@ function shortTitle($title, $max = 16) {
     return mb_strlen($title) > $max ? mb_substr($title, 0, $max - 1) . '…' : $title;
 } ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Library of the C.D.I.'); ?></title>
-  <?php include 'includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body>
   <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/includes/navbar.php'; ?>
   <main class="page">
     <div class="container">
       <section class="hero">
@@ -66,7 +68,7 @@ function shortTitle($title, $max = 16) {
               <span class="hero__popular-label"><?= bookfind_translate('Popular right now'); ?></span>
               <span class="hero__popular-list">
                 <?php foreach ($landingStats['popular'] as $i => $book) { ?>
-                  <a class="chip chip--link" href="books.php?s=<?= urlencode($book['title']); ?>"><?= htmlspecialchars(shortTitle($book['title'], 22)); ?></a>
+                  <a class="chip chip--link" href="<?= url('books.php?s=' . urlencode($book['title'])); ?>"><?= htmlspecialchars(shortTitle($book['title'], 22)); ?></a>
                 <?php } ?>
               </span>
             </div>
@@ -121,7 +123,7 @@ function shortTitle($title, $max = 16) {
                     <?php if (!empty($book['series'])) { ?><span class="chip"><?= bookfind_translate('Volume'); ?> <?= htmlspecialchars($book['volume']); ?></span><?php } ?>
                   </div>
                   <div class="book-card__foot">
-                    <a href="books-reader.php?id=<?= (int)$book['id']; ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
+                    <a href="<?= url('books-reader.php?id=' . (int)$book['id']); ?>" class="btn btn--secondary"><?= bookfind_translate('View'); ?></a>
                   </div>
                 </div>
               </article>
@@ -169,8 +171,8 @@ function shortTitle($title, $max = 16) {
             <h2><?= bookfind_translate('Ready to explore the catalog?'); ?></h2>
             <p><?= bookfind_translate('Create an account to borrow and track your books.'); ?></p>
             <div class="btn-group">
-              <a href="signup.php" class="btn btn--primary btn--lg"><?= bookfind_translate('Sign up'); ?></a>
-              <a href="login.php" class="btn btn--secondary btn--lg"><?= bookfind_translate('Sign in'); ?></a>
+              <a href="<?= url('signup.php'); ?>" class="btn btn--primary btn--lg"><?= bookfind_translate('Sign up'); ?></a>
+              <a href="<?= url('login.php'); ?>" class="btn btn--secondary btn--lg"><?= bookfind_translate('Sign in'); ?></a>
             </div>
           </div>
         </section>
@@ -224,7 +226,7 @@ function shortTitle($title, $max = 16) {
       for (var j = 0; j < els.length; j++) { io.observe(els[j]); }
     });
   </script>
-  <?php include 'includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

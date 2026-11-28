@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -17,41 +18,41 @@
 ?>
 
 <?php if (isset($_GET['id']) and !empty($_GET['id'])) { ?>
-  <?php require '../actions/database.php';
-  require '../actions/users/securityAction.php';
-  require 'actions/users/securityAdminAction.php';
-  require '../actions/functions/logFunction.php';
-  require '../actions/users/showOneUserProfileAction.php';
+  <?php require ROOT_PATH . '/actions/database.php';
+  require ROOT_PATH . '/actions/users/securityAction.php';
+  require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+  require ROOT_PATH . '/actions/functions/logFunction.php';
+  require ROOT_PATH . '/actions/users/showOneUserProfileAction.php';
   if (($_SESSION['grade'] != '1' and ($usersInfos['grade'] ?? null) == '1') or ($_SESSION['grade'] != '1' and $_SESSION['grade'] != '2' and ($usersInfos['grade'] ?? null) == '2') or $_SESSION['grade'] == '3') {
     http_response_code(403);
-    require '../errors/403.php';
+    require ROOT_PATH . '/errors/403.php';
     exit;
   } else {
-    require '../actions/functions/selected.php';
-    require '../actions/functions/gradeIntToText.php';
-    require 'actions/users/updatePersonalInfoAction.php';
-    require 'actions/users/updateSchoolInfoAction.php';
-    require 'actions/users/updateGradeAction.php';
-    require 'actions/users/updatePasswordAction.php';
-    require 'actions/users/deleteAccountAction1.php';
-    require 'actions/users/deleteAccountAction2.php'; ?>
+    require ROOT_PATH . '/actions/functions/selected.php';
+    require ROOT_PATH . '/actions/functions/gradeIntToText.php';
+    require ROOT_PATH . '/gestion/actions/users/updatePersonalInfoAction.php';
+    require ROOT_PATH . '/gestion/actions/users/updateSchoolInfoAction.php';
+    require ROOT_PATH . '/gestion/actions/users/updateGradeAction.php';
+    require ROOT_PATH . '/gestion/actions/users/updatePasswordAction.php';
+    require ROOT_PATH . '/gestion/actions/users/deleteAccountAction1.php';
+    require ROOT_PATH . '/gestion/actions/users/deleteAccountAction2.php'; ?>
     <!DOCTYPE html>
-    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+    <html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title><?= bookfind_translate('BookFind — Update user account'); ?></title>
-      <?php include '../includes/header.php' ?>
+      <?php include ROOT_PATH . '/includes/header.php' ?>
     </head>
 
     <body class="admin">
-      <?php include 'includes/navbar.php' ?>
+      <?php include ROOT_PATH . '/gestion/includes/navbar.php' ?>
       <main class="page">
         <div class="container">
           <div class="narrow stack">
 
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
@@ -88,7 +89,7 @@
               </div>
             </form>
 
-            <form method="post">
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
               <?= csrf_field(); ?>
               <div class="card">
                 <div class="card__body">
@@ -108,7 +109,7 @@
                   <div class="field">
                     <label for="class_name" class="label"><?= bookfind_translate('Class'); ?></label>
                     <select name="class_name" id="class_name" class="select" required>
-                      <?php include '../actions/functions/getClassesAndOptions.php'; ?>
+                      <?php include ROOT_PATH . '/actions/functions/getClassesAndOptions.php'; ?>
                     </select>
                   </div>
                   <div class="btn-group">
@@ -121,7 +122,7 @@
 
             <?php if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') { ?>
 
-              <form method="post">
+              <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
                 <?= csrf_field(); ?>
                 <div class="card">
                   <div class="card__body">
@@ -154,7 +155,7 @@
                 </div>
               </form>
 
-              <form method="post">
+              <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
                 <?= csrf_field(); ?>
                 <div class="card">
                   <div class="card__body">
@@ -186,7 +187,7 @@
                 </div>
               </form>
 
-              <form method="post">
+              <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="post">
                 <?= csrf_field(); ?>
                 <div class="card">
                   <div class="card__body">
@@ -218,12 +219,12 @@
           </div>
         </div>
       </main>
-      <?php include '../includes/footer.php'; ?>
+      <?php include ROOT_PATH . '/includes/footer.php'; ?>
     </body>
 
     </html>
   <?php } else {
   http_response_code(403);
-  require '../errors/403.php';
+  require ROOT_PATH . '/errors/403.php';
   exit;
 } ?>

@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,27 +17,27 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require 'actions/users/securityAdminAction.php';
-require '../actions/functions/logFunction.php';
-require 'actions/books/addBooksAction.php'; ?>
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/gestion/actions/books/addBooksAction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Add a book'); ?></title>
-  <?php include '../includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-  <?php include 'includes/navbar.php'; ?>
+  <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
   <main class="page">
     <div class="container">
       <div class="narrow">
-        <form method="POST" autocomplete="off">
+        <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST" autocomplete="off">
           <?= csrf_field(); ?>
           <div class="card">
             <div class="card__body">
@@ -60,7 +61,7 @@ require 'actions/books/addBooksAction.php'; ?>
                 <label for="isbn" class="label"><?= bookfind_translate('ISBN*'); ?></label>
                 <input type="number" name="isbn" id="isbn" class="input" list="isbns" min="1000000000" max="9999999999999" autofocus required />
                 <datalist id="isbns">
-                  <?php include 'actions/books/list-isbns.php'; ?>
+                  <?php include ROOT_PATH . '/gestion/actions/books/list-isbns.php'; ?>
                 </datalist>
               </div>
               <div class="field">
@@ -71,21 +72,21 @@ require 'actions/books/addBooksAction.php'; ?>
                 <label for="author" class="label"><?= bookfind_translate('Author*'); ?></label>
                 <input type="text" name="author" id="author" class="input" list="authors" required />
                 <datalist id="authors">
-                  <?php include 'actions/books/list-authors.php'; ?>
+                  <?php include ROOT_PATH . '/gestion/actions/books/list-authors.php'; ?>
                 </datalist>
               </div>
               <div class="field">
                 <label for="type" class="label"><?= bookfind_translate('Type*'); ?></label>
                 <input type="text" name="type" id="type" class="input" list="types" required />
                 <datalist id="types">
-                  <?php include 'actions/books/list-types.php'; ?>
+                  <?php include ROOT_PATH . '/gestion/actions/books/list-types.php'; ?>
                 </datalist>
               </div>
               <div class="field">
                 <label for="publisher" class="label"><?= bookfind_translate('Publisher*'); ?></label>
                 <input type="text" name="publisher" id="publisher" class="input" list="publishers" required />
                 <datalist id="publishers">
-                  <?php include 'actions/books/list-publishers.php'; ?>
+                  <?php include ROOT_PATH . '/gestion/actions/books/list-publishers.php'; ?>
                 </datalist>
               </div>
               <div class="field">
@@ -100,14 +101,14 @@ require 'actions/books/addBooksAction.php'; ?>
                 <label for="genre" class="label"><?= bookfind_translate('Genre'); ?></label>
                 <input type="text" name="genre" id="genre" class="input" list="genres" />
                 <datalist id="genres">
-                  <?php include 'actions/books/list-genres.php'; ?>
+                  <?php include ROOT_PATH . '/gestion/actions/books/list-genres.php'; ?>
                 </datalist>
               </div>
               <div class="field">
                 <label for="series" class="label"><?= bookfind_translate('Series'); ?></label>
                 <input type="text" name="series" id="series" class="input" list="series" />
                 <datalist id="series">
-                  <?php include 'actions/books/list-series.php'; ?>
+                  <?php include ROOT_PATH . '/gestion/actions/books/list-series.php'; ?>
                 </datalist>
               </div>
               <div class="field">
@@ -170,7 +171,7 @@ require 'actions/books/addBooksAction.php'; ?>
       }
     });
   </script>
-  <?php include '../includes/footer.php'; ?>
+  <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

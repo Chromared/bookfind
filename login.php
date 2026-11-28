@@ -15,27 +15,29 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/functions/sessionInit.php'; ?>
-<?php require 'actions/database.php';
-require 'actions/functions/logFunction.php';
-require 'actions/functions/csrfFunction.php';
-require 'actions/users/loginAction.php'; ?>
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
+<?php require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/actions/functions/csrfFunction.php';
+require ROOT_PATH . '/actions/users/loginAction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Sign in'); ?></title>
-  <?php include 'includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body>
-  <?php include 'includes/icons.php'; ?>
+  <?php include ROOT_PATH . '/includes/icons.php'; ?>
   <div class="auth">
     <aside class="auth__brand">
-      <a href="index.php" class="auth__back" aria-label="<?= bookfind_translate('Back'); ?>" title="<?= bookfind_translate('Back'); ?>"
+      <a href="<?= url('index.php'); ?>" class="auth__back" aria-label="<?= bookfind_translate('Back'); ?>" title="<?= bookfind_translate('Back'); ?>"
          onclick="if (history.length > 1) { history.back(); return false; }">
         <svg class="icon"><use href="#i-arrow-left"/></svg>
       </a>
@@ -62,7 +64,7 @@ require 'actions/users/loginAction.php'; ?>
 
     <div class="auth__form">
       <div class="auth__form-inner">
-        <a href="index.php" class="auth__back auth__back--mobile" aria-label="<?= bookfind_translate('Back'); ?>" title="<?= bookfind_translate('Back'); ?>"
+        <a href="<?= url('index.php'); ?>" class="auth__back auth__back--mobile" aria-label="<?= bookfind_translate('Back'); ?>" title="<?= bookfind_translate('Back'); ?>"
            onclick="if (history.length > 1) { history.back(); return false; }">
           <svg class="icon"><use href="#i-arrow-left"/></svg>
         </a>
@@ -76,7 +78,7 @@ require 'actions/users/loginAction.php'; ?>
           </div>
         <?php } ?>
 
-        <form method="POST">
+        <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST">
           <div class="field">
             <label for="username" class="label"><?= bookfind_translate('Username'); ?></label>
             <input type="text" name="username" id="username" class="input" placeholder="jdoe" autofocus required />
@@ -100,7 +102,7 @@ require 'actions/users/loginAction.php'; ?>
           </div>
         </form>
 
-        <div class="auth__foot-link"><?= bookfind_translate("Don't have an account yet?"); ?> <a href="signup.php"><?= bookfind_translate('Sign up'); ?></a></div>
+        <div class="auth__foot-link"><?= bookfind_translate("Don't have an account yet?"); ?> <a href="<?= url('signup.php'); ?>"><?= bookfind_translate('Sign up'); ?></a></div>
       </div>
     </div>
   </div>

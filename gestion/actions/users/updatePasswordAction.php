@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 $id = $_GET['id'] ?? null;
 if (isset($_POST['validatePassword'])) {
     if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') {
@@ -38,9 +38,9 @@ if (isset($_POST['validatePassword'])) {
                     $getUser->execute(array($id));
                     $usersInfos = $getUser->fetch();
 
-                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Password changed', 'The password of <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed.');
+                    SaveLog($db, $_SERVER['REQUEST_URI'], 'Password changed', 'The password of <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)($usersInfos['id'] ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed.');
 
-                    header('Location: update-user.php?id=' . $id . '&msg3=true');
+                    header('Location: ' . url('gestion/update-user.php?id=' . rawurlencode((string)$id) . '&msg3=true'));
                 } else {
                     $errorMsg3 = bookfind_translate('The two new passwords are not identical.');
                 }
@@ -48,7 +48,7 @@ if (isset($_POST['validatePassword'])) {
                 $errorMsg3 = bookfind_translate('Please fill in all fields.');
             }
         } else {
-            $errorMsg3 = bookfind_translate('Not all fields exist. Please') . ' <a href="update-user.php?id=' . ($id ?? '') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+            $errorMsg3 = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('gestion/update-user.php?id=' . rawurlencode((string)($id ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
         }
     } else {
         $errorMsg3 = bookfind_translate('You do not have permission to perform this action.');

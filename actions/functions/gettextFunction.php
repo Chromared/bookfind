@@ -8,7 +8,7 @@ $GLOBALS['bookfindTranslations'] = [];
 $localeSet = false;
 
 if (function_exists('bindtextdomain')) {
-    bindtextdomain('bookfind', dirname(__DIR__, 2) . '/locales');
+    bindtextdomain('bookfind', ROOT_PATH . '/locales');
     bind_textdomain_codeset('bookfind', 'UTF-8');
     textdomain('bookfind');
 
@@ -21,8 +21,8 @@ if (function_exists('bindtextdomain')) {
 }
 
 if ($locale === 'fr_FR' && (!function_exists('gettext') || $localeSet === false)) {
-    $catalogPath = dirname(__DIR__, 2) . '/locales/fr_FR/LC_MESSAGES/bookfind.mo';
-    $catalog = file_get_contents($catalogPath);
+    $catalogPath = ROOT_PATH . '/locales/fr_FR/LC_MESSAGES/bookfind.mo';
+    $catalog = is_file($catalogPath) ? @file_get_contents($catalogPath) : false;
 
     if ($catalog === false || strlen($catalog) < 28) {
         error_log('Unable to read the BookFind French gettext catalog.');

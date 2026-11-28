@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__) . '/includes/paths.php'; require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -17,23 +18,23 @@
 ?>
 
 <?php
-require '../actions/database.php';
-require '../actions/users/securityAction.php';
-require 'actions/users/securityAdminAction.php';
+require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/users/securityAction.php';
+require ROOT_PATH . '/gestion/actions/users/securityAdminAction.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include '../actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= bookfind_translate('BookFind — Management'); ?></title>
-    <?php include '../includes/header.php'; ?>
+    <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body class="admin">
-    <?php include 'includes/navbar.php'; ?>
+    <?php include ROOT_PATH . '/gestion/includes/navbar.php'; ?>
 
     <main class="page">
       <div class="container container--wide">
@@ -212,9 +213,10 @@ require 'actions/users/securityAdminAction.php';
     </main>
 
     <script nonce="<?= htmlspecialchars($_SESSION['csp_nonce'] ?? '') ?>" defer>
+        var appBaseUrl = document.querySelector('meta[name="base-url"]').getAttribute('content') || '';
         function updateCounters() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'actions/others/count_data.php', true);
+            xhr.open('GET', appBaseUrl + '/gestion/actions/others/count_data.php', true);
             xhr.onload = function() {
                 if (xhr.status == 200) {
                     var data = JSON.parse(xhr.responseText);
@@ -466,7 +468,7 @@ require 'actions/users/securityAdminAction.php';
         function loadCharts() {
             var chartIds = ['chart-monthly', 'chart-evolution', 'chart-borrowers', 'chart-status', 'chart-users-classes', 'chart-occupation'];
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'actions/others/stats_data.php', true);
+            xhr.open('GET', appBaseUrl + '/gestion/actions/others/stats_data.php', true);
             xhr.onload = function() {
                 if (xhr.status == 200) {
                     try {
@@ -497,7 +499,7 @@ require 'actions/users/securityAdminAction.php';
         setInterval(updateCounters, 10000);
         loadCharts();
     </script>
-    <?php include '../includes/footer.php'; ?>
+    <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

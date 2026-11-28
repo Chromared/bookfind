@@ -15,28 +15,30 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/functions/sessionInit.php';
-require 'actions/database.php';
-require 'actions/functions/logFunction.php';
-require 'actions/functions/generateUsernameFunction.php';
-require 'actions/users/signupAction.php'; ?>
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require ROOT_PATH . '/actions/database.php';
+require ROOT_PATH . '/actions/functions/logFunction.php';
+require ROOT_PATH . '/actions/functions/generateUsernameFunction.php';
+require ROOT_PATH . '/actions/users/signupAction.php'; ?>
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= bookfind_translate('BookFind — Sign up'); ?></title>
-  <?php include 'includes/header.php'; ?>
+  <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body>
-  <?php include 'includes/icons.php'; ?>
+  <?php include ROOT_PATH . '/includes/icons.php'; ?>
   <div class="auth">
     <aside class="auth__brand">
       <div class="auth__brand-top">
-        <img src="/assets/logo.svg" alt="BookFind" class="navbar__logo">
+        <img src="<?= asset('assets/logo.svg'); ?>" alt="BookFind" class="navbar__logo">
         BookFind
       </div>
       <div>
@@ -72,7 +74,7 @@ require 'actions/users/signupAction.php'; ?>
           </div>
         <?php } ?>
 
-        <form method="POST">
+        <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST">
           <div class="form-row">
             <div class="field">
               <label for="firstname" class="label"><?= bookfind_translate('First name'); ?></label>
@@ -87,7 +89,7 @@ require 'actions/users/signupAction.php'; ?>
             <label for="class_name" class="label"><?= bookfind_translate('Class'); ?></label>
             <select name="class_name" id="class_name" class="select" required>
               <option value><?= bookfind_translate('--- Select a class ---'); ?></option>
-              <?php include 'actions/functions/getClassesAndOptions.php'; ?>
+              <?php include ROOT_PATH . '/actions/functions/getClassesAndOptions.php'; ?>
             </select>
           </div>
           <div class="field">
@@ -101,7 +103,7 @@ require 'actions/users/signupAction.php'; ?>
           <div class="field">
             <label class="check">
               <input type="checkbox" name="rules-pdc" id="rules-pdc" required />
-              <span><?= bookfind_translate('I have read and accept the'); ?> <a href="rules.php" target="_blank"><?= bookfind_translate('rules'); ?></a> <?= bookfind_translate('and the'); ?> <a href="privacy.php" target="_blank"><?= bookfind_translate('privacy policy'); ?></a></span>
+              <span><?= bookfind_translate('I have read and accept the'); ?> <a href="<?= url('rules.php'); ?>" target="_blank"><?= bookfind_translate('rules'); ?></a> <?= bookfind_translate('and the'); ?> <a href="<?= url('privacy.php'); ?>" target="_blank"><?= bookfind_translate('privacy policy'); ?></a></span>
             </label>
           </div>
           <div class="field">
@@ -110,7 +112,7 @@ require 'actions/users/signupAction.php'; ?>
           </div>
         </form>
 
-        <div class="auth__foot-link"><?= bookfind_translate('Already signed up?'); ?> <a href="login.php"><?= bookfind_translate('Sign in'); ?></a></div>
+        <div class="auth__foot-link"><?= bookfind_translate('Already signed up?'); ?> <a href="<?= url('login.php'); ?>"><?= bookfind_translate('Sign in'); ?></a></div>
       </div>
     </div>
   </div>

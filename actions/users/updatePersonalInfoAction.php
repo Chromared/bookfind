@@ -20,8 +20,8 @@
 
 <?php
 if (isset($_POST['validatePersonalInfo'])) {
-        if (isset($_POST['name']) AND isset($_POST['firstname'])) {
-        if (!empty($_POST['name']) AND !empty($_POST['firstname'])) {
+    if (isset($_POST['name']) and isset($_POST['firstname'])) {
+        if (!empty($_POST['name']) and !empty($_POST['firstname'])) {
             $name = $_POST['name'];
             $firstname = $_POST['firstname'];
             $id = $_SESSION['id'];
@@ -29,23 +29,22 @@ if (isset($_POST['validatePersonalInfo'])) {
             $updatePersonalInfo = $db->prepare('UPDATE users SET last_name = ?, first_name = ? WHERE id = ?');
             $updatePersonalInfo->execute(array($name, $firstname, $id));
 
-            if($name != $_SESSION['lastname'] AND $firstname == $_SESSION['firstname']){
+            if ($name != $_SESSION['lastname'] and $firstname == $_SESSION['firstname']) {
                 SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'The new last name is ' . $name . '.');
-            }elseif($name == $_SESSION['lastname'] AND $firstname != $_SESSION['firstname']){
+            } elseif ($name == $_SESSION['lastname'] and $firstname != $_SESSION['firstname']) {
                 SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'The new first name is ' . $firstname . '.');
-            }elseif($name != $_SESSION['lastname'] AND $firstname != $_SESSION['firstname']){
+            } elseif ($name != $_SESSION['lastname'] and $firstname != $_SESSION['firstname']) {
                 SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'This user is now named ' . $name . ' ' . $firstname . '.');
             }
 
             $_SESSION['lastname'] = $name;
             $_SESSION['firstname'] = $firstname;
 
-            header('Location: updateProfile.php?id=' . $id .'&msg1=true');
-
-    }else {
-        $errorMsg1 = bookfind_translate('Please fill in all fields.');
+            header('Location: ' . url('updateProfile.php?id=' . rawurlencode((string)$id) . '&msg1=true'));
+        } else {
+            $errorMsg1 = bookfind_translate('Please fill in all fields.');
+        }
+    } else {
+        $errorMsg1 = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('updateProfile.php?id=' . rawurlencode((string)$id)), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
     }
-}else{
-    $errorMsg1 = bookfind_translate('Not all fields exist. Please') . ' <a href="updateProfile.php?id=' . $id . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
-}
 }

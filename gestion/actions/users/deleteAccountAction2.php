@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if (isset($_POST['validateDelete2'])){
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; if (isset($_POST['validateDelete2'])){
         if($_SESSION['grade'] == 1 OR $_SESSION['grade'] == 2){
             
         $id = $_GET['id'];
@@ -33,7 +33,7 @@
 
         SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'The account of ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' was deleted.');
 
-        header('Location: users.php');
+        header('Location: ' . url('gestion/users.php'));
         
     }else{
         $msg = bookfind_translate('You do not have sufficient permissions to delete this user.');

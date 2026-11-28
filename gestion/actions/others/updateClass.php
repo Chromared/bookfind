@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if(isset($_POST['classUpdateValidate'])){
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; if(isset($_POST['classUpdateValidate'])){
     $existingClass = $_POST['existingClass'];
     $newClass = $_POST['newClassName'];
 
@@ -35,7 +35,7 @@
 
     SaveLog($db, $_SERVER['REQUEST_URI'], 'Class modified', 'The class "' . htmlspecialchars($existingClass) . '" was renamed to ' . htmlspecialchars($newClass) . '.');
 
-    header('Location: bookfind.php?tab=classes&successUpdateClass#updateClass');
+    header('Location: ' . url('gestion/bookfind.php?tab=classes&successUpdateClass#updateClass'));
 
     }else{ $msgC2 = bookfind_translate('The class you want to modify does not exist.'); }
 }

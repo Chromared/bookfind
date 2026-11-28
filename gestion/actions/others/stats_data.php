@@ -1,3 +1,4 @@
+<?php require_once dirname(__DIR__, 3) . '/includes/paths.php'; ?>
 <?php
 //This file belongs to the BookFind project.
 //Copyright (C) 2026 Chromared
@@ -16,8 +17,8 @@
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
-require '../../../actions/database.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
+require ROOT_PATH . '/actions/database.php';
 // Access guard: verify session and graded authorization (same as securityAdminAction.php)
 // For AJAX endpoints, do not include handlers that redirect to an HTML page.
 // Check session and rights here and return JSON + HTTP status code if unauthorized.

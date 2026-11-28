@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 $id = $_GET['id'] ?? null;
 if (isset($_POST['validateSchoolInfo'])) {
     if ($_SESSION['grade'] == '1' or $_SESSION['grade'] == '2') {
@@ -33,20 +33,20 @@ if (isset($_POST['validateSchoolInfo'])) {
 
                 if ($checkIfClassAlreadyExists->rowCount() > 0) {
 
-                    header('Location: update-user.php?id=' . $id . '&msg2=true');
-                        $updateSchoolInfo = $db->prepare('UPDATE users SET class_name = ? WHERE id = ?');
-                        $updateSchoolInfo->execute(array($class_name, $id));
+                    header('Location: ' . url('gestion/update-user.php?id=' . rawurlencode((string)$id) . '&msg2=true'));
+                    $updateSchoolInfo = $db->prepare('UPDATE users SET class_name = ? WHERE id = ?');
+                    $updateSchoolInfo->execute(array($class_name, $id));
 
-                        // Retrieve info before change
-                        $getUser = $db->prepare('SELECT id, first_name, last_name, class_name FROM users WHERE id = ?');
-                        $getUser->execute(array($id));
-                        $usersInfos = $getUser->fetch();
+                    // Retrieve info before change
+                    $getUser = $db->prepare('SELECT id, first_name, last_name, class_name FROM users WHERE id = ?');
+                    $getUser->execute(array($id));
+                    $usersInfos = $getUser->fetch();
 
-                        if ($class_name != ($usersInfos['class_name'] ?? '')) {
-                            SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'The class of <a href="../profile.php?id=' . ($usersInfos['id'] ?? '') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed from ' . htmlspecialchars($usersInfos['class_name'] ?? '') . ' to ' . htmlspecialchars($class_name) . '.');
-                        }
+                    if ($class_name != ($usersInfos['class_name'] ?? '')) {
+                        SaveLog($db, $_SERVER['REQUEST_URI'], 'Account modified', 'The class of <a href="' . htmlspecialchars(url('profile.php?id=' . rawurlencode((string)($usersInfos['id'] ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . '</a> was changed from ' . htmlspecialchars($usersInfos['class_name'] ?? '') . ' to ' . htmlspecialchars($class_name) . '.');
+                    }
 
-                        header('Location: update-user.php?id=' . $id . '&msg2=true');
+                    header('Location: ' . url('gestion/update-user.php?id=' . rawurlencode((string)$id) . '&msg2=true'));
                 } else {
                     $errorMsg2 = bookfind_translate('The selected class does not exist.');
                 }
@@ -54,7 +54,7 @@ if (isset($_POST['validateSchoolInfo'])) {
                 $errorMsg2 = bookfind_translate('All fields must be filled in.');
             }
         } else {
-            $errorMsg2 = bookfind_translate('Not all fields exist. Reload the page') . ' <a href="update-user.php?id=' . ($id ?? '') . '">' . bookfind_translate('here') . '</a>.';
+            $errorMsg2 = bookfind_translate('Not all fields exist. Reload the page') . ' <a href="' . htmlspecialchars(url('gestion/update-user.php?id=' . rawurlencode((string)($id ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('here') . '</a>.';
         }
     } else {
         $errorMsg2 = bookfind_translate('You do not have permission to perform this action.');

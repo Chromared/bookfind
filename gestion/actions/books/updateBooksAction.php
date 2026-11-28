@@ -18,11 +18,11 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php';
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php';
 $id = $_GET['id'] ?? null;
-if(isset($_POST['validate'])){
-    if(isset($_GET['id']) AND isset($_POST['title']) AND isset($_POST['author']) AND isset($_POST['isbn']) AND isset($_POST['publisher']) AND isset($_POST['type'])){
-        if(!empty($_GET['id']) AND !empty($_POST['title']) AND !empty($_POST['author']) AND !empty($_POST['isbn']) AND !empty($_POST['publisher']) AND !empty($_POST['type'])){
+if (isset($_POST['validate'])) {
+    if (isset($_GET['id']) and isset($_POST['title']) and isset($_POST['author']) and isset($_POST['isbn']) and isset($_POST['publisher']) and isset($_POST['type'])) {
+        if (!empty($_GET['id']) and !empty($_POST['title']) and !empty($_POST['author']) and !empty($_POST['isbn']) and !empty($_POST['publisher']) and !empty($_POST['type'])) {
 
             $id = $_GET['id'];
             $title = $_POST['title'];
@@ -30,17 +30,20 @@ if(isset($_POST['validate'])){
             $isbn = $_POST['isbn'];
             $publisher = $_POST['publisher'];
             $type = $_POST['type'];
-            
-            if(isset($_POST['summary']) AND !empty($_POST['summary'])){
+
+            if (isset($_POST['summary']) and !empty($_POST['summary'])) {
                 $summary = $_POST['summary'];
-            }else{$summary = false;}
+            } else {
+                $summary = false;
+            }
 
-            if(isset($_POST['genre']) AND !empty($_POST['genre'])){
+            if (isset($_POST['genre']) and !empty($_POST['genre'])) {
                 $genre = $_POST['genre'];
+            } else {
+                $genre = false;
+            }
 
-            }else{$genre = false;}
-
-            if(isset($_POST['unique_id']) AND !empty($_POST['unique_id'])){
+            if (isset($_POST['unique_id']) and !empty($_POST['unique_id'])) {
 
                 $unique_id = $_POST['unique_id'];
 
@@ -49,19 +52,24 @@ if(isset($_POST['validate'])){
                 $idUnique = $checkIfIdUniqueAlreadyExists->fetch();
 
 
-                if(($checkIfIdUniqueAlreadyExists->rowCount() == 0 AND $id != $idUnique['id']) OR $checkIfIdUniqueAlreadyExists->rowCount() == 1 AND $id == $idUnique['id']){
+                if (($checkIfIdUniqueAlreadyExists->rowCount() == 0 and $id != $idUnique['id']) or $checkIfIdUniqueAlreadyExists->rowCount() == 1 and $id == $idUnique['id']) {
 
-                	$id_u = true;
-
+                    $id_u = true;
                 }
-            }else{$unique_id = false; $id_u = true;}
+            } else {
+                $unique_id = false;
+                $id_u = true;
+            }
 
-            if(isset($_POST['series']) AND isset($_POST['volume']) AND !empty($_POST['series']) AND !empty($_POST['volume'])){
+            if (isset($_POST['series']) and isset($_POST['volume']) and !empty($_POST['series']) and !empty($_POST['volume'])) {
                 $series = $_POST['series'];
                 $volume = $_POST['volume'];
-            }else{$series = false; $volume = false;}
+            } else {
+                $series = false;
+                $volume = false;
+            }
 
-            if($id_u === true){
+            if ($id_u === true) {
 
                 $addBook = $db->prepare('UPDATE books SET title = ?, author = ?, isbn = ?, unique_id = ?, publisher = ?, type = ?, summary = ?, genre = ?, series = ?, volume = ? WHERE id = ?');
                 $addBook->execute(array($title, $author, $isbn, $unique_id, $publisher, $type, $summary, $genre, $series, $volume, $id));
@@ -69,8 +77,13 @@ if(isset($_POST['validate'])){
                 SaveLog($db, $_SERVER['REQUEST_URI'], 'Book modified', 'The book ' . htmlspecialchars($title) . ' was modified successfully.');
 
                 $successMsg = 'Book modified successfully';
-
-            }else{ $errorMsg = bookfind_translate('Unique identifier already assigned to another book'); }
-        }else{ $errorMsg = bookfind_translate('Not all fields are filled in.'); }
-    }else{ $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="update-book.php?id=' . ($id ?? '') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.'); }
+            } else {
+                $errorMsg = bookfind_translate('Unique identifier already assigned to another book');
+            }
+        } else {
+            $errorMsg = bookfind_translate('Not all fields are filled in.');
+        }
+    } else {
+        $errorMsg = bookfind_translate('Not all fields exist. Please') . ' <a href="' . htmlspecialchars(url('gestion/update-book.php?id=' . rawurlencode((string)($id ?? ''))), ENT_QUOTES, 'UTF-8') . '">' . bookfind_translate('reload') . '</a> ' . bookfind_translate('the page.');
+    }
 }

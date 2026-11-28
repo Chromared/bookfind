@@ -15,21 +15,23 @@
 //You should have received a copy of the GNU Affero General Public License
 //along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ?>
+<?php require_once __DIR__ . '/includes/paths.php';
+require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
-<?php require 'actions/functions/sessionInit.php'; ?>
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; ?>
 
 <!DOCTYPE html>
-<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include 'actions/users/decodeThemeAction.php'; ?>">
+<html lang="<?= $GLOBALS['bookfindLocale'] === 'fr_FR' ? 'fr' : 'en'; ?>" data-theme="<?php include ROOT_PATH . '/actions/users/decodeThemeAction.php'; ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= bookfind_translate('BookFind — Rules'); ?></title>
-    <?php include 'includes/header.php'; ?>
+    <?php include ROOT_PATH . '/includes/header.php'; ?>
 </head>
 
 <body>
-    <?php include 'includes/navbar.php'; ?>
+    <?php include ROOT_PATH . '/includes/navbar.php'; ?>
     <main class="page">
         <div class="container">
             <div class="narrow prose">
@@ -69,7 +71,7 @@
             </div>
         </div>
     </main>
-    <?php include 'includes/footer.php'; ?>
+    <?php include ROOT_PATH . '/includes/footer.php'; ?>
 </body>
 
 </html>

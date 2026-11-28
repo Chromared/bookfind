@@ -18,7 +18,7 @@
 
 
 
-<?php require_once __DIR__ . '/../../../actions/functions/sessionInit.php'; if (isset($_POST['export'])) {
+<?php require_once ROOT_PATH . '/actions/functions/sessionInit.php'; if (isset($_POST['export'])) {
     // Clean output buffer to avoid unwanted newlines
     if (ob_get_length()) ob_clean();
 
