@@ -22,26 +22,43 @@ require_once ROOT_PATH . '/actions/users/securityAction.php';
 <?php if(isset($_POST['validateReturn'])){
     if(isset($_POST['id']) AND !empty($_POST['id']) AND isset($_POST['user_id']) AND !empty($_POST['user_id'])){
 
-        $book = $_POST['id'];
-        $user_id = $_POST['user_id'];
+        $book = (int)$_POST['id'];
+        $user_id = (int)$_POST['user_id'];
+        $db->beginTransaction();
 
-        $selectNbLoansFromUsers = $db->prepare('SELECT loans_count FROM users WHERE id = ?');
-        $selectNbLoansFromUsers->execute(array($user_id));
-        $user_loans_count = $selectNbLoansFromUsers->fetch();
+        try {
+            $selectLoan = $db->prepare('SELECT id FROM loans WHERE book_id = ? AND borrower_id = ? AND status = 1 FOR UPDATE');
+            $selectLoan->execute([$book, $user_id]);
 
-        $loans_count = $user_loans_count['loans_count'] - 1;
+            if ($selectLoan->fetchColumn() !== false) {
+                $updateLoan = $db->prepare('UPDATE loans SET status = ?, return_date = NOW() WHERE book_id = ? AND borrower_id = ? AND status = 1');
+                $updateLoan->execute([2, $book, $user_id]);
 
-        $updateLoanForBooks = $db->prepare('UPDATE books SET status = ? WHERE id = ?');
-        $updateLoanForBooks->execute(array(2, $book));
+                $updateLoanForBooks = $db->prepare('UPDATE books SET status = ? WHERE id = ?');
+                $updateLoanForBooks->execute([2, $book]);
 
-        $updateLoan = $db->prepare('UPDATE loans SET status = ?, return_date = NOW() WHERE book_id = ? AND borrower_id = ? AND status = 1');
-        $updateLoan->execute(array(2, $book, $user_id));
+                $selectUser = $db->prepare('SELECT loans_count FROM users WHERE id = ? FOR UPDATE');
+                $selectUser->execute([$user_id]);
+                $userLoans = $selectUser->fetch();
+                if ($userLoans) {
+                    $updateMaxLoanUser = $db->prepare('UPDATE users SET loans_count = ? WHERE id = ?');
+                    $updateMaxLoanUser->execute([max(0, (int)$userLoans['loans_count'] - 1), $user_id]);
+                }
 
-        $updateMaxLoanUser = $db->prepare('UPDATE users SET loans_count = ? WHERE id = ?');
-        $updateMaxLoanUser->execute(array($loans_count, $user_id));
+                $db->commit();
+                SaveLog($db, $_SERVER['REQUEST_URI'], 'Loan return', 'No comment');
 
-        SaveLog($db, $_SERVER['REQUEST_URI'], 'Loan return', 'No comment');
+                header('Location: ' . url('gestion/loan.php?id=' . rawurlencode((string)$book) . '&user_id=' . rawurlencode((string)$user_id)));
+                exit;
+            }
 
-        header('Location: ' . url('gestion/loan.php?id=' . rawurlencode((string)$book) . '&user_id=' . rawurlencode((string)$user_id)));
+            $db->rollBack();
+            $msgReturnLoan = bookfind_translate('This loan is no longer active.');
+        } catch (Throwable $exception) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            throw $exception;
+        }
     }
 }

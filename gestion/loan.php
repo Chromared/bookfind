@@ -113,6 +113,12 @@ $dateIn30Days = date('Y-m-d', strtotime('+30 days')); ?>
               <div class="card">
                 <div class="card__body">
                   <h1 class="card__title"><?= bookfind_translate('Return the loan'); ?></h1>
+                  <?php if (isset($msgReturnLoan)) { ?>
+                    <div class="alert alert--warning" role="alert">
+                      <svg class="icon"><use href="#i-alert"/></svg>
+                      <div><?= htmlspecialchars($msgReturnLoan, ENT_QUOTES, 'UTF-8'); ?></div>
+                    </div>
+                  <?php } ?>
                   <div class="field">
                     <input type="submit" name="validateReturn" value="<?= bookfind_translate('Return the loan'); ?>" class="btn btn--success" />
                   </div>

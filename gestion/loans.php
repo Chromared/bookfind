@@ -92,7 +92,7 @@ require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
                       <div class="mt-3">
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed by"); ?></span>
-                          <span class="kv__v"><a href="<?= url('profile.php?id=' . rawurlencode((string)$loanInfos1['borrower_id'])); ?>"><?= htmlspecialchars($loanInfos1['borrower_name']); ?></a></span>
+                          <span class="kv__v"><?php require_once ROOT_PATH . '/actions/functions/loanBorrowerFunction.php'; echo loanBorrowerHtml($loanInfos1); ?></span>
                         </div>
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed on"); ?></span>
@@ -130,7 +130,7 @@ require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
                       <div class="mt-3">
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed by"); ?></span>
-                          <span class="kv__v"><a href="<?= url('profile.php?id=' . rawurlencode((string)$loanInfos2['borrower_id'])); ?>"><?= htmlspecialchars($loanInfos2['borrower_name']); ?></a></span>
+                          <span class="kv__v"><?php require_once ROOT_PATH . '/actions/functions/loanBorrowerFunction.php'; echo loanBorrowerHtml($loanInfos2); ?></span>
                         </div>
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed on"); ?></span>
@@ -168,7 +168,7 @@ require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
                       <div class="mt-3">
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed by"); ?></span>
-                          <span class="kv__v"><a href="<?= url('profile.php?id=' . rawurlencode((string)$loanInfos3['borrower_id'])); ?>"><?= htmlspecialchars($loanInfos3['borrower_name']); ?></a></span>
+                          <span class="kv__v"><?php require_once ROOT_PATH . '/actions/functions/loanBorrowerFunction.php'; echo loanBorrowerHtml($loanInfos3); ?></span>
                         </div>
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed on"); ?></span>
@@ -206,7 +206,7 @@ require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
                       <div class="mt-3">
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed by"); ?></span>
-                          <span class="kv__v"><a href="<?= url('profile.php?id=' . rawurlencode((string)$loanInfos4['borrower_id'])); ?>"><?= htmlspecialchars($loanInfos4['borrower_name']); ?></a></span>
+                          <span class="kv__v"><?php require_once ROOT_PATH . '/actions/functions/loanBorrowerFunction.php'; echo loanBorrowerHtml($loanInfos4); ?></span>
                         </div>
                         <div class="kv">
                           <span class="kv__k"><?= bookfind_translate("Borrowed on"); ?></span>

@@ -2057,3 +2057,36 @@ msgstr ""
 
 #~ msgid ".htaccess tools"
 #~ msgstr "Outils .htaccess"
+
+msgid "Deleted user"
+msgstr "Utilisateur supprimé"
+
+msgid "Please select a valid class."
+msgstr "Veuillez sélectionner une classe valide."
+
+msgid "There are no users in this class."
+msgstr "Cette classe ne contient aucun utilisateur."
+
+msgid "Delete users from a class"
+msgstr "Supprimer les utilisateurs d’une classe"
+
+msgid "%d user account(s) deleted. Loan history was kept."
+msgstr "%d compte(s) utilisateur supprimé(s). L’historique des emprunts a été conservé."
+
+msgid "This will permanently delete %d user account(s) from class \"%s\". Loan history will be kept and the borrowers will be anonymized."
+msgstr "Cette action supprimera définitivement %d compte(s) utilisateur de la classe « %s ». L’historique des emprunts sera conservé et les emprunteurs seront anonymisés."
+
+msgid "Confirm deletion"
+msgstr "Confirmer la suppression"
+
+msgid "Class whose users should be deleted*"
+msgstr "Classe dont les utilisateurs doivent être supprimés*"
+
+msgid "Delete users"
+msgstr "Supprimer les utilisateurs"
+
+msgid "This user account no longer exists."
+msgstr "Ce compte utilisateur n’existe plus."
+
+msgid "This loan is no longer active."
+msgstr "Cet emprunt n’est plus en cours."

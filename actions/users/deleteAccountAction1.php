@@ -23,14 +23,14 @@
         if(!empty($_POST['password'])){
 
         $password = $_POST['password'];
-        $id = $_SESSION['id'];
+        $id = (int)($_SESSION['id'] ?? 0);
 
-        $checkPassword = $db->prepare('SELECT password, loans_count FROM users WHERE id = ?');
+        $checkPassword = $db->prepare('SELECT password, (SELECT COUNT(*) FROM loans WHERE borrower_id = users.id AND status = 1) AS active_loans FROM users WHERE id = ?');
         $checkPassword->execute(array($id));
 
         $InfoDelete = $checkPassword->fetch();
 
-        if($InfoDelete['loans_count'] == '0'){
+        if($InfoDelete && (int)$InfoDelete['active_loans'] === 0){
 
         if (password_verify($password, $InfoDelete['password'])) {
 
@@ -41,7 +41,7 @@
         }
 
     }else{
-        $errorMsg4 = sprintf(bookfind_translate('You must return all your loans before deleting your account. You currently have %d book(s) still on loan.'), $InfoDelete['loans_count']);
+        $errorMsg4 = sprintf(bookfind_translate('You must return all your loans before deleting your account. You currently have %d book(s) still on loan.'), (int)($InfoDelete['active_loans'] ?? 0));
     }
 
     }else{

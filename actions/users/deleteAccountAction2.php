@@ -19,11 +19,18 @@
 
 
 <?php if (isset($_POST['validateDelete2'])) {
+        require_once ROOT_PATH . '/actions/users/deleteUsersPreservingLoans.php';
+        $id = (int)($_SESSION['id'] ?? 0);
+        $deletedCount = deleteUsersPreservingLoans($db, [$id], true);
 
-        $checkPassword = $db->prepare('DELETE FROM users WHERE id = ?');
-        $checkPassword->execute(array($id));
+        if ($deletedCount === null) {
+            $activeLoans = $db->prepare('SELECT COUNT(*) FROM loans WHERE borrower_id = ? AND status = 1');
+            $activeLoans->execute([$id]);
+            $errorMsg4 = sprintf(bookfind_translate('You must return all your loans before deleting your account. You currently have %d book(s) still on loan.'), (int)$activeLoans->fetchColumn());
+        } elseif ($deletedCount > 0) {
+            SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'No comment.');
 
-        SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'No comment.');
-
-        header('Location: ' . url('actions/users/logoutAction.php'));
+            header('Location: ' . url('actions/users/logoutAction.php'));
+            exit;
+        }
 }

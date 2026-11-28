@@ -67,7 +67,8 @@
                         </div>
                         <?php if ($books['status'] == 1 && isset($_SESSION['auth']) and $_SESSION['grade'] != 0) { ?>
                             <div class="book-card__author mt-2">
-                                <?= bookfind_translate('By'); ?> <a href="<?= url('profile.php?id=' . rawurlencode((string)$loans['borrower_id'])); ?>"><?= htmlspecialchars($loans['borrower_name']); ?></a> — <?= bookfind_translate('due'); ?> <?php ColorLoanDate($loans['due_date']); ?>
+                                <?php require_once ROOT_PATH . '/actions/functions/loanBorrowerFunction.php'; ?>
+                                <?= bookfind_translate('By'); ?> <?= loanBorrowerHtml($loans); ?> — <?= bookfind_translate('due'); ?> <?php ColorLoanDate($loans['due_date']); ?>
                             </div>
                         <?php } ?>
                         <div class="book-card__foot">

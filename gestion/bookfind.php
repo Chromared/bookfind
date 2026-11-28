@@ -39,6 +39,7 @@ if (isset($_GET['tab']) && $_GET['tab'] == 'database') {
     require ROOT_PATH . '/gestion/actions/others/addClass.php';
     require ROOT_PATH . '/gestion/actions/others/updateClass.php';
     require ROOT_PATH . '/gestion/actions/others/deleteClass.php';
+    require ROOT_PATH . '/gestion/actions/users/deleteClassUsers.php';
 } elseif (isset($_GET['tab']) && $_GET['tab'] == 'users') {
     require ROOT_PATH . '/gestion/actions/users/importUsers.php';
     require ROOT_PATH . '/gestion/actions/users/regenUsernamesAction.php';
@@ -225,6 +226,49 @@ if (!isset($_GET['tab']) or !in_array($_GET['tab'], ['database', 'classes', 'use
                         <div class="field">
                             <input type="submit" name="classDeleteValidate" class="btn btn--danger" value="<?= bookfind_translate('Delete'); ?>" />
                         </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Delete every account in a selected class while keeping loan history -->
+            <form action="<?= url(ltrim(str_replace(BASE_URL, '', $_SERVER['SCRIPT_NAME']), '/')) . (!empty($_SERVER['QUERY_STRING']) ? '?' . htmlspecialchars($_SERVER['QUERY_STRING'], ENT_QUOTES, 'UTF-8') : ''); ?>" method="POST" autocomplete="off" id="deleteClassUsers">
+                <?= csrf_field(); ?>
+                <div class="card">
+                    <div class="card__body">
+                        <h2 class="card__title"><?= bookfind_translate('Delete users from a class'); ?></h2>
+                        <?php if (isset($msgClassUsers)) { ?>
+                            <div class="alert alert--warning" role="alert">
+                                <svg class="icon"><use href="#i-alert"/></svg>
+                                <div><?= htmlspecialchars($msgClassUsers, ENT_QUOTES, 'UTF-8'); ?></div>
+                            </div>
+                        <?php } elseif (isset($_GET['successDeleteClassUsers'])) { ?>
+                            <div class="alert alert--success" role="alert">
+                                <svg class="icon"><use href="#i-check"/></svg>
+                                <div><?= sprintf(bookfind_translate('%d user account(s) deleted. Loan history was kept.'), (int)$_GET['successDeleteClassUsers']); ?></div>
+                            </div>
+                        <?php } ?>
+                        <?php if (isset($classUsersDeletionPreview)) { ?>
+                            <input type="hidden" name="classToDelete" value="<?= htmlspecialchars($classUsersDeletionPreview['name'], ENT_QUOTES, 'UTF-8'); ?>" />
+                            <input type="hidden" name="expectedUserCount" value="<?= (int)$classUsersDeletionPreview['count']; ?>" />
+                            <div class="alert alert--danger" role="alert">
+                                <svg class="icon"><use href="#i-alert"/></svg>
+                                <div><?= sprintf(bookfind_translate('This will permanently delete %d user account(s) from class "%s". Loan history will be kept and the borrowers will be anonymized.'), $classUsersDeletionPreview['count'], htmlspecialchars($classUsersDeletionPreview['name'], ENT_QUOTES, 'UTF-8')); ?></div>
+                            </div>
+                            <div class="field">
+                                <input type="submit" name="classUsersDeleteConfirm" class="btn btn--danger" value="<?= bookfind_translate('Confirm deletion'); ?>" />
+                            </div>
+                        <?php } else { ?>
+                            <div class="field">
+                                <label for="classToDelete" class="label"><?= bookfind_translate('Class whose users should be deleted*'); ?></label>
+                                <select name="classToDelete" id="classToDelete" class="select" required>
+                                    <option value=""><?= bookfind_translate('--- Select a class ---'); ?></option>
+                                    <?php include ROOT_PATH . '/actions/functions/getClassesAndOptions.php'; ?>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <input type="submit" name="classUsersDeletePreview" class="btn btn--danger" value="<?= bookfind_translate('Delete users'); ?>" />
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </form>

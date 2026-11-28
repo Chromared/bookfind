@@ -28,12 +28,17 @@
         $getUser->execute(array($id));
         $usersInfos = $getUser->fetch();
 
-        $DeleteUserAccount = $db->prepare('DELETE FROM users WHERE id = ?');
-        $DeleteUserAccount->execute(array($id));
+        require_once ROOT_PATH . '/actions/users/deleteUsersPreservingLoans.php';
+        $deletedCount = $usersInfos ? deleteUsersPreservingLoans($db, [(int)$usersInfos['id']]) : 0;
 
-        SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'The account of ' . htmlspecialchars($usersInfos['first_name'] ?? '') . ' ' . htmlspecialchars($usersInfos['last_name'] ?? '') . ' was deleted.');
+        if ($deletedCount > 0) {
+            SaveLog($db, $_SERVER['REQUEST_URI'], 'Account deleted', 'The account of ' . ($usersInfos['first_name'] ?? '') . ' ' . ($usersInfos['last_name'] ?? '') . ' was deleted.');
 
-        header('Location: ' . url('gestion/users.php'));
+            header('Location: ' . url('gestion/users.php'));
+            exit;
+        } else {
+            $msg = bookfind_translate('This user account no longer exists.');
+        }
         
     }else{
         $msg = bookfind_translate('You do not have sufficient permissions to delete this user.');

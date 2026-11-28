@@ -117,7 +117,7 @@ require ROOT_PATH . '/actions/functions/colorLoanDateFunction.php'; ?>
               <div class="mt-2">
                 <div class="kv">
                   <span class="kv__k"><?= bookfind_translate('Borrowed by'); ?></span>
-                  <span class="kv__v"><a href="<?= url('profile.php?id=' . rawurlencode((string)$loan['borrower_id'])); ?>"><?= htmlspecialchars($loan['borrower_name']); ?></a></span>
+                  <span class="kv__v"><?php require_once ROOT_PATH . '/actions/functions/loanBorrowerFunction.php'; echo loanBorrowerHtml($loan); ?></span>
                 </div>
                 <div class="kv">
                   <span class="kv__k"><?= bookfind_translate('Due on'); ?></span>
